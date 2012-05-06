@@ -1,0 +1,17 @@
+<div class="pagination pagination-item">
+	<label>
+		<?php printf(__('Page %s <span class="of">of</span> %s', 'siteorigin'), $paged, $max_page) ?>
+	</label>
+
+	<ul>
+		<?php if($paged > 1) : ?>
+			<li class="first search-button"><a href="<?php print add_query_arg('paged', null) ?>">First</a></li>
+			<li class="previous search-button"><a href="<?php print add_query_arg('paged', $paged - 1 == 1 ? null : $paged - 1) ?>"><?php _e('Prev', 'siteorigin') ?></a></li>
+		<?php endif ?>
+
+		<?php if($paged < $max_page) : ?>
+			<li class="next search-button"><a href="<?php print add_query_arg('paged', $paged + 1) ?>"><?php _e('Next', 'siteorigin') ?></a></li>
+			<li class="last search-button"><a href="<?php print add_query_arg('paged', $max_page) ?>">Last</a></li>
+		<?php endif ?>
+	</ul>
+</div>

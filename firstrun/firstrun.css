@@ -1,0 +1,74 @@
+#origin-firstrun{
+    position: fixed;
+    top: 28px;
+    left:0;
+    width:100%;
+    background: #1BA8F0 url(./bar-bg.png);
+    color: #e5ffff;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.75);
+    padding: 20px 10px 15px 10px;
+    line-height: 1;
+
+    z-index: 9999;
+
+    display: none;
+
+    box-shadow: inset 0px 1px 6px rgba(0,0,0,0.35);
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    font-size: 13px;
+
+    line-height: 1.9em;
+}
+
+#origin-firstrun strong{
+    display: block;
+    margin-left: 56px
+}
+
+#origin-firstrun strong a{
+    color: white;
+}
+
+#origin-firstrun .avatar{
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    margin-top: -22px;
+    border:1px solid #3bb7ff;
+
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
+
+}
+
+#origin-firstrun .dismiss{
+    display: block;
+    float: right;
+    text-decoration: none;
+    color: white;
+    margin: -3px 0px 0px 20px;
+
+    background: #1ba8f0;
+
+    padding:2px 8px;
+    border: 1px solid #0094db;
+
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+#origin-firstrun .social{
+    display: inline-block;
+}
+
+#origin-firstrun .follow {
+    display: block;
+    float: left;
+    margin-left: 15px;
+    margin-bottom: -14px;
+    max-width: 120px;
+}
