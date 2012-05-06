@@ -5,13 +5,13 @@
 
 	<ul>
 		<?php if($paged > 1) : ?>
-			<li class="first search-button"><a href="<?php print add_query_arg('paged', null) ?>">First</a></li>
-			<li class="previous search-button"><a href="<?php print add_query_arg('paged', $paged - 1 == 1 ? null : $paged - 1) ?>"><?php _e('Prev', 'siteorigin') ?></a></li>
+			<li class="first pagination-button"><a href="<?php print so_pagination_page_url(null) ?>">First</a></li>
+			<li class="previous pagination-button"><a href="<?php print so_pagination_page_url( $paged - 1 == 1 ? null : $paged - 1) ?>"><?php _e('Prev', 'siteorigin') ?></a></li>
 		<?php endif ?>
 
 		<?php if($paged < $max_page) : ?>
-			<li class="next search-button"><a href="<?php print add_query_arg('paged', $paged + 1) ?>"><?php _e('Next', 'siteorigin') ?></a></li>
-			<li class="last search-button"><a href="<?php print add_query_arg('paged', $max_page) ?>">Last</a></li>
+			<li class="next pagination-button"><a href="<?php print so_pagination_page_url($paged + 1) ?>"><?php _e('Next', 'siteorigin') ?></a></li>
+			<li class="last pagination-button"><a href="<?php print so_pagination_page_url($max_page) ?>">Last</a></li>
 		<?php endif ?>
 	</ul>
 </div>

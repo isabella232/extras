@@ -1,11 +1,11 @@
 <div class="pagination pagination-search">
 	<ul>
 		<?php if($paged - self::PAGINATION_SEARCH_SPREAD > 1) : ?>
-			<li class="first pagination-button"><a href="<?php print OriginPaginationController::page_url(1) ?>">First</a></li>
+			<li class="first pagination-button"><a href="<?php print so_pagination_page_url(1) ?>">First</a></li>
 		<?php endif; ?>
 		
 		<?php if($paged > 1) : ?>
-			<li class="previous pagination-button"><a href="<?php print OriginPaginationController::page_url($paged-1 == 1 ? 1 : $paged - 1) ?>"><?php _e('Prev', 'siteorigin') ?></a></li>
+			<li class="previous pagination-button"><a href="<?php print so_pagination_page_url($paged-1 == 1 ? 1 : $paged - 1) ?>"><?php _e('Prev', 'siteorigin') ?></a></li>
 		<?php endif ?>
 		
 		<?php if($paged - self::PAGINATION_SEARCH_SPREAD > 1) : ?>
@@ -16,7 +16,7 @@
 			<?php if($i == $paged) : ?>
 				<li class="current"><span><?php print $i ?><span></li>
 			<?php else : ?>
-				<li class="page pagination-button"><a href="<?php print OriginPaginationController::page_url($i) ?>"><?php print $i ?></a></li>
+				<li class="page pagination-button"><a href="<?php print so_pagination_page_url($i) ?>"><?php print $i ?></a></li>
 			<?php endif; ?>
 		<?php endfor; ?>
 
@@ -25,11 +25,11 @@
 		<?php endif; ?>
 		
 		<?php if($paged < $max_page) : ?>
-			<li class="next pagination-button"><a href="<?php print OriginPaginationController::page_url($paged + 1) ?>"><?php _e('Next', 'siteorigin') ?></a></li>
+			<li class="next pagination-button"><a href="<?php print so_pagination_page_url($paged + 1) ?>"><?php _e('Next', 'siteorigin') ?></a></li>
 		<?php endif ?>
 		
 		<?php if($paged + self::PAGINATION_SEARCH_SPREAD < $max_page) : ?>
-			<li class="last pagination-button"><a href="<?php print OriginPaginationController::page_url($max_page) ?>">Last</a></li>
+			<li class="last pagination-button"><a href="<?php print so_pagination_page_url($max_page) ?>">Last</a></li>
 		<?php endif; ?>
 	</ul>
 </div> 

@@ -5,11 +5,11 @@
  * 
  * @action after_switch_theme
  */
-function siteorigin_first_run_activate(){
+function so_first_run_activate(){
 	global $siteorigin_first_run_active;
 	$siteorigin_first_run_active = true;
 }
-add_action('after_switch_theme', 'siteorigin_first_run_activate');
+add_action('after_switch_theme', 'so_first_run_activate');
 
 /**
  * Enqueue admin scripts.
@@ -17,28 +17,27 @@ add_action('after_switch_theme', 'siteorigin_first_run_activate');
  * @param $suffix
  * @return mixed
  */
-function siteorigin_first_run_enqueue($suffix){
-	if($suffix != 'themes.php') return;
-	
+function so_first_run_enqueue($suffix){
+	error_log($suffix);
 	global $siteorigin_first_run_active;
 	if(empty($siteorigin_first_run_active)) return;
 	
 	wp_enqueue_script('siteorigin-firstrun', get_template_directory_uri().'/extras/firstrun/firstrun.js', array('jquery'));
 	wp_enqueue_style('siteorigin-firstrun', get_template_directory_uri().'/extras/firstrun/firstrun.css');
 }
-add_action('admin_enqueue_scripts', 'siteorigin_first_run_enqueue');
+add_action('admin_enqueue_scripts', 'so_first_run_enqueue');
 
 /**
  * Display the first run bar
  * 
  * @action admin_footer-themes.php
  */
-function siteorigin_first_run_display(){
+function so_first_run_display(){
 	global $siteorigin_first_run_active;
 	if(empty($siteorigin_first_run_active)) return;
 	
 	// TODO update this when WP 3.4 is officially released
-	$theme = @ get_theme_data(get_template_directory().'/style.css');
+	$theme = get_theme_data(get_template_directory().'/style.css');
 	include(dirname(__FILE__).'/bar.phtml');
 }
-add_action('admin_footer-themes.php', 'siteorigin_first_run_display');
+add_action('admin_footer-themes.php', 'so_first_run_display');

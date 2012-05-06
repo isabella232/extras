@@ -17,8 +17,8 @@ if(!function_exists('simple_options_get')) :
 		if(!current_user_can('edit_theme_options')) return;
 
 		add_theme_page(
-			__('Theme Options', 'origin'),
-			__('Theme Options', 'origin'),
+			__('Theme Options', 'siteorigin'),
+			__('Theme Options', 'siteorigin'),
 			'edit_theme_options',
 			'simple-options-install',
 			'_simple_options_install_info_render'
@@ -92,9 +92,9 @@ if(!function_exists('simple_options_get')) :
 	 * @param array $settings
 	 */
 	function simple_options_add($page, $field, $type, $settings){
-		global $simple_options;
-		if(empty($simple_options[$page])) $simple_options[$page] = array();
-		$simple_options[$page][$field] = $settings;
+		global $simple_options_fields;
+		if(empty($simple_options_fields[$page])) $simple_options_fields[$page] = array();
+		$simple_options_fields[$page][$field] = $settings;
 	}
 
 	/**
@@ -105,12 +105,16 @@ if(!function_exists('simple_options_get')) :
 	 * @return mixed|WP_Error
 	 */
 	function simple_options_get($page, $field){
-		global $simple_options;
-		if(!isset($simple_options[$page])) return new WP_Error('', 'Unknown options page');
-		if(!isset($simple_options[$page][$field])) return new WP_Error('', 'Unknown field');
-		if(!isset($simple_options[$page][$field]['default'])) return false;
-
-		return $simple_options[$page][$field]['default'];
+		global $simple_options_fields, $simple_options_values;
+		if(is_null($simple_options_fields)){
+			$simple_options_values = get_option('simple-options-'.basename(get_template_directory()), array());
+		}
+		
+		if(!isset($simple_options_fields[$page])) return new WP_Error('', 'Unknown options page');
+		if(!isset($simple_options_fields[$page][$field])) return new WP_Error('', 'Unknown field');
+		if(!isset($simple_options_fields[$page][$field]['default'])) return false;
+		
+		return isset($simple_options_values[$page][$field]) ? $simple_options_values[$page][$field] : $simple_options_fields[$page][$field]['default'];
 	}
 
 endif;
