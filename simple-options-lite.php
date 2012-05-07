@@ -48,13 +48,22 @@ if(!function_exists('simple_options_get')) :
 			'width' => 640,
 			'height' => 773
 		), $url);
-
+		
+		if(function_exists('wp_get_theme')) $info = wp_get_theme();
+		else $info = get_theme_data(get_template_directory().'/stylesheet.css');
+		
 		?>
 		<div class="wrap">
 			<div id="icon-themes" class="icon32"><br></div>
 			<h2>Install Simple Options</h2>
-			<p>This plugin uses the simple options plugin. To set up options, please install this plugin.</p>
-			<p><a href="<?php print $url ?>" class="thickbox button-primary">Install Simple Options</a></p>
+			<p>
+				<?php print isset($info['Name']) ? $info['Name'] : $info->get('Name'); ?> uses the Simple Options plugin to handle theme options.
+				It's a free plugin that only takes a few seconds to install.
+			</p>
+			<br/>
+			<p>
+				<a href="<?php print $url ?>" class="thickbox button-primary">Install Simple Options</a>
+			</p>
 		</div>
 		<?php
 	}
