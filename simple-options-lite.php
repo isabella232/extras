@@ -10,6 +10,14 @@
 if(!function_exists('simple_options_get')) :
 	
 	/**
+	 * Just initialize all the options.
+	 */
+	function simple_options_init(){
+		do_action('simple_options_init');
+	}
+	add_action('init', 'simple_options_init');
+	
+	/**
 	 * Add an admin page for Simple options installation info
 	 * @action admin_menu
 	 */
@@ -35,7 +43,8 @@ if(!function_exists('simple_options_get')) :
 
 		$url = add_query_arg(array(
 			'tab' => 'plugin-information',
-			'plugin' => 'simple-options',
+			//'plugin' => 'simple-options',
+			'plugin' => 'jetpack',
 			'TB_iframe' => 'true',
 			'width' => 640,
 			'height' => 773

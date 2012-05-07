@@ -6,11 +6,11 @@
 	<ul>
 		<?php if($paged > 1) : ?>
 			<li class="first pagination-button"><a href="<?php print so_pagination_page_url(null) ?>">First</a></li>
-			<li class="previous pagination-button"><a href="<?php print so_pagination_page_url( $paged - 1 == 1 ? null : $paged - 1) ?>"><?php _e('Prev', 'siteorigin') ?></a></li>
+			<li class="previous pagination-button"><a href="<?php print so_pagination_page_url( $paged - 1 == 1 ? null : $paged - 1) ?>"><?php _e('Prev', 'siteorigin', 'Previous item') ?></a></li>
 		<?php endif ?>
 
 		<?php if($paged < $max_page) : ?>
-			<li class="next pagination-button"><a href="<?php print so_pagination_page_url($paged + 1) ?>"><?php _e('Next', 'siteorigin') ?></a></li>
+			<li class="next pagination-button"><a href="<?php print so_pagination_page_url($paged + 1) ?>"><?php _e('Next', 'siteorigin', 'Next item') ?></a></li>
 			<li class="last pagination-button"><a href="<?php print so_pagination_page_url($max_page) ?>">Last</a></li>
 		<?php endif ?>
 	</ul>

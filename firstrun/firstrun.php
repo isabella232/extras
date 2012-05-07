@@ -18,7 +18,7 @@ add_action('after_switch_theme', 'so_first_run_activate');
  * @return mixed
  */
 function so_first_run_enqueue($suffix){
-	error_log($suffix);
+	if($suffix != 'themes.php' && $suffix != 'theme-install.php') return;
 	global $siteorigin_first_run_active;
 	if(empty($siteorigin_first_run_active)) return;
 	
