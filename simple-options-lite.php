@@ -50,7 +50,7 @@ if(!function_exists('simple_options_get')) :
 		), $url);
 		
 		if(function_exists('wp_get_theme')) $info = wp_get_theme();
-		else $info = get_theme_data(get_template_directory().'/stylesheet.css');
+		else $info = get_theme_data(get_template_directory().'/style.css');
 		
 		?>
 		<div class="wrap">
