@@ -43,8 +43,7 @@ if(!function_exists('simple_options_get')) :
 
 		$url = add_query_arg(array(
 			'tab' => 'plugin-information',
-			//'plugin' => 'simple-options',
-			'plugin' => 'jetpack',
+			'plugin' => 'simple-options',
 			'TB_iframe' => 'true',
 			'width' => 640,
 			'height' => 773
