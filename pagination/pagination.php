@@ -18,7 +18,7 @@ function so_pagination_render($type = self::PAGINATION_SEARCH) {
 		$paged = 1;
 	}
 
-	if(empty($max_page)) return;
+	if(empty($max_page) || $max_page <= 1) return;
 
 	if(!file_exists(dirname(__FILE__) . '/tpl/' . $type . '.phtml'))
 		return new WP_Error(1, 'Invalid pagination type. Use SO_PAGINATION_* constants.');

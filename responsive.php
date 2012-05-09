@@ -9,6 +9,8 @@
 
 /**
  * Filter a sidebar.
+ *
+ * @param $sidebar
  * 
  * @action register_sidebar
  */
@@ -77,21 +79,23 @@ function siteorigin_responsive_print_styles(){
 		}
 
 		// Set up all the default stuff
-		$css[1920] = array();
+		if(empty($css[1920])) $css[1920] = array();
 		$defaults = implode('; ', array(
 			'-webkit-box-sizing: border-box',
 			'-moz-box-sizing: border-box',
 			'box-sizing: border-box',
 			'float: left',
 		));
-		$css[1920][$defaults] = array(
-			trim($sidebar['grid_selector']).' > .widget'
-		);
+		if(empty($css[1920][$defaults])) $css[1920][$defaults] = array();
+		$css[1920][$defaults][] = trim($sidebar['grid_selector']).' > .widget';
 
 		// And now the stuff that's specific to this grid
 		$padding = $sidebar['cell_padding'];
-		$css[1920]["padding: 0 {$padding}px"] = array(trim($sidebar['grid_selector']).' > .widget');
-		$css[1920]["margin-left: -{$padding}px; margin-right: -{$padding}px;"] = array(trim($sidebar['grid_selector']));
+		if(empty($css[1920]["padding: 0 {$padding}px"])) $css[1920]["padding: 0 {$padding}px"] = array();
+		$css[1920]["padding: 0 {$padding}px"][] = trim($sidebar['grid_selector']).' > .widget';
+		
+		if(empty($css[1920]["margin-left: -{$padding}px; margin-right: -{$padding}px;"])) $css[1920]["margin-left: -{$padding}px; margin-right: -{$padding}px;"] = array();
+		$css[1920]["margin-left: -{$padding}px; margin-right: -{$padding}px;"][] = trim($sidebar['grid_selector']);
 
 
 		foreach($responsive_resolutions as $resolution){
@@ -146,6 +150,7 @@ function siteorigin_responsive_print_styles(){
 	// Build the CSS
 	$css_text = '';
 	krsort($css);
+	
 	foreach($css as $res => $def){
 		if($res < 1920){
 			$css_text .= '@media (max-width:'.$res.'px)';
