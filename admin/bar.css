@@ -1,18 +1,18 @@
-#origin-firstrun{
-    position: fixed;
-    top: 28px;
-    left:0;
+#siteorigin-admin-bar{
+    position: absolute;
+    top: 0;
+    left: 0;
     width:100%;
     background: #1BA8F0 url(./bar-bg.png);
     color: #e5ffff;
     text-shadow: 0 1px 0 rgba(0,0,0,0.75);
-    padding: 20px 10px 15px 10px;
+    
     line-height: 1;
-
-    z-index: 9999;
 
     display: none;
 
+    -webkit-box-shadow: inset 0px 1px 6px rgba(0,0,0,0.35);
+    -moz-box-shadow: inset 0px 1px 6px rgba(0,0,0,0.35);
     box-shadow: inset 0px 1px 6px rgba(0,0,0,0.35);
 
     -webkit-box-sizing: border-box;
@@ -24,27 +24,33 @@
     line-height: 1.9em;
 }
 
-#origin-firstrun strong{
+#siteorigin-admin-bar .inner{
+    padding: 20px 10px 15px 10px;
+}
+
+#siteorigin-admin-bar strong{
     display: block;
     margin-left: 56px
 }
 
-#origin-firstrun strong a{
-    color: white;
+#siteorigin-admin-bar strong a{
+    color: #FFF;
 }
 
-#origin-firstrun .avatar{
+#siteorigin-admin-bar .avatar,
+#siteorigin-admin-bar .icon{
     position: absolute;
     top: 50%;
     left: 10px;
     margin-top: -21px;
     border:1px solid #3bb7ff;
 
+    -moz-box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
     box-shadow: 0px 0px 3px rgba(0,0,0,0.2);
-
 }
 
-#origin-firstrun .dismiss{
+#siteorigin-admin-bar .dismiss{
     display: block;
     float: right;
     text-decoration: none;
@@ -61,11 +67,11 @@
     border-radius: 3px;
 }
 
-#origin-firstrun .social{
+#siteorigin-admin-bar .social{
     display: inline-block;
 }
 
-#origin-firstrun .follow {
+#siteorigin-admin-bar .follow {
     display: block;
     float: left;
     margin-left: 15px;
