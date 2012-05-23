@@ -48,15 +48,14 @@ if(!function_exists('simple_options_get')) :
 			'height' => 773
 		), $url);
 		
-		if(function_exists('wp_get_theme')) $info = wp_get_theme();
-		else $info = get_theme_data(get_template_directory().'/style.css');
+		$info = get_theme_data(get_template_directory().'/style.css');
 		
 		?>
 		<div class="wrap">
 			<div id="icon-themes" class="icon32"><br></div>
 			<h2><?php _e('Install Simple Options', 'siteorigin') ?></h2>
 			<p>
-				<?php printf(__('%s uses the Simple Options plugin to handle theme options.', 'siteorigin'), isset($info['Name']) ? $info['Name'] : $info->get('Name')) ?>
+				<?php printf(__('%s uses the Simple Options plugin to handle theme options.', 'siteorigin'), $info['Name']) ?>
 				<?php _e("It's a free plugin that only takes a few seconds to install.", 'siteorigin') ?>
 			</p>
 			<br/>
