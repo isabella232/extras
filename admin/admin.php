@@ -47,7 +47,7 @@ function so_admin_display(){
 /**
  * Display the first run bar
  * 
- * @action admin_footer-themes.php
+ * @action in_admin_header
  */
 function so_admin_bar_display(){
 	$bar = so_admin_display();
@@ -81,6 +81,8 @@ add_action('wp_ajax_so_admin_dismiss_bar', 'so_admin_dismiss_bar');
 function so_admin_display_bar($bar){
 	if(!file_exists(dirname(__FILE__).'/icons/'.$bar.'.png')) $icon = 'http://www.gravatar.com/avatar/'.md5('greg@siteorigin.com').'?s=44';
 	else $icon = get_template_directory_uri().'/extras/admin/icons/'.$bar.'.png';
-	
-	include(dirname(__FILE__).'/bar.phtml');
+
+	$GLOBALS['so_admin_bar'] = $bar;
+	$GLOBALS['so_admin_bar_icon'] = $icon;
+	get_template_part('extras/admin/bar');
 }
