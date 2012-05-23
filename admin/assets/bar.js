@@ -1,16 +1,14 @@
 jQuery(function($){
     $('#siteorigin-admin-bar').show();
-    $('body').css('padding-top', $('#wpadminbar').outerHeight() + $('#siteorigin-admin-bar').outerHeight() + 1);
     
     var position = function(){
-        $('#siteorigin-admin-bar').css('top', -$('#siteorigin-admin-bar').outerHeight()-1);
-        $('body').css('padding-top', $('#wpadminbar').outerHeight() + $('#siteorigin-admin-bar').outerHeight()+1);
+        $('#siteorigin-admin-bar').css('top',$('#wpadminbar').outerHeight());
+        $('#wpcontent, #adminmenu').css('padding-top', $('#wpadminbar').outerHeight() + $('#siteorigin-admin-bar').outerHeight());
     }
     position();
     
     var interval = setInterval(position, 250);
-        
-
+    
     $('#siteorigin-admin-bar .dismiss').click(function(){
         clearInterval(interval);
         $('#siteorigin-admin-bar').slideUp('fast');

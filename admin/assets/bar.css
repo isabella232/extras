@@ -1,5 +1,6 @@
 #siteorigin-admin-bar{
     position: absolute;
+    z-index:21; /* Above the menu shadow */
     top: 0;
     left: 0;
     width:100%;
