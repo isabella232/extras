@@ -7,9 +7,11 @@
 	fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-Hi! I'm Greg from SiteOrigin. I hope you enjoy my theme!
-Feel free to <a href="mailto:support@siteorigin.com">contact me</a> if you need any help.<br/>
-Most importantly, please follow me on Twitter and Facebook for updates and new free themes :)
+<?php _e("Hi! I'm Greg from SiteOrigin.", 'siteorigin') ?> 
+<?php _e("I hope you enjoy my theme.", 'siteorigin') ?> 
+<?php printf(__("Feel free to %scontact me%s if you need any help.", 'siteorigin'), '<a href="mailto:support@siteorigin.com">', '</a>') ?><br/>
+<?php _e("Remember to follow me on Twitter and Facebook for updates and new free themes.", 'siteorigin') ?>
+
 <div class="social">
 	<div class="follow twitter">
 		<a href="https://twitter.com/siteorigin" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @siteorigin</a>

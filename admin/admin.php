@@ -5,10 +5,10 @@
  * 
  * @action after_switch_theme
  */
-function so_admin_first_run_activate(){
+function so_adminbar_first_run_activate(){
 	define('SO_FIRST_RUN_ACTIVE', true);
 }
-add_action('after_switch_theme', 'so_admin_first_run_activate');
+add_action('after_switch_theme', 'so_adminbar_first_run_activate');
 
 /**
  * Enqueue admin scripts.
@@ -16,20 +16,20 @@ add_action('after_switch_theme', 'so_admin_first_run_activate');
  * @param $suffix
  * @return mixed
  */
-function so_admin_enqueue($suffix){
-	if(!so_admin_display()) return;
+function so_adminbar_enqueue($suffix){
+	if(!so_adminbar_is_display()) return;
 	
-	wp_enqueue_script('siteorigin-admin-bar', get_template_directory_uri().'/extras/admin/bar.js', array('jquery'));
-	wp_enqueue_style('siteorigin-admin-bar', get_template_directory_uri().'/extras/admin/bar.css');
+	wp_enqueue_script('siteorigin-admin-bar', get_template_directory_uri().'/extras/admin/assets/bar.js', array('jquery'));
+	wp_enqueue_style('siteorigin-admin-bar', get_template_directory_uri().'/extras/admin/assets/bar.css');
 }
-add_action('admin_enqueue_scripts', 'so_admin_enqueue');
+add_action('admin_enqueue_scripts', 'so_adminbar_enqueue');
 
 /**
  * Check if we're displaying the admin bar
  * 
  * @return bool|string The name of the admin bar to display or false for none.
  */
-function so_admin_display(){
+function so_adminbar_is_display(){
 	$screen = get_current_screen();
 	
 	if($screen->id == 'appearance_page_custom-background') $bar = 'background';
@@ -49,18 +49,29 @@ function so_admin_display(){
  * 
  * @action in_admin_header
  */
-function so_admin_bar_display(){
-	$bar = so_admin_display();
+function so_adminbar_render(){
+	$bar = so_adminbar_is_display();
 	if(!$bar) return;
-	
-	so_admin_display_bar($bar);
+
+	if(!file_exists(dirname(__FILE__).'/icons/'.$bar.'.png')) $icon = 'http://www.gravatar.com/avatar/'.md5('greg@siteorigin.com').'?s=44';
+	else $icon = get_template_directory_uri().'/extras/admin/icons/'.$bar.'.png';
+
+	?>
+	<div id="siteorigin-admin-bar" data-type="<?php print esc_attr($bar) ?>">
+		<div class="inner">
+			<img src="<?php print esc_attr($icon) ?>" class="icon" width="44" height="44" />
+			<a href="#dismiss" class="dismiss"><?php _e('dismiss', 'siteorigin') ?></a>
+			<strong><?php get_template_part('extras/admin/messages/message', $bar) ?></strong>
+		</div>
+	</div>
+	<?php
 }
-add_action('in_admin_header', 'so_admin_bar_display');
+add_action('in_admin_header', 'so_adminbar_render');
 
 /**
  * An ajax callback to dismiss the admin bar.
  */
-function so_admin_dismiss_bar(){
+function so_adminbar_dismiss_bar(){
 	$dismiss = $previous = get_user_meta(get_current_user_id(), 'so_admin_bars_dismissed', true);
 	if(empty($dismiss)) $dismiss = array();
 	
@@ -71,18 +82,4 @@ function so_admin_dismiss_bar(){
 	
 	exit();
 }
-add_action('wp_ajax_so_admin_dismiss_bar', 'so_admin_dismiss_bar');
-
-/**
- * Display the admin bar.
- *
- * @param $bar
- */
-function so_admin_display_bar($bar){
-	if(!file_exists(dirname(__FILE__).'/icons/'.$bar.'.png')) $icon = 'http://www.gravatar.com/avatar/'.md5('greg@siteorigin.com').'?s=44';
-	else $icon = get_template_directory_uri().'/extras/admin/icons/'.$bar.'.png';
-
-	$GLOBALS['so_admin_bar'] = $bar;
-	$GLOBALS['so_admin_bar_icon'] = $icon;
-	get_template_part('extras/admin/bar');
-}
+add_action('wp_ajax_so_admin_dismiss_bar', 'so_adminbar_dismiss_bar');

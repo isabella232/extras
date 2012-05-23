@@ -8,7 +8,6 @@
 
 // Ignore Simple Options Lite if the full version is already installed
 if(!function_exists('simple_options_get')) :
-	
 	/**
 	 * Just initialize all the options.
 	 */
@@ -35,7 +34,7 @@ if(!function_exists('simple_options_get')) :
 	add_action('admin_menu', 'simple_options_install_info');
 	
 	/**
-	 * 
+	 * Render the page that displays Simple Options installation info.
 	 */
 	function _simple_options_install_info_render(){
 		if(is_multisite()) $url = network_admin_url('plugin-install.php');
@@ -55,14 +54,14 @@ if(!function_exists('simple_options_get')) :
 		?>
 		<div class="wrap">
 			<div id="icon-themes" class="icon32"><br></div>
-			<h2>Install Simple Options</h2>
+			<h2><?php _e('Install Simple Options', 'siteorigin') ?></h2>
 			<p>
-				<?php print isset($info['Name']) ? $info['Name'] : $info->get('Name'); ?> uses the Simple Options plugin to handle theme options.
-				It's a free plugin that only takes a few seconds to install.
+				<?php printf(__('%s uses the Simple Options plugin to handle theme options.', 'siteorigin'), isset($info['Name']) ? $info['Name'] : $info->get('Name')) ?>
+				<?php _e("It's a free plugin that only takes a few seconds to install.", 'siteorigin') ?>
 			</p>
 			<br/>
 			<p>
-				<a href="<?php print $url ?>" class="thickbox button-primary">Install Simple Options</a>
+				<a href="<?php print $url ?>" class="thickbox button-primary"><?php _e('Install Simple Options', 'siteorigin') ?></a>
 			</p>
 		</div>
 		<?php
