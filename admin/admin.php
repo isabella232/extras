@@ -32,6 +32,12 @@ function so_adminbar_init(){
 }
 add_action('current_screen', 'so_adminbar_init');
 
+/**
+ * Set up the default admin bars.
+ * 
+ * @param $bar
+ * @return object
+ */
 function so_adminbar_defaults($bar){
 	$screen = get_current_screen();
 	
@@ -46,7 +52,7 @@ function so_adminbar_defaults($bar){
 add_filter('so_adminbar', 'so_adminbar_defaults');
 
 /**
- * Enqueue admin scripts.
+ * Enqueue admin bar scripts if there's an admin bar active.
  * 
  * @param $suffix
  * @return mixed
@@ -60,7 +66,7 @@ function so_adminbar_enqueue($suffix){
 add_action('admin_enqueue_scripts', 'so_adminbar_enqueue');
 
 /**
- * Display the first run bar
+ * Display the admin bar
  * 
  * @action in_admin_header
  */
