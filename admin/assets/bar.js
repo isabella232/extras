@@ -3,8 +3,16 @@ jQuery(function($){
     
     var position = function(){
         $('#siteorigin-admin-bar').css('top',0);
-        $('#wpcontent, #adminmenu').css('padding-top', $('#siteorigin-admin-bar').outerHeight());
+        if($('body').hasClass('branch-3-3')){
+            // WordPress 3.3 has a slightly different layout
+            $('#siteorigin-admin-bar').css('top', $('#wpadminbar').outerHeight());
+            $('#wpcontent, #adminmenu').css('padding-top', $('#siteorigin-admin-bar').outerHeight() + $('#wpadminbar').outerHeight());
+        }
+        else{
+            $('#wpcontent, #adminmenu').css('padding-top', $('#siteorigin-admin-bar').outerHeight());
+        }
     }
+    
     position();
     
     var interval = setInterval(position, 250);
@@ -12,7 +20,12 @@ jQuery(function($){
     $('#siteorigin-admin-bar .dismiss').click(function(){
         clearInterval(interval);
         $('#siteorigin-admin-bar').slideUp('fast');
-        $('#wpcontent, #adminmenu').animate({'padding-top': 0}, 'fast');
+        if($('body').hasClass('branch-3-3')){
+            $('#wpcontent, #adminmenu').animate({'padding-top': $('#wpadminbar').outerHeight()}, 'fast');
+        }
+        else{
+            $('#wpcontent, #adminmenu').animate({'padding-top': 0}, 'fast');
+        }
         
         // Send the message to the server to dismiss this bar
         $.post(
