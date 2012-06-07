@@ -8,9 +8,8 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <?php _e("Hi! I'm Greg from SiteOrigin.", 'siteorigin') ?> 
-<?php _e("I hope you enjoy my theme.", 'siteorigin') ?> 
-<?php printf(__("Feel free to %scontact me%s if you need any help.", 'siteorigin'), '<a href="mailto:support@siteorigin.com">', '</a>') ?><br/>
-<?php _e("Remember to follow me on Twitter and Facebook for updates and new free themes.", 'siteorigin') ?>
+<?php _e("I hope you enjoy my free WordPress theme.", 'siteorigin') ?> 
+<?php _e("Please follow me on Twitter and Facebook for updates.", 'siteorigin') ?>
 
 <div class="social">
 	<div class="follow twitter">

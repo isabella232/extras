@@ -11,13 +11,48 @@ function so_adminbar_first_run_activate(){
 add_action('after_switch_theme', 'so_adminbar_first_run_activate');
 
 /**
+ * Initialize the default admin bars.
+ */
+function so_adminbar_init(){
+	if(!is_admin()) return;
+	
+	$bar = null;
+	$bar = apply_filters('so_adminbar', $bar);
+	
+	if(!empty($bar)){
+		$dismissed = get_user_meta(get_current_user_id(), 'so_admin_bars_dismissed', true);
+		if(!empty($dismissed) && !empty($dismissed[$bar->id])) $bar = null;
+	}
+	
+	if(!empty($bar)){
+		if(empty($bar->icon)) $bar->icon = 'http://www.gravatar.com/avatar/'.md5('greg@siteorigin.com').'?s=44';
+	}
+	
+	$GLOBALS['so_adminbar_active'] = $bar;
+}
+add_action('current_screen', 'so_adminbar_init');
+
+function so_adminbar_defaults($bar){
+	$screen = get_current_screen();
+	
+	if($screen->id == 'themes' && defined('SO_FIRST_RUN_ACTIVE'))
+		$bar = (object) array('id' => 'firstrun', 'message' => array('extras/admin/messages/message', 'firstrun'));
+	
+	if($screen->id == 'appearance_page_custom-background')
+		$bar = (object) array('id' => 'custom-background', 'message' => array('extras/admin/messages/message', 'background'));
+	
+	return $bar;
+}
+add_filter('so_adminbar', 'so_adminbar_defaults');
+
+/**
  * Enqueue admin scripts.
  * 
  * @param $suffix
  * @return mixed
  */
 function so_adminbar_enqueue($suffix){
-	if(!so_adminbar_is_display()) return;
+	if(empty($GLOBALS['so_adminbar_active'])) return;
 	
 	wp_enqueue_script('siteorigin-admin-bar', get_template_directory_uri().'/extras/admin/assets/bar.js', array('jquery'));
 	wp_enqueue_style('siteorigin-admin-bar', get_template_directory_uri().'/extras/admin/assets/bar.css');
@@ -25,43 +60,19 @@ function so_adminbar_enqueue($suffix){
 add_action('admin_enqueue_scripts', 'so_adminbar_enqueue');
 
 /**
- * Check if we're displaying the admin bar
- * 
- * @return bool|string The name of the admin bar to display or false for none.
- */
-function so_adminbar_is_display(){
-	$screen = get_current_screen();
-	
-	if($screen->id == 'appearance_page_custom-background') $bar = 'background';
-	else if($screen->id == 'themes' && defined('SO_FIRST_RUN_ACTIVE')) $bar = 'firstrun';
-	
-	if(empty($bar)) return false;
-	
-	// Check if this bar has been dismissed
-	$dismissed = get_user_meta(get_current_user_id(), 'so_admin_bars_dismissed', true);
-	if(empty($dismissed) || empty($dismissed[$bar])) return $bar;
-	return false;
-	
-}
-
-/**
  * Display the first run bar
  * 
  * @action in_admin_header
  */
 function so_adminbar_render(){
-	$bar = so_adminbar_is_display();
-	if(!$bar) return;
-
-	if(!file_exists(dirname(__FILE__).'/icons/'.$bar.'.png')) $icon = 'http://www.gravatar.com/avatar/'.md5('greg@siteorigin.com').'?s=44';
-	else $icon = get_template_directory_uri().'/extras/admin/icons/'.$bar.'.png';
-
+	if(empty($GLOBALS['so_adminbar_active'])) return;
+	
 	?>
-	<div id="siteorigin-admin-bar" data-type="<?php print esc_attr($bar) ?>">
+	<div id="siteorigin-admin-bar" data-type="<?php print esc_attr($GLOBALS['so_adminbar_active']->id) ?>">
 		<div class="inner">
-			<img src="<?php print esc_attr($icon) ?>" class="icon" width="44" height="44" />
+			<img src="<?php print esc_attr($GLOBALS['so_adminbar_active']->icon) ?>" class="icon" width="44" height="44" />
 			<a href="#dismiss" class="dismiss"><?php _e('dismiss', 'siteorigin') ?></a>
-			<strong><?php get_template_part('extras/admin/messages/message', $bar) ?></strong>
+			<strong><?php call_user_func_array('get_template_part', $GLOBALS['so_adminbar_active']->message) ?></strong>
 		</div>
 	</div>
 	<?php

@@ -2,8 +2,8 @@ jQuery(function($){
     $('#siteorigin-admin-bar').show();
     
     var position = function(){
-        $('#siteorigin-admin-bar').css('top',$('#wpadminbar').outerHeight());
-        $('#wpcontent, #adminmenu').css('padding-top', $('#wpadminbar').outerHeight() + $('#siteorigin-admin-bar').outerHeight());
+        $('#siteorigin-admin-bar').css('top',0);
+        $('#wpcontent, #adminmenu').css('padding-top', $('#siteorigin-admin-bar').outerHeight());
     }
     position();
     
@@ -12,7 +12,7 @@ jQuery(function($){
     $('#siteorigin-admin-bar .dismiss').click(function(){
         clearInterval(interval);
         $('#siteorigin-admin-bar').slideUp('fast');
-        $('body').animate({'padding-top': $('#wpadminbar').outerHeight()}, 'fast');
+        $('#wpcontent, #adminmenu').animate({'padding-top': 0}, 'fast');
         
         // Send the message to the server to dismiss this bar
         $.post(
