@@ -44,9 +44,6 @@ function so_adminbar_defaults($bar){
 	if($screen->id == 'themes' && defined('SO_FIRST_RUN_ACTIVE'))
 		$bar = (object) array('id' => 'firstrun', 'message' => array('extras/admin/messages/message', 'firstrun'));
 	
-	if($screen->id == 'appearance_page_custom-background')
-		$bar = (object) array('id' => 'custom-background', 'message' => array('extras/admin/messages/message', 'background'));
-	
 	return $bar;
 }
 add_filter('so_adminbar', 'so_adminbar_defaults');
@@ -58,6 +55,7 @@ add_filter('so_adminbar', 'so_adminbar_defaults');
  * @return mixed
  */
 function so_adminbar_enqueue($suffix){
+	// Only enqueue these if there's an active admin bar
 	if(empty($GLOBALS['so_adminbar_active'])) return;
 	
 	wp_enqueue_script('siteorigin-admin-bar', get_template_directory_uri().'/extras/admin/assets/bar.js', array('jquery'));
