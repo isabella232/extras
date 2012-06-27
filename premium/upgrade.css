@@ -1,0 +1,40 @@
+/* CSS for the upgrade page */
+
+#theme-upgrade{
+    width: 620px;
+}
+
+#theme-upgrade .feature-img-left,
+#theme-upgrade .feature-img-right{
+
+}
+
+#theme-upgrade .feature-img-left{
+    float: left;
+    margin: 0 20px 20px 0;
+}
+
+#theme-upgrade .feature-img-right{
+    float:right;
+    margin: 0 0 20px 20px;
+}
+
+#theme-upgrade p.download{
+    text-align: center;
+    margin-top: 40px;
+}
+
+#theme-upgrade p.download span{
+    margin-top: 5px;
+    display: block;
+    text-align: center;
+    color: #888;
+}
+
+#theme-upgrade a.download{
+    width:214px;
+    height:53px;
+    display: inline-block;
+    background: url(img/download.png) no-repeat;
+    text-indent: -9999px;
+}

@@ -1,6 +1,6 @@
-<?php _e("Hi! I'm Greg Priday from SiteOrigin.", 'siteorigin') ?> 
-<?php _e("I hope you enjoy my free WordPress theme.", 'siteorigin') ?> 
-<?php _e("Please follow me on Twitter and Facebook for updates.", 'siteorigin') ?>
+<?php $theme = wp_get_theme(basename(get_template_directory())) ?>
+<?php printf(__("Please <a href='mailto:support@siteorigin.com'>email me</a> if you need help with %s. ", 'siteorigin'), $theme->get('Name')) ?>
+<?php _e('Like and follow SiteOrigin to hear about my new WordPress freebies.', 'siteorigin') ?>
 
 <div class="social">
 	<div class="follow twitter">
