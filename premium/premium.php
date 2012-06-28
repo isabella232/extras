@@ -37,7 +37,7 @@ function so_premium_page_render(){
 		</p>
 		
 		<?php foreach($args['features'] as $feature) : ?>
-			<h3><?php print $feature['heading'] ?></h3>
+			<h3><?php print $feature['title'] ?></h3>
 			<p><?php print $feature['text'] ?></p>
 		<?php endforeach ?>
 

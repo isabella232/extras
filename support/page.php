@@ -1,4 +1,4 @@
-<div class="wrap">
+<div class="wrap" style="max-width:680px">
 	<h2><?php _e('Premium Theme Support', 'siteorigin') ?></h2>
 	<?php $theme = wp_get_theme(basename(get_template_directory())) ?>
 	<p>
