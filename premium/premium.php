@@ -36,6 +36,12 @@ function so_premium_page_render(){
 			<span><?php print $args['below_first_buy'] ?></span>
 		</p>
 		
+		<?php if(!empty($args['promo_image'])) : ?>
+			<div id="promo-image">
+				<img src="<?php print esc_attr($args['promo_image'][0]) ?>" width="<?php print esc_attr($args['promo_image'][1]) ?>" height="<?php print esc_attr($args['promo_image'][2]) ?>" class="magnify" />
+			</div>
+		<?php endif; ?>
+		
 		<?php foreach($args['features'] as $feature) : ?>
 			<h3><?php print $feature['title'] ?></h3>
 			<p><?php print $feature['text'] ?></p>
@@ -56,6 +62,15 @@ function so_premium_page_render(){
  */
 function so_premium_enqueue($prefix){
 	if($prefix != 'appearance_page_premium_upgrade') return false;
+	
 	wp_enqueue_style('siteorigin-premium-upgrade', get_template_directory_uri().'/extras/premium/upgrade.css', array(), SO_THEME_VERSION);
+	wp_enqueue_script('siteorigin-magnifier', get_template_directory_uri().'/extras/premium/magnifier.js');
 }
 add_action('admin_enqueue_scripts', 'so_premium_enqueue');
+
+function so_premium_footer(){
+	$screen = get_current_screen();
+	if($screen->id != 'appearance_page_premium_upgrade') return false;
+	?><div id="magnifier"><div class="image"></div></div><?php
+}
+add_action('admin_footer', 'so_premium_footer');

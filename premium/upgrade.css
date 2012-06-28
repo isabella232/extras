@@ -4,24 +4,9 @@
     width: 620px;
 }
 
-#theme-upgrade .feature-img-left,
-#theme-upgrade .feature-img-right{
-
-}
-
-#theme-upgrade .feature-img-left{
-    float: left;
-    margin: 0 20px 20px 0;
-}
-
-#theme-upgrade .feature-img-right{
-    float:right;
-    margin: 0 0 20px 20px;
-}
-
 #theme-upgrade p.download{
     text-align: center;
-    margin-top: 40px;
+    margin-top: 30px;
 }
 
 #theme-upgrade p.download span{
@@ -37,4 +22,60 @@
     display: inline-block;
     background: url(img/download.png) no-repeat;
     text-indent: -9999px;
+}
+
+#theme-upgrade h3{
+    margin-top: 30px;
+}
+
+/* The promo image */
+
+#promo-image{
+    margin-top: 25px;
+}
+
+#promo-image img{
+    max-width: 100%;
+    height: auto;
+}
+
+/* The Magnifier */
+
+#magnifier {
+    display: none;
+
+    cursor: none;
+    position: absolute;
+
+    top: 50px;
+    left: 50px;
+
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+
+    padding: 5px;
+
+    background: rgba(255,255,255,0.1);
+
+    -webkit-box-shadow:0 0 10px rgba(0,0,0,0.5);
+    -moz-box-shadow:0 0 10px rgba(0,0,0,0.5);
+    box-shadow:0 0 10px rgba(0,0,0,0.5);
+
+    z-index: 25;
+}
+
+#magnifier .image{
+    background-color: #EFEFEF;
+    background-repeat: no-repeat;
+    width: 200px;
+    height: 200px;
+
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+
+    box-shadow:inset 0 0 5px rgba(0,0,0,0.25);
+    -webkit-box-shadow:inset 0 0 5px rgba(0,0,0,0.25);
+    -moz-box-shadow:inset 0 0 5px rgba(0,0,0,0.25);
 }
