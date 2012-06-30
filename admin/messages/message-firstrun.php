@@ -1,5 +1,5 @@
 <?php _e("Hi! I'm Greg Priday from SiteOrigin.", 'siteorigin') ?> 
-<?php _e("I hope you enjoy my free WordPress theme.", 'siteorigin') ?> 
+<?php _e("I hope you enjoy my WordPress theme.", 'siteorigin') ?> 
 <?php _e("Please follow me on Twitter and Facebook for updates.", 'siteorigin') ?>
 
 <div class="social">

@@ -9,7 +9,7 @@
 			'mailto:support@siteorigin.com?subject='.urlencode($theme->get('Name').' Questions')
 		);
 		printf(
-			__("We still love you, even if you're using %s Free. We just want to offer the best service possible to the fine people who have purchased our themes.", 'siteorigin'),
+			__("We still love you, even if you're using %s Free. We just want to offer the best service possible to the fine people who have purchased our Premium themes.", 'siteorigin'),
 			$theme->get('Name')
 		);
 		?></p>

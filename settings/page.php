@@ -4,8 +4,8 @@
 	<div id="icon-themes" class="icon32"><br></div>
 	<h2><?php _e('Theme Settings','siteorigin') ?></h2>
 	<p style="margin-bottom: 30px">
-		<a href="<?php print esc_attr('http://siteorigin.com/theme/'.$theme->get_template().'/') ?>" target="_blank">
-			<?php _e('Download Documentation', 'siteorigin') ?>
+		<a href="<?php print esc_attr('http://siteorigin.com/doc/'.$theme->get_template().'/') ?>" target="_blank">
+			<?php _e('Read Documentation', 'siteorigin') ?>
 		</a>
 	</p>
 
