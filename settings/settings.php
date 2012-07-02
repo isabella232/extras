@@ -220,7 +220,7 @@ function so_settings_field($args){
 		case 'teaser' :
 			?>
 			<div class="premium-teaser">
-				<?php printf(__('<a href="%s" target="_blank">Premium version</a> only', 'siteorigin'), 'http://siteorigin.com/premium/'.basename(get_template_directory()).'/') ?>
+				<?php printf(__('<a href="%s" target="_blank">Premium version</a> only', 'siteorigin'), function_exists('so_premium_get_url') ? so_premium_get_url() : '#') ?>
 			</div>
 			<?php
 			break;
