@@ -22,6 +22,36 @@ function so_settings_init($theme_name = null){
 	add_action('so_adminbar', 'so_settings_adminbar');
 	
 	add_action('admin_enqueue_scripts', 'so_settings_enqueue_scripts');
+	
+	// Set up the help tabs
+	add_action('load-appearance_page_theme_settings_page', 'so_settings_help_tab');
+}
+
+/**
+ * Add the settings help tab
+ */
+function so_settings_help_tab(){
+	$screen = get_current_screen();
+	$theme = wp_get_theme();
+	
+	ob_start();
+	?>
+	<p>
+		<?php
+		printf(
+			__('<a href="%s" target="_blank">Documentation</a> for %s is available on SiteOrigin.', 'siteorigin'),
+			'http://siteorigin.com/doc/'.$theme->get_template().'/',
+			$theme->get('Name')
+		);
+		?>
+	</p>
+	<?php
+	$content = ob_get_clean();
+	$screen->add_help_tab(array(
+		'id' => 'theme_settings_documentation',
+		'title' => __('Theme Documentation', 'siteorigin'),
+		'content' => $content
+	));
 }
 
 /**
@@ -190,7 +220,7 @@ function so_settings_field($args){
 		case 'teaser' :
 			?>
 			<div class="premium-teaser">
-				<?php printf(__('<a href="%s">Premium version</a> only', 'siteorigin'), admin_url('themes.php?page=premium_upgrade')) ?>
+				<?php printf(__('<a href="%s" target="_blank">Premium version</a> only', 'siteorigin'), 'http://siteorigin.com/premium/'.basename(get_template_directory()).'/') ?>
 			</div>
 			<?php
 			break;

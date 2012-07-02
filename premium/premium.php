@@ -57,6 +57,14 @@ function so_premium_page_render(){
 }
 
 /**
+ * Gets the URL of the premium theme.
+ * @return string The URL where the user can buy the premium upgrade.
+ */
+function so_premium_get_url(){
+	return 'http://siteorigin.com/premium/'.basename(get_template_directory()).'/';
+}
+
+/**
  * Enqueue premium scripts
  */
 function so_premium_enqueue($prefix){
@@ -67,6 +75,9 @@ function so_premium_enqueue($prefix){
 }
 add_action('admin_enqueue_scripts', 'so_premium_enqueue');
 
+/**
+ * @return bool
+ */
 function so_premium_footer(){
 	$screen = get_current_screen();
 	if($screen->id != 'appearance_page_premium_upgrade') return false;

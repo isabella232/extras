@@ -1,6 +1,6 @@
 <?php $theme = wp_get_theme(basename(get_template_directory())) ?>
-<?php printf(__("Please <a href='mailto:support@siteorigin.com'>email me</a> if you need help with %s. ", 'siteorigin'), $theme->get('Name')) ?>
-<?php _e('Like and follow SiteOrigin to hear about my new WordPress freebies.', 'siteorigin') ?>
+<?php printf(__("Check out the <a href='%s'>documentation</a> for %s. ", 'siteorigin'), 'http://siteorigin.com/doc/'.$theme->get_template().'/', $theme->get('Name')) ?>
+<?php _e('Please like and follow SiteOrigin to hear about my new WordPress freebies.', 'siteorigin') ?>
 
 <div class="social">
 	<div class="follow twitter">
