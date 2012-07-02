@@ -5,7 +5,3 @@ License:
 -----------------------------------------------
 
 SiteOrigin Extras is licensed under GPL
-
-It includes the following external libraries
-
-* CodeMirror - All of CodeMirror is released under a MIT-style license

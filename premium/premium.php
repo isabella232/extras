@@ -19,7 +19,7 @@ function so_premium_page_render(){
 	
 	?>
 	<div class="wrap">
-		<h2><?php _e('Premium Upgrade') ?></h2>
+		<h2><?php _e('Premium Upgrade', 'siteorigin') ?></h2>
 		<p><?php printf(__("If you like %s, you'll love the premium upgrade - <a href='%s' target='_blank'>find out more</a>"), $theme->get('Name'), so_premium_get_url()) ?></p>
 	</div>
 	<?php
