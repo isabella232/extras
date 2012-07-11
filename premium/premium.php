@@ -5,8 +5,7 @@
  * @return mixed
  */
 function so_premium_admin_menu(){
-	if(defined('SO_PREMIUM_VERSION')) return;
-	
+	if(defined('SO_IS_PREMIUM')) return;
 	add_theme_page(__('Premium Upgrade', 'siteorigin'), __('Premium Upgrade', 'siteorigin'), 'switch_themes', 'premium_upgrade', 'so_premium_page_render');
 }
 add_action('admin_menu', 'so_premium_admin_menu');
