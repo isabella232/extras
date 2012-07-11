@@ -1,13 +1,11 @@
 <div class="wrap" style="max-width:680px">
 	<h2><?php _e('Premium Theme Support', 'siteorigin') ?></h2>
-	<?php $theme = wp_get_theme(basename(get_template_directory())) ?>
 	<p>
 		<?php
 		printf(
-			__("Please email <a href='%s'>support@siteorigin.com</a> for premium support. ", 'siteorigin'),
-			'mailto:support@siteorigin.com?subject='.urlencode($theme->get('Name').' Support [premium]')
+			__("Need some theme support? Just fill out a <a href='%s'>support request</a> and we'll get back to you. ", 'siteorigin'),
+			'http://siteorigin.com/support/contact/'
 		);
-		_e("Make sure you include your order number or just mention that you're a premium user so we can prioritize your email.", 'siteorigin')
 		?>
 	</p>
 </div> 
