@@ -12,12 +12,12 @@ function so_theme_update_filter($current){
 	if(empty($order_number)) return $current;
 
 	if(function_exists('wp_get_theme')){
-		$theme = wp_get_theme();
-		$version = $theme->get('Version');
+		$theme_data = wp_get_theme();
+		$version = $theme_data->get('Version');
 	}
 	else{
-		$theme = get_theme_data(get_template_directory().'/style.css');
-		$version = $theme['Version'];
+		$theme_data = get_theme_data(get_template_directory().'/style.css');
+		$version = $theme_data['Version'];
 	}
 	
 	// Updates are not compatible with the old child theme system
