@@ -17,8 +17,7 @@ function so_theme_update_filter($current){
 	if(empty($current->checked)) return $current;
 
 	$request = wp_remote_post(
-		//'http://siteorigin.com/premium/'.$theme.'/',
-		'http://siteorigin.dynalias.com/premium/'.$theme.'/',
+		'http://siteorigin.com/premium/'.$theme.'/',
 		array(
 			'body' => array(
 				'action' => 'update_info',
