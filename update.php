@@ -9,12 +9,10 @@
 function so_theme_update_filter($current){
 	$theme = basename(get_template_directory());
 	$order_number = get_option('so_order_number_'.$theme, false);
-	
+	if(empty($order_number)) return $current;
+
 	// Updates are not compatible with the old child theme system
 	if(basename(get_stylesheet_directory()) == basename(get_template_directory()).'-premium') return $current;
-	
-	if(empty($code)) return $current;
-	if(empty($current->checked)) return $current;
 
 	$request = wp_remote_post(
 		'http://siteorigin.com/premium/'.$theme.'/',
@@ -28,12 +26,13 @@ function so_theme_update_filter($current){
 
 	if(!is_wp_error($request) && $request['response']['code'] == 200){
 		$data = unserialize($request['body']);
+		if(empty($current->response)) $current->response = array();
 		if(!empty($data)) $current->response[$theme] = $data;
 	}
 
 	return $current;
 }
-add_filter('pre_set_site_transient_update_themes', 'so_premium_update_filter');
+add_filter('pre_set_site_transient_update_themes', 'so_theme_update_filter');
 
 /**
  * Add the 
