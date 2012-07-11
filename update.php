@@ -11,6 +11,15 @@ function so_theme_update_filter($current){
 	$order_number = get_option('so_order_number_'.$theme, false);
 	if(empty($order_number)) return $current;
 
+	if(function_exists('wp_get_theme')){
+		$theme = wp_get_theme();
+		$version = $theme->get('Version');
+	}
+	else{
+		$theme = get_theme_data(get_template_directory().'/style.css');
+		$version = $theme['Version'];
+	}
+	
 	// Updates are not compatible with the old child theme system
 	if(basename(get_stylesheet_directory()) == basename(get_template_directory()).'-premium') return $current;
 
@@ -19,12 +28,13 @@ function so_theme_update_filter($current){
 		array(
 			'body' => array(
 				'action' => 'update_info',
+				'version' => $version,
 				'order_number' => $order_number
 			)
 		)
 	);
 
-	if(!is_wp_error($request) && $request['response']['code'] == 200){
+	if(!is_wp_error($request) && $request['response']['code'] == 200 && !empty($request['body'])){
 		$data = unserialize($request['body']);
 		if(empty($current->response)) $current->response = array();
 		if(!empty($data)) $current->response[$theme] = $data;
@@ -35,7 +45,7 @@ function so_theme_update_filter($current){
 add_filter('pre_set_site_transient_update_themes', 'so_theme_update_filter');
 
 /**
- * Add the 
+ * Add the order number setting
  */
 function so_theme_update_settings(){
 	$theme = basename(get_template_directory());
@@ -56,7 +66,7 @@ function so_theme_update_settings(){
 		'so-order-code'
 	);
 
-	register_setting('general', $name);
+	register_setting('general', $name, 'so_theme_update_refresh');
 }
 add_action('admin_init', 'so_theme_update_settings');
 
@@ -71,4 +81,10 @@ function so_theme_update_settings_order_field(){
 	<input type="text" class="regular-text code" name="<?php print esc_attr($name) ?>" value="<?php print esc_attr(get_option($name, false)) ?>" />
 	<p class="description"><?php _e('Find your order code in your original download email from SiteOrigin', 'siteorigin'); ?></p>
 	<?php
+}
+
+function so_theme_update_refresh($code){
+	// This tells the theme update to recheck
+	set_site_transient('update_themes', null);
+	return $code;
 }
