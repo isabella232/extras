@@ -7,8 +7,7 @@
  */
 function so_settings_init($theme_name = null){
 	if(empty($theme_name)) {
-		$theme = wp_get_theme();
-		$theme_name = $theme->get_template();
+		$theme_name = basename(get_template_directory());
 	}
 	
 	$GLOBALS['so_settings_theme_name'] = $theme_name;
@@ -32,7 +31,7 @@ function so_settings_init($theme_name = null){
  */
 function so_settings_help_tab(){
 	$screen = get_current_screen();
-	$theme = wp_get_theme();
+	$theme = basename(get_template_directory());
 	
 	ob_start();
 	?>
@@ -40,8 +39,8 @@ function so_settings_help_tab(){
 		<?php
 		printf(
 			__('<a href="%s" target="_blank">Documentation</a> for %s is available on SiteOrigin.', 'siteorigin'),
-			'http://siteorigin.com/doc/'.$theme->get_template().'/',
-			$theme->get('Name')
+			'http://siteorigin.com/doc/'.$theme.'/',
+			ucfirst($theme)
 		);
 		?>
 	</p>

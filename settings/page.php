@@ -1,5 +1,3 @@
-<?php $theme = wp_get_theme(basename(get_template_directory())) ?>
-
 <div class="wrap">
 	<div id="icon-themes" class="icon32"><br></div>
 	<h2><?php _e('Theme Settings','siteorigin') ?></h2>
