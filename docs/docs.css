@@ -1,0 +1,106 @@
+@import url(http://fonts.googleapis.com/css?family=Coming+Soon);
+
+#siteorigin-theme-docs{
+    width: 638px;
+    position: relative;
+}
+
+
+#siteorigin-theme-docs .table-of-contents{
+    margin: 1.5em 0;
+}
+
+#siteorigin-theme-docs .table-of-contents ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+#siteorigin-theme-docs .table-of-contents ul ul{
+    padding-left: 1.5em;
+}
+
+#siteorigin-theme-docs .table-of-contents > ul > li > a{
+    color: #474747;
+    font-weight: 500;
+    margin-bottom: 0.5em;
+    font-size: 14px;
+}
+
+#siteorigin-theme-docs .table-of-contents ul ul > li > a{
+    font-weight: 500;
+    color: #5e5e5e;
+}
+
+#siteorigin-theme-docs .table-of-contents ul ul{
+
+}
+
+#siteorigin-theme-docs .table-of-contents ul a{
+}
+
+#siteorigin-theme-docs h3{
+    font-size: 18px;
+    margin: 1.5em 0;
+    color: #44474A;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    font-weight: 300;
+}
+
+#siteorigin-theme-table{
+    position: absolute;
+    top: 0;
+    right: -270px;
+    width: 250px;
+    
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    
+    padding: 10px;
+    
+    background: #F3F3F3; 
+}
+
+#siteorigin-theme-table li.pagenav a{
+    color: #4f5355;
+    text-decoration: none;
+    font-size: 13.5px;
+}
+
+#siteorigin-theme-table li.pagenav > a{
+    font-weight: bold;
+    color: #44474a;
+    font-size: 15.5px;
+}
+
+#siteorigin-theme-table li.pagenav .current_page_item > a{
+    font-weight: 500;
+    color: #44474a;
+}
+
+#siteorigin-theme-table li.pagenav li{
+    margin-top: 10px;
+}
+
+#siteorigin-theme-table li.pagenav .children{
+    padding-left: 15px;
+}
+
+/* @group Social Icons */
+
+#siteorigin-theme-table .social-follow{
+    margin-top: 45px;
+}
+
+#siteorigin-theme-table .social-follow strong{
+    display: block;
+    margin-bottom: 12px;
+    font-weight: 500;
+    font-size: 12px;
+    font-family: 'Coming Soon', cursive;
+}
+
+#siteorigin-theme-table .social-follow .network{
+    display: block;
+    margin-bottom: 5px;
+}

@@ -219,7 +219,7 @@ function so_settings_field($args){
 		case 'teaser' :
 			?>
 			<div class="premium-teaser">
-				<?php printf(__('<a href="%s" target="_blank">Premium version</a> only', 'siteorigin'), function_exists('so_premium_get_url') ? so_premium_get_url() : '#') ?>
+				<?php printf(__('<a href="%s">Premium version</a> only', 'siteorigin'), admin_url('themes.php?page=premium_upgrade')) ?>
 			</div>
 			<?php
 			break;

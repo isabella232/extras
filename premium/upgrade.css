@@ -25,13 +25,18 @@
 }
 
 #theme-upgrade h3{
-    margin-top: 30px;
+    font-size: 18px;
+    margin: 1.5em 0;
+    color: #44474A;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    font-weight: 300;
 }
 
 /* The promo image */
 
 #promo-image{
     margin-top: 25px;
+    margin-bottom: 30px;
 }
 
 #promo-image img{
@@ -63,7 +68,7 @@
 }
 
 #magnifier .image{
-    background-color: #EFEFEF;
+    background-color: #FFFFFF;
     background-repeat: no-repeat;
     width: 200px;
     height: 200px;
@@ -72,12 +77,37 @@
     -moz-border-radius: 100px;
     border-radius: 100px;
 
-    box-shadow:inset 0 0 5px rgba(0,0,0,0.25);
     -webkit-box-shadow:inset 0 0 5px rgba(0,0,0,0.25);
     -moz-box-shadow:inset 0 0 5px rgba(0,0,0,0.25);
+    box-shadow:inset 0 0 5px rgba(0,0,0,0.25);
 }
 
 #promo-image{
     position: relative;
     background: #EAEAEA url(img/loader.gif) no-repeat center center;
+}
+
+/* Overlay */
+
+#theme-upgrade-info{
+    display: none;
+    
+    background-color: #FFFBCC;
+    color: #555;
+    border: 1px solid #E6DB55;
+    
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    
+    padding: 10px;    
+}
+
+#theme-upgrade-info p{
+    margin: 0 0 15px 0;
+}
+
+#theme-upgrade-already-paid{
+    float: right;
+    margin-top: 15px;
 }
