@@ -72,9 +72,11 @@ function so_premium_page_render(){
 					<a href="<?php print esc_attr($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_attr($premium['buy_button']) ?>" /></a>
 					<span><?php print $premium['buy_message_1'] ?></span>
 				</p>
-				<p id="promo-image">
-					<img src="<?php print esc_attr($premium['featured'][0]) ?>" width="<?php print intval($premium['featured'][1]) ?>" height="<?php print intval($premium['featured'][2]) ?>" class="magnify" />
-				</p>
+				<?php if(!empty($premium['featured'])) : ?>
+					<p id="promo-image">
+						<img src="<?php print esc_attr($premium['featured'][0]) ?>" width="<?php print intval($premium['featured'][1]) ?>" height="<?php print intval($premium['featured'][2]) ?>" class="magnify" />
+					</p>
+				<?php endif; ?>
 				<div class="content">
 					<?php print wpautop($premium['post_content']) ?>
 				</div>
