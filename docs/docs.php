@@ -35,10 +35,10 @@ function so_theme_docs_page_render(){
 	else $page = $_GET['current'];
 	
 	// Get the document page
-	$response = wp_remote_get(SO_THEME_ENDPOINT.'/doc/'.$page.'/?format=php');
+	$response = wp_remote_get(SO_THEME_ENDPOINT.'/doc/'.$page.'/?format=json');
 	$doc = false;
-	if(!is_wp_error($response)){
-		$doc = isset($response['body']) ? unserialize($response['body']) : false;
+	if(!is_wp_error($response) && !empty($response['body'])){
+		$doc = unserialize(urldecode($response['body']));
 	}
 	
 	if(empty($doc)){

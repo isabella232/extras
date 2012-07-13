@@ -161,7 +161,7 @@ function so_premium_admin_enqueue($prefix){
 	$siteorigin_premium_info = false;
 	$result = wp_remote_get(SO_THEME_ENDPOINT.'/premium/'.$theme.'/?format=php');
 	if(!is_wp_error($result)){
-		$siteorigin_premium_info = unserialize($result['body']);
+		$siteorigin_premium_info = unserialize(urldecode($result['body']));
 	}
 	
 	wp_enqueue_script('siteorigin-magnifier', get_template_directory_uri().'/extras/premium/magnifier.js', array('jquery'), SO_THEME_VERSION);
