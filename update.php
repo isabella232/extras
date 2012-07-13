@@ -24,7 +24,7 @@ function so_theme_update_filter($current){
 	if(basename(get_stylesheet_directory()) == basename(get_template_directory()).'-premium') return $current;
 
 	$request = wp_remote_post(
-		'http://siteorigin.com/premium/'.$theme.'/',
+		SO_THEME_ENDPOINT.'/premium/'.$theme.'/',
 		array(
 			'body' => array(
 				'action' => 'update_info',
