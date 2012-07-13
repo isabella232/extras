@@ -22,15 +22,26 @@ function so_premium_page_render(){
 	
 	switch($action){
 		case 'view':
-			$result = wp_remote_get(SO_THEME_ENDPOINT.'/premium/'.$theme.'/?format=php');
-			if(is_wp_error($result)){
-				// Display just a link
+			global $siteorigin_premium_info;
+			$premium = $siteorigin_premium_info;
+			
+			if(empty($premium)){
 				?>
-				<div class="wrap" id="theme-upgrade"><h2>Error!</h2></div>
+				<div class="wrap" id="theme-upgrade">
+					<h2><?php _e('Premium Upgrade', 'siteorigin') ?></h2>
+					<p>
+						<?php
+						printf(
+							__("There's a premium version of %s available, <a href='%s'>find out more</a>.", 'siteorigin'),
+							ucfirst($theme),
+							'http://siteorigin.com/premium/'.$theme.'/'
+						);
+						?>
+					</p>
+				</div>
 				<?php
 				return;	
 			}
-			$premium = unserialize($result['body']);
 			
 			?>
 			<div class="wrap" id="theme-upgrade">
@@ -142,9 +153,22 @@ function so_premium_page_render(){
  */
 function so_premium_admin_enqueue($prefix){
 	if($prefix != 'appearance_page_premium_upgrade') return;
+
+	$theme = basename(get_template_directory());
+	global $siteorigin_premium_info;
+	$siteorigin_premium_info = false;
+	$result = wp_remote_get(SO_THEME_ENDPOINT.'/premium/'.$theme.'/?format=php');
+	if(!is_wp_error($result)){
+		$siteorigin_premium_info = unserialize($result['body']);
+	}
 	
 	wp_enqueue_script('siteorigin-magnifier', get_template_directory_uri().'/extras/premium/magnifier.js', array('jquery'), SO_THEME_VERSION);
 	wp_enqueue_script('siteorigin-premium-upgrade', get_template_directory_uri().'/extras/premium/premium.js', array('jquery'), SO_THEME_VERSION);
 	wp_enqueue_style('siteorigin-premium-upgrade', get_template_directory_uri().'/extras/premium/upgrade.css', array(), SO_THEME_VERSION);
+	
+	wp_localize_script('siteorigin-premium-upgrade', 'soPremiumUpgrade', array(
+		'theme' => $theme,
+		'variation' => isset($siteorigin_premium_info['variation']) ? $theme.'_'.$siteorigin_premium_info['variation'] : false,
+	));
 }
 add_action('admin_enqueue_scripts', 'so_premium_admin_enqueue');

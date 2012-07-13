@@ -38,9 +38,9 @@ function so_settings_help_tab(){
 	<p>
 		<?php
 		printf(
-			__('<a href="%s" target="_blank">Documentation</a> for %s is available on SiteOrigin.', 'siteorigin'),
-			'http://siteorigin.com/doc/'.$theme.'/',
-			ucfirst($theme)
+			__("Please read %s's <a href='%s'>Documentation</a>.", 'siteorigin'),
+			ucfirst($theme),
+			admin_url('themes.php?page=so_theme_docs')
 		);
 		?>
 	</p>
