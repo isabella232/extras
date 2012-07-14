@@ -11,17 +11,6 @@ add_action('admin_menu', 'so_theme_docs_admin_menu');
 
 function so_theme_docs_enqueue($prefix){
 	if($prefix != 'appearance_page_so_theme_docs') return;
-
-	$theme = basename(get_template_directory());
-	if(empty($_GET['current'])) $page = $theme.'/';
-	else $page = $_GET['current'];
-	
-	wp_enqueue_script('siteorigin-theme-docs', get_template_directory_uri().'/extras/docs/docs.js', array('jquery'), SO_THEME_VERSION);
-	wp_localize_script('siteorigin-theme-docs', 'soThemeDocs', array(
-		'page' => $page,
-		'url' => admin_url('themes.php?page=so_theme_docs'),
-	));
-	
 	wp_enqueue_style('siteorigin-theme-docs', get_template_directory_uri().'/extras/docs/docs.css', array(), SO_THEME_VERSION);
 }
 add_action('admin_enqueue_scripts', 'so_theme_docs_enqueue');
@@ -42,11 +31,7 @@ function so_theme_docs_page_render(){
 	}
 	
 	if(empty($doc)){
-		?>
-		<div class="wrap" id="siteorigin-theme-docs">
-			<h2><?php _e('Not Found', 'siteorigin') ?></h2>
-		</div>
-		<?php
+		?><div class="wrap" id="siteorigin-theme-docs"><h2><?php _e('Not Found', 'siteorigin') ?></h2></div><?php
 		exit();	
 	}
 	

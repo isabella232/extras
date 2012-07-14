@@ -22,8 +22,11 @@ function so_premium_page_render(){
 	
 	switch($action){
 		case 'view':
-			global $siteorigin_premium_info;
-			$premium = $siteorigin_premium_info;
+			$premium = false;
+			$result = wp_remote_get(SO_THEME_ENDPOINT.'/premium/'.$theme.'/?format=php');
+			if(!is_wp_error($result)){
+				$premium = unserialize(urldecode($result['body']));
+			}
 			
 			if(empty($premium)){
 				?>
@@ -165,21 +168,8 @@ function so_premium_page_render(){
 function so_premium_admin_enqueue($prefix){
 	if($prefix != 'appearance_page_premium_upgrade') return;
 
-	$theme = basename(get_template_directory());
-	global $siteorigin_premium_info;
-	$siteorigin_premium_info = false;
-	$result = wp_remote_get(SO_THEME_ENDPOINT.'/premium/'.$theme.'/?format=php');
-	if(!is_wp_error($result)){
-		$siteorigin_premium_info = unserialize(urldecode($result['body']));
-	}
-	
 	wp_enqueue_script('siteorigin-magnifier', get_template_directory_uri().'/extras/premium/magnifier.js', array('jquery'), SO_THEME_VERSION);
 	wp_enqueue_script('siteorigin-premium-upgrade', get_template_directory_uri().'/extras/premium/premium.js', array('jquery'), SO_THEME_VERSION);
 	wp_enqueue_style('siteorigin-premium-upgrade', get_template_directory_uri().'/extras/premium/upgrade.css', array(), SO_THEME_VERSION);
-	
-	wp_localize_script('siteorigin-premium-upgrade', 'soPremiumUpgrade', array(
-		'theme' => $theme,
-		'variation' => isset($siteorigin_premium_info['variation']) ? $theme.'_'.$siteorigin_premium_info['variation'] : false,
-	));
 }
 add_action('admin_enqueue_scripts', 'so_premium_admin_enqueue');
