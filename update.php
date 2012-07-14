@@ -24,7 +24,7 @@ function so_theme_update_filter($current){
 	if(basename(get_stylesheet_directory()) == basename(get_template_directory()).'-premium') return $current;
 
 	$request = wp_remote_post(
-		SO_THEME_ENDPOINT.'/premium/'.$theme.'/',
+		SO_THEME_ENDPOINT.'/premium/'.$theme.'/?rand='.rand(0, getrandmax()),
 		array(
 			'body' => array(
 				'action' => 'update_info',

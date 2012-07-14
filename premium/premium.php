@@ -125,19 +125,28 @@ function so_premium_page_render(){
 						</p>
 					<?php elseif($valid) : ?>
 						<p>
-							<?php _e('Your order number appears to be <strong>valid</strong>.', 'siteorigin') ?>
+							<?php _e("We've validated your order number.", 'siteorigin') ?>
 							<?php
 								printf(
-									__('There should be a theme update for %s waiting for you on your <a href="%s">Themes page</a>.', 'siteorigin'),
+									__('You can update now, or later on your <a href="%s">Themes page</a>.', 'siteorigin'),
 									ucfirst($theme),
 									admin_url('themes.php')
 								);
 							?>
 							<?php _e('This update will unlock all the premium features.', 'siteorigin') ?>
 						</p>
+						<p class="submit">
+							<?php
+							$update_url = wp_nonce_url(admin_url('update.php?action=upgrade-theme&amp;theme=' . urlencode($theme)), 'upgrade-theme_' . $theme);
+							$update_onclick = 'onclick="if ( confirm(\'' . esc_js( __("Updating this theme will lose any customizations you have made. 'Cancel' to stop, 'OK' to update.", 'siteorigin') ) . '\') ) {return true;}return false;"';
+							?>
+							<a href="<?php print esc_attr($update_url) ?>" <?php print $update_onclick ?> class="button-primary">
+								<?php _e('Update Theme', 'siteorigin') ?>
+							</a>
+						</p>
 					<?php else : ?>
 						<p>
-							<?php _e('Your order number appears to be <strong>invalid</strong>.', 'siteorigin') ?>
+							<?php _e('We  <strong>invalid</strong>.', 'siteorigin') ?>
 							<?php _e("Please try again, or upgrade manually using the ZIP file we sent you.", 'siteorigin') ?>
 							<?php _e('Note that you need a valid order number to receive automatic updates in the future.', 'siteorigin') ?>
 						</p>
