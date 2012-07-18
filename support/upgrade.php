@@ -4,8 +4,8 @@
 		<?php
 		$theme = basename(get_template_directory());
 		printf(
-			__('We offer priority email support to everyone who upgrades to <a href="%s">%s Premium</a>.', 'siteorigin'),
-			'http://siteorigin.com/premium/'.$theme.'/',
+			__('We offer email support to everyone who upgrades to <a href="%s">%s Premium</a>.', 'siteorigin'),
+			admin_url('themes.php?page=premium_upgrade'),
 			ucfirst($theme)
 		);
 		?>
