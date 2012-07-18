@@ -22,11 +22,7 @@ function so_premium_page_render(){
 	
 	switch($action){
 		case 'view':
-			$premium = false;
-			$result = wp_remote_get(SO_THEME_ENDPOINT.'/premium/'.$theme.'/?format=php');
-			if(!is_wp_error($result)){
-				$premium = unserialize(urldecode($result['body']));
-			}
+			$premium = apply_filters('so_premium_content', array());
 			
 			if(empty($premium)){
 				?>
@@ -68,9 +64,7 @@ function so_premium_page_render(){
 	
 				<a href="#" id="theme-upgrade-already-paid"><?php _e('Already Paid?', 'siteorigin') ?></a>
 				<h2><?php print $premium['post_title'] ?></h2>
-				<p>
-					<?php print $premium['post_excerpt'] ?>
-				</p>
+				<p><?php print $premium['post_excerpt'] ?></p>
 				<p class="download">
 					<a href="<?php print esc_attr($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_attr($premium['buy_button']) ?>" /></a>
 					<span><?php print $premium['buy_message_1'] ?></span>
@@ -81,7 +75,10 @@ function so_premium_page_render(){
 					</p>
 				<?php endif; ?>
 				<div class="content">
-					<?php print wpautop($premium['post_content']) ?>
+					<?php foreach($premium['feature'] as $feature) : ?>
+						<h3><?php print $feature['heading'] ?></h3>
+						<p><?php print $feature['content'] ?></p>
+					<?php endforeach ?>
 				</div>
 				<p class="download">
 					<a href="<?php print esc_attr($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_attr($premium['buy_button']) ?>" /></a>
