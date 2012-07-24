@@ -63,27 +63,35 @@ function so_premium_page_render(){
 				</form>
 	
 				<a href="#" id="theme-upgrade-already-paid"><?php _e('Already Paid?', 'siteorigin') ?></a>
-				<h2><?php print $premium['post_title'] ?></h2>
-				<p><?php print $premium['post_excerpt'] ?></p>
-				<p class="download">
-					<a href="<?php print esc_attr($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_attr($premium['buy_button']) ?>" /></a>
-					<span><?php print $premium['buy_message_1'] ?></span>
-				</p>
+				<?php if(isset($premium['premium_title'])) : ?><h2><?php print $premium['premium_title'] ?></h2><?php endif; ?>
+				<?php if(isset($premium['premium_summary'])) : ?><p><?php print $premium['premium_summary'] ?></p><?php endif; ?>
+
+				<?php if(isset($premium['buy_button']) && isset($premium['buy_url'])) : ?>
+					<p class="download">
+						<a href="<?php print esc_attr($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_attr($premium['buy_button']) ?>" /></a>
+						<?php if(isset($premium['buy_message_1'])) : ?><span><?php print $premium['buy_message_1'] ?></span><?php endif; ?>
+					</p>
+				<?php endif; ?>
+						
 				<?php if(!empty($premium['featured'])) : ?>
 					<p id="promo-image">
 						<img src="<?php print esc_attr($premium['featured'][0]) ?>" width="<?php print intval($premium['featured'][1]) ?>" height="<?php print intval($premium['featured'][2]) ?>" class="magnify" />
 					</p>
 				<?php endif; ?>
 				<div class="content">
-					<?php foreach($premium['feature'] as $feature) : ?>
+					<?php if(!empty($premium['features'])) : foreach($premium['features'] as $feature) : ?>
 						<h3><?php print $feature['heading'] ?></h3>
 						<p><?php print $feature['content'] ?></p>
-					<?php endforeach ?>
+					<?php endforeach; endif; ?>
 				</div>
-				<p class="download">
-					<a href="<?php print esc_attr($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_attr($premium['buy_button']) ?>" /></a>
-					<span><?php print $premium['buy_message_2'] ?></span>
-				</p>
+
+				<?php if(isset($premium['buy_button']) && isset($premium['buy_url'])) : ?>
+					<p class="download">
+						<a href="<?php print esc_attr($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_attr($premium['buy_button']) ?>" /></a>
+						<?php if(isset($premium['buy_message_2'])) : ?><span><?php print $premium['buy_message_2'] ?></span><?php endif; ?>
+					</p>
+				<?php endif; ?>
+				
 				</div>
 				<div id="magnifier"><div class="image"></div>
 			</div>
@@ -129,7 +137,6 @@ function so_premium_page_render(){
 							<?php
 								printf(
 									__('You can update now, or later on your <a href="%s">Themes page</a>.', 'siteorigin'),
-									ucfirst($theme),
 									admin_url('themes.php')
 								);
 							?>
@@ -167,6 +174,6 @@ function so_premium_admin_enqueue($prefix){
 
 	wp_enqueue_script('siteorigin-magnifier', get_template_directory_uri().'/extras/premium/magnifier.js', array('jquery'), SO_THEME_VERSION);
 	wp_enqueue_script('siteorigin-premium-upgrade', get_template_directory_uri().'/extras/premium/premium.js', array('jquery'), SO_THEME_VERSION);
-	wp_enqueue_style('siteorigin-premium-upgrade', get_template_directory_uri().'/extras/premium/upgrade.css', array(), SO_THEME_VERSION);
+	wp_enqueue_style('siteorigin-premium-upgrade', get_template_directory_uri().'/extras/premium/premium.css', array(), SO_THEME_VERSION);
 }
 add_action('admin_enqueue_scripts', 'so_premium_admin_enqueue');
