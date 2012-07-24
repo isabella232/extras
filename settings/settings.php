@@ -40,7 +40,7 @@ function so_settings_help_tab(){
 		printf(
 			__("Please read %s's <a href='%s'>Documentation</a>.", 'siteorigin'),
 			ucfirst($theme),
-			admin_url('themes.php?page=so_theme_docs')
+			'http://siteorigin.com/doc/'.$theme.'/'
 		);
 		?>
 	</p>
