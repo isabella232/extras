@@ -4,4 +4,4 @@ Extras are SiteOrigin specific extras. For the sake of consistency, we'll call i
 License:
 -----------------------------------------------
 
-SiteOrigin Extras is licensed under GPL
+SiteOrigin Extras is licensed under GPL version 3.0
