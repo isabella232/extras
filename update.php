@@ -10,15 +10,6 @@ function so_theme_update_filter($current){
 	$theme = basename(get_template_directory());
 	$order_number = get_option('so_order_number_'.$theme, false);
 	if(empty($order_number)) return $current;
-
-	if(function_exists('wp_get_theme')){
-		$theme_data = wp_get_theme();
-		$version = $theme_data->get('Version');
-	}
-	else{
-		$theme_data = get_theme_data(get_template_directory().'/style.css');
-		$version = $theme_data['Version'];
-	}
 	
 	// Updates are not compatible with the old child theme system
 	if(basename(get_stylesheet_directory()) == basename(get_template_directory()).'-premium') return $current;
@@ -28,7 +19,7 @@ function so_theme_update_filter($current){
 		array(
 			'body' => array(
 				'action' => 'update_info',
-				'version' => $version,
+				'version' => SO_THEME_VERSION,
 				'order_number' => $order_number
 			)
 		)
