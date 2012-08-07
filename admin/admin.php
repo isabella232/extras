@@ -74,7 +74,7 @@ function so_adminbar_render(){
 	?>
 	<div id="siteorigin-admin-bar" data-type="<?php print esc_attr($GLOBALS['so_adminbar_active']->id) ?>">
 		<div class="inner">
-			<img src="<?php print esc_attr($GLOBALS['so_adminbar_active']->icon) ?>" class="icon" width="44" height="44" />
+			<img src="<?php print esc_url($GLOBALS['so_adminbar_active']->icon) ?>" class="icon" width="44" height="44" />
 			<a href="#dismiss" class="dismiss"><?php _e('dismiss', 'siteorigin') ?></a>
 			<strong><?php call_user_func_array('get_template_part', $GLOBALS['so_adminbar_active']->message) ?></strong>
 		</div>

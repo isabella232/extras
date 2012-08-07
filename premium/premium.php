@@ -45,7 +45,7 @@ function so_premium_page_render(){
 			?>
 			<div class="wrap" id="theme-upgrade">
 
-				<form id="theme-upgrade-info" method="post" action="<?php print add_query_arg('action', 'enter-order') ?>">
+				<form id="theme-upgrade-info" method="post" action="<?php print esc_url(add_query_arg('action', 'enter-order')) ?>">
 					<p>
 						<?php
 						printf(
@@ -68,14 +68,14 @@ function so_premium_page_render(){
 
 				<?php if(isset($premium['buy_button']) && isset($premium['buy_url'])) : ?>
 					<p class="download">
-						<a href="<?php print esc_attr($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_attr($premium['buy_button']) ?>" /></a>
+						<a href="<?php print esc_url($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_url($premium['buy_button']) ?>" /></a>
 						<?php if(isset($premium['buy_message_1'])) : ?><span><?php print $premium['buy_message_1'] ?></span><?php endif; ?>
 					</p>
 				<?php endif; ?>
 						
 				<?php if(!empty($premium['featured'])) : ?>
 					<p id="promo-image">
-						<img src="<?php print esc_attr($premium['featured'][0]) ?>" width="<?php print intval($premium['featured'][1]) ?>" height="<?php print intval($premium['featured'][2]) ?>" class="magnify" />
+						<img src="<?php print esc_url($premium['featured'][0]) ?>" width="<?php print intval($premium['featured'][1]) ?>" height="<?php print intval($premium['featured'][2]) ?>" class="magnify" />
 					</p>
 				<?php endif; ?>
 				<div class="content">
@@ -87,7 +87,7 @@ function so_premium_page_render(){
 
 				<?php if(isset($premium['buy_button']) && isset($premium['buy_url'])) : ?>
 					<p class="download">
-						<a href="<?php print esc_attr($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_attr($premium['buy_button']) ?>" /></a>
+						<a href="<?php print esc_url($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_url($premium['buy_button']) ?>" /></a>
 						<?php if(isset($premium['buy_message_2'])) : ?><span><?php print $premium['buy_message_2'] ?></span><?php endif; ?>
 					</p>
 				<?php endif; ?>
@@ -147,7 +147,7 @@ function so_premium_page_render(){
 							$update_url = wp_nonce_url(admin_url('update.php?action=upgrade-theme&amp;theme=' . urlencode($theme)), 'upgrade-theme_' . $theme);
 							$update_onclick = 'onclick="if ( confirm(\'' . esc_js( __("Updating this theme will lose any customizations you have made. 'Cancel' to stop, 'OK' to update.", 'siteorigin') ) . '\') ) {return true;}return false;"';
 							?>
-							<a href="<?php print esc_attr($update_url) ?>" <?php print $update_onclick ?> class="button-primary">
+							<a href="<?php print esc_url($update_url) ?>" <?php print $update_onclick ?> class="button-primary">
 								<?php _e('Update Theme', 'siteorigin') ?>
 							</a>
 						</p>
