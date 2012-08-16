@@ -70,6 +70,13 @@ function so_panels_admin_enqueue_scripts(){
 		wp_enqueue_script('so-panels-admin-grid', get_template_directory_uri().'/extras/panels/js/panels.admin.grid.js', array('jquery'), SO_THEME_VERSION);
 		wp_enqueue_script('so-panels-admin', get_template_directory_uri().'/extras/panels/js/panels.admin.js', array('jquery'), SO_THEME_VERSION);
 		
+		// Localize the panels with the panels data
+		global $post;
+		$panels_data = get_post_meta($post->ID, 'panels_data', true); 
+		if(!empty($panels_data )){
+			wp_localize_script('so-panels-admin', 'panelsData', $panels_data);
+		}
+		
 		// This gives panels a chance to enqueue scripts too, without having to check the screen ID.
 		do_action('so_panel_enqueue_scripts');
 	}
@@ -89,3 +96,29 @@ function so_panels_admin_enqueue_styles(){
 }
 add_action('admin_print_styles-post-new.php', 'so_panels_admin_enqueue_styles');
 add_action('admin_print_styles-post.php', 'so_panels_admin_enqueue_styles');
+
+/**
+ * Save the panels data
+ * 
+ * @param $post_id
+ * @param $post
+ */
+function so_panels_save_post($post_id, $post){
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+	if ( empty($_POST['_sopanels_nonce']) || !wp_verify_nonce($_POST['_sopanels_nonce'], 'save') ) return;
+	if ( !current_user_can( 'edit_post', $post_id ) ) return;
+	
+	$panels_data = array();
+
+	$panels_data['panels'] = array_map('stripslashes_deep', isset($_POST['panels']) ? $_POST['panels'] : array());
+	$panels_data['panels'] = array_values($panels_data['panels']);
+	
+	$panels_data['grids'] = array_map('stripslashes_deep', isset($_POST['grids']) ? $_POST['grids'] : array());
+	$panels_data['grids'] = array_values($panels_data['grids']);
+	
+	$panels_data['grid_cells'] = array_map('stripslashes_deep', isset($_POST['grid_cells']) ? $_POST['grid_cells'] : array());
+	$panels_data['grid_cells'] = array_values($panels_data['grid_cells']);
+	
+	update_post_meta($post_id, 'panels_data', $panels_data);
+}
+add_action('save_post', 'so_panels_save_post', 10, 2);

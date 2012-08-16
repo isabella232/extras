@@ -9,7 +9,7 @@ jQuery(function($){
         close: function(){
             $('#panels-container .panel.new-panel').hide().fadeIn('slow').removeClass('new-panel');
         }
-    });
+    }).find('.panel-type').disableSelection();
     
     // And the tabs in the main dialog
     $('#panels-dialog-tabs').tabs({});$('#panels-dialog-tabs').tabs({});
@@ -24,52 +24,118 @@ jQuery(function($){
             return false;
         });
 
-    $('#panels .columns-add')
+    $('#panels .grid-add')
         .button({
             icons : {primary: 'ui-icon-columns'},
             text : false
         })
         .click(function(){
-            $('#columns-add-dialog').dialog('open');
+            $('#grid-add-dialog').dialog('open');
             return false;
         });
     
     var newPanelId = 0;
-    
-    $('#panels-dialog .panel-type').click(function(){
-        var $$ = $(this);
+
+    /**
+     * Create a new panel
+     * @param type
+     * @return {*}
+     */
+    var createPanel = function(type, data){
+        var $$;
+        if(typeof type == 'string') $$ = $('#panels-dialog .panel-type[data-class="'+type+'"]');
+        else $$ = type;
+        
         var panel = $('<div class="panel new-panel"><div class="panel-wrapper"><h4></h4><small class="description"></small><div class="form"></div></div></div>');
         var dialog;
 
         var formHtml = $$.attr('data-form');
         formHtml = formHtml.replace(/\{\%id\}/g, newPanelId++);
-        
+
         panel.find('h4').html('Panel Title').click(function(){
             dialog.dialog('open');
         });
         panel.find('.description').html('Panel Description');
         panel.find('.form').html(formHtml);
         dialog = $('<div />').addClass('dialog-form').html(formHtml).dialog({
-                autoOpen: false,
-                modal : true,
-                title : 'asd',
-                minWidth: 700,
-                buttons: {
-                    'Done' : function(){
-                        dialog.find('*[name]').each(function(){
-                            panel.find('.form *[name="'+$(this).attr('name')+'"]').val($(this).val());
-                        });
-                        dialog.dialog('close');
-                    }
+            autoOpen: false,
+            modal : true,
+            title : 'Temporary Title',
+            minWidth: 700,
+            open: function(){
+                panel.find('.form *[name]').each(function(){
+                    dialog.find('*[name="'+$(this).attr('name')+'"]').val($(this).val());
+                });
+            },
+            buttons: {
+                'Done' : function(){
+                    dialog.find('*[name]').each(function(){
+                        panel.find('.form *[name="'+$(this).attr('name')+'"]').val($(this).val());
+                    });
+                    dialog.dialog('close');
                 }
-            });
+            }
+        });
         panel.disableSelection();
         
-        $('#panels-container .cell .panels-container').last().append(panel).sortable('refresh');
-        $('#panels-container .cell .panels-container').sortable( "refresh" );
+        if(data != undefined){
+            // Populate the form values
+            for(c in data){
+                if(c != 'info') {
+                    panel.find('.form *[name$="['+c+']"]').val(data[c]);
+                    dialog.find('*[name$="['+c+']"]').val(data[c]);
+                }
+            }
+        }
+        
+        return panel;
+    }
+    
+    $('#panels-dialog .panel-type').click(function(){
+        var panel = createPanel($(this));
+        $('#panels-container .cell .panels-container').last().append(panel);
+        $('#panels-container .cell .panels-container').sortable( "refresh").trigger('refreshcells');
         $.grid.resizeCells($('#panels-container .cell .panels-container').last().closest('.grid-container'));
     });
     
-    // Temporary
-    $.grid.setupGrid($.grid.createGrid(1));
+    if(panelsData != undefined){
+        // Create all the content
+        for(var gi in panelsData.grids){
+            var cellWeights = [];
+            
+            // Get the cell weights
+            for(var ci in panelsData.grid_cells){
+                if(Number(panelsData.grid_cells[ci]['grid']) == gi){
+                    cellWeights[cellWeights.length] =  Number(panelsData.grid_cells[ci].weight);
+                }
+            }
+            
+            // Create the grids
+            var grid = $.grid.createGrid(Number(panelsData.grids[gi]['cells']), cellWeights);
+            $.grid.setupGrid(grid);
+            
+            // Add panels to the grid cells
+            for(var pi in panelsData.panels){
+
+                if(Number(panelsData.panels[pi]['info']['grid']) == gi){
+                    var pd = panelsData.panels[pi];
+                    var panel = createPanel(pd['info']['class'], pd);
+                    grid
+                        .find('.panels-container').eq(Number(panelsData.panels[pi]['info']['cell']))
+                        .append(panel)
+                }
+            }
+        }
+        
+        $('.panels-container')
+            .sortable('refresh')
+            .trigger('refreshcells');
+        
+        // Remove the new-panel class from any of these created panels
+        $('#panels-container .panel').removeClass('new-panel');
+    }
+    else{
+        // Temporary
+        $.grid.setupGrid($.grid.createGrid(1));
+    }
 });

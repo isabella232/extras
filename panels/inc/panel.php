@@ -40,7 +40,7 @@ abstract class SO_Panel {
 	}
 	
 	static function input_name($name, $sub = false){
-		return esc_attr('panel[{%id}]['.$name.']'.(!empty($sub) ? '['.$sub.']' : ''));
+		return esc_attr('panels[{%id}]['.$name.']'.(!empty($sub) ? '['.$sub.']' : ''));
 	}
 }
 

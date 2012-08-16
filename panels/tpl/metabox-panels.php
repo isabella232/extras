@@ -13,10 +13,13 @@ if(!empty($so_panel_types)){
 			$form = ob_get_clean();
 			
 			if(empty($form)) $form = '<p>'.__('No Panel Settings', 'siteorigin').'</p>';
+			
+			// Add all the extra fields
 			$form .= '<input type="hidden" data-info-field="order" name="panel_order[]" value="{%id}" />';
 			$form .= '<input type="hidden" data-info-field="class" name="'.SO_Panel::input_name('info', 'class').'" value="'.$class.'" />';
 			$form .= '<input type="hidden" data-info-field="id" name="'.SO_Panel::input_name('info', 'id').'" value="{%id}" />';
-			$form .= '<input type="hidden" data-info-field="container" name="'.SO_Panel::input_name('info', 'container').'" value="" />';
+			$form .= '<input type="hidden" data-info-field="container" name="'.SO_Panel::input_name('info', 'grid').'" value="" />';
+			$form .= '<input type="hidden" data-info-field="container" name="'.SO_Panel::input_name('info', 'cell').'" value="" />';
 	
 			$panels[$group][] = array(
 				'info' => $panel->get_info(),
@@ -35,7 +38,7 @@ if(!empty($so_panel_types)){
 	
 	<div id="add-to-panels">
 		<button class="panels-add"><?php _e('Add Panel', 'siteorigin') ?></button>
-		<button class="columns-add"><?php _e('Add Columns', 'siteorigin') ?></button>
+		<button class="grid-add"><?php _e('Add Grid', 'siteorigin') ?></button>
 	</div>
 	
 	<!-- The dialogs -->
@@ -70,31 +73,33 @@ if(!empty($so_panel_types)){
 		
 	</div>
 	
-	<div id="columns-setting-dialog" data-title="<?php esc_attr_e('Column Settings','siteorigin') ?>">
+	<div id="grid-setting-dialog" data-title="<?php esc_attr_e('Grid Settings','siteorigin') ?>">
 		<div id="columns-setting-tabs">
 			<ul>
-				<li><a href="#columns-setting-desktop"><?php _e('General', 'siteorigin') ?></a></li>
-				<li><a href="#columns-setting-desktop"><?php _e('Desktop', 'siteorigin') ?></a></li>
-				<li><a href="#columns-setting-tablet"><?php _e('Tablet', 'siteorigin') ?></a></li>
-				<li><a href="#columns-setting-mobile"><?php _e('Mobile', 'siteorigin') ?></a></li>
+				<li><a href="#grid-setting-desktop"><?php _e('General', 'siteorigin') ?></a></li>
+				<li><a href="#grid-setting-desktop"><?php _e('Desktop', 'siteorigin') ?></a></li>
+				<li><a href="#grid-setting-tablet"><?php _e('Tablet', 'siteorigin') ?></a></li>
+				<li><a href="#grid-setting-mobile"><?php _e('Mobile', 'siteorigin') ?></a></li>
 			</ul>
 			
-			<div id="columns-setting-desktop">
+			<div id="grid-setting-desktop">
 				This is foo
 			</div>
 
-			<div id="columns-setting-tablet">
+			<div id="grid-setting-tablet">
 				This is bar
 			</div>
 
-			<div id="columns-setting-mobile">
+			<div id="grid-setting-mobile">
 				This is the final one
 			</div>
 		</div>
 	</div>
 
-	<div id="columns-add-dialog" data-title="<?php esc_attr_e('Create Columns','siteorigin') ?>">
+	<div id="grid-add-dialog" data-title="<?php esc_attr_e('Create Grid','siteorigin') ?>">
 		<label><?php _e('Column Count', 'siteorigin') ?></label>
 		<input type="text" class="small-text" value="3" />
 	</div>
+	
+	<?php wp_nonce_field('save', '_sopanels_nonce') ?>
 </div>
