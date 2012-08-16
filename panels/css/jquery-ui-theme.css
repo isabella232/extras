@@ -1,0 +1,163 @@
+
+/* jQuery UI Button */
+
+.ui-button,
+.ui-dialog .ui-dialog-titlebar-close{
+    display: inline-block;
+    position: relative;
+    margin-right: .1em;
+    text-decoration: none !important;
+    cursor: pointer;
+    text-align: center;
+    zoom: 1;
+    overflow: visible;
+    padding: 5px;
+
+    background: #f8f8f8;
+    background: -moz-linear-gradient(top,  #f8f8f8 0%, #ececec 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#ececec));
+    background: -webkit-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
+    background: -o-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
+    background: -ms-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
+    background: linear-gradient(to bottom,  #f8f8f8 0%,#ececec 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#ececec',GradientType=0 );
+    
+    border: 1px solid #dfdfdf;
+    
+    margin: 0;
+    
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.ui-button.ui-button-icon-only .ui-button-text{
+    display: none;
+}
+
+.ui-button .ui-icon{
+    display: block;
+    width: 8px;
+    height: 8px;
+}
+
+.ui-button .ui-icon.ui-icon-add{ background: url(images/icons/add.png); }
+.ui-button .ui-icon.ui-icon-columns{ background: url(images/icons/columns.png); }
+.ui-button .ui-icon.ui-icon-settings{ background: url(images/icons/settings.png); }
+.ui-button .ui-icon.ui-icon-move{ background: url(images/icons/move.png); }
+.ui-button .ui-icon.ui-icon-remove{ background: url(images/icons/remove.png); }
+
+/* jQuery UI Dialog */
+
+.ui-dialog{
+	border: 1px solid #dfdfdf;
+    background: white;
+
+    -webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.ui-dialog .ui-dialog-titlebar{
+    background: #f8f8f8;
+    background: -moz-linear-gradient(top,  #f8f8f8 0%, #ececec 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#ececec));
+    background: -webkit-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
+    background: -o-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
+    background: -ms-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
+    background: linear-gradient(to bottom,  #f8f8f8 0%,#ececec 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#ececec',GradientType=0 );
+
+    border: 1px solid #dfdfdf;
+    border-bottom: none;
+    padding: 7px 10px;
+
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    
+    font-family: Georgia;
+    font-size: 14px;
+    color: #464646;
+    text-shadow: white 0px 1px 0px;
+    
+    position: relative;
+    margin: -1px -1px 0 -1px;
+}
+
+.ui-dialog .ui-dialog-titlebar-close{
+    position: absolute;
+    top: 5px;
+    right: 8px;
+}
+
+.ui-dialog .ui-dialog-titlebar-close .ui-icon{
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: url(images/icons/close.png);
+}
+
+.ui-dialog .ui-dialog-content{
+    padding: 10px;
+}
+
+/* jQuery UI Tabs */
+
+.ui-dialog{
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    
+}
+
+.ui-dialog .ui-tabs .ui-tabs-nav{
+    border-bottom: 1px solid #CCC;
+    margin-bottom: 8px;
+    line-height:1; 
+}
+
+.ui-dialog .ui-tabs .ui-tabs-nav li{
+    display: inline-block;
+    margin: 0 2px -1px 2px;
+
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    
+    border: 1px solid #DFDFDF;
+    border-bottom-color: #CCC;
+}
+
+.ui-dialog .ui-tabs .ui-tabs-nav li a{
+    display: block;
+    color: #AAA;
+    text-decoration: none;
+    padding: 7px 10px;
+}
+
+.ui-dialog .ui-tabs .ui-tabs-nav li.ui-state-active{
+    border-color: #CCC;
+    border-bottom-color: white;
+}
+
+.ui-dialog .ui-tabs .ui-tabs-nav li.ui-state-active a{
+    color: #464646;
+}
+
+.ui-dialog .ui-dialog-buttonset{
+	padding: 0 10px 10px 10px;
+	text-align: right;
+}
+
+/* Resizable Stuff */
+
+.ui-resizable-e{
+    
+}
