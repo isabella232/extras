@@ -34,6 +34,7 @@ function so_panels_init(){
 		'menu_position' => null,
 		'supports' => array( 'title'),
 		'register_meta_box_cb' => 'so_panels_metaboxes',
+		'menu_icon' => get_template_directory_uri().'/extras/panels/images/menu-icon.png'
 	));
 }
 add_action('after_setup_theme', 'so_panels_init');

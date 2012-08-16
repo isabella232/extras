@@ -105,6 +105,13 @@
     padding: 10px;
 }
 
+.ui-dialog .ui-dialog-content input,
+.ui-dialog .ui-dialog-content textarea{
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
 /* jQuery UI Tabs */
 
 .ui-dialog{
