@@ -43,7 +43,7 @@ if(!empty($so_panel_types)){
 	
 	<!-- The dialogs -->
 	
-	<div id="panels-dialog" data-title="<?php esc_attr_e('Add New Item','siteorigin') ?>">
+	<div id="panels-dialog" data-title="<?php esc_attr_e('Add New Item','siteorigin') ?>" class="panels-admin-dialog">
 		<div id="panels-dialog-tabs">
 			<ul>
 				<?php foreach($so_panel_groups as $id => $info) : ?>
@@ -73,8 +73,8 @@ if(!empty($so_panel_types)){
 		
 	</div>
 	
-	<div id="grid-setting-dialog" data-title="<?php esc_attr_e('Grid Settings','siteorigin') ?>">
-		<div id="columns-setting-tabs">
+	<div id="grid-setting-dialog" data-title="<?php esc_attr_e('Grid Settings','siteorigin') ?>" class="panels-admin-dialog">
+		<div id="grid-setting-tabs">
 			<ul>
 				<li><a href="#grid-setting-desktop"><?php _e('General', 'siteorigin') ?></a></li>
 				<li><a href="#grid-setting-desktop"><?php _e('Desktop', 'siteorigin') ?></a></li>
@@ -96,7 +96,7 @@ if(!empty($so_panel_types)){
 		</div>
 	</div>
 
-	<div id="grid-add-dialog" data-title="<?php esc_attr_e('Create Grid','siteorigin') ?>">
+	<div id="grid-add-dialog" data-title="<?php esc_attr_e('Create Grid','siteorigin') ?>" class="panels-admin-dialog">
 		<label><?php _e('Column Count', 'siteorigin') ?></label>
 		<input type="text" class="small-text" value="3" />
 	</div>

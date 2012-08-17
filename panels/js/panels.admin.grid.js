@@ -65,6 +65,12 @@ jQuery(function($){
                 change: function(){
                     $.grid.resizeCells($$, true);
                 },
+                stop: function(){
+                    // Refresh all the cell sizes after we stop sorting
+                    $('#panels-container .grid-container').each(function(){
+                        $.grid.resizeCells($(this), true);
+                    });
+                },
                 receive: function(){
                     $(this).trigger('refreshcells');
                 }
@@ -222,7 +228,7 @@ jQuery(function($){
     });
     
     // Create the grid settings dialog
-    $('#grid-setting-dialog').dialog({
+    $('#grid-setting-dialog').show().dialog({
         autoOpen: false,
         modal: true,
         title: $('#grid-setting-dialog').attr('data-title') 
@@ -230,7 +236,7 @@ jQuery(function($){
     $('#grid-setting-tabs').tabs({});
     
     // Create the add grid dialog
-    $('#grid-add-dialog').dialog({
+    $('#grid-add-dialog').show().dialog({
         autoOpen: false,
         modal: true,
         title: $('#grid-setting-dialog').attr('data-title'),

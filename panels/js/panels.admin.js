@@ -1,6 +1,6 @@
 jQuery(function($){
     // Create the main dialog
-    $('#panels-dialog').dialog({
+    $('#panels-dialog').show().dialog({
         autoOpen: false,
         modal : true,
         title : $('#panels-dialog').attr('data-title'),
@@ -14,6 +14,7 @@ jQuery(function($){
     // And the tabs in the main dialog
     $('#panels-dialog-tabs').tabs({});$('#panels-dialog-tabs').tabs({});
     
+    // The button for adding a panel
     $('#panels .panels-add')
         .button({
             icons : {primary: 'ui-icon-add'},
@@ -23,7 +24,8 @@ jQuery(function($){
             $('#panels-dialog').dialog('open');
             return false;
         });
-
+    
+    // The button for adding a grid
     $('#panels .grid-add')
         .button({
             icons : {primary: 'ui-icon-columns'},
@@ -38,6 +40,7 @@ jQuery(function($){
 
     /**
      * Create a new panel
+     * 
      * @param type
      * @return {*}
      */
@@ -57,7 +60,7 @@ jQuery(function($){
         });
         panel.find('.description').html('Panel Description');
         panel.find('.form').html(formHtml);
-        dialog = $('<div />').addClass('dialog-form').html(formHtml).dialog({
+        dialog = $('<div id="panel-dialog" />').addClass('dialog-form').html(formHtml).dialog({
             autoOpen: false,
             modal : true,
             title : 'Temporary Title',
@@ -66,9 +69,15 @@ jQuery(function($){
                 panel.find('.form *[name]').each(function(){
                     dialog.find('*[name="'+$(this).attr('name')+'"]').val($(this).val());
                 });
+                
+                // This gives panel types a chance to influence the form
+                $(this).trigger('panelsopen');
             },
             buttons: {
                 'Done' : function(){
+                    $(this).trigger('panelsdone');
+                    
+                    // Transfer the dialog values across
                     dialog.find('*[name]').each(function(){
                         panel.find('.form *[name="'+$(this).attr('name')+'"]').val($(this).val());
                     });
@@ -87,10 +96,13 @@ jQuery(function($){
                 }
             }
         }
-        
+
+        // This is to refresh the dialog positions
+        $(window).resize();
         return panel;
     }
     
+    // Handle adding a new panel
     $('#panels-dialog .panel-type').click(function(){
         var panel = createPanel($(this));
         $('#panels-container .cell .panels-container').last().append(panel);
@@ -102,18 +114,18 @@ jQuery(function($){
         // Create all the content
         for(var gi in panelsData.grids){
             var cellWeights = [];
-            
+
             // Get the cell weights
             for(var ci in panelsData.grid_cells){
                 if(Number(panelsData.grid_cells[ci]['grid']) == gi){
                     cellWeights[cellWeights.length] =  Number(panelsData.grid_cells[ci].weight);
                 }
             }
-            
+
             // Create the grids
             var grid = $.grid.createGrid(Number(panelsData.grids[gi]['cells']), cellWeights);
             $.grid.setupGrid(grid);
-            
+
             // Add panels to the grid cells
             for(var pi in panelsData.panels){
 
@@ -126,16 +138,24 @@ jQuery(function($){
                 }
             }
         }
-        
+
         $('.panels-container')
             .sortable('refresh')
             .trigger('refreshcells');
-        
+
         // Remove the new-panel class from any of these created panels
         $('#panels-container .panel').removeClass('new-panel');
+        // Make sure everything is sized properly
+        $('#panels-container .grid-container').each(function(){
+            $.grid.resizeCells($(this));
+        });
     }
     else{
         // Temporary
         $.grid.setupGrid($.grid.createGrid(1));
     }
+    
+    $(window).resize(function(){
+        $('.panels-admin-dialog').dialog("option", "position", "center");
+    });
 });
