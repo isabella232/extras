@@ -21,11 +21,12 @@ abstract class SO_Panel {
 
 	/**
 	 * Render the panel
-	 * 
+	 *
 	 * @abstract
+	 * @param array $data The data for this panel
 	 * @return mixed
 	 */
-	abstract function render();
+	abstract function render($data);
 
 	/**
 	 * Get the panel information

@@ -55,15 +55,22 @@ jQuery(function($){
         var formHtml = $$.attr('data-form');
         formHtml = formHtml.replace(/\{\%id\}/g, newPanelId++);
 
-        panel.find('h4').html('Panel Title').click(function(){
-            dialog.dialog('open');
-        });
-        panel.find('.description').html('Panel Description');
-        panel.find('.form').html(formHtml);
+        panel
+            .data({
+                // We need this data to update the title
+                'title-field': $$.attr('data-title-field'),
+                'title': $$.attr('data-title')
+            })
+            .find('h4').click(function(){
+                dialog.dialog('open');
+            })
+            .end().find('.description').html('Panel Description')
+            .end().find('.form').html(formHtml);
+        
         dialog = $('<div id="panel-dialog" />').addClass('dialog-form').html(formHtml).dialog({
             autoOpen: false,
             modal : true,
-            title : 'Temporary Title',
+            title : ('Edit %s Panel').replace('%s', $$.attr('data-title')),
             minWidth: 700,
             open: function(){
                 panel.find('.form *[name]').each(function(){
@@ -81,6 +88,10 @@ jQuery(function($){
                     dialog.find('*[name]').each(function(){
                         panel.find('.form *[name="'+$(this).attr('name')+'"]').val($(this).val());
                     });
+                    
+                    // Change the title of the panel
+                    setPanelTitle(panel);
+                    
                     dialog.dialog('close');
                 }
             }
@@ -96,10 +107,33 @@ jQuery(function($){
                 }
             }
         }
-
+        
+        setPanelTitle(panel);
+        
         // This is to refresh the dialog positions
         $(window).resize();
         return panel;
+    }
+
+    /**
+     * Set the title of the panel
+     * 
+     * @param {*} panel
+     */
+    var setPanelTitle = function(panel){
+        var titleField = panel.data('title-field');
+        var titleValue;
+        
+        if(titleField != undefined){
+            titleValue = panel.find('*[name$="['+titleField+']"]').val();
+        }
+        
+        if(titleValue == '' || titleValue == undefined){
+            panel.find('h4').html(panel.data('title'));
+        }
+        else{
+            panel.find('h4').html(panel.data('title')+': '+titleValue);
+        }
     }
     
     // Handle adding a new panel
@@ -110,6 +144,7 @@ jQuery(function($){
         $.grid.resizeCells($('#panels-container .cell .panels-container').last().closest('.grid-container'));
     });
     
+    console.log(panelsData);
     if(panelsData != undefined){
         // Create all the content
         for(var gi in panelsData.grids){
@@ -139,7 +174,7 @@ jQuery(function($){
             }
         }
 
-        $('.panels-container')
+        $('#panels-container .panels-container')
             .sortable('refresh')
             .trigger('refreshcells');
 

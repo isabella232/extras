@@ -84,6 +84,10 @@ jQuery(function($){
                     $(this).find('input[name$="[info][grid]"]').val($('#panels-container .grid-container').index(container));
                     $(this).find('input[name$="[info][cell]"]').val(container.find('.cell').index($(this).closest('.cell')));
                 });
+
+                $('#panels-container .cell').each(function(){
+                    $(this).find('input[name$="[grid]"]').val($('#panels-container .grid-container').index($(this).closest('.grid-container')));
+                });
             })
             .disableSelection();
     }
@@ -165,7 +169,9 @@ jQuery(function($){
                         .click(function(){
                             if(confirm('Are you sure you want to delete this grid?')){
                                 container.remove();
-                                $('#panels-container').sortable( "refresh" );
+                                $('#panels-container')
+                                    .sortable( "refresh" )
+                                    .find('.panels-container').trigger('refreshcells');
                             }
                             return false;
                         })
@@ -215,7 +221,7 @@ jQuery(function($){
     // Create a sortable for the grids
     $('#panels-container').sortable({
         items: '> .grid-container',
-        handles : '.grid-handle',
+        handle : '.grid-handle',
         tolerance: 'pointer',
         stop: function(){
             $(this).find('.cell').each(function(){

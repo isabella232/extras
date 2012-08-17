@@ -22,7 +22,7 @@ function so_panels_init(){
 			'menu_name' => __('Panels', 'seven')
 
 		),
-		'public' => false,
+		'public' => true,
 		'publicly_queryable' => true,
 		'show_ui' => true,
 		'show_in_menu' => true,
@@ -123,3 +123,105 @@ function so_panels_save_post($post_id, $post){
 	update_post_meta($post_id, 'panels_data', $panels_data);
 }
 add_action('save_post', 'so_panels_save_post', 10, 2);
+
+
+function so_panels_css(){
+	global $post;
+	if(is_single() && $post->post_type = 'panel'){
+		$panels_data = get_post_meta($post->ID, 'panels_data', true);
+		
+		$css = array();
+		$css[1920] = array();
+		
+		// Add the grid sizing
+		$ci = 0;
+		foreach($panels_data['grids'] as $gi => $grid){
+			$cell_count = intval($grid['cells']);
+			for($i = 0; $i < $cell_count; $i++){
+				$cell = $panels_data['grid_cells'][$ci++];
+				
+				if($cell_count > 1){
+					$css_new = 'width:'.round($cell['weight']*100,3).'%';
+					if(empty($css[1920][$css_new])) $css[1920][$css_new] = array();
+					$css[1920][$css_new][] = '#pgc-'.$gi.'-'.$i;
+				}
+			}
+			
+			if($cell_count > 1){
+				if(empty($css[1920]['float:left'])) $css[1920]['float:left'] = array();
+				$css[1920]['float:left'][] = '#pg-'.$gi.' .panel-grid-cell';
+			}
+		}
+
+		// Build the CSS
+		$css_text = '';
+		krsort($css);
+		foreach($css as $res => $def){
+			if($res < 1920){
+				$css_text .= '@media (max-width:'.$res.'px)';
+				$css_text .= ' { ';
+			}
+
+			foreach($def as $property => $selector){
+				$selector = array_unique($selector);
+				$css_text .= implode(' , ', $selector).' { '.$property.' } ';
+			}
+
+			if($res < 1920) $css_text .= ' } ';
+		}
+		
+		print '<style type="text/css">';
+		print $css_text;
+		print '</style>';
+	}
+}
+add_action('wp_print_styles', 'so_panels_css');
+
+/**
+ * Render the panels
+ * 
+ * @param bool $post_id
+ */
+function so_panels_render($post_id = false){
+	if(empty($post_id)){
+		global $post;
+	}
+	else $post = get_post($post_id);
+
+	$panels_data = get_post_meta($post->ID, 'panels_data', true);
+	
+	// Create the skeleton of the grids
+	$grids = array();
+	foreach($panels_data['grids'] as $gi => $grid){
+		$gi = intval($gi);
+		$grids[$gi] = array();
+		for($i = 0; $i < $grid['cells']; $i++){
+			$grids[$gi][$i] = array();
+		}
+	}
+	
+	foreach($panels_data['panels'] as $panel){
+		$grids[intval($panel['info']['grid'])][intval($panel['info']['cell'])][] = $panel;
+	}
+	
+	foreach($grids as $gi => $cells){
+		?><div class="panel-grid" id="pg-<?php print $gi ?>"><?php
+		foreach($cells as $ci => $panels){
+			?><div class="panel-grid-cell" id="pgc-<?php print $gi.'-'.$ci ?>"><?php
+			foreach($panels as $pi => $panel){
+				$panel_class = new $panel['info']['class'];
+				$info = $panel_class->get_info();
+				$classes = array('panel-panel', 'panel-'.$info['group'], 'panel-'.$info['group'].'-'.$info['name']);
+				if($pi == count($panels)-1) $classes[] = 'panel-last-child';
+				
+				?><div class="<?php print esc_attr(implode(' ',$classes)) ?>" id="panel-<?php print $pi ?>"><?php
+				$panel_class->render($panel);
+				?></div><?php
+			}
+			if(empty($panels)) print '&nbsp;';
+			?></div><?php
+		}
+		if(count($cells) > 1) print '<div class="clear"></div>';
+		?></div><?php
+	}
+}

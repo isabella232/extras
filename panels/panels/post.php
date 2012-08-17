@@ -8,7 +8,7 @@ class SO_Panel_Post_Title extends SO_Panel{
 	function form(){}
 	function save($new_values){}
 	
-	function render(){
+	function render($data){
 		?><h1 class="entry-title"><?php the_title() ?></h1><?php
 	}
 	
@@ -17,6 +17,7 @@ class SO_Panel_Post_Title extends SO_Panel{
 			'title' => __('Title', 'siteorigin'),
 			'description' => __("The current post's title.", 'siteorigin'),
 			'group' => 'post',
+			'name' => 'title'
 		);
 	}
 }
@@ -26,7 +27,7 @@ class SO_Panel_Post_Content extends SO_Panel{
 	function form(){}
 	function save($new_values){}
 
-	function render(){
+	function render($data){
 		?><div class="entry-content"><?php the_content() ?></div><?php
 	}
 
@@ -35,6 +36,7 @@ class SO_Panel_Post_Content extends SO_Panel{
 			'title' => __('Content', 'siteorigin'),
 			'description' => __("The current post's content.", 'siteorigin'),
 			'group' => 'post',
+			'name' => 'contents'
 		);
 	}
 }
@@ -44,7 +46,7 @@ class SO_Panel_Post_Featured_Image extends SO_Panel{
 	function form(){}
 	function save($new_values){}
 
-	function render(){
+	function render($data){
 		if(!has_post_thumbnail()) return;
 		?><div class="entry-featured-image"><?php the_content() ?></div><?php
 	}
@@ -54,6 +56,7 @@ class SO_Panel_Post_Featured_Image extends SO_Panel{
 			'title' => __('Featured Image', 'siteorigin'),
 			'description' => __("The current post's featured image.", 'siteorigin'),
 			'group' => 'post',
+			'name' => 'featured-image'
 		);
 	}
 }
@@ -63,7 +66,7 @@ class SO_Panel_Post_Comments extends SO_Panel{
 	function form(){}
 	function save($new_values){}
 
-	function render(){
+	function render($data){
 		if(!has_post_thumbnail()) return;
 		?><div class="entry-featured-image"><?php the_content() ?></div><?php
 	}
@@ -73,6 +76,7 @@ class SO_Panel_Post_Comments extends SO_Panel{
 			'title' => __('Post Comments', 'siteorigin'),
 			'description' => __("The current post's comments.", 'siteorigin'),
 			'group' => 'post',
+			'name' => 'comments'
 		);
 	}
 }

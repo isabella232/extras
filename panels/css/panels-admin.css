@@ -215,8 +215,11 @@
 .panels-container .panel h4{
 	display: inline-block;
 	cursor: pointer;
-    margin: 0 0 5px 0;
+    margin: 0 0 8px 0;
     font-weight: 600;
+    height: 1em;
+    line-height: 1;
+    overflow: hidden;
 }
 
 .panels-container .panel.ui-sortable-helper h4{

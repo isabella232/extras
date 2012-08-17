@@ -20,15 +20,17 @@ class SO_Panel_Basic_Text extends SO_Panel{
 
 	}
 
-	function render(){
-
+	function render($data){
+		?><h3><?php print esc_html($data['headline']) ?></h3><?php
 	}
 
 	function get_info(){
 		return array(
 			'title' => __('Text', 'siteorigin'),
 			'description' => null,
-			'group' => 'post',
+			'title_field' => 'headline',
+			'group' => 'basic',
+			'name' => 'text',
 		);
 	}
 }

@@ -55,7 +55,12 @@ if(!empty($so_panel_types)){
 				<div id="panels-dialog-tabs-<?php print esc_attr($group_id) ?>">
 					<ul class="panel-type-list">
 						<?php foreach($panels[$group_id] as $panel_type) : $i++; ?>
-							<li class="panel-type" data-class="<?php print esc_attr($panel_type['class']) ?>" data-form="<?php print esc_attr($panel_type['form']) ?>">
+							<li class="panel-type"
+								data-class="<?php print esc_attr($panel_type['class']) ?>"
+								data-form="<?php print esc_attr($panel_type['form']) ?>"
+								data-title="<?php print esc_attr($panel_type['info']['title']) ?>"
+								<?php if(!empty($panel_type['info']['title_field'])) : ?>data-title-field="<?php print esc_attr($panel_type['info']['title_field']) ?>"<?php endif ?>
+								>
 								<div class="panel-type-wrapper">
 									<h3><?php print $panel_type['info']['title'] ?></h3>
 									<?php if(!empty($panel_type['info']['description'])) : ?>
