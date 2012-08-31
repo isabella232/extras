@@ -1,0 +1,261 @@
+/* @group Panel List */
+
+.panel-type-list,
+.panel-grid-list{
+    margin: 15px -5px 0 -5px;
+}
+
+.panel-type-list .panel-type,
+.panel-grid-list .panel-grid {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 25%;
+    padding: 0 5px;
+    margin-bottom: 10px;
+    
+    float: left;
+}
+
+.panel-type-list .panel-type-wrapper,
+.panel-grid-list .panel-grid-wrapper {
+    padding: 10px;
+    background: #808080;
+
+    background: #f8f8f8;
+    background: -moz-linear-gradient(top,  #f8f8f8 0%, #ececec 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#ececec));
+    background: -webkit-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
+    background: -o-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
+    background: -ms-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
+    background: linear-gradient(to bottom,  #f8f8f8 0%,#ececec 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#ececec',GradientType=0 );
+
+    border: 1px solid #dfdfdf;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    
+    cursor: pointer;
+}
+
+.panel-type-list .panel-type h3,
+.panel-grid-list .panel-grid h3 {
+    margin: 0 0 7px 0;
+    font-weight: 600;
+}
+
+/* @end */
+
+/* @group Grid */
+
+#panels-container .grid-wrapper h4{
+	margin: 5px 1px;
+}
+
+#panels-container .grid {
+	margin-bottom: 20px;
+	position: relative;
+	background: url(images/grid-bg.png) repeat;
+}
+
+#panels-container .grid .cell {	
+	background: #fff8bd;
+	border: 1px solid #ecd800;
+	
+	position: absolute;
+	top: 0;
+}
+
+#panels-container .grid .cell .cell-wrapper{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	
+	padding: 10px 10px 6px 10px; /* 6px bottom to remove bottom margin from panels */
+}
+
+#panels-container .grid .cell.first{
+	margin-left: 0;
+}
+
+#panels-container .grid .cell.last{
+	margin-right: 0;
+}
+
+#panels-container .grid .cell .cell-width{
+	height: 11px;
+	position: absolute;
+	bottom: -13px;
+	overflow: hidden;
+	font-size: 9px;
+	width: 100%;
+}
+
+#panels-container .grid .cell .cell-width-left{
+	float: left;
+	height: 11px;
+	width: 5px;
+	background: url(images/cell-width.png) no-repeat left top;
+}
+
+#panels-container .grid .cell .cell-width-right{
+	float: right;
+	height: 11px;
+	width: 5px;
+	background: url(images/cell-width.png) no-repeat left bottom;
+}
+
+#panels-container .grid .cell .cell-width-line{
+	background: url(images/cell-width.png) repeat-x left -11px;
+	margin: 0 5px;
+	height: 11px;
+}
+
+#panels-container .grid .cell .cell-width-value{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+
+#panels-container .grid .cell .cell-width-value span{
+	display: inline-block;
+	background: #f6f6f6;
+	font-size: 9px;
+	color: #848484;
+	padding: 0 5px;
+	line-height: 1;
+}
+
+#panels-container .grid .ui-resizable-handle.ui-resizable-w{
+    width: 12px;
+    left: -12px;
+	cursor: move;
+    background: rgba(0,150,211, 0);
+
+    -webkit-transition: background 0.25s ease-in-out;
+    -moz-transition: background 0.25s ease-in-out;
+    -o-transition: background 0.25s ease-in-out;
+    transition: background 0.25s ease-in-out;
+}
+
+#panels-container .grid .ui-resizable-handle.ui-resizable-w:hover{
+    background: rgba(0,150,211, 0.1);
+}
+
+#panels-container .grid .ui-resizable-resizing .ui-resizable-handle.ui-resizable-w{
+    background: rgba(0,150,211, 0.25);
+}
+
+/* @group Controls */
+
+#panels-container .grid-container .controls{
+	line-height: 1;
+	margin-bottom: 2px;
+	text-align: right;
+}
+
+#panels-container .grid-container .controls .ui-button{
+	margin-left: 5px;
+}
+
+#panels-container .grid-container .controls .grid-handle{
+	cursor: move;
+}
+
+#add-to-panels{
+	padding-top: 10px;
+}
+
+/* @end */
+
+/* @end */
+
+/* @group The Resizable Helper */
+
+.ui-resizable-helper{
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	
+	background: #fff8bd;
+	border: 1px solid #ecd800;
+	min-height: 100px;
+	position: absolute;
+}
+
+/* @end */
+
+/* @group Panel Container */
+
+.panels-container .panel{
+    margin-bottom: 4px;
+	
+	background: #f8f8f8;
+    background: -moz-linear-gradient(top,  #f8f8f8 0%, #ececec 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#ececec));
+    background: -webkit-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
+    background: -o-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
+    background: -ms-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
+    background: linear-gradient(to bottom,  #f8f8f8 0%,#ececec 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#ececec',GradientType=0 );
+    
+    border: 1px solid #dfdfdf;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    
+    cursor: move;
+}
+
+.panels-container .panel .panel-wrapper{
+	padding: 7px;
+}
+
+.panels-container .panel h4{
+	display: inline-block;
+	cursor: pointer;
+    margin: 0 0 8px 0;
+    font-weight: 600;
+    height: 1em;
+    line-height: 1;
+    overflow: hidden;
+}
+
+.panels-container .panel.ui-sortable-helper h4{
+	cursor: move;
+}
+
+.panels-container .panel small{
+	display: block;
+}
+
+.panels-container .panel .form{
+	display: none;
+}
+
+.panels-container .ui-state-highlight{
+	border: 1px dashed #dfdfdf;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    
+    height: 51px;
+    
+    background: rgba(255,255,255,0.4);
+    margin-bottom: 4px;
+}
+
+/* @end */
+
+/* @group Dialogs */
+
+#panels-dialog,
+#grid-setting-dialog,
+#grid-add-dialog{
+	display: none;
+}
+
+/* @end */
