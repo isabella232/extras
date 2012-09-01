@@ -172,7 +172,7 @@ jQuery(function($){
             }
 
             // Create the grids
-            var grid = $.grid.createGrid(Number(panelsData.grids[gi]['cells']), cellWeights, panelsData.grids[gi]['grid_type']);
+            var grid = $.grid.createGrid(Number(panelsData.grids[gi]['cells']), cellWeights);
             $.grid.setupGrid(grid);
             
             // Add panels to the grid cells
@@ -201,7 +201,7 @@ jQuery(function($){
     }
     else{
         // Create an initial grid container
-        $('#grid-add-dialog .panel-grid').eq(0).click();
+        $.grid.setupGrid($.grid.createGrid(1));
     }
     
     $(window).resize(function(){

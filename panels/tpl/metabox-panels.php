@@ -79,30 +79,10 @@ if(!empty($so_panel_types)){
 	</div>
 	
 	<div id="grid-add-dialog" data-title="<?php esc_attr_e('Create Grid','siteorigin') ?>" class="panels-admin-dialog">
-		<?php
-		global $so_panel_grids;
-		?><ul class="panel-grid-list"><?php
-		foreach ($so_panel_grids as $id => $grid){
-			$cells = array();
-			foreach($grid['cells'] as $cell){
-				$cells[] = $cell['weight'];
-			}
-			?>
-			<li class="panel-grid"
-				data-cells="<?php print esc_attr(implode('|', $cells)) ?>"
-				data-type="<?php echo esc_attr($id) ?>"
-				>
-				<div class="panel-grid-wrapper">
-					<h3><?php print esc_html(isset($grid['title']) ? $grid['title'] : __('Untitled', 'siteorigin')) ?></h3>
-					<?php if(!empty($grid['description'])) : ?>
-						<small class="description"><?php print esc_html($grid['description']) ?></small>
-					<?php endif; ?>
-				</div>
-			</li>
-			<?php
-		}
-		?>
-		</ul>
+		<p><label><strong><?php _e('Columns') ?></strong></label></p>
+		<p>
+			<input id="grid-add-dialog-input" name="column_count" class="small-text" value="3" />
+		</p>
 	</div>
 	
 	<?php wp_nonce_field('save', '_sopanels_nonce') ?>

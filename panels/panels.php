@@ -249,7 +249,6 @@ function so_panels_render($post_id = false){
 	ob_start();
 	foreach($grids as $gi => $cells){
 		$grid = $panels_data['grids'][$gi];
-		$grid_info = $so_panel_grids[$grid['grid_type']];
 		
 		?><div class="panel-grid" id="pg-<?php print $gi ?>"><?php
 		foreach($cells as $ci => $panels){

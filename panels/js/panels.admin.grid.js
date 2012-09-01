@@ -11,7 +11,6 @@ jQuery(function($){
         $$.find('.grid .cell').not('.first').each(function(){
             var sharedCellWidth, sharedCellLeft;
             
-            /*
             $(this).resizable({
                 handles: 'w',
                 containment : 'parent',
@@ -42,11 +41,9 @@ jQuery(function($){
                     $.grid.resizeCells($$, true);
                 }
             });
-            */
         });
         
         // Enable double clicking on the resizer
-        /*
         $$.find('.grid .cell .ui-resizable-handle').dblclick(function(){
             var c1 = $(this).closest('.cell');
             var c2 = c1.prev();
@@ -58,7 +55,6 @@ jQuery(function($){
             
             return false;
         });
-        */
 
         $$.find('.grid .cell')
             .each(function(){
@@ -146,7 +142,7 @@ jQuery(function($){
      * @param weights
      * @return {*}
      */
-    $.grid.createGrid = function(cells, weights, type){
+    $.grid.createGrid = function(cells, weights){
         if(weights == undefined){
             weights = [];
             for(var i = 0; i < cells; i++){
@@ -159,8 +155,7 @@ jQuery(function($){
         var container = $('<div />').addClass('grid-container').appendTo('#panels-container');
         // Add the hidden field to store the grid order
         container.append($('<input type="hidden" name="grids['+gridId+'][cells]" />').val(cells));
-        container.append($('<input type="hidden" name="grids['+gridId+'][grid_type]" />').val(type));
-        
+            
         container
             .append(
                 $('<div class="controls" />')
@@ -244,8 +239,6 @@ jQuery(function($){
         autoOpen: false,
         modal: true,
         title: $('#grid-add-dialog').attr('data-title'),
-        minWidth: 960,
-        minHeight: 400,
         open: function(){
             $(this).find('input').val(3);
         },
