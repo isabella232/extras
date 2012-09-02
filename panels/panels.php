@@ -149,6 +149,13 @@ function so_panels_save_post($post_id, $post){
 	$panels_data['grid_cells'] = array_values($panels_data['grid_cells']);
 	
 	update_post_meta($post_id, 'panels_data', $panels_data);
+	
+	if(isset($_POST['panels_home_page'])){
+		set_theme_mod('panels_home_page', $post_id);
+	}
+	elseif(get_theme_mod('panels_home_page') == $post_id){
+		remove_theme_mod('panels_home_page');
+	}
 }
 add_action('save_post', 'so_panels_save_post', 10, 2);
 
@@ -272,3 +279,52 @@ function so_panels_render($post_id = false){
 	$html = ob_get_clean();
 	print apply_filters('panels_render', $html, $post_id, $post);
 }
+
+/**
+ * Change the template we're using for the home page to the panels template if we've set a panel home page.
+ * 
+ * @param $template
+ * @return string
+ */
+function panels_set_home_template($template){
+	if(get_theme_mod('panels_home_page')){
+		$post = get_post(get_theme_mod('panels_home_page'));
+		if(!empty($post))
+			$template = locate_template('single-panel.php'); 
+	}
+	
+	return $template;
+}
+add_filter('home_template', 'panels_set_home_template');
+
+/**
+ * Filter the query for the home page panel so we just load the home panel
+ * 
+ * @param WP_Query $query
+ */
+function panels_filter_home_query($query){
+	if(is_home() && $query->is_main_query() && get_theme_mod('panels_home_page')){
+		$query->set('post_type', 'panel');
+		$query->set('numberposts', 1);
+		$query->set('post__in', array(get_theme_mod('panels_home_page')));
+		$query->is_single = true;
+		$query->is_singular = true;
+	}
+	
+	return $query;
+}
+add_filter('pre_get_posts', 'panels_filter_home_query');
+
+/**
+ * Change the permalink of the home page panel
+ * 
+ * @param $permalink
+ * @param $post
+ */
+function panels_filter_post_link($permalink, $post){
+	if($post->post_type == 'panel' && $post->ID == get_theme_mod('panels_home_page')){
+		$permalink = home_url('/');
+	}
+	return $permalink;
+}
+add_filter('post_type_link', 'panels_filter_post_link', 10, 2);
