@@ -34,7 +34,7 @@ class SO_Panel_Basic_Text extends SO_Panel{
 	function get_info(){
 		return array(
 			'title' => __('Text', 'siteorigin'),
-			'description' => null,
+			'description' => __('A simple text and headline', 'siteorigin'),
 			'title_field' => 'headline',
 			'group' => 'basic',
 			'name' => 'text',

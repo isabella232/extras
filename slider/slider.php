@@ -140,7 +140,9 @@ class Seven_Panel_Slider extends SO_Panel{
 			'post_type' => 'slider',
 			'post_status' => 'publish',
 		));
-
+		
+		global $_wp_additional_image_sizes;
+		
 		?>
 		<p><strong><?php _e('Slider', 'siteorigin') ?></strong></p>
 		<p>
@@ -150,6 +152,19 @@ class Seven_Panel_Slider extends SO_Panel{
 					<option value="<?php print $slider->ID ?>"><?php print $slider->post_title ?></option>
 				<?php endforeach; ?>
 			</select>
+		</p>
+		<p><strong><?php _e('Slider', 'siteorigin') ?></strong></p>
+		<p>
+			<select name="<?php print self::input_name('image_size') ?>">
+				<option value="large"><?php _e('Large', 'siteorigin') ?></option>
+				<option value="medium"><?php _e('Medium', 'siteorigin') ?></option>
+				<option value="thumbnail"><?php _e('Thumbnail', 'siteorigin') ?></option>
+				<option value="full"><?php _e('Full', 'siteorigin') ?></option>
+				<?php foreach ($_wp_additional_image_sizes as $name => $info) : ?>
+					<option value="<?php print esc_attr($name) ?>"><?php print esc_html($name) ?></option>
+				<?php endforeach ?>
+			</select>
+		</p>
 		<?php
 	}
 
@@ -166,11 +181,11 @@ class Seven_Panel_Slider extends SO_Panel{
 		$post = get_post($data['slider_id']);
 		$slides = get_post_meta($post->ID, 'seven_slider', true);
 		
-		?><ul><?php
+		?><ul class="slides"><?php
 		foreach($slides as $slide){
 			?>
 			<li>
-				<?php print wp_get_attachment_image($slide['image'], 'slider'); ?>
+				<?php print wp_get_attachment_image($slide['image'], !empty($data['image_size']) ? $data['image_size'] : 'large'); ?>
 			</li>
 			<?php
 		}

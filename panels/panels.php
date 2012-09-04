@@ -1,7 +1,9 @@
 <?php
 
 require_once get_template_directory().'/extras/panels/inc/panel.php';
+
 require_once get_template_directory().'/extras/panels/panels/basic.php';
+require_once get_template_directory().'/extras/panels/panels/home.php';
 require_once get_template_directory().'/extras/panels/panels/post.php';
 
 /**
@@ -165,7 +167,8 @@ add_action('save_post', 'so_panels_save_post', 10, 2);
  */
 function so_panels_css(){
 	global $post;
-	if(is_single() && $post->post_type = 'panel'){
+	
+	if(is_single() && $post->post_type == 'panel'){
 		$panels_data = get_post_meta($post->ID, 'panels_data', true);
 		
 		$css = array();
@@ -192,11 +195,11 @@ function so_panels_css(){
 			}
 
 			// Mobile Responsive
-			if(empty($css[767]['float:left'])) $css[767]['float:none'] = array();
-			$css[767]['float:none'][] = '#pg-'.$gi.' .panel-grid-cell';
-
-			if(empty($css[767]['float:left'])) $css[767]['width:auto'] = array();
-			$css[767]['width:auto'][] = '#pg-'.$gi.' .panel-grid-cell';
+			$mobile_css = array('float:none','width:auto','margin-bottom:15px');
+			foreach($mobile_css as $c){
+				if(empty($css[767][$c])) $css[767][$c] = array();
+				$css[767][$c][] = '#pg-'.$gi.' .panel-grid-cell';
+			}
 		}
 		
 
@@ -251,8 +254,6 @@ function so_panels_render($post_id = false){
 		$grids[intval($panel['info']['grid'])][intval($panel['info']['cell'])][] = $panel;
 	}
 	
-	global $so_panel_grids;
-	
 	ob_start();
 	foreach($grids as $gi => $cells){
 		$grid = $panels_data['grids'][$gi];
@@ -301,6 +302,7 @@ add_filter('home_template', 'panels_set_home_template');
  * Filter the query for the home page panel so we just load the home panel
  * 
  * @param WP_Query $query
+ * @return WP_Query
  */
 function panels_filter_home_query($query){
 	if(is_home() && $query->is_main_query() && get_theme_mod('panels_home_page')){
@@ -320,6 +322,7 @@ add_filter('pre_get_posts', 'panels_filter_home_query');
  * 
  * @param $permalink
  * @param $post
+ * @return string
  */
 function panels_filter_post_link($permalink, $post){
 	if($post->post_type == 'panel' && $post->ID == get_theme_mod('panels_home_page')){
