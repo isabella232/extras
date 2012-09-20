@@ -26,19 +26,19 @@ jQuery(function($){
     }
 
     /**
-     * Update all seven media fields
+     * Update all siteorigin media fields
      * @param par
      */
     var updateMedia = function(par){
         if(par == undefined) par = $('body');
 
-        par.find('select.seven-media').each(function(){
+        par.find('select.siteorigin-media').each(function(){
             var $$ = $(this);
             var v = $$.val();
             
             $$.find('option[value!="-1"]').remove();
-            for(var i in sevenSlider.images){
-                $$.append($('<option>'+sevenSlider.images[i]+'</option>').attr('value', i));
+            for(var i in siteoriginSlider.images){
+                $$.append($('<option>'+siteoriginSlider.images[i]+'</option>').attr('value', i));
             }
             
             $$.val(v);
@@ -47,9 +47,9 @@ jQuery(function($){
     }
     
     // Add all the initial slides
-    if(sevenSlider.slides.length){
-        for(var i = 0; i < sevenSlider.slides.length; i++){
-            addSlide(sevenSlider.slides[i]);
+    if(siteoriginSlider.slides.length){
+        for(var i = 0; i < siteoriginSlider.slides.length; i++){
+            addSlide(siteoriginSlider.slides[i]);
         }
     }
     
@@ -89,10 +89,10 @@ jQuery(function($){
             // Get a refreshed list of media
             $.get(
                 ajaxurl,
-                { post_ID : $('#post_ID').val() , action: 'seven_slider_images'},
+                { post_ID : $('#post_ID').val() , action: 'siteorigin_slider_images'},
                 function(data){
-                    // Update the sevenSlider value
-                    sevenSlider.images = data;
+                    // Update the siteoriginSlider value
+                    siteoriginSlider.images = data;
                     
                     // Update the media
                     updateMedia();

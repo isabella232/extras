@@ -1,9 +1,16 @@
 <?php
+/**
+ * Handle the SiteOrigin theme settings panel.
+ * 
+ * @package SiteOrigin Extras
+ */
+
 
 /**
  * Intialize the theme settings page
  * 
  * @param $theme_name
+ * @since 1.0
  */
 function so_settings_init($theme_name = null){
 	if(empty($theme_name)) {
@@ -28,6 +35,8 @@ function so_settings_init($theme_name = null){
 
 /**
  * Add the settings help tab
+ * 
+ * @since 1.0
  */
 function so_settings_help_tab(){
 	$screen = get_current_screen();
@@ -57,6 +66,7 @@ function so_settings_help_tab(){
  * Initialize admin settings in the admin
  * 
  * @action admin_init
+ * @since 1.0
  */
 function so_settings_admin_init(){
 	register_setting('theme_settings', $GLOBALS['so_settings_name'], 'so_settings_validate');
@@ -66,6 +76,7 @@ function so_settings_admin_init(){
  * Set up the theme settings page.
  * 
  * @action admin_menu
+ * @since 1.0
  */
 function so_settings_admin_menu(){
 	add_theme_page(__('Theme Settings','siteorigin'), __('Theme Settings', 'siteorigin'), 'edit_theme_options', 'theme_settings_page', 'so_settings_render');
@@ -73,20 +84,39 @@ function so_settings_admin_menu(){
 
 /**
  * Render the theme settings page
+ * 
+ * @since 1.0
  */
 function so_settings_render(){
 	locate_template('extras/settings/page.php', true, false);
 }
 
+/**
+ * Enqueue all the settings scripts.
+ * 
+ * @param $prefix
+ * @since 1.0
+ */
 function so_settings_enqueue_scripts($prefix){
 	if($prefix != 'appearance_page_theme_settings_page') return;
 	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri().'/extras/settings/settings.js', array('jquery'), SO_THEME_VERSION );
 	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri().'/extras/settings/settings.css', array(), SO_THEME_VERSION );
 	
+	wp_localize_script('siteorigin-settings', 'soSettings', array(
+		'tab' => get_theme_mod('_theme_settings_current_tab', 0),
+	));
+	
 	wp_enqueue_style( 'farbtastic' );
 	wp_enqueue_script( 'farbtastic' );
 }
 
+/**
+ * Add the admin bar to the settings page
+ * 
+ * @param $bar
+ * @return object|null
+ * @since 1.0
+ */
 function so_settings_adminbar($bar){
 	$screen = get_current_screen();
 	if($screen->id == 'appearance_page_theme_settings_page'){
@@ -101,6 +131,7 @@ function so_settings_adminbar($bar){
  * 
  * @param $id
  * @param $name
+ * @since 1.0
  */
 function so_settings_add_section($id, $name){
 	add_settings_section($id, $name, '__return_false', 'theme_settings');
@@ -114,6 +145,7 @@ function so_settings_add_section($id, $name){
  * @param string $type
  * @param string $name
  * @param array $args
+ * @since 1.0
  */
 function so_settings_add_field($section, $id, $type, $name, $args = array()){
 	if(isset($wp_settings_fields['theme_settings'][$section][$id])){
@@ -139,6 +171,7 @@ function so_settings_add_field($section, $id, $type, $name, $args = array()){
  * @param $type
  * @param $name
  * @param array $args
+ * @since 1.0
  */
 function so_settings_add_teaser($section, $id, $name, $args = array()){
 	global $wp_settings_fields;
@@ -149,7 +182,7 @@ function so_settings_add_teaser($section, $id, $name, $args = array()){
 		'field' => $id,
 		'type' => 'teaser',
 	));
-
+	
 	add_settings_field($id, $name, 'so_settings_field', 'theme_settings', $section, $args);
 }
 
@@ -158,6 +191,7 @@ function so_settings_add_teaser($section, $id, $name, $args = array()){
  * 
  * @param string $name The setting name
  * @return mixed
+ * @since 1.0
  */
 function so_setting($name){
 	if(!isset($GLOBALS['so_settings'][$name])) return null;
@@ -165,8 +199,10 @@ function so_setting($name){
 }
 
 /**
- * Render a settings field
+ * Render a settings field.
+ * 
  * @param $args
+ * @since 1.0
  */
 function so_settings_field($args){
 	$field_name = $GLOBALS['so_settings_name'].'['.$args['section'].'_'.$args['field'].']';
@@ -176,41 +212,41 @@ function so_settings_field($args){
 	switch($args['type']){
 		case 'checkbox' :
 			?>
-				<input id="<?php print esc_attr($field_id) ?>" name="<?php print esc_attr($field_name) ?>" type="checkbox" <?php checked($current) ?> />
-				<label for="<?php print esc_attr($field_id) ?>"><?php print esc_attr(!empty($args['label']) ? $args['label'] : __('Enabled', 'siteorigin')) ?></label>
+				<input id="<?php echo esc_attr($field_id) ?>" name="<?php echo esc_attr($field_name) ?>" type="checkbox" <?php checked($current) ?> />
+				<label for="<?php echo esc_attr($field_id) ?>"><?php echo esc_attr(!empty($args['label']) ? $args['label'] : __('Enabled', 'siteorigin')) ?></label>
 			<?php
 			break;
 		case 'text' :
 		case 'number' :
 			?>
 			<input
-				id="<?php print esc_attr($field_id) ?>"
-				name="<?php print esc_attr($field_name) ?>"
-				class="<?php print esc_attr($args['type'] == 'number' ? 'small-text' : 'regular-text') ?>"
+				id="<?php echo esc_attr($field_id) ?>"
+				name="<?php echo esc_attr($field_name) ?>"
+				class="<?php echo esc_attr($args['type'] == 'number' ? 'small-text' : 'regular-text') ?>"
 				size="25"
-				type="<?php print esc_attr($args['type']) ?>"
-				value="<?php print esc_attr($current) ?>" /><?php
+				type="<?php echo esc_attr($args['type']) ?>"
+				value="<?php echo esc_attr($current) ?>" /><?php
 			break;
 		
 		case 'select' :
 			?>
-			<select id="<?php print esc_attr($field_id) ?>" name="<?php print esc_attr($field_name) ?>">
+			<select id="<?php echo esc_attr($field_id) ?>" name="<?php echo esc_attr($field_name) ?>">
 				<?php foreach($args['options'] as $option_id => $label) : ?>
-					<option value="<?php print esc_attr($option_id) ?>" <?php selected($option_id, $current) ?>><?php print esc_attr($label) ?></option>
+					<option value="<?php echo esc_attr($option_id) ?>" <?php selected($option_id, $current) ?>><?php echo esc_attr($label) ?></option>
 				<?php endforeach ?>
 			</select>
 			<?php
 			break;
 		
 		case 'textarea' :
-			?><textarea id="<?php print esc_attr($field_id) ?>" name="<?php print esc_attr($field_name) ?>" class="large-text" rows="3"><?php print esc_textarea($current) ?></textarea><?php
+			?><textarea id="<?php echo esc_attr($field_id) ?>" name="<?php echo esc_attr($field_name) ?>" class="large-text" rows="3"><?php echo esc_textarea($current) ?></textarea><?php
 			break;
 		
 		case 'color' :
 			?>
 			<div class="colorpicker-wrapper">
-				<div class="color-indicator" style="background-color: <?php print esc_attr($current) ?>"></div>
-				<input type="text" id="<?php print esc_attr($field_id) ?>" value="<?php print esc_attr($current) ?>" name="<?php print esc_attr($field_name) ?>" />
+				<div class="color-indicator" style="background-color: <?php echo esc_attr($current) ?>"></div>
+				<input type="text" id="<?php echo esc_attr($field_id) ?>" value="<?php echo esc_attr($current) ?>" name="<?php echo esc_attr($field_name) ?>" />
 				<div class="farbtastic-container"></div>
 			</div>
 			<?php
@@ -229,7 +265,7 @@ function so_settings_field($args){
 			break;
 	}
 
-	if(!empty($args['description'])) print '<p class="description">'.$args['description'].'</p>';
+	if(!empty($args['description'])) echo '<p class="description">'.$args['description'].'</p>';
 }
 
 /**
@@ -237,10 +273,17 @@ function so_settings_field($args){
  * 
  * @param $values
  * @return array
+ * @since 1.0
  */
 function so_settings_validate($values){
 	global $wp_settings_fields;
+
+	$theme_name = basename(get_template_directory());
+	$current = get_option($theme_name.'_theme_settings', array());
 	
+	set_theme_mod('_theme_settings_current_tab', isset($_REQUEST['theme_settings_current_tab']) ? $_REQUEST['theme_settings_current_tab'] : 0);
+	
+	$changed = false;
 	foreach($wp_settings_fields['theme_settings'] as $section_id => $fields){
 		foreach($fields as $field_id => $field){
 			$name = $section_id.'_'.$field_id;
@@ -251,6 +294,8 @@ function so_settings_validate($values){
 			elseif($field['args']['type'] == 'number'){
 				$values[$name] = isset($values[$name]) ? intval($values[$name]) : $GLOBALS['so_settings_defaults'][$name];
 			}
+
+			if(!isset($current[$name]) || $values[$name] != $current[$name]) $changed = true;
 			
 			// See if this needs any special validation
 			if(!empty($field['args']['validator']) && method_exists('SO_Settings_Validator', $field['args']['validator'])){
@@ -258,12 +303,41 @@ function so_settings_validate($values){
 			}
 		}
 	}
+	
+	if($changed){
+		do_action('so_settings_changed');
+
+		/**
+		 * An action triggered when the theme settings have changed.
+		 */
+		set_theme_mod('so_settings_changed', true);
+	}
 
 	return $values;
 }
 
 /**
- * Settings validators
+ * 
+ */
+function so_settings_change_message(){
+	if(get_theme_mod('so_settings_changed')){
+		remove_theme_mod('so_settings_changed');
+		
+		?>
+		<div id="setting-error-settings_updated" class="updated settings-error">
+			<p><strong><?php _e('Settings saved.', 'siteorigin') ?></strong></p>
+		</div>
+		<?php
+
+		/**
+		 * This is an action that the theme can use to display a settings changed message.
+		 */
+		do_action('so_settings_changed_message');
+	}
+}
+
+/**
+ * Settings validators.
  */
 class SO_Settings_Validator {
 	/**

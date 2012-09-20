@@ -62,6 +62,39 @@ function so_panels_metabox_render($post, $args){
 }
 
 /**
+ * Give all the panels a chance to enqueue their scripts and styles.
+ * 
+ * @action wp_enqueue_scripts
+ */
+function so_panels_enqueue_scripts(){
+	global $post;
+	if(is_single() && $post->post_type == 'panel'){
+		$classes = array();
+		$data = get_post_meta($post->ID, 'panels_data', true);
+
+		if(empty($data['panels'])) return;
+		
+		// Find which panels we're using
+		foreach($data['panels'] as $panel){
+			if(isset($panel['info']['class']) && class_exists($panel['info']['class'])) $classes[] = $panel['info']['class'];
+		}
+		$classes = array_unique($classes);
+		
+		foreach($classes as $class){
+			if(method_exists($class, 'enqueue')){
+				// Let the panels themselves enqueue any scripts they need
+				call_user_func(array($class, 'enqueue'));
+			}
+			
+			// Give the themes a chance to enqueue scripts for a given panel
+			do_action('so_panels_enqueue_scripts-'.$class);
+		}
+		
+	}
+}
+add_action('wp_enqueue_scripts', 'so_panels_enqueue_scripts');
+
+/**
  * Enqueue the panels admin scripts
  */
 function so_panels_admin_enqueue_scripts(){
@@ -91,7 +124,13 @@ function so_panels_admin_enqueue_scripts(){
 		
 		// Localize the panels with the panels data
 		global $post;
-		$panels_data = get_post_meta($post->ID, 'panels_data', true); 
+		$panels_data = get_post_meta($post->ID, 'panels_data', true);
+		
+		// Remove any panels that no longer exist.
+		foreach($panels_data['panels'] as $i => $panel){
+			if(!class_exists($panel['info']['class'])) unset($panels_data['panels'][$i]);
+		}
+		
 		if(!empty($panels_data )){
 			wp_localize_script('so-panels-admin', 'panelsData', $panels_data);
 		}
@@ -120,7 +159,10 @@ function so_panels_admin_enqueue_styles(){
 add_action('admin_print_styles-post-new.php', 'so_panels_admin_enqueue_styles');
 add_action('admin_print_styles-post.php', 'so_panels_admin_enqueue_styles');
 
-function so_panels_admin_enqueue_icon_style($hook){
+/**
+ * This is the style for the panel icon. 
+ */
+function so_panels_admin_enqueue_icon_style(){
 	$screen = get_current_screen();
 	if($screen->post_type == 'panel'){
 		wp_enqueue_style('so-panels-icon', get_template_directory_uri().'/extras/panels/css/panels-icon.css');
@@ -163,10 +205,12 @@ add_action('save_post', 'so_panels_save_post', 10, 2);
 
 
 /**
- * Print the CSS for the current panel
+ * echo the CSS for the current panel
  */
 function so_panels_css(){
 	global $post;
+	global $so_panels_margin_bottom;
+	if(empty($so_panels_margin_bottom)) $so_panels_margin_bottom = 20;
 	
 	if(is_single() && $post->post_type == 'panel'){
 		$panels_data = get_post_meta($post->ID, 'panels_data', true);
@@ -195,7 +239,7 @@ function so_panels_css(){
 			}
 
 			// Mobile Responsive
-			$mobile_css = array('float:none','width:auto','margin-bottom:15px');
+			$mobile_css = array('float:none','width:auto','margin-bottom:'.$so_panels_margin_bottom.'px');
 			foreach($mobile_css as $c){
 				if(empty($css[767][$c])) $css[767][$c] = array();
 				$css[767][$c][] = '#pg-'.$gi.' .panel-grid-cell';
@@ -219,10 +263,10 @@ function so_panels_css(){
 
 			if($res < 1920) $css_text .= ' } ';
 		}
-		
-		print '<style type="text/css">';
-		print $css_text;
-		print '</style>';
+
+		echo '<style type="text/css">';
+		echo $css_text;
+		echo '</style>';
 	}
 }
 add_action('wp_print_styles', 'so_panels_css');
@@ -258,27 +302,37 @@ function so_panels_render($post_id = false){
 	foreach($grids as $gi => $cells){
 		$grid = $panels_data['grids'][$gi];
 		
-		?><div class="panel-grid" id="pg-<?php print $gi ?>"><?php
+		?><div class="panel-grid" id="pg-<?php echo $gi ?>"><?php
 		foreach($cells as $ci => $panels){
-			?><div class="panel-grid-cell" id="pgc-<?php print $gi.'-'.$ci ?>"><?php
+			?><div class="panel-grid-cell" id="pgc-<?php echo $gi.'-'.$ci ?>"><?php
 			foreach($panels as $pi => $panel){
+				// Skip this if the class no longer exists
+				if(!class_exists($panel['info']['class'])) continue;
+				
 				$panel_class = new $panel['info']['class'];
 				$info = $panel_class->get_info();
 				$classes = array('panel-panel', 'panel-'.$info['group'], 'panel-'.$info['group'].'-'.$info['name']);
 				if($pi == 0) $classes[] = 'panel-first-child';
 				if($pi == count($panels)-1) $classes[] = 'panel-last-child';
 				
-				?><div class="<?php print esc_attr(implode(' ',$classes)) ?>" id="panel-<?php print $pi ?>"><?php
-				$panel_class->render($panel);
+				?><div class="<?php echo esc_attr(implode(' ',$classes)) ?>" id="panel-<?php echo $gi . '-' . $ci. '-' . $pi ?>"><?php
+				
+				// Give child themes or plugins a chance to render this panel
+				ob_start();
+				do_action('so_panels_render-'.$panel['info']['class']);
+				$c = ob_get_clean();
+					
+				if(empty($c)) $panel_class->render($panel);
+				else print $c;
 				?></div><?php
 			}
-			if(empty($panels)) print '&nbsp;';
+			if(empty($panels)) echo '&nbsp;';
 			?></div><?php
 		}
 		?><div class="clear"></div></div><?php
 	}
 	$html = ob_get_clean();
-	print apply_filters('panels_render', $html, $post_id, $post);
+	echo apply_filters('panels_render', $html, $post_id, $post);
 }
 
 /**
@@ -287,16 +341,16 @@ function so_panels_render($post_id = false){
  * @param $template
  * @return string
  */
-function panels_set_home_template($template){
+function so_panels_set_home_template($template){
 	if(get_theme_mod('panels_home_page')){
 		$post = get_post(get_theme_mod('panels_home_page'));
-		if(!empty($post))
+		if(!empty($post) && $post->post_status == 'publish')
 			$template = locate_template('single-panel.php'); 
 	}
 	
 	return $template;
 }
-add_filter('home_template', 'panels_set_home_template');
+add_filter('home_template', 'so_panels_set_home_template');
 
 /**
  * Filter the query for the home page panel so we just load the home panel
@@ -304,8 +358,11 @@ add_filter('home_template', 'panels_set_home_template');
  * @param WP_Query $query
  * @return WP_Query
  */
-function panels_filter_home_query($query){
+function so_panels_filter_home_query($query){
 	if(is_home() && $query->is_main_query() && get_theme_mod('panels_home_page')){
+		$post = get_post(get_theme_mod('panels_home_page'));
+		if(empty($post) || $post->post_status != 'publish') return $query;
+		
 		$query->set('post_type', 'panel');
 		$query->set('numberposts', 1);
 		$query->set('post__in', array(get_theme_mod('panels_home_page')));
@@ -315,7 +372,7 @@ function panels_filter_home_query($query){
 	
 	return $query;
 }
-add_filter('pre_get_posts', 'panels_filter_home_query');
+add_filter('pre_get_posts', 'so_panels_filter_home_query');
 
 /**
  * Change the permalink of the home page panel
@@ -324,10 +381,11 @@ add_filter('pre_get_posts', 'panels_filter_home_query');
  * @param $post
  * @return string
  */
-function panels_filter_post_link($permalink, $post){
+function so_panels_filter_post_link($permalink, $post){
 	if($post->post_type == 'panel' && $post->ID == get_theme_mod('panels_home_page')){
 		$permalink = home_url('/');
 	}
+	
 	return $permalink;
 }
-add_filter('post_type_link', 'panels_filter_post_link', 10, 2);
+add_filter('post_type_link', 'so_panels_filter_post_link', 10, 2);

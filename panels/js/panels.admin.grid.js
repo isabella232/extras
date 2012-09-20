@@ -209,8 +209,6 @@ jQuery(function($){
         return container;
     }
     
-    console.log(panelsGrids);
-    
     $(window).bind('resize', function(event){
         if ($(event.target).hasClass('ui-resizable')) return;
 

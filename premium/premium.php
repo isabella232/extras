@@ -45,7 +45,7 @@ function so_premium_page_render(){
 			?>
 			<div class="wrap" id="theme-upgrade">
 
-				<form id="theme-upgrade-info" method="post" action="<?php print esc_url(add_query_arg('action', 'enter-order')) ?>">
+				<form id="theme-upgrade-info" method="post" action="<?php echo esc_url(add_query_arg('action', 'enter-order')) ?>">
 					<p>
 						<?php
 						printf(
@@ -63,32 +63,32 @@ function so_premium_page_render(){
 				</form>
 	
 				<a href="#" id="theme-upgrade-already-paid"><?php _e('Already Paid?', 'siteorigin') ?></a>
-				<?php if(isset($premium['premium_title'])) : ?><h2><?php print $premium['premium_title'] ?></h2><?php endif; ?>
-				<?php if(isset($premium['premium_summary'])) : ?><p><?php print $premium['premium_summary'] ?></p><?php endif; ?>
+				<?php if(isset($premium['premium_title'])) : ?><h2><?php echo $premium['premium_title'] ?></h2><?php endif; ?>
+				<?php if(isset($premium['premium_summary'])) : ?><p><?php echo $premium['premium_summary'] ?></p><?php endif; ?>
 
 				<?php if(isset($premium['buy_button']) && isset($premium['buy_url'])) : ?>
 					<p class="download">
-						<a href="<?php print esc_url($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_url($premium['buy_button']) ?>" /></a>
-						<?php if(isset($premium['buy_message_1'])) : ?><span><?php print $premium['buy_message_1'] ?></span><?php endif; ?>
+						<a href="<?php echo esc_url($premium['buy_url']) ?>" class="buy-button"><img src="<?php echo esc_url($premium['buy_button']) ?>" /></a>
+						<?php if(isset($premium['buy_message_1'])) : ?><span><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
 					</p>
 				<?php endif; ?>
 						
 				<?php if(!empty($premium['featured'])) : ?>
 					<p id="promo-image">
-						<img src="<?php print esc_url($premium['featured'][0]) ?>" width="<?php print intval($premium['featured'][1]) ?>" height="<?php print intval($premium['featured'][2]) ?>" class="magnify" />
+						<img src="<?php echo esc_url($premium['featured'][0]) ?>" width="<?php echo intval($premium['featured'][1]) ?>" height="<?php echo intval($premium['featured'][2]) ?>" class="magnify" />
 					</p>
 				<?php endif; ?>
 				<div class="content">
 					<?php if(!empty($premium['features'])) : foreach($premium['features'] as $feature) : ?>
-						<h3><?php print $feature['heading'] ?></h3>
-						<p><?php print $feature['content'] ?></p>
+						<h3><?php echo $feature['heading'] ?></h3>
+						<p><?php echo $feature['content'] ?></p>
 					<?php endforeach; endif; ?>
 				</div>
 
 				<?php if(isset($premium['buy_button']) && isset($premium['buy_url'])) : ?>
 					<p class="download">
-						<a href="<?php print esc_url($premium['buy_url']) ?>" class="buy-button"><img src="<?php print esc_url($premium['buy_button']) ?>" /></a>
-						<?php if(isset($premium['buy_message_2'])) : ?><span><?php print $premium['buy_message_2'] ?></span><?php endif; ?>
+						<a href="<?php echo esc_url($premium['buy_url']) ?>" class="buy-button"><img src="<?php echo esc_url($premium['buy_button']) ?>" /></a>
+						<?php if(isset($premium['buy_message_2'])) : ?><span><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
 					</p>
 				<?php endif; ?>
 				
@@ -124,7 +124,7 @@ function so_premium_page_render(){
 			
 			?>
 				<div class="wrap" id="theme-upgrade">
-					<h2>Your Order Number is [<?php print get_option($option_name) ?>]</h2>
+					<h2>Your Order Number is [<?php echo get_option($option_name) ?>]</h2>
 					
 					<?php if(is_null($valid)) : ?>
 						<p>
@@ -147,7 +147,7 @@ function so_premium_page_render(){
 							$update_url = wp_nonce_url(admin_url('update.php?action=upgrade-theme&amp;theme=' . urlencode($theme)), 'upgrade-theme_' . $theme);
 							$update_onclick = 'onclick="if ( confirm(\'' . esc_js( __("Updating this theme will lose any customizations you have made. 'Cancel' to stop, 'OK' to update.", 'siteorigin') ) . '\') ) {return true;}return false;"';
 							?>
-							<a href="<?php print esc_url($update_url) ?>" <?php print $update_onclick ?> class="button-primary">
+							<a href="<?php echo esc_url($update_url) ?>" <?php echo $update_onclick ?> class="button-primary">
 								<?php _e('Update Theme', 'siteorigin') ?>
 							</a>
 						</p>

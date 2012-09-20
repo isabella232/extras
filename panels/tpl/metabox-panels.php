@@ -7,10 +7,15 @@ if(!empty($so_panel_types)){
 	foreach($so_panel_types as $group => $types){
 		$panels[$group] = array();
 		foreach($types as $class){
+			if(!class_exists($class)) continue;
+			
 			$panel = new $class;
 			ob_start();
 			$panel->form();
 			$form = ob_get_clean();
+			
+			// Give plugins and child themes a chance to edit the form 
+			$form = apply_filters('so_panel_form_'.$class, $form);
 			
 			if(empty($form)) $form = '<p>'.__('No Panel Settings', 'siteorigin').'</p>';
 			
@@ -43,28 +48,28 @@ if(!empty($so_panel_types)){
 	
 	<!-- The dialogs -->
 	
-	<div id="panels-dialog" data-title="<?php esc_attr_e('Add New Item','siteorigin') ?>" class="panels-admin-dialog">
+	<div id="panels-dialog" data-title="<?php esc_attr_e('Add New Panel','siteorigin') ?>" class="panels-admin-dialog">
 		<div id="panels-dialog-tabs">
 			<ul>
 				<?php foreach($so_panel_groups as $id => $info) : ?>
-					<li><a href="#panels-dialog-tabs-<?php print esc_attr($id) ?>"><?php print ($info['name']) ?></a></li>
+					<li><a href="#panels-dialog-tabs-<?php echo esc_attr($id) ?>"><?php echo ($info['name']) ?></a></li>
 				<?php endforeach; ?>
 			</ul>
 			
 			<?php foreach($so_panel_groups as $group_id => $info) : $i = 0; ?>
-				<div id="panels-dialog-tabs-<?php print esc_attr($group_id) ?>">
+				<div id="panels-dialog-tabs-<?php echo esc_attr($group_id) ?>">
 					<ul class="panel-type-list">
 						<?php foreach($panels[$group_id] as $panel_type) : $i++; ?>
 							<li class="panel-type"
-								data-class="<?php print esc_attr($panel_type['class']) ?>"
-								data-form="<?php print esc_attr($panel_type['form']) ?>"
-								data-title="<?php print esc_attr($panel_type['info']['title']) ?>"
-								<?php if(!empty($panel_type['info']['title_field'])) : ?>data-title-field="<?php print esc_attr($panel_type['info']['title_field']) ?>"<?php endif ?>
+								data-class="<?php echo esc_attr($panel_type['class']) ?>"
+								data-form="<?php echo esc_attr($panel_type['form']) ?>"
+								data-title="<?php echo esc_attr($panel_type['info']['title']) ?>"
+								<?php if(!empty($panel_type['info']['title_field'])) : ?>data-title-field="<?php echo esc_attr($panel_type['info']['title_field']) ?>"<?php endif ?>
 								>
 								<div class="panel-type-wrapper">
-									<h3><?php print $panel_type['info']['title'] ?></h3>
+									<h3><?php echo $panel_type['info']['title'] ?></h3>
 									<?php if(!empty($panel_type['info']['description'])) : ?>
-										<small class="description"><?php print $panel_type['info']['description'] ?></small>
+										<small class="description"><?php echo $panel_type['info']['description'] ?></small>
 									<?php endif; ?>
 								</div>
 							</li>
@@ -74,12 +79,16 @@ if(!empty($so_panel_types)){
 					</ul>
 				</div>
 			<?php endforeach; ?>
+			
+			<?php if(!defined('SO_IS_PREMIUM')) : ?>
+				<p><?php printf(__('Additional panels are available in <a href="%s">%s Premium</a>'), admin_url('themes.php?page=premium_upgrade'), ucfirst(get_option('stylesheet'))) ?></p>
+			<?php endif; ?>
 		</div>
 		
 	</div>
 	
 	<div id="grid-add-dialog" data-title="<?php esc_attr_e('Create Grid','siteorigin') ?>" class="panels-admin-dialog">
-		<p><label><strong><?php _e('Columns') ?></strong></label></p>
+		<p><label><strong><?php _e('Columns', 'siteorigin') ?></strong></label></p>
 		<p>
 			<input id="grid-add-dialog-input" name="column_count" class="small-text" value="3" />
 		</p>

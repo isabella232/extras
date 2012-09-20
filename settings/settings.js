@@ -30,9 +30,11 @@ jQuery(function($){
             table.show();
             tabs.find('a').removeClass('nav-tab-active');
             a.addClass('nav-tab-active');
+            
+            $('#current-tab-field').val(i);
             return false;
         });
         
-        if(i == 0) a.click();
+        if(i == soSettings.tab) a.click();
     });
 });

@@ -3,7 +3,7 @@
 /**
  * Create the slider post type
  */
-function seven_slider_init(){
+function siteorigin_slider_init(){
 	register_post_type('slider', array(
 		'labels' => array(
 			'name' => __('Sliders', 'siteorigin'),
@@ -32,22 +32,48 @@ function seven_slider_init(){
 		'hierarchical' => false,
 		'menu_position' => null,
 		'supports' => array( 'title'),
-		'register_meta_box_cb' => 'seven_slider_metaboxes',
+		'register_meta_box_cb' => 'siteorigin_slider_metaboxes',
+		'menu_icon' => get_template_directory_uri().'/extras/slider/menu-icon.png'
 	));
 }
-add_action('after_setup_theme', 'seven_slider_init');
+add_action('after_setup_theme', 'siteorigin_slider_init');
 
 /**
  * Register slider metaboxes
  */
-function seven_slider_metaboxes(){
-	add_meta_box('slider-slides', __('Slider Slides', 'siteorigin'), 'seven_slider_metabox_slider_slides', 'slider');
+function siteorigin_slider_metaboxes(){
+	add_meta_box('slider-slides', __('Slider Slides', 'siteorigin'), 'siteorigin_slider_metabox_slider_slides', 'slider');
 }
+
+/**
+ * Add custom slider admin columns
+ */
+function siteorigin_slider_admin_columns($columns){
+	$columns['slides'] = __('Slides', 'siteorigin');
+	return $columns;
+}
+add_filter('manage_slider_posts_columns', 'siteorigin_slider_admin_columns');
+
+/**
+ * Render the custom slider admin columns.
+ * 
+ * @param $column
+ * @param $post_id
+ */
+function siteorigin_slider_admin_column_display($column, $post_id){
+	switch($column){
+		case 'slides':
+			$slides = get_post_meta($post_id, 'siteorigin_slider', true);
+			echo count($slides);
+			break;
+	}
+}
+add_action('manage_slider_posts_custom_column', 'siteorigin_slider_admin_column_display', 10, 2);
 
 /**
  * Enqueue scripts for editing the slider
  */
-function seven_slider_admin_enqueue(){
+function siteorigin_slider_admin_enqueue(){
 	$screen = get_current_screen();
 	if($screen->id == 'slider'){
 		global $post;
@@ -59,35 +85,35 @@ function seven_slider_admin_enqueue(){
 		wp_enqueue_script( 'jquery-ui-droppable' );
 		wp_enqueue_script( 'jquery-ui-sortable' );
 
-		wp_enqueue_script('seven-slider-admin', get_template_directory_uri().'/extras/slider/admin.js', array('jquery'), SO_THEME_VERSION);
-		wp_enqueue_style('seven-slider-admin', get_template_directory_uri().'/extras/slider/admin.css', array(), SO_THEME_VERSION);
+		wp_enqueue_script('siteorigin-slider-admin', get_template_directory_uri().'/extras/slider/admin.js', array('jquery'), SO_THEME_VERSION);
+		wp_enqueue_style('siteorigin-slider-admin', get_template_directory_uri().'/extras/slider/admin.css', array(), SO_THEME_VERSION);
 		
-		$slides = get_post_meta($post->ID, 'seven_slider', true);
-		wp_localize_script('seven-slider-admin', 'sevenSlider', array(
-			'images' => seven_slider_get_post_images($post->ID),
+		$slides = get_post_meta($post->ID, 'siteorigin_slider', true);
+		wp_localize_script('siteorigin-slider-admin', 'siteoriginSlider', array(
+			'images' => siteorigin_slider_get_post_images($post->ID),
 			'slides' => $slides,
 		));
 	}
 }
-add_action('admin_print_scripts-post-new.php', 'seven_slider_admin_enqueue');
-add_action('admin_print_scripts-post.php', 'seven_slider_admin_enqueue');
+add_action('admin_print_scripts-post-new.php', 'siteorigin_slider_admin_enqueue');
+add_action('admin_print_scripts-post.php', 'siteorigin_slider_admin_enqueue');
 
 /**
  * Get the images for a given post
  */
-function seven_slider_action_images(){
+function siteorigin_slider_action_images(){
 	header('content-type: text/json', true);
-	print json_encode(seven_slider_get_post_images(intval($_REQUEST['post_ID'])));
+	echo json_encode(siteorigin_slider_get_post_images(intval($_REQUEST['post_ID'])));
 	exit();
 }
-add_action('wp_ajax_seven_slider_images', 'seven_slider_action_images');
+add_action('wp_ajax_siteorigin_slider_images', 'siteorigin_slider_action_images');
 
 /**
  * Get all the images for the slider
  * @param $post_id
  * @return array
  */
-function seven_slider_get_post_images($post_id){
+function siteorigin_slider_get_post_images($post_id){
 	$attachments = get_children(array(
 		'post_type' => 'attachment',
 		'post_mime_type' => 'image',
@@ -106,19 +132,19 @@ function seven_slider_get_post_images($post_id){
 /**
  * Render the slider meta box
  */
-function seven_slider_metabox_slider_slides($post, $post_id){
+function siteorigin_slider_metabox_slider_slides($post, $post_id){
 	get_template_part('extras/slider/admin', 'builder');
 }
 
 /**
  * Save the slider
  */
-function seven_slider_save_post($post_id){
+function siteorigin_slider_save_post($post_id){
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( empty($_POST['_seven_nonce']) || !wp_verify_nonce($_POST['_seven_nonce'], 'save_slider') ) return;
+	if ( empty($_POST['_so_slider_nonce']) || !wp_verify_nonce($_POST['_so_slider_nonce'], 'save_slider') ) return;
 	
 	$slider = array();
-	foreach($_REQUEST['seven_slider'] as $field => $vals){
+	foreach($_REQUEST['siteorigin_slider'] as $field => $vals){
 		foreach($vals as $slide => $val){
 			if(empty($slider[$slide])) $slider[$slide] = array();
 			$slider[$slide][$field] = $val;
@@ -126,14 +152,35 @@ function seven_slider_save_post($post_id){
 	}
 	
 	$slider = array_map('stripslashes_deep', $slider);
-	update_post_meta($post_id, 'seven_slider', $slider);
+	update_post_meta($post_id, 'siteorigin_slider', $slider);
 }
-add_action('save_post', 'seven_slider_save_post');
+add_action('save_post', 'siteorigin_slider_save_post');
+
+function siteorigin_slider_display_upgrade(){
+	if(!defined('SO_IS_PREMIUM')){
+		
+		?>
+		<tr valign="top">
+			<th scope="row"><label><?php _e('URL', 'siteorigin') ?></label></th>
+			<td>
+				<?php
+				printf(
+					__('Upgrade to <a href="%s">%s Premium</a> to link slides to URLS', 'siteorigin'),
+					admin_url('themes.php?page=premium_upgrade'),
+					ucfirst(get_option('stylesheet'))
+				);
+				?>
+			</td>
+		</tr>
+		<?php
+	}
+}
+add_action('so_slider_after_builder_form', 'siteorigin_slider_display_upgrade');
 
 /**
- * The Seven slider panel
+ * The siteorigin slider panel
  */
-class Seven_Panel_Slider extends SO_Panel{
+class SO_Panel_Slider extends SO_Panel{
 	function form(){
 		$sliders = get_posts(array(
 			'numberposts' => -1,
@@ -146,22 +193,22 @@ class Seven_Panel_Slider extends SO_Panel{
 		?>
 		<p><strong><?php _e('Slider', 'siteorigin') ?></strong></p>
 		<p>
-			<select name="<?php print self::input_name('slider_id') ?>">
+			<select name="<?php echo self::input_name('slider_id') ?>">
 				<option value="-1"><?php _e('None', 'siteorigin') ?></option>
 				<?php foreach ($sliders as $slider ) : ?>
-					<option value="<?php print $slider->ID ?>"><?php print $slider->post_title ?></option>
+					<option value="<?php echo $slider->ID ?>"><?php echo $slider->post_title ?></option>
 				<?php endforeach; ?>
 			</select>
 		</p>
-		<p><strong><?php _e('Slider', 'siteorigin') ?></strong></p>
+		<p><strong><?php _e('Image Size', 'siteorigin') ?></strong></p>
 		<p>
-			<select name="<?php print self::input_name('image_size') ?>">
+			<select name="<?php echo self::input_name('image_size') ?>">
 				<option value="large"><?php _e('Large', 'siteorigin') ?></option>
 				<option value="medium"><?php _e('Medium', 'siteorigin') ?></option>
 				<option value="thumbnail"><?php _e('Thumbnail', 'siteorigin') ?></option>
 				<option value="full"><?php _e('Full', 'siteorigin') ?></option>
 				<?php foreach ($_wp_additional_image_sizes as $name => $info) : ?>
-					<option value="<?php print esc_attr($name) ?>"><?php print esc_html($name) ?></option>
+					<option value="<?php echo esc_attr($name) ?>"><?php echo esc_html($name) ?></option>
 				<?php endforeach ?>
 			</select>
 		</p>
@@ -179,13 +226,20 @@ class Seven_Panel_Slider extends SO_Panel{
 		}
 		
 		$post = get_post($data['slider_id']);
-		$slides = get_post_meta($post->ID, 'seven_slider', true);
+		$slides = get_post_meta($post->ID, 'siteorigin_slider', true);
 		
 		?><ul class="slides"><?php
 		foreach($slides as $slide){
 			?>
 			<li>
-				<?php print wp_get_attachment_image($slide['image'], !empty($data['image_size']) ? $data['image_size'] : 'large'); ?>
+				<?php do_action('so_slide_before', $slide) ?>
+				<?php echo wp_get_attachment_image($slide['image'], !empty($data['image_size']) ? $data['image_size'] : 'large'); ?>
+				<?php if(!empty($slide['title']) || !empty($slide['extra'])) ?>
+				<div class="slide-text">
+					<h3><?php print esc_html($slide['title']) ?></h3>
+					<p><?php print esc_html($slide['extra']) ?></p>
+				</div>
+				<?php do_action('so_slide_after', $slide) ?>
 			</li>
 			<?php
 		}
@@ -202,4 +256,4 @@ class Seven_Panel_Slider extends SO_Panel{
 		);
 	}
 }
-so_panels_register_type('home', 'Seven_Panel_Slider');
+so_panels_register_type('home', 'SO_Panel_Slider');

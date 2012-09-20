@@ -54,7 +54,7 @@ jQuery(function($){
 
         var formHtml = $$.attr('data-form');
         formHtml = formHtml.replace(/\{\%id\}/g, newPanelId++);
-
+        
         panel
             .data({
                 // We need this data to update the title
@@ -64,7 +64,7 @@ jQuery(function($){
             .find('h4').click(function(){
                 dialog.dialog('open');
             })
-            .end().find('.description').html('Panel Description')
+            .end().find('.description').html($$.find('.description').html())
             .end().find('.form').html(formHtml);
         
         // Create the dialog buttons
@@ -100,6 +100,7 @@ jQuery(function($){
             title : ('Edit %s Panel').replace('%s', $$.attr('data-title')),
             minWidth: 700,
             open: function(){
+                // Transfer the values of the  
                 panel.find('.form *[name]').each(function(){
                     dialog.find('*[name="'+$(this).attr('name')+'"]').val($(this).val());
                 });
@@ -158,8 +159,6 @@ jQuery(function($){
     });
     
     if(typeof panelsData != 'undefined'){
-        console.log(panelsData);
-        
         // Create all the content
         for(var gi in panelsData.grids){
             var cellWeights = [];

@@ -69,7 +69,7 @@ function so_theme_update_settings_order_field(){
 	$name = 'so_order_number_'.$theme;
 
 	?>
-	<input type="text" class="regular-text code" name="<?php print esc_attr($name) ?>" value="<?php print esc_attr(get_option($name, false)) ?>" />
+	<input type="text" class="regular-text code" name="<?php echo esc_attr($name) ?>" value="<?php echo esc_attr(get_option($name, false)) ?>" />
 	<p class="description"><?php _e('Find your order code in your original download email from SiteOrigin', 'siteorigin'); ?></p>
 	<?php
 }
