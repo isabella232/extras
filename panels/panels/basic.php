@@ -40,6 +40,9 @@ class SO_Panel_Basic_Text extends SO_Panel{
 		endif;
 	}
 
+	/**
+	 * @return array Information about the panel
+	 */
 	function get_info(){
 		return array(
 			'title' => __('Text', 'siteorigin'),
@@ -164,24 +167,24 @@ class SO_Panel_Basic_Posts extends SO_Panel {
 		<p><strong><?php _e('Order By', 'siteorigin') ?></strong></p>
 		<p>
 			<select name="<?php echo self::input_name('orderby') ?>">
-				<option value="post_date"><?php _e('Post Date', 'siteorigin') ?></option>
-				<option value="title"><?php _e('Post Title', 'siteorigin') ?></option>
-				<option value="menu_order"><?php _e('Menu Order', 'siteorigin') ?></option>
-				<option value="rand"><?php _e('Random', 'siteorigin') ?></option>
+				<option value="post_date"><?php esc_html_e('Post Date', 'siteorigin') ?></option>
+				<option value="title"><?php esc_html_e('Post Title', 'siteorigin') ?></option>
+				<option value="menu_order"><?php esc_html_e('Menu Order', 'siteorigin') ?></option>
+				<option value="rand"><?php esc_html_e('Random', 'siteorigin') ?></option>
 			</select>
 
 			<select name="<?php echo self::input_name('order') ?>">
-				<option value="DESC"><?php _e('Descending', 'siteorigin') ?></option>
-				<option value="ASC"><?php _e('Ascending', 'siteorigin') ?></option>
+				<option value="DESC"><?php esc_html_e('Descending', 'siteorigin') ?></option>
+				<option value="ASC"><?php esc_html_e('Ascending', 'siteorigin') ?></option>
 			</select>
 		</p>
 
-		<p><strong><?php _e('Show Post Title', 'siteorigin') ?></strong></p>
 		<p>
-			<label>
-				<input type="checkbox" name="<?php echo self::input_name('title') ?>" />
-				<?php _e('Yes', 'siteorigin') ?>
-			</label>
+			<strong><?php _e('Show Post Title', 'siteorigin') ?></strong>
+			<select name="<?php echo self::input_name('show_titles') ?>">
+				<option value="yes"><?php esc_html_e('Yes', 'siteorigin') ?></option>
+				<option value="no"><?php esc_html_e('No', 'siteorigin') ?></option>
+			</select>
 		</p>
 
 		<?php
@@ -211,18 +214,24 @@ class SO_Panel_Basic_Posts extends SO_Panel {
 			setup_postdata($post);
 			?>
 			<li id="post-<?php the_ID() ?>" <?php post_class('summary') ?>>
-				<?php if(has_post_thumbnail()) : ?>
-					<div class="thumbnail">
-						<a href="<?php the_permalink() ?>"><?php the_post_thumbnail($thumbnail_size) ?></a>
-					</div>	
-				<?php endif ?>
-				
-				<div class="post-info">
-					<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+				<div class="thumbnail">
+					<a href="<?php the_permalink() ?>">
+						<?php if(has_post_thumbnail()) : the_post_thumbnail($thumbnail_size) ?>
+						<?php else : ?>
+							<!-- Temporary thumbnail -->
+						<?php endif ?>
+					</a>
 				</div>
+				
+				<?php if($data['show_titles'] == 'yes') : ?>
+					<div class="post-info">
+						<a href="<?php the_permalink() ?>"><?php the_title() ?></a>
+					</div>
+				<?php endif; ?>
 			</li>
 			<?php
 		}
+		wp_reset_postdata();
 		
 		?></ul></div><?php
 	}

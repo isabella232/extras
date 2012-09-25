@@ -3,6 +3,7 @@
 require_once get_template_directory().'/extras/panels/inc/panel.php';
 
 require_once get_template_directory().'/extras/panels/panels/basic.php';
+require_once get_template_directory().'/extras/panels/panels/widgets.php';
 require_once get_template_directory().'/extras/panels/panels/home.php';
 require_once get_template_directory().'/extras/panels/panels/post.php';
 
@@ -308,8 +309,9 @@ function so_panels_render($post_id = false){
 			foreach($panels as $pi => $panel){
 				// Skip this if the class no longer exists
 				if(!class_exists($panel['info']['class'])) continue;
-				
+
 				$panel_class = new $panel['info']['class'];
+				
 				$info = $panel_class->get_info();
 				$classes = array('panel-panel', 'panel-'.$info['group'], 'panel-'.$info['group'].'-'.$info['name']);
 				if($pi == 0) $classes[] = 'panel-first-child';
