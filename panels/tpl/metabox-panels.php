@@ -1,38 +1,34 @@
 <?php
 
-global $so_panel_types, $so_panel_groups;
-$panels = array();
+$panel_widgets = array();
+global $wp_widget_factory;
 
-if(!empty($so_panel_types)){
-	foreach($so_panel_types as $group => $types){
-		$panels[$group] = array();
-		foreach($types as $class){
-			if(!class_exists($class)) continue;
-			
-			$panel = new $class;
-			ob_start();
-			$panel->form();
-			$form = ob_get_clean();
-			
-			// Give plugins and child themes a chance to edit the form 
-			$form = apply_filters('so_panel_form_'.$class, $form);
-			
-			if(empty($form)) $form = '<p>'.__('No Panel Settings', 'siteorigin').'</p>';
-			
-			// Add all the extra fields
-			$form .= '<input type="hidden" data-info-field="order" name="panel_order[]" value="{%id}" />';
-			$form .= '<input type="hidden" data-info-field="class" name="'.SO_Panel::input_name('info', 'class').'" value="'.$class.'" />';
-			$form .= '<input type="hidden" data-info-field="id" name="'.SO_Panel::input_name('info', 'id').'" value="{%id}" />';
-			$form .= '<input type="hidden" data-info-field="container" name="'.SO_Panel::input_name('info', 'grid').'" value="" />';
-			$form .= '<input type="hidden" data-info-field="container" name="'.SO_Panel::input_name('info', 'cell').'" value="" />';
+$i = 0;
+foreach($wp_widget_factory->widgets as $class => $info){
 	
-			$panels[$group][] = array(
-				'info' => $panel->get_info(),
-				'class' => $class,
-				'form' => $form,
-			);
-		}
-	}
+	$widget = new $class();
+	$widget->id = 'temp';
+	$widget->number = $i++;
+	
+	ob_start();
+	$widget->form(array());
+	$form = ob_get_clean();
+	
+	// Conver the widget field naming into ones that panels uses
+	$exp = preg_quote($widget->get_field_name('____'));
+	$exp = str_replace('____', '(.*?)', $exp);
+	$form = preg_replace('/'.$exp.'/', 'widgets[{$id}][$1]', $form);
+	
+	// Add all the extra fields
+	$form .= '<input type="hidden" data-info-field="order" name="panel_order[]" value="{$id}" />';
+	$form .= '<input type="hidden" data-info-field="class" name="widgets[{$id}][info][class]" value="'.$class.'" />';
+	$form .= '<input type="hidden" data-info-field="id" name="widgets[{$id}][info][id]" value="{$id}" />';
+	$form .= '<input type="hidden" data-info-field="grid" name="widgets[{$id}][info][grid]" value="" />';
+	$form .= '<input type="hidden" data-info-field="cell" name="widgets[{$id}][info][cell]" value="" />';
+	
+	$widget->form = $form;
+	
+	$panel_widgets[] = $widget;
 }
 
 ?>
@@ -48,40 +44,38 @@ if(!empty($so_panel_types)){
 	
 	<!-- The dialogs -->
 	
-	<div id="panels-dialog" data-title="<?php esc_attr_e('Add New Panel','siteorigin') ?>" class="panels-admin-dialog">
+	<div id="panels-dialog" data-title="<?php esc_attr_e('Add Widget','siteorigin') ?>" class="panels-admin-dialog">
 		<div id="panels-dialog-tabs">
-			<ul>
-				<?php foreach($so_panel_groups as $id => $info) : ?>
-					<li><a href="#panels-dialog-tabs-<?php echo esc_attr($id) ?>"><?php echo ($info['name']) ?></a></li>
-				<?php endforeach; ?>
-			</ul>
 			
-			<?php foreach($so_panel_groups as $group_id => $info) : $i = 0; ?>
-				<div id="panels-dialog-tabs-<?php echo esc_attr($group_id) ?>">
-					<ul class="panel-type-list">
-						<?php foreach($panels[$group_id] as $panel_type) : $i++; ?>
-							<li class="panel-type"
-								data-class="<?php echo esc_attr($panel_type['class']) ?>"
-								data-form="<?php echo esc_attr($panel_type['form']) ?>"
-								data-title="<?php echo esc_attr($panel_type['info']['title']) ?>"
-								<?php if(!empty($panel_type['info']['title_field'])) : ?>data-title-field="<?php echo esc_attr($panel_type['info']['title_field']) ?>"<?php endif ?>
-								>
-								<div class="panel-type-wrapper">
-									<h3><?php echo $panel_type['info']['title'] ?></h3>
-									<?php if(!empty($panel_type['info']['description'])) : ?>
-										<small class="description"><?php echo $panel_type['info']['description'] ?></small>
-									<?php endif; ?>
-								</div>
-							</li>
-							<?php if($i % 4 == 0) : ?><div class="clear"></div><?php endif; ?>
-						<?php endforeach; ?>
-						<?php if($i % 4 != 0) : ?><div class="clear"></div><?php endif; ?>
-					</ul>
-				</div>
-			<?php endforeach; ?>
+			<!--
+			<ul>
+				<li><a href="#panels-dialog-tabs-general"><?php esc_attr_e('General', 'siteorigin') ?></a></li>
+			</ul>
+			-->
+
+			<!--<div id="panels-dialog-tabs-general">-->
+				<ul class="panel-type-list">
+					<?php $i = 0; foreach($panel_widgets as $widget) : $i++; ?>
+						<li class="panel-type"
+							data-class="<?php echo esc_attr(get_class($widget)) ?>"
+							data-form="<?php echo esc_attr($widget->form) ?>"
+							data-title="<?php echo esc_attr($widget->name) ?>"
+							>
+							<div class="panel-type-wrapper">
+								<h3><?php echo esc_html($widget->name) ?></h3>
+								<?php if(!empty($widget->widget_options['description'])) : ?>
+									<small class="description"><?php echo esc_html($widget->widget_options['description']) ?></small>
+								<?php endif; ?>
+							</div>
+						</li>
+						<?php if($i % 4 == 0) : ?><div class="clear"></div><?php endif; ?>
+					<?php endforeach; ?>
+					<?php if($i % 4 != 0) : ?><div class="clear"></div><?php endif; ?>
+				</ul>
+			<!--</div>-->
 			
 			<?php if(!defined('SO_IS_PREMIUM')) : ?>
-				<p><?php printf(__('Additional panels are available in <a href="%s">%s Premium</a>'), admin_url('themes.php?page=premium_upgrade'), ucfirst(get_option('stylesheet'))) ?></p>
+				<p><?php printf(__('Additional widgets are available in <a href="%s">%s Premium</a>'), admin_url('themes.php?page=premium_upgrade'), ucfirst(get_option('stylesheet'))) ?></p>
 			<?php endif; ?>
 		</div>
 		
@@ -90,7 +84,7 @@ if(!empty($so_panel_types)){
 	<div id="grid-add-dialog" data-title="<?php esc_attr_e('Create Grid','siteorigin') ?>" class="panels-admin-dialog">
 		<p><label><strong><?php _e('Columns', 'siteorigin') ?></strong></label></p>
 		<p>
-			<input id="grid-add-dialog-input" name="column_count" class="small-text" value="3" />
+			<input type="text" id="grid-add-dialog-input" name="column_count" class="small-text" value="3" />
 		</p>
 	</div>
 	

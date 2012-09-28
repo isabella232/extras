@@ -178,10 +178,65 @@ function siteorigin_slider_display_upgrade(){
 add_action('so_slider_after_builder_form', 'siteorigin_slider_display_upgrade');
 
 /**
- * The siteorigin slider panel
+ * The SiteOrigin Slider Widget
  */
-class SO_Panel_Slider extends SO_Panel{
-	function form(){
+class SO_Slider_Widget extends WP_Widget {
+	function __construct(){
+		parent::__construct(
+			'so-slider',
+			__('Slider', 'siteorigin'),
+			array(
+				'description' => __('Insert a slider.', 'siteorigin'),
+			)
+		);
+	}
+
+	function widget($args, $instance){
+		
+		echo $args['before_widget'];
+		
+		if($instance['slider_id'] == -1){
+			_e('Please select a slider.', 'siteorigin');
+			echo $args['after_widget'];
+			return;
+		}
+
+		$post = get_post($instance['slider_id']);
+		$slides = get_post_meta($post->ID, 'siteorigin_slider', true);
+
+		?><ul class="slides"><?php
+		foreach($slides as $slide){
+			?>
+			<li>
+				<?php do_action('so_slide_before', $slide) ?>
+					
+				<?php echo wp_get_attachment_image($slide['image'], !empty($data['image_size']) ? $data['image_size'] : 'large'); ?>
+				<?php if(!empty($slide['title']) || !empty($slide['extra'])) : ?>
+					<div class="slide-text">
+						<h3><?php print esc_html($slide['title']) ?></h3>
+						<p><?php print esc_html($slide['extra']) ?></p>
+					</div>
+				<?php endif; ?>
+					
+				<?php do_action('so_slide_after', $slide) ?>
+			</li>
+			<?php
+		}
+		?></ul><?php
+		print $args['after_widget'];
+	}
+	
+	/**
+	 * @param array $instance
+	 * @return string|void
+	 */
+	function form($instance){
+		$instance = wp_parse_args($instance, array(
+			'slider_id' => false,
+			'image_size' => false,
+		));
+		
+		
 		$sliders = get_posts(array(
 			'numberposts' => -1,
 			'post_type' => 'slider',
@@ -191,22 +246,22 @@ class SO_Panel_Slider extends SO_Panel{
 		global $_wp_additional_image_sizes;
 		
 		?>
-		<p><strong><?php _e('Slider', 'siteorigin') ?></strong></p>
+		<p><label for="<?php echo $this->get_field_id('slider_id') ?>"><?php _e('Slider', 'siteorigin') ?></label></p>
 		<p>
-			<select name="<?php echo self::input_name('slider_id') ?>">
-				<option value="-1"><?php _e('None', 'siteorigin') ?></option>
+			<select name="<?php echo $this->get_field_name('slider_id') ?>" id="<?php echo $this->get_field_id('slider_id') ?>">
+				<option value="-1"><?php esc_html_e('None', 'siteorigin') ?></option>
 				<?php foreach ($sliders as $slider ) : ?>
 					<option value="<?php echo $slider->ID ?>"><?php echo $slider->post_title ?></option>
 				<?php endforeach; ?>
 			</select>
 		</p>
-		<p><strong><?php _e('Image Size', 'siteorigin') ?></strong></p>
+		<p><label for="<?php echo $this->get_field_id('image_size') ?>"><?php _e('Image Size', 'siteorigin') ?></label></p>
 		<p>
-			<select name="<?php echo self::input_name('image_size') ?>">
-				<option value="large"><?php _e('Large', 'siteorigin') ?></option>
-				<option value="medium"><?php _e('Medium', 'siteorigin') ?></option>
-				<option value="thumbnail"><?php _e('Thumbnail', 'siteorigin') ?></option>
-				<option value="full"><?php _e('Full', 'siteorigin') ?></option>
+			<select name="<?php echo $this->get_field_name('image_size') ?>" id="<?php echo $this->get_field_id('image_size') ?>">
+				<option value="large"><?php esc_html_e('Large', 'siteorigin') ?></option>
+				<option value="medium"><?php esc_html_e('Medium', 'siteorigin') ?></option>
+				<option value="thumbnail"><?php esc_html_e('Thumbnail', 'siteorigin') ?></option>
+				<option value="full"><?php esc_html_e('Full', 'siteorigin') ?></option>
 				<?php foreach ($_wp_additional_image_sizes as $name => $info) : ?>
 					<option value="<?php echo esc_attr($name) ?>"><?php echo esc_html($name) ?></option>
 				<?php endforeach ?>
@@ -215,45 +270,8 @@ class SO_Panel_Slider extends SO_Panel{
 		<?php
 	}
 
-	function save($new_values){
-		return $new_values;
-	}
-
-	function render($data){
-		if($data['slider_id'] == -1){
-			_e('Please select a slider.', 'siteorigin');
-			return;
-		}
-		
-		$post = get_post($data['slider_id']);
-		$slides = get_post_meta($post->ID, 'siteorigin_slider', true);
-		
-		?><ul class="slides"><?php
-		foreach($slides as $slide){
-			?>
-			<li>
-				<?php do_action('so_slide_before', $slide) ?>
-				<?php echo wp_get_attachment_image($slide['image'], !empty($data['image_size']) ? $data['image_size'] : 'large'); ?>
-				<?php if(!empty($slide['title']) || !empty($slide['extra'])) ?>
-				<div class="slide-text">
-					<h3><?php print esc_html($slide['title']) ?></h3>
-					<p><?php print esc_html($slide['extra']) ?></p>
-				</div>
-				<?php do_action('so_slide_after', $slide) ?>
-			</li>
-			<?php
-		}
-		?></ul><?php
-	}
-
-	function get_info(){
-		return array(
-			'title' => __('Slider', 'siteorigin'),
-			'description' => __("Add sliders you've created.", 'siteorigin'),
-			//'title_field' => 'headline',
-			'group' => 'home',
-			'name' => 'slider',
-		);
+	function update($new, $old){
+		return $new;
 	}
 }
-so_panels_register_type('home', 'SO_Panel_Slider');
+register_widget('SO_Slider_Widget');

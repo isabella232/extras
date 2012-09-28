@@ -1,12 +1,5 @@
 <?php
 
-require_once get_template_directory().'/extras/panels/inc/panel.php';
-
-require_once get_template_directory().'/extras/panels/panels/basic.php';
-require_once get_template_directory().'/extras/panels/panels/widgets.php';
-require_once get_template_directory().'/extras/panels/panels/home.php';
-require_once get_template_directory().'/extras/panels/panels/post.php';
-
 /**
  * Initialize the panels extra
  */
@@ -126,10 +119,13 @@ function so_panels_admin_enqueue_scripts(){
 		// Localize the panels with the panels data
 		global $post;
 		$panels_data = get_post_meta($post->ID, 'panels_data', true);
+		if(empty($panels_data)) $panels_data = array();
 		
 		// Remove any panels that no longer exist.
-		foreach($panels_data['panels'] as $i => $panel){
-			if(!class_exists($panel['info']['class'])) unset($panels_data['panels'][$i]);
+		if(!empty($panels_data['panels'])) {
+			foreach($panels_data['panels'] as $i => $panel){
+				if(!class_exists($panel['info']['class'])) unset($panels_data['panels'][$i]);
+			}
 		}
 		
 		if(!empty($panels_data )){
@@ -183,16 +179,29 @@ function so_panels_save_post($post_id, $post){
 	if ( !current_user_can( 'edit_post', $post_id ) ) return;
 	
 	$panels_data = array();
-
-	$panels_data['panels'] = array_map('stripslashes_deep', isset($_POST['panels']) ? $_POST['panels'] : array());
-	$panels_data['panels'] = array_values($panels_data['panels']);
+	
+	$panels_data['widgets'] = array_map('stripslashes_deep', isset($_POST['widgets']) ? $_POST['widgets'] : array());
+	$panels_data['widgets'] = array_values($panels_data['widgets']);
+	
+	foreach($panels_data['widgets'] as $i => $widget){
+		$info = $widget['info'];
+		if(!class_exists($widget['info']['class'])) continue;
+		
+		$the_widget = new $widget['info']['class'];
+		if(method_exists($the_widget, 'update')){
+			unset($widget['info']);
+			$widget = $the_widget->update($widget, $widget);
+		}
+		$widget['info'] = $info;
+		$panels_data['widgets'][$i] = $widget;
+	}
 	
 	$panels_data['grids'] = array_map('stripslashes_deep', isset($_POST['grids']) ? $_POST['grids'] : array());
 	$panels_data['grids'] = array_values($panels_data['grids']);
 	
 	$panels_data['grid_cells'] = array_map('stripslashes_deep', isset($_POST['grid_cells']) ? $_POST['grid_cells'] : array());
 	$panels_data['grid_cells'] = array_values($panels_data['grid_cells']);
-	
+
 	update_post_meta($post_id, 'panels_data', $panels_data);
 	
 	if(isset($_POST['panels_home_page'])){
@@ -295,8 +304,8 @@ function so_panels_render($post_id = false){
 		}
 	}
 	
-	foreach($panels_data['panels'] as $panel){
-		$grids[intval($panel['info']['grid'])][intval($panel['info']['cell'])][] = $panel;
+	foreach($panels_data['widgets'] as $widget){
+		$grids[intval($widget['info']['grid'])][intval($widget['info']['cell'])][] = $widget;
 	}
 	
 	ob_start();
@@ -304,31 +313,31 @@ function so_panels_render($post_id = false){
 		$grid = $panels_data['grids'][$gi];
 		
 		?><div class="panel-grid" id="pg-<?php echo $gi ?>"><?php
-		foreach($cells as $ci => $panels){
+		foreach($cells as $ci => $widgets){
 			?><div class="panel-grid-cell" id="pgc-<?php echo $gi.'-'.$ci ?>"><?php
-			foreach($panels as $pi => $panel){
+			foreach($widgets as $pi => $widget_info){
 				// Skip this if the class no longer exists
-				if(!class_exists($panel['info']['class'])) continue;
+				if(!class_exists($widget_info['info']['class'])) continue;
 
-				$panel_class = new $panel['info']['class'];
+				$the_widget = new $widget_info['info']['class'];
 				
-				$info = $panel_class->get_info();
-				$classes = array('panel-panel', 'panel-'.$info['group'], 'panel-'.$info['group'].'-'.$info['name']);
+				$data = $widget_info;
+				unset($data['info']);
+				
+				$classes = array('panel', 'widget');
+				if(!empty($the_widget->id_base)) $classes[] = 'widget_'.$the_widget->id_base; 
 				if($pi == 0) $classes[] = 'panel-first-child';
-				if($pi == count($panels)-1) $classes[] = 'panel-last-child';
+				if($pi == count($widgets)-1) $classes[] = 'panel-last-child';
 				
-				?><div class="<?php echo esc_attr(implode(' ',$classes)) ?>" id="panel-<?php echo $gi . '-' . $ci. '-' . $pi ?>"><?php
-				
-				// Give child themes or plugins a chance to render this panel
-				ob_start();
-				do_action('so_panels_render-'.$panel['info']['class']);
-				$c = ob_get_clean();
-					
-				if(empty($c)) $panel_class->render($panel);
-				else print $c;
-				?></div><?php
+				$the_widget->widget(array(
+					'before_widget' => '<div class="'.esc_attr(implode(' ',$classes)).'" id="panel-'.$gi . '-' . $ci. '-' . $pi.'">',
+					'after_widget' => '</div>',
+					'before_title' => '<h3 class="widget-title">',
+					'after_title' => '</h3>',
+					'widget_id' => 'widget-'.$gi.'-'.$ci.'-'.$pi
+				), $data);
 			}
-			if(empty($panels)) echo '&nbsp;';
+			if(empty($widgets)) echo '&nbsp;';
 			?></div><?php
 		}
 		?><div class="clear"></div></div><?php

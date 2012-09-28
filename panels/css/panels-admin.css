@@ -2,7 +2,11 @@
 
 .panel-type-list,
 .panel-grid-list{
-    margin: 15px -5px 0 -5px;
+    margin: 0 -5px;
+}
+
+#panels-dialog-tabs{
+    margin-bottom: -10px
 }
 
 .panel-type-list .panel-type,

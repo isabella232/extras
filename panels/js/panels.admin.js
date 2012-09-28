@@ -2,17 +2,16 @@ jQuery(function($){
     // Create the main dialog
     $('#panels-dialog').show().dialog({
         autoOpen: false,
+        resizable : false,
+        draggable : false,
         modal : true,
         title : $('#panels-dialog').attr('data-title'),
         minWidth: 960,
-        minHeight: 400,
+        maxHeight: 720,
         close: function(){
             $('#panels-container .panel.new-panel').hide().fadeIn('slow').removeClass('new-panel');
         }
     }).find('.panel-type').disableSelection();
-    
-    // And the tabs in the main dialog
-    $('#panels-dialog-tabs').tabs({});$('#panels-dialog-tabs').tabs({});
     
     // The button for adding a panel
     $('#panels .panels-add')
@@ -53,7 +52,7 @@ jQuery(function($){
         var dialog;
 
         var formHtml = $$.attr('data-form');
-        formHtml = formHtml.replace(/\{\%id\}/g, newPanelId++);
+        formHtml = formHtml.replace(/\{\$id\}/g, newPanelId++);
         
         panel
             .data({
@@ -84,8 +83,14 @@ jQuery(function($){
             $(this).trigger('panelsdone');
 
             // Transfer the dialog values across
-            dialog.find('*[name]').each(function(){
-                panel.find('.form *[name="'+$(this).attr('name')+'"]').val($(this).val());
+            dialog.find('*[name]').not('[data-info-field]').each(function(){
+                var f = panel.find('.form *[name="'+$(this).attr('name')+'"]');
+                
+                if(f.attr('type') == 'checkbox'){
+                    if($(this).is(':checked')) f.prop("checked", true);
+                    else f.prop("checked", false);
+                }
+                else f.val($(this).val());
             });
 
             // Change the title of the panel
@@ -94,21 +99,40 @@ jQuery(function($){
             dialog.dialog('close');
         }
         
-        dialog = $('<div id="panel-dialog" />').addClass('dialog-form').html(formHtml).dialog({
-            autoOpen: false,
-            modal : true,
-            title : ('Edit %s Panel').replace('%s', $$.attr('data-title')),
-            minWidth: 700,
-            open: function(){
-                // Transfer the values of the  
-                panel.find('.form *[name]').each(function(){
-                    dialog.find('*[name="'+$(this).attr('name')+'"]').val($(this).val());
-                });
-                
-                // This gives panel types a chance to influence the form
-                $(this).trigger('panelsopen');
-            },
-            buttons: dialogButtons
+        dialog = $('<div id="panel-dialog" />').addClass('dialog-form')
+            .html(formHtml).dialog({
+                autoOpen: false,
+                modal : true,
+                title : ('Edit %s Panel').replace('%s', $$.attr('data-title')),
+                minWidth: 700,
+                open: function(){
+                    // Transfer the values of the form to the dialog
+                    panel.find('.form *[name]').not('[data-info-field]').each(function(){
+                        var f = dialog.find('.form *[name="'+$(this).attr('name')+'"]');
+    
+                        if(f.attr('type') == 'checkbox'){
+                            if($(this).is(':checked')) f.prop("checked", true);
+                            else f.prop("checked", false);
+                        }
+                        else f.val($(this).val());
+                    });
+                    
+                    // This gives panel types a chance to influence the form
+                    $(this).trigger('panelsopen');
+                },
+                buttons: dialogButtons
+            });
+        
+        dialog.find('label').each(function(){
+            // Make labels work as expected
+            var f = $('#' + $(this).attr('for'));
+            $(this).disableSelection();
+
+            $(this).click(function(){
+                // Toggle the checked value
+                if(f.attr('type') == 'checkbox') f.prop('checked', !f.prop('checked'));
+                else f.focus();
+            });
         });
         panel.disableSelection();
         
@@ -116,8 +140,17 @@ jQuery(function($){
             // Populate the form values
             for(c in data){
                 if(c != 'info') {
-                    panel.find('.form *[name$="['+c+']"]').val(data[c]);
-                    dialog.find('*[name$="['+c+']"]').val(data[c]);
+                    var pe = panel.find('.form *[name$="['+c+']"]');
+                    var de = dialog.find('*[name$="['+c+']"]');
+                    
+                    if(pe.attr('type') == 'checkbox'){
+                        pe.prop('checked', Boolean(c));
+                        de.prop('checked', Boolean(c));
+                    }
+                    else{
+                        pe.val(data[c]);
+                        de.val(data[c]);
+                    }
                 }
             }
         }
@@ -156,6 +189,9 @@ jQuery(function($){
         $('#panels-container .cell .panels-container').last().append(panel);
         $('#panels-container .cell .panels-container').sortable( "refresh").trigger('refreshcells');
         $.grid.resizeCells($('#panels-container .cell .panels-container').last().closest('.grid-container'));
+        
+        // Close the add panel dialog
+        $('#panels-dialog').dialog('close');
     });
     
     if(typeof panelsData != 'undefined'){
@@ -175,13 +211,13 @@ jQuery(function($){
             $.grid.setupGrid(grid);
             
             // Add panels to the grid cells
-            for(var pi in panelsData.panels){
+            for(var pi in panelsData.widgets){
 
-                if(Number(panelsData.panels[pi]['info']['grid']) == gi){
-                    var pd = panelsData.panels[pi];
+                if(Number(panelsData.widgets[pi]['info']['grid']) == gi){
+                    var pd = panelsData.widgets[pi];
                     var panel = createPanel(pd['info']['class'], pd);
                     grid
-                        .find('.panels-container').eq(Number(panelsData.panels[pi]['info']['cell']))
+                        .find('.panels-container').eq(Number(panelsData.widgets[pi]['info']['cell']))
                         .append(panel)
                 }
             }
