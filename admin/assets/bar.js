@@ -29,7 +29,7 @@ jQuery(function($){
         
         // Send the message to the server to dismiss this bar
         $.post(
-            ajaxurl + '?action=so_admin_dismiss_bar',
+            ajaxurl + '?action=siteorigin_admin_dismiss_bar',
             { bar : $('#siteorigin-admin-bar').attr('data-type') }
         );
         

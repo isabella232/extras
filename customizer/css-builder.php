@@ -3,7 +3,7 @@
 /**
  * This is used for building custom CSS.
  */
-class SO_CSS_Builder {
+class SiteOrigin_CSS_Builder {
 	private $css;
 	private $fonts;
 	

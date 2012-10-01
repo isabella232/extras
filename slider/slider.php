@@ -85,8 +85,8 @@ function siteorigin_slider_admin_enqueue(){
 		wp_enqueue_script( 'jquery-ui-droppable' );
 		wp_enqueue_script( 'jquery-ui-sortable' );
 
-		wp_enqueue_script('siteorigin-slider-admin', get_template_directory_uri().'/extras/slider/admin.js', array('jquery'), SO_THEME_VERSION);
-		wp_enqueue_style('siteorigin-slider-admin', get_template_directory_uri().'/extras/slider/admin.css', array(), SO_THEME_VERSION);
+		wp_enqueue_script('siteorigin-slider-admin', get_template_directory_uri().'/extras/slider/js/admin.js', array('jquery'), SITEORIGIN_THEME_VERSION);
+		wp_enqueue_style('siteorigin-slider-admin', get_template_directory_uri().'/extras/slider/css/admin.css', array(), SITEORIGIN_THEME_VERSION);
 		
 		$slides = get_post_meta($post->ID, 'siteorigin_slider', true);
 		wp_localize_script('siteorigin-slider-admin', 'siteoriginSlider', array(
@@ -133,7 +133,7 @@ function siteorigin_slider_get_post_images($post_id){
  * Render the slider meta box
  */
 function siteorigin_slider_metabox_slider_slides($post, $post_id){
-	get_template_part('extras/slider/admin', 'builder');
+	get_template_part('extras/slider/tpl/admin', 'builder');
 }
 
 /**
@@ -141,7 +141,7 @@ function siteorigin_slider_metabox_slider_slides($post, $post_id){
  */
 function siteorigin_slider_save_post($post_id){
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( empty($_POST['_so_slider_nonce']) || !wp_verify_nonce($_POST['_so_slider_nonce'], 'save_slider') ) return;
+	if ( empty($_POST['_siteorigin_slider_nonce']) || !wp_verify_nonce($_POST['_siteorigin_slider_nonce'], 'save_slider') ) return;
 	
 	$slider = array();
 	foreach($_REQUEST['siteorigin_slider'] as $field => $vals){
@@ -157,7 +157,7 @@ function siteorigin_slider_save_post($post_id){
 add_action('save_post', 'siteorigin_slider_save_post');
 
 function siteorigin_slider_display_upgrade(){
-	if(!defined('SO_IS_PREMIUM')){
+	if(!defined('SITEORIGIN_IS_PREMIUM')){
 		
 		?>
 		<tr valign="top">
@@ -175,12 +175,12 @@ function siteorigin_slider_display_upgrade(){
 		<?php
 	}
 }
-add_action('so_slider_after_builder_form', 'siteorigin_slider_display_upgrade');
+add_action('siteorigin_slider_after_builder_form', 'siteorigin_slider_display_upgrade');
 
 /**
  * The SiteOrigin Slider Widget
  */
-class SO_Slider_Widget extends WP_Widget {
+class SiteOrigin_Slider_Widget extends WP_Widget {
 	function __construct(){
 		parent::__construct(
 			'so-slider',
@@ -208,7 +208,7 @@ class SO_Slider_Widget extends WP_Widget {
 		foreach($slides as $slide){
 			?>
 			<li>
-				<?php do_action('so_slide_before', $slide) ?>
+				<?php do_action('siteorigin_slide_before', $slide) ?>
 					
 				<?php echo wp_get_attachment_image($slide['image'], !empty($data['image_size']) ? $data['image_size'] : 'large'); ?>
 				<?php if(!empty($slide['title']) || !empty($slide['extra'])) : ?>
@@ -218,7 +218,7 @@ class SO_Slider_Widget extends WP_Widget {
 					</div>
 				<?php endif; ?>
 					
-				<?php do_action('so_slide_after', $slide) ?>
+				<?php do_action('siteorigin_slide_after', $slide) ?>
 			</li>
 			<?php
 		}
@@ -274,4 +274,11 @@ class SO_Slider_Widget extends WP_Widget {
 		return $new;
 	}
 }
-register_widget('SO_Slider_Widget');
+
+/**
+ * Register the slider widgets
+ */
+function siteorigin_slider_register_widgets(){
+	register_widget('SiteOrigin_Slider_Widget');
+}
+add_action('widgets_init', 'siteorigin_slider_register_widgets');

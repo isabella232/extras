@@ -12,25 +12,25 @@
  * @param $theme_name
  * @since 1.0
  */
-function so_settings_init($theme_name = null){
+function siteorigin_settings_init($theme_name = null){
 	if(empty($theme_name)) {
 		$theme_name = basename(get_template_directory());
 	}
 	
-	$GLOBALS['so_settings_theme_name'] = $theme_name;
-	$GLOBALS['so_settings_name'] = $theme_name.'_theme_settings';
-	$GLOBALS['so_settings_defaults'] = apply_filters('so_theme_default_settings', array());
-	$GLOBALS['so_settings'] = wp_parse_args(get_option($theme_name.'_theme_settings', array()), $GLOBALS['so_settings_defaults']);
+	$GLOBALS['siteorigin_settings_theme_name'] = $theme_name;
+	$GLOBALS['siteorigin_settings_name'] = $theme_name.'_theme_settings';
+	$GLOBALS['siteorigin_settings_defaults'] = apply_filters('siteorigin_theme_default_settings', array());
+	$GLOBALS['siteorigin_settings'] = wp_parse_args(get_option($theme_name.'_theme_settings', array()), $GLOBALS['siteorigin_settings_defaults']);
 	
 	// Register all the actions for the settings page
-	add_action('admin_menu', 'so_settings_admin_menu');
-	add_action('admin_init', 'so_settings_admin_init', 8);
-	add_action('so_adminbar', 'so_settings_adminbar');
+	add_action('admin_menu', 'siteorigin_settings_admin_menu');
+	add_action('admin_init', 'siteorigin_settings_admin_init', 8);
+	add_action('siteorigin_adminbar', 'siteorigin_settings_adminbar');
 	
-	add_action('admin_enqueue_scripts', 'so_settings_enqueue_scripts');
+	add_action('admin_enqueue_scripts', 'siteorigin_settings_enqueue_scripts');
 	
 	// Set up the help tabs
-	add_action('load-appearance_page_theme_settings_page', 'so_settings_help_tab');
+	add_action('load-appearance_page_theme_settings_page', 'siteorigin_settings_help_tab');
 }
 
 /**
@@ -38,7 +38,7 @@ function so_settings_init($theme_name = null){
  * 
  * @since 1.0
  */
-function so_settings_help_tab(){
+function siteorigin_settings_help_tab(){
 	$screen = get_current_screen();
 	$theme = basename(get_template_directory());
 	
@@ -68,8 +68,8 @@ function so_settings_help_tab(){
  * @action admin_init
  * @since 1.0
  */
-function so_settings_admin_init(){
-	register_setting('theme_settings', $GLOBALS['so_settings_name'], 'so_settings_validate');
+function siteorigin_settings_admin_init(){
+	register_setting('theme_settings', $GLOBALS['siteorigin_settings_name'], 'siteorigin_settings_validate');
 }
 
 /**
@@ -78,8 +78,8 @@ function so_settings_admin_init(){
  * @action admin_menu
  * @since 1.0
  */
-function so_settings_admin_menu(){
-	add_theme_page(__('Theme Settings','siteorigin'), __('Theme Settings', 'siteorigin'), 'edit_theme_options', 'theme_settings_page', 'so_settings_render');
+function siteorigin_settings_admin_menu(){
+	add_theme_page(__('Theme Settings','siteorigin'), __('Theme Settings', 'siteorigin'), 'edit_theme_options', 'theme_settings_page', 'siteorigin_settings_render');
 }
 
 /**
@@ -87,7 +87,7 @@ function so_settings_admin_menu(){
  * 
  * @since 1.0
  */
-function so_settings_render(){
+function siteorigin_settings_render(){
 	locate_template('extras/settings/page.php', true, false);
 }
 
@@ -97,10 +97,10 @@ function so_settings_render(){
  * @param $prefix
  * @since 1.0
  */
-function so_settings_enqueue_scripts($prefix){
+function siteorigin_settings_enqueue_scripts($prefix){
 	if($prefix != 'appearance_page_theme_settings_page') return;
-	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri().'/extras/settings/settings.js', array('jquery'), SO_THEME_VERSION );
-	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri().'/extras/settings/settings.css', array(), SO_THEME_VERSION );
+	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri().'/extras/settings/settings.js', array('jquery'), SITEORIGIN_THEME_VERSION );
+	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri().'/extras/settings/settings.css', array(), SITEORIGIN_THEME_VERSION );
 	
 	wp_localize_script('siteorigin-settings', 'soSettings', array(
 		'tab' => get_theme_mod('_theme_settings_current_tab', 0),
@@ -117,10 +117,10 @@ function so_settings_enqueue_scripts($prefix){
  * @return object|null
  * @since 1.0
  */
-function so_settings_adminbar($bar){
+function siteorigin_settings_adminbar($bar){
 	$screen = get_current_screen();
 	if($screen->id == 'appearance_page_theme_settings_page'){
-		$bar = (object) array('id' => $GLOBALS['so_settings_name'], 'message' => array('extras/settings/message'));
+		$bar = (object) array('id' => $GLOBALS['siteorigin_settings_name'], 'message' => array('extras/settings/message'));
 	}
 	
 	return $bar;
@@ -133,7 +133,7 @@ function so_settings_adminbar($bar){
  * @param $name
  * @since 1.0
  */
-function so_settings_add_section($id, $name){
+function siteorigin_settings_add_section($id, $name){
 	add_settings_section($id, $name, '__return_false', 'theme_settings');
 }
 
@@ -147,7 +147,7 @@ function so_settings_add_section($id, $name){
  * @param array $args
  * @since 1.0
  */
-function so_settings_add_field($section, $id, $type, $name, $args = array()){
+function siteorigin_settings_add_field($section, $id, $type, $name, $args = array()){
 	if(isset($wp_settings_fields['theme_settings'][$section][$id])){
 		if(isset($wp_settings_fields['theme_settings'][$section][$id]['args']['type']) && $wp_settings_fields['theme_settings'][$section][$id]['args']['type'] == 'teaser')
 			unset($wp_settings_fields['theme_settings'][$section][$id]);
@@ -160,7 +160,7 @@ function so_settings_add_field($section, $id, $type, $name, $args = array()){
 		'type' => $type,
 	));
 	
-	add_settings_field($id, $name, 'so_settings_field', 'theme_settings', $section, $args);
+	add_settings_field($id, $name, 'siteorigin_settings_field', 'theme_settings', $section, $args);
 }
 
 /**
@@ -173,7 +173,7 @@ function so_settings_add_field($section, $id, $type, $name, $args = array()){
  * @param array $args
  * @since 1.0
  */
-function so_settings_add_teaser($section, $id, $name, $args = array()){
+function siteorigin_settings_add_teaser($section, $id, $name, $args = array()){
 	global $wp_settings_fields;
 	if(isset($wp_settings_fields['theme_settings'][$section][$id])) return;
 	
@@ -183,7 +183,7 @@ function so_settings_add_teaser($section, $id, $name, $args = array()){
 		'type' => 'teaser',
 	));
 	
-	add_settings_field($id, $name, 'so_settings_field', 'theme_settings', $section, $args);
+	add_settings_field($id, $name, 'siteorigin_settings_field', 'theme_settings', $section, $args);
 }
 
 /**
@@ -193,9 +193,9 @@ function so_settings_add_teaser($section, $id, $name, $args = array()){
  * @return mixed
  * @since 1.0
  */
-function so_setting($name){
-	if(!isset($GLOBALS['so_settings'][$name])) return null;
-	else return $GLOBALS['so_settings'][$name];
+function siteorigin_setting($name){
+	if(!isset($GLOBALS['siteorigin_settings'][$name])) return null;
+	else return $GLOBALS['siteorigin_settings'][$name];
 }
 
 /**
@@ -204,10 +204,10 @@ function so_setting($name){
  * @param $args
  * @since 1.0
  */
-function so_settings_field($args){
-	$field_name = $GLOBALS['so_settings_name'].'['.$args['section'].'_'.$args['field'].']';
+function siteorigin_settings_field($args){
+	$field_name = $GLOBALS['siteorigin_settings_name'].'['.$args['section'].'_'.$args['field'].']';
 	$field_id = $args['section'].'_'.$args['field'];
-	$current = isset($GLOBALS['so_settings'][$field_id]) ? $GLOBALS['so_settings'][$field_id] : null;
+	$current = isset($GLOBALS['siteorigin_settings'][$field_id]) ? $GLOBALS['siteorigin_settings'][$field_id] : null;
 	
 	switch($args['type']){
 		case 'checkbox' :
@@ -275,7 +275,7 @@ function so_settings_field($args){
  * @return array
  * @since 1.0
  */
-function so_settings_validate($values){
+function siteorigin_settings_validate($values){
 	global $wp_settings_fields;
 
 	$theme_name = basename(get_template_directory());
@@ -292,25 +292,25 @@ function so_settings_validate($values){
 				$values[$name] = !empty($values[$name]);
 			}
 			elseif($field['args']['type'] == 'number'){
-				$values[$name] = isset($values[$name]) ? intval($values[$name]) : $GLOBALS['so_settings_defaults'][$name];
+				$values[$name] = isset($values[$name]) ? intval($values[$name]) : $GLOBALS['siteorigin_settings_defaults'][$name];
 			}
 
 			if(!isset($current[$name]) || $values[$name] != $current[$name]) $changed = true;
 			
 			// See if this needs any special validation
-			if(!empty($field['args']['validator']) && method_exists('SO_Settings_Validator', $field['args']['validator'])){
-				$values[$name] = call_user_func(array('SO_Settings_Validator', $field['args']['validator']), $values[$name]);
+			if(!empty($field['args']['validator']) && method_exists('SiteOrigin_Settings_Validator', $field['args']['validator'])){
+				$values[$name] = call_user_func(array('SiteOrigin_Settings_Validator', $field['args']['validator']), $values[$name]);
 			}
 		}
 	}
 	
 	if($changed){
-		do_action('so_settings_changed');
+		do_action('siteorigin_settings_changed');
 
 		/**
 		 * An action triggered when the theme settings have changed.
 		 */
-		set_theme_mod('so_settings_changed', true);
+		set_theme_mod('siteorigin_settings_changed', true);
 	}
 
 	return $values;
@@ -319,9 +319,9 @@ function so_settings_validate($values){
 /**
  * 
  */
-function so_settings_change_message(){
-	if(get_theme_mod('so_settings_changed')){
-		remove_theme_mod('so_settings_changed');
+function siteorigin_settings_change_message(){
+	if(get_theme_mod('siteorigin_settings_changed')){
+		remove_theme_mod('siteorigin_settings_changed');
 		
 		?>
 		<div id="setting-error-settings_updated" class="updated settings-error">
@@ -332,14 +332,14 @@ function so_settings_change_message(){
 		/**
 		 * This is an action that the theme can use to display a settings changed message.
 		 */
-		do_action('so_settings_changed_message');
+		do_action('siteorigin_settings_changed_message');
 	}
 }
 
 /**
  * Settings validators.
  */
-class SO_Settings_Validator {
+class SiteOrigin_Settings_Validator {
 	/**
 	 * Extracts the twitter username from the string.
 	 * 

@@ -1,7 +1,7 @@
 <?php
 
 if(class_exists('WP_Customize_Control')) :
-class SO_Customize_Fonts_Control extends WP_Customize_Control {
+class SiteOrigin_Customize_Fonts_Control extends WP_Customize_Control {
 	
 	function __construct( $manager, $id, $args = array() ) {
 		$google_web_fonts = include(get_template_directory().'/extras/customizer/google-web-fonts.php');
@@ -46,7 +46,7 @@ class SO_Customize_Fonts_Control extends WP_Customize_Control {
 }
 endif;
 
-function so_customize_font_add_web_font($selector, $font, &$css, &$web_fonts){
+function siteorigin_customize_font_add_web_font($selector, $font, &$css, &$web_fonts){
 	if(empty($css[$selector])) $css[$selector] = array();
 	
 	if(strpos($font, ':') !== false) list($family, $variant) = explode(':', $font, 2);

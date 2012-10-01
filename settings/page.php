@@ -2,7 +2,7 @@
 	<div id="icon-themes" class="icon32"><br></div>
 	<h2><?php _e('Theme Settings','siteorigin') ?></h2>
 	
-	<?php so_settings_change_message(); ?>
+	<?php siteorigin_settings_change_message(); ?>
 	
 	<form action="options.php" method="post">
 		<?php settings_fields('theme_settings'); ?>

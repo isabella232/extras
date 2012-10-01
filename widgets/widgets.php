@@ -3,7 +3,7 @@
 /**
  * This function just gives active widgets a chance to enqueue their scripts
  */
-function so_widgets_enqueue_widget_scripts(){
+function siteorigin_widgets_enqueue_widget_scripts(){
 	global $wp_registered_widgets, $post;
 	$active_widgets = array();
 	
@@ -31,12 +31,12 @@ function so_widgets_enqueue_widget_scripts(){
 		do_action('enqueue_widget_scripts_'.$widget);
 	}
 }
-add_action('wp_enqueue_scripts', 'so_widgets_enqueue_widget_scripts');
+add_action('wp_enqueue_scripts', 'siteorigin_widgets_enqueue_widget_scripts');
 
 /**
  * A call to action widget. Designed to be used on a home page panel
  */
-class SO_Widgets_CTA extends WP_Widget {
+class SiteOrigin_Widgets_CTA extends WP_Widget {
 	function __construct(){
 		parent::__construct(
 			'call-to-action',
@@ -95,7 +95,7 @@ class SO_Widgets_CTA extends WP_Widget {
 		/**
 		 * This gives themes a chance to add their own button styles
 		 */
-		$button_styles = apply_filters('so_button_styles', array());
+		$button_styles = apply_filters('siteorigin_button_styles', array());
 
 		?>
 		<p><label for="<?php echo $this->get_field_id('headline') ?>"><?php _e('Headline', 'siteorigin') ?></label></p>
@@ -129,7 +129,7 @@ class SO_Widgets_CTA extends WP_Widget {
 /**
  * A call to action widget. Designed to be used on a home page panel
  */
-class SO_Widgets_Button extends WP_Widget {
+class SiteOrigin_Widgets_Button extends WP_Widget {
 	function __construct(){
 		parent::__construct(
 			'button',
@@ -191,7 +191,7 @@ class SO_Widgets_Button extends WP_Widget {
 		/**
 		 * This gives themes a chance to add their own button styles
 		 */
-		$button_styles = apply_filters('so_button_styles', array());
+		$button_styles = apply_filters('siteorigin_button_styles', array());
 
 		?>
 		<p><label for="<?php echo $this->get_field_id('button') ?>"><?php _e('Button Text', 'siteorigin') ?></label></p>
@@ -228,7 +228,7 @@ class SO_Widgets_Button extends WP_Widget {
 /**
  * A widget that displays some text, a headline and an icon. 
  */
-class SO_Widgets_IconText extends WP_Widget {
+class SiteOrigin_Widgets_IconText extends WP_Widget {
 	function __construct(){
 		parent::__construct(
 			'icon-text',
@@ -314,9 +314,9 @@ class SO_Widgets_IconText extends WP_Widget {
 	}
 }
 
-class SO_Widgets_PostList extends WP_Widget{
+class SiteOrigin_Widgets_PostList extends WP_Widget{
 	function __construct(){
-		parent::__construct(
+		WP_Widget::__construct(
 			'postlist',
 			__('Post List', 'siteorigin'),
 			array(
@@ -324,7 +324,13 @@ class SO_Widgets_PostList extends WP_Widget{
 			)
 		);
 	}
-	
+
+	/**
+	 * 
+	 * 
+	 * @param array $args
+	 * @param array $instance
+	 */
 	function widget($args, $instance){
 		echo $args['before_widget'];
 		if(!empty($instance['headline'])){
@@ -338,7 +344,7 @@ class SO_Widgets_PostList extends WP_Widget{
 			'post_type' => $instance['post_type'],
 		));
 
-		$thumbnail_size = apply_filters('so_widgets_postlist_thumbnail_size', 'post-thumbnail');
+		$thumbnail_size = apply_filters('siteorigin_widgets_postlist_thumbnail_size', 'post-thumbnail');
 
 		?><div class="flexslider-carousel"><ul class="posts slides"><?php
 
@@ -370,14 +376,23 @@ class SO_Widgets_PostList extends WP_Widget{
 		
 		echo $args['after_widget'];
 	}
-	
+
+	/**
+	 * @param array $new
+	 * @param array $old
+	 * @return array
+	 */
 	function update($new, $old){
 		$new['headline'] = esc_html($new['headline']);
 		$new['show_titles'] = !empty($new['show_titles']);
 		
 		return $new;
 	}
-	
+
+	/**
+	 * @param array $instance
+	 * @return string|void
+	 */
 	function form($instance){
 		$types = get_post_types(array('public' => true), 'objects');
 		unset($types['attachment']);
@@ -439,7 +454,7 @@ class SO_Widgets_PostList extends WP_Widget{
 /**
  * Simply displays a headline
  */
-class SO_Widgets_Headline extends WP_Widget {
+class SiteOrigin_Widgets_Headline extends WP_Widget {
 	function __construct(){
 		parent::__construct(
 			'headline',
@@ -496,11 +511,11 @@ class SO_Widgets_Headline extends WP_Widget {
 /**
  * Intialize the SiteOrigin widgets
  */
-function so_widgets_init(){
-	register_widget('SO_Widgets_CTA');
-	register_widget('SO_Widgets_Button');
-	register_widget('SO_Widgets_IconText');
-	register_widget('SO_Widgets_PostList');
-	register_widget('SO_Widgets_Headline');
+function siteorigin_widgets_init(){
+	register_widget('SiteOrigin_Widgets_CTA');
+	register_widget('SiteOrigin_Widgets_Button');
+	register_widget('SiteOrigin_Widgets_IconText');
+	register_widget('SiteOrigin_Widgets_PostList');
+	register_widget('SiteOrigin_Widgets_Headline');
 }
-add_action('widgets_init', 'so_widgets_init');
+add_action('widgets_init', 'siteorigin_widgets_init');

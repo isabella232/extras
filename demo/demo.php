@@ -10,11 +10,11 @@
 /**
  * Initialize the demo mode.
  */
-function so_demo_init($query){
+function siteorigin_demo_init($query){
 	if(!$query->is_main_query()) return;
 	if(!get_theme_mod('is_demo_mode', true)) return;
 	
-	$demo_pages = apply_filters('so_demo_pages', array());
+	$demo_pages = apply_filters('siteorigin_demo_pages', array());
 	global $siteorigin_is_demo, $siteorigin_demo_page;
 	
 	$siteorigin_is_demo = false;
@@ -34,23 +34,23 @@ function so_demo_init($query){
 		exit();
 	}
 }
-add_action('pre_get_posts', 'so_demo_init', 1);
+add_action('pre_get_posts', 'siteorigin_demo_init', 1);
 
 /**
  * Display a footer element.
  */
-function so_demo_footer(){
+function siteorigin_demo_footer(){
 	if(!get_theme_mod('is_demo_mode', true) || !current_user_can('edit_theme_options')) return;
 	
 	?>
 	<div id="so-demo-mode-bar">
 		<div id="so-demo-mode-bar-wrapper">
-			<?php printf(__("You're using %s in demo mode. <a href='%s'>Click here</a> to disable demo mode and start building your own site.", 'siteorigin'), ucfirst(get_option( 'stylesheet' )), admin_url('themes.php?page=so_demo_mode_disable')) ?>
+			<?php printf(__("You're using %s in demo mode. <a href='%s'>Click here</a> to disable demo mode and start building your own site.", 'siteorigin'), ucfirst(get_option( 'stylesheet' )), admin_url('themes.php?page=siteorigin_demo_mode_disable')) ?>
 		</div>
 	</div>
 	<?php
 }
-add_action('wp_footer', 'so_demo_footer');
+add_action('wp_footer', 'siteorigin_demo_footer');
 
 /**
  * Filter the title for the demo mode
@@ -62,11 +62,11 @@ add_action('wp_footer', 'so_demo_footer');
  * @since prospect 1.0
  * @filter wp_title
  */
-function so_demo_page_title($title, $sep, $sep_location){
+function siteorigin_demo_page_title($title, $sep, $sep_location){
 	global $siteorigin_is_demo, $siteorigin_demo_page;
 	if(!$siteorigin_is_demo) return $title;
 	else{
-		$titles = apply_filters('so_demo_page_titles', array());
+		$titles = apply_filters('siteorigin_demo_page_titles', array());
 
 		if( isset($_GET['demo_page']) && isset($titles[$_GET['demo_page']]) )
 			$title = $titles[$_GET['demo_page']].' '.$sep;
@@ -75,53 +75,53 @@ function so_demo_page_title($title, $sep, $sep_location){
 	if(empty($sep)) return $title;
 	else return $title.' '.get_bloginfo('name');
 }
-add_filter('wp_title', 'so_demo_page_title', 15, 3);
+add_filter('wp_title', 'siteorigin_demo_page_title', 15, 3);
 
 /**
  * Initialize the demo mode admin functionality.
  */
-function so_demo_admin_init(){
+function siteorigin_demo_admin_init(){
 	if(!isset($_POST['_wpdemo_nonce']) || !wp_verify_nonce($_POST['_wpdemo_nonce'], 'save')) return;
 	
-	set_theme_mod('is_demo_mode', $_POST['so_demo_disable_confirm'] != 'on');
-	if($_POST['so_demo_disable_confirm'] == 'on'){
+	set_theme_mod('is_demo_mode', $_POST['siteorigin_demo_disable_confirm'] != 'on');
+	if($_POST['siteorigin_demo_disable_confirm'] == 'on'){
 		header('location: '.admin_url('themes.php'));
 	}
 	
 }
-add_action('admin_init', 'so_demo_admin_init');
+add_action('admin_init', 'siteorigin_demo_admin_init');
 
 /**
  * Enqueue scripts for demo mode.
  */
-function so_demo_enqueue_scripts(){
+function siteorigin_demo_enqueue_scripts(){
 	if(!get_theme_mod('is_demo_mode', true) || !current_user_can('edit_theme_options')) return;
 	
-	wp_enqueue_style('so-demo-mode', get_template_directory_uri().'/extras/demo/bar.css', array(), SO_THEME_VERSION);
+	wp_enqueue_style('so-demo-mode', get_template_directory_uri().'/extras/demo/bar.css', array(), SITEORIGIN_THEME_VERSION);
 }
-add_action('wp_enqueue_scripts', 'so_demo_enqueue_scripts');
+add_action('wp_enqueue_scripts', 'siteorigin_demo_enqueue_scripts');
 
 /**
  * Add the disable admin menu item to the menu
  */
-function so_demo_admin_menu(){
+function siteorigin_demo_admin_menu(){
 	if(!get_theme_mod('is_demo_mode', true)) return;
 	
-	add_theme_page(__('Disable Demo Mode', 'siteorigin'), __('Disable Demo Mode', 'siteorigin'), 'edit_theme_options', 'so_demo_mode_disable', 'so_demo_admin_disable');
+	add_theme_page(__('Disable Demo Mode', 'siteorigin'), __('Disable Demo Mode', 'siteorigin'), 'edit_theme_options', 'siteorigin_demo_mode_disable', 'siteorigin_demo_admin_disable');
 }
-add_action('admin_menu', 'so_demo_admin_menu');
+add_action('admin_menu', 'siteorigin_demo_admin_menu');
 
 /**
  * Render the "disable demo mode" admin page
  */
-function so_demo_admin_disable(){
+function siteorigin_demo_admin_disable(){
 	?>
 	<div class="wrap">
 		<h2><?php _e('Disable Demo Mode', 'siteorigin') ?></h2>
-		<form action="<?php echo add_query_arg('page', 'so_demo_mode_disable') ?>" method="post">
+		<form action="<?php echo add_query_arg('page', 'siteorigin_demo_mode_disable') ?>" method="post">
 			<p>
 				<label>
-					<input type="checkbox" name="so_demo_disable_confirm" />
+					<input type="checkbox" name="siteorigin_demo_disable_confirm" />
 					<?php _e('Disable') ?>
 				</label>
 				<div class="description">

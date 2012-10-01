@@ -4,16 +4,16 @@
  * Display the premium admin menu
  * @return mixed
  */
-function so_premium_admin_menu(){
-	if(defined('SO_IS_PREMIUM')) return;
-	add_theme_page(__('Premium Upgrade', 'siteorigin'), __('Premium Upgrade', 'siteorigin'), 'switch_themes', 'premium_upgrade', 'so_premium_page_render');
+function siteorigin_premium_admin_menu(){
+	if(defined('SITEORIGIN_IS_PREMIUM')) return;
+	add_theme_page(__('Premium Upgrade', 'siteorigin'), __('Premium Upgrade', 'siteorigin'), 'switch_themes', 'premium_upgrade', 'siteorigin_premium_page_render');
 }
-add_action('admin_menu', 'so_premium_admin_menu');
+add_action('admin_menu', 'siteorigin_premium_admin_menu');
 
 /**
  * Render the premium page
  */
-function so_premium_page_render(){
+function siteorigin_premium_page_render(){
 	$theme = basename(get_template_directory());
 	
 	if(isset($_GET['action'])) $action = $_GET['action'];
@@ -22,7 +22,7 @@ function so_premium_page_render(){
 	
 	switch($action){
 		case 'view':
-			$premium = apply_filters('so_premium_content', array());
+			$premium = apply_filters('siteorigin_premium_content', array());
 			
 			if(empty($premium)){
 				?>
@@ -99,7 +99,7 @@ function so_premium_page_render(){
 			break;
 		
 		case 'enter-order' :
-			$option_name = 'so_order_number_'.$theme;
+			$option_name = 'siteorigin_order_number_'.$theme;
 			if(isset($_POST['_upgrade_nonce']) && wp_verify_nonce($_POST['_upgrade_nonce'], 'save_order_number') && isset($_POST['order_number'])){
 				update_option($option_name, trim($_POST['order_number']));
 			}
@@ -109,7 +109,7 @@ function so_premium_page_render(){
 				add_query_arg(array(
 					'order_number' => get_option($option_name),
 					'action' => 'validate_order_number',
-				), SO_THEME_ENDPOINT.'/premium/'.$theme.'/')
+				), SITEORIGIN_THEME_ENDPOINT.'/premium/'.$theme.'/')
 			);
 			$valid = null;
 			if(!is_wp_error($result)){
@@ -169,11 +169,11 @@ function so_premium_page_render(){
  * @param $prefix
  * @return mixed
  */
-function so_premium_admin_enqueue($prefix){
+function siteorigin_premium_admin_enqueue($prefix){
 	if($prefix != 'appearance_page_premium_upgrade') return;
 
-	wp_enqueue_script('siteorigin-magnifier', get_template_directory_uri().'/extras/premium/magnifier.js', array('jquery'), SO_THEME_VERSION);
-	wp_enqueue_script('siteorigin-premium-upgrade', get_template_directory_uri().'/extras/premium/premium.js', array('jquery'), SO_THEME_VERSION);
-	wp_enqueue_style('siteorigin-premium-upgrade', get_template_directory_uri().'/extras/premium/premium.css', array(), SO_THEME_VERSION);
+	wp_enqueue_script('siteorigin-magnifier', get_template_directory_uri().'/extras/premium/magnifier.js', array('jquery'), SITEORIGIN_THEME_VERSION);
+	wp_enqueue_script('siteorigin-premium-upgrade', get_template_directory_uri().'/extras/premium/premium.js', array('jquery'), SITEORIGIN_THEME_VERSION);
+	wp_enqueue_style('siteorigin-premium-upgrade', get_template_directory_uri().'/extras/premium/premium.css', array(), SITEORIGIN_THEME_VERSION);
 }
-add_action('admin_enqueue_scripts', 'so_premium_admin_enqueue');
+add_action('admin_enqueue_scripts', 'siteorigin_premium_admin_enqueue');
