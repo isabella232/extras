@@ -2,6 +2,8 @@
 
 /**
  * Enqueue everything for the mobile navigation.
+ * 
+ * @action wp_enqueue_scripts
  */
 function siteorigin_mobilenav_enqueue_scripts(){
 	wp_enqueue_script('siteorigin-mobilenav', get_template_directory_uri().'/extras/mobilenav/mobilenav.js', array('jquery'), SITEORIGIN_THEME_VERSION);

@@ -36,7 +36,9 @@ function siteorigin_theme_update_filter($current){
 add_filter('pre_set_site_transient_update_themes', 'siteorigin_theme_update_filter');
 
 /**
- * Add the order number setting
+ * Add the order number setting.
+ * 
+ * @action admin_init
  */
 function siteorigin_theme_update_settings(){
 	$theme = basename(get_template_directory());

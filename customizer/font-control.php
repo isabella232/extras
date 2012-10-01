@@ -1,6 +1,9 @@
 <?php
 
 if(class_exists('WP_Customize_Control')) :
+/**
+ * A customizer control for choosing web fonts
+ */
 class SiteOrigin_Customize_Fonts_Control extends WP_Customize_Control {
 	
 	function __construct( $manager, $id, $args = array() ) {
@@ -46,6 +49,14 @@ class SiteOrigin_Customize_Fonts_Control extends WP_Customize_Control {
 }
 endif;
 
+/**
+ * Adds web fonts to the given CSS array and adds the web font to the given web fonts array reference.
+ * 
+ * @param string $selector The selector we want to use the web font with.
+ * @param string $font The web font.
+ * @param array $css The current CSS array.
+ * @param array $web_fonts A list of web fonts.
+ */
 function siteorigin_customize_font_add_web_font($selector, $font, &$css, &$web_fonts){
 	if(empty($css[$selector])) $css[$selector] = array();
 	

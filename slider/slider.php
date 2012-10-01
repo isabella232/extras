@@ -183,7 +183,7 @@ add_action('siteorigin_slider_after_builder_form', 'siteorigin_slider_display_up
 class SiteOrigin_Slider_Widget extends WP_Widget {
 	function __construct(){
 		parent::__construct(
-			'so-slider',
+			'siteorigin-slider',
 			__('Slider', 'siteorigin'),
 			array(
 				'description' => __('Insert a slider.', 'siteorigin'),

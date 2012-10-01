@@ -57,7 +57,7 @@ class SiteOrigin_CSS_Builder {
 	}
 
 	/**
-	 * echo all the CSS
+	 * Echo all the CSS
 	 */
 	function print_css(){
 		// Start by importing Google web fonts

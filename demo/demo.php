@@ -9,6 +9,9 @@
 
 /**
  * Initialize the demo mode.
+ * 
+ * @param WP_Query $query
+ * @action pre_get_posts
  */
 function siteorigin_demo_init($query){
 	if(!$query->is_main_query()) return;
@@ -38,6 +41,8 @@ add_action('pre_get_posts', 'siteorigin_demo_init', 1);
 
 /**
  * Display a footer element.
+ * 
+ * @action wp_footer
  */
 function siteorigin_demo_footer(){
 	if(!get_theme_mod('is_demo_mode', true) || !current_user_can('edit_theme_options')) return;
@@ -59,7 +64,6 @@ add_action('wp_footer', 'siteorigin_demo_footer');
  * @param $sep
  * @param $sep_location
  * @return string
- * @since prospect 1.0
  * @filter wp_title
  */
 function siteorigin_demo_page_title($title, $sep, $sep_location){
@@ -79,6 +83,8 @@ add_filter('wp_title', 'siteorigin_demo_page_title', 15, 3);
 
 /**
  * Initialize the demo mode admin functionality.
+ * 
+ * @action admin_init
  */
 function siteorigin_demo_admin_init(){
 	if(!isset($_POST['_wpdemo_nonce']) || !wp_verify_nonce($_POST['_wpdemo_nonce'], 'save')) return;
@@ -93,6 +99,8 @@ add_action('admin_init', 'siteorigin_demo_admin_init');
 
 /**
  * Enqueue scripts for demo mode.
+ * 
+ * @action wp_enqueue_scripts
  */
 function siteorigin_demo_enqueue_scripts(){
 	if(!get_theme_mod('is_demo_mode', true) || !current_user_can('edit_theme_options')) return;
@@ -103,6 +111,8 @@ add_action('wp_enqueue_scripts', 'siteorigin_demo_enqueue_scripts');
 
 /**
  * Add the disable admin menu item to the menu
+ * 
+ * @action admin_menu
  */
 function siteorigin_demo_admin_menu(){
 	if(!get_theme_mod('is_demo_mode', true)) return;

@@ -67,8 +67,8 @@ class SiteOrigin_Widgets_CTA extends WP_Widget {
 	}
 
 	/**
-	 * @param array $new_instance
-	 * @param array $old_instance
+	 * @param array $new
+	 * @param array $old
 	 * @return array|void
 	 */
 	function update($new, $old) {
@@ -509,7 +509,7 @@ class SiteOrigin_Widgets_Headline extends WP_Widget {
 }
 
 /**
- * Intialize the SiteOrigin widgets
+ * Initialize the SiteOrigin widgets
  */
 function siteorigin_widgets_init(){
 	register_widget('SiteOrigin_Widgets_CTA');

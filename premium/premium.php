@@ -2,10 +2,13 @@
 
 /**
  * Display the premium admin menu
- * @return mixed
+ * 
+ * @action admin_menu
  */
 function siteorigin_premium_admin_menu(){
+	// Don't display this page if the user has alreeady upgraded to premium
 	if(defined('SITEORIGIN_IS_PREMIUM')) return;
+	
 	add_theme_page(__('Premium Upgrade', 'siteorigin'), __('Premium Upgrade', 'siteorigin'), 'switch_themes', 'premium_upgrade', 'siteorigin_premium_page_render');
 }
 add_action('admin_menu', 'siteorigin_premium_admin_menu');
@@ -168,6 +171,8 @@ function siteorigin_premium_page_render(){
  * Enqueue admin scripts
  * @param $prefix
  * @return mixed
+ * 
+ * @action admin_enqueue_scripts
  */
 function siteorigin_premium_admin_enqueue($prefix){
 	if($prefix != 'appearance_page_premium_upgrade') return;

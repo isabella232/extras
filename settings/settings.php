@@ -10,7 +10,6 @@
  * Intialize the theme settings page
  * 
  * @param $theme_name
- * @since 1.0
  */
 function siteorigin_settings_init($theme_name = null){
 	if(empty($theme_name)) {
@@ -35,8 +34,6 @@ function siteorigin_settings_init($theme_name = null){
 
 /**
  * Add the settings help tab
- * 
- * @since 1.0
  */
 function siteorigin_settings_help_tab(){
 	$screen = get_current_screen();
@@ -66,7 +63,6 @@ function siteorigin_settings_help_tab(){
  * Initialize admin settings in the admin
  * 
  * @action admin_init
- * @since 1.0
  */
 function siteorigin_settings_admin_init(){
 	register_setting('theme_settings', $GLOBALS['siteorigin_settings_name'], 'siteorigin_settings_validate');
@@ -76,7 +72,6 @@ function siteorigin_settings_admin_init(){
  * Set up the theme settings page.
  * 
  * @action admin_menu
- * @since 1.0
  */
 function siteorigin_settings_admin_menu(){
 	add_theme_page(__('Theme Settings','siteorigin'), __('Theme Settings', 'siteorigin'), 'edit_theme_options', 'theme_settings_page', 'siteorigin_settings_render');
@@ -84,8 +79,6 @@ function siteorigin_settings_admin_menu(){
 
 /**
  * Render the theme settings page
- * 
- * @since 1.0
  */
 function siteorigin_settings_render(){
 	locate_template('extras/settings/page.php', true, false);
@@ -95,7 +88,6 @@ function siteorigin_settings_render(){
  * Enqueue all the settings scripts.
  * 
  * @param $prefix
- * @since 1.0
  */
 function siteorigin_settings_enqueue_scripts($prefix){
 	if($prefix != 'appearance_page_theme_settings_page') return;
@@ -115,7 +107,6 @@ function siteorigin_settings_enqueue_scripts($prefix){
  * 
  * @param $bar
  * @return object|null
- * @since 1.0
  */
 function siteorigin_settings_adminbar($bar){
 	$screen = get_current_screen();
@@ -131,7 +122,6 @@ function siteorigin_settings_adminbar($bar){
  * 
  * @param $id
  * @param $name
- * @since 1.0
  */
 function siteorigin_settings_add_section($id, $name){
 	add_settings_section($id, $name, '__return_false', 'theme_settings');
@@ -145,7 +135,6 @@ function siteorigin_settings_add_section($id, $name){
  * @param string $type
  * @param string $name
  * @param array $args
- * @since 1.0
  */
 function siteorigin_settings_add_field($section, $id, $type, $name, $args = array()){
 	if(isset($wp_settings_fields['theme_settings'][$section][$id])){
@@ -171,7 +160,6 @@ function siteorigin_settings_add_field($section, $id, $type, $name, $args = arra
  * @param $type
  * @param $name
  * @param array $args
- * @since 1.0
  */
 function siteorigin_settings_add_teaser($section, $id, $name, $args = array()){
 	global $wp_settings_fields;
@@ -191,7 +179,6 @@ function siteorigin_settings_add_teaser($section, $id, $name, $args = array()){
  * 
  * @param string $name The setting name
  * @return mixed
- * @since 1.0
  */
 function siteorigin_setting($name){
 	if(!isset($GLOBALS['siteorigin_settings'][$name])) return null;
@@ -202,7 +189,6 @@ function siteorigin_setting($name){
  * Render a settings field.
  * 
  * @param $args
- * @since 1.0
  */
 function siteorigin_settings_field($args){
 	$field_name = $GLOBALS['siteorigin_settings_name'].'['.$args['section'].'_'.$args['field'].']';
@@ -273,7 +259,6 @@ function siteorigin_settings_field($args){
  * 
  * @param $values
  * @return array
- * @since 1.0
  */
 function siteorigin_settings_validate($values){
 	global $wp_settings_fields;

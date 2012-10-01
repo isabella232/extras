@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * All the current Google web fonts. 
+ */
 return array (
 	'Abel' =>
 	array (
