@@ -122,7 +122,7 @@ function siteorigin_demo_admin_disable(){
 			<p>
 				<label>
 					<input type="checkbox" name="siteorigin_demo_disable_confirm" />
-					<?php _e('Disable') ?>
+					<?php _e('Disable', 'siteorigin') ?>
 				</label>
 				<div class="description">
 					<?php _e("Check this box to disable demo mode. You can't re-enable the demo mode.", 'siteorigin') ?>
