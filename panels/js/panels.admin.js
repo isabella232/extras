@@ -69,8 +69,8 @@ jQuery(function($){
         // Create the dialog buttons
         var dialogButtons = {};
         // The delete button
-        dialogButtons[panelsLoc.buttons.delete] = function(){
-            if(confirm(panelsLoc.messages.confirmDeletePanel)){
+        dialogButtons[panelsLoc.buttons['delete']] = function(){
+            if(confirm(panelsLoc.messages['confirmDeletePanel'])){
                 panel.fadeOut(function(){
                     $(this).remove();
                     $('#panels-container .panels-container').trigger('refreshcells');
@@ -79,7 +79,7 @@ jQuery(function($){
             }
         };
         // The done button
-        dialogButtons[panelsLoc.buttons.done] = function(){
+        dialogButtons[panelsLoc.buttons['done']] = function(){
             $(this).trigger('panelsdone');
 
             // Transfer the dialog values across
