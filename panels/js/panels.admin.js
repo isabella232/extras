@@ -108,7 +108,7 @@ jQuery(function($){
                 open: function(){
                     // Transfer the values of the form to the dialog
                     panel.find('.form *[name]').not('[data-info-field]').each(function(){
-                        var f = dialog.find('.form *[name="'+$(this).attr('name')+'"]');
+                        var f = dialog.find('*[name="'+$(this).attr('name')+'"]');
     
                         if(f.attr('type') == 'checkbox'){
                             if($(this).is(':checked')) f.prop("checked", true);
