@@ -2,6 +2,10 @@
 	position: relative;
 }
 
+html {
+    overflow-y: scroll; /* This fixes the tooltips */
+}
+
 /* @group Panel List */
 
 .panel-type-list,

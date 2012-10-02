@@ -5,7 +5,7 @@ jQuery(function($){
             var tooltip = $('<div class="panels-tooltip"></div>').appendTo('body').html($$.attr('data-tooltip')).append($('<div class="pointer"></div>'));
             
             tooltip.css({
-                top : $$.offset().top -15 - $$.outerHeight(),
+                top : $$.offset().top -12 - $$.outerHeight(),
                 left : $$.offset().left - tooltip.outerWidth()/2 + $$.outerWidth()/2
             });
             

@@ -73,7 +73,7 @@ foreach($wp_widget_factory->widgets as $class => $info){
 		
 	</div>
 	
-	<div id="grid-add-dialog" data-title="<?php esc_attr_e('Create Grid','siteorigin') ?>" class="panels-admin-dialog">
+	<div id="grid-add-dialog" data-title="<?php esc_attr_e('Add Columns','siteorigin') ?>" class="panels-admin-dialog">
 		<p><label><strong><?php _e('Columns', 'siteorigin') ?></strong></label></p>
 		<p><input type="text" id="grid-add-dialog-input" name="column_count" class="small-text" value="3" /></p>
 	</div>
