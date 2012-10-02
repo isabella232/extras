@@ -165,6 +165,7 @@ jQuery(function($){
                                 icons : {primary: 'ui-icon-remove'},
                                 text : false
                             })
+                            .attr('data-tooltip', panelsLoc.buttons['delete'])
                             .click(function(){
                                 if(confirm('Are you sure you want to delete this grid?')){
                                     container.remove();

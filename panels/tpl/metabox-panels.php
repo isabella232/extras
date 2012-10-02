@@ -38,8 +38,8 @@ foreach($wp_widget_factory->widgets as $class => $info){
 	</div>
 	
 	<div id="add-to-panels">
-		<button class="panels-add"><?php _e('Add Panel', 'siteorigin') ?></button>
-		<button class="grid-add"><?php _e('Add Grid', 'siteorigin') ?></button>
+		<button class="panels-add" data-tooltip="<?php esc_attr_e('Add Widget','siteorigin') ?>"><?php _e('Add Widget', 'siteorigin') ?></button>
+		<button class="grid-add" data-tooltip="<?php esc_attr_e('Add Columns','siteorigin') ?>"><?php _e('Add Columns', 'siteorigin') ?></button>
 	</div>
 	
 	<!-- The dialogs -->
@@ -47,32 +47,24 @@ foreach($wp_widget_factory->widgets as $class => $info){
 	<div id="panels-dialog" data-title="<?php esc_attr_e('Add Widget','siteorigin') ?>" class="panels-admin-dialog">
 		<div id="panels-dialog-tabs">
 			
-			<!--
-			<ul>
-				<li><a href="#panels-dialog-tabs-general"><?php esc_attr_e('General', 'siteorigin') ?></a></li>
+			<ul class="panel-type-list">
+				<?php $i = 0; foreach($panel_widgets as $widget) : $i++; ?>
+					<li class="panel-type"
+						data-class="<?php echo esc_attr(get_class($widget)) ?>"
+						data-form="<?php echo esc_attr($widget->form) ?>"
+						data-title="<?php echo esc_attr($widget->name) ?>"
+						>
+						<div class="panel-type-wrapper">
+							<h3><?php echo esc_html($widget->name) ?></h3>
+							<?php if(!empty($widget->widget_options['description'])) : ?>
+								<small class="description"><?php echo esc_html($widget->widget_options['description']) ?></small>
+							<?php endif; ?>
+						</div>
+					</li>
+					<?php if($i % 4 == 0) : ?><div class="clear"></div><?php endif; ?>
+				<?php endforeach; ?>
+				<?php if($i % 4 != 0) : ?><div class="clear"></div><?php endif; ?>
 			</ul>
-			-->
-
-			<!--<div id="panels-dialog-tabs-general">-->
-				<ul class="panel-type-list">
-					<?php $i = 0; foreach($panel_widgets as $widget) : $i++; ?>
-						<li class="panel-type"
-							data-class="<?php echo esc_attr(get_class($widget)) ?>"
-							data-form="<?php echo esc_attr($widget->form) ?>"
-							data-title="<?php echo esc_attr($widget->name) ?>"
-							>
-							<div class="panel-type-wrapper">
-								<h3><?php echo esc_html($widget->name) ?></h3>
-								<?php if(!empty($widget->widget_options['description'])) : ?>
-									<small class="description"><?php echo esc_html($widget->widget_options['description']) ?></small>
-								<?php endif; ?>
-							</div>
-						</li>
-						<?php if($i % 4 == 0) : ?><div class="clear"></div><?php endif; ?>
-					<?php endforeach; ?>
-					<?php if($i % 4 != 0) : ?><div class="clear"></div><?php endif; ?>
-				</ul>
-			<!--</div>-->
 			
 			<?php if(!defined('SITEORIGIN_IS_PREMIUM')) : ?>
 				<p><?php printf(__('Additional widgets are available in <a href="%s">%s Premium</a>'), admin_url('themes.php?page=premium_upgrade'), ucfirst(get_option('stylesheet'))) ?></p>
@@ -83,9 +75,7 @@ foreach($wp_widget_factory->widgets as $class => $info){
 	
 	<div id="grid-add-dialog" data-title="<?php esc_attr_e('Create Grid','siteorigin') ?>" class="panels-admin-dialog">
 		<p><label><strong><?php _e('Columns', 'siteorigin') ?></strong></label></p>
-		<p>
-			<input type="text" id="grid-add-dialog-input" name="column_count" class="small-text" value="3" />
-		</p>
+		<p><input type="text" id="grid-add-dialog-input" name="column_count" class="small-text" value="3" /></p>
 	</div>
 	
 	<?php wp_nonce_field('save', '_sopanels_nonce') ?>

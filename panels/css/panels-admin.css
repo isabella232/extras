@@ -1,3 +1,7 @@
+#panels{
+	position: relative;
+}
+
 /* @group Panel List */
 
 .panel-type-list,
@@ -260,6 +264,34 @@
 #grid-setting-dialog,
 #grid-add-dialog{
 	display: none;
+}
+
+/* @end */
+
+/* @group Tooltips */
+
+.panels-tooltip{
+	position: absolute;
+	padding: 4px 8px;
+	color: white;
+	background: #1c1c1c;
+	background: rgba(0,0,0,0.8);
+	z-index: 9999;
+	
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	font-size: 11px;
+}
+
+.panels-tooltip .pointer{
+	position: absolute;
+	width: 8px;
+	height: 4px;
+	bottom: -4px;
+	left: 50%;
+	margin-left: -4px;
+	background-image: url(images/tooltip-pointer.png);
 }
 
 /* @end */
