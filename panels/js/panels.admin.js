@@ -87,8 +87,9 @@ jQuery(function($){
                 var f = panel.find('.form *[name="'+$(this).attr('name')+'"]');
                 
                 if(f.attr('type') == 'checkbox'){
-                    if($(this).is(':checked')) f.prop("checked", true);
-                    else f.prop("checked", false);
+                    console.log('bar');
+                    console.log($(this).is(':checked'));
+                    f.prop("checked", $(this).is(':checked'));
                 }
                 else f.val($(this).val());
             });
@@ -111,8 +112,9 @@ jQuery(function($){
                         var f = dialog.find('*[name="'+$(this).attr('name')+'"]');
     
                         if(f.attr('type') == 'checkbox'){
-                            if($(this).is(':checked')) f.prop("checked", true);
-                            else f.prop("checked", false);
+                            console.log('foo');
+                            console.log($(this).is(':checked'));
+                            f.prop("checked", $(this).is(':checked'))
                         }
                         else f.val($(this).val());
                     });
@@ -144,8 +146,8 @@ jQuery(function($){
                     var de = dialog.find('*[name$="['+c+']"]');
                     
                     if(pe.attr('type') == 'checkbox'){
-                        pe.prop('checked', Boolean(c));
-                        de.prop('checked', Boolean(c));
+                        pe.prop('checked', Boolean(data[c]));
+                        de.prop('checked', Boolean(data[c]));
                     }
                     else{
                         pe.val(data[c]);
