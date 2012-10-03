@@ -168,10 +168,14 @@ jQuery(function($){
                             .attr('data-tooltip', panelsLoc.buttons['delete'])
                             .click(function(){
                                 if(confirm('Are you sure you want to delete this grid?')){
-                                    container.remove();
-                                    $('#panels-container')
-                                        .sortable( "refresh" )
-                                        .find('.panels-container').trigger('refreshcells');
+                                    container.slideUp(function(){
+                                        container.find('[data-tooltip]').removeTooltip();
+                                        container.remove();
+                                        
+                                        $('#panels-container')
+                                            .sortable( "refresh" )
+                                            .find('.panels-container').trigger('refreshcells');
+                                    });
                                 }
                                 return false;
                             })
@@ -267,4 +271,11 @@ jQuery(function($){
         
         $('#grid-add-dialog').dialog('close');
     });
+    
+    $('#so-panels-panels .handlediv').click(function(){
+        // Trigger the resize to reorganise the columns
+        setTimeout(function(){
+            $(window).resize();
+        }, 150);
+    })
 });
