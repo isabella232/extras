@@ -6,6 +6,9 @@
  * @action after_setup_theme
  */
 function siteorigin_panels_init(){
+	$panels_support = get_theme_support('siteorigin-panels');
+	if(empty($panels_support)) return;
+	
 	register_post_type('panel', array(
 		'labels' => array(
 			'name' => __('Panels', 'siteorigin'),
@@ -201,8 +204,12 @@ add_action('save_post', 'siteorigin_panels_save_post');
  */
 function siteorigin_panels_css(){
 	global $post;
-	global $siteorigin_panels_margin_bottom;
-	if(empty($siteorigin_panels_margin_bottom)) $siteorigin_panels_margin_bottom = 20;
+	
+	$panels_support = get_theme_support('siteorigin-panels');
+	if(empty($panels_support)) return;
+	$panels_support = $panels_support[0];
+	
+	$panels_margin_bottom = $panels_support['margin-bottom'];
 	
 	if(is_single() && $post->post_type == 'panel'){
 		$panels_data = get_post_meta($post->ID, 'panels_data', true);
@@ -229,12 +236,14 @@ function siteorigin_panels_css(){
 				if(empty($css[1920]['float:left'])) $css[1920]['float:left'] = array();
 				$css[1920]['float:left'][] = '#pg-'.$gi.' .panel-grid-cell';
 			}
-
-			// Mobile Responsive
-			$mobile_css = array('float:none','width:auto','margin-bottom:'.$siteorigin_panels_margin_bottom.'px');
-			foreach($mobile_css as $c){
-				if(empty($css[767][$c])) $css[767][$c] = array();
-				$css[767][$c][] = '#pg-'.$gi.' .panel-grid-cell';
+			
+			if($panels_support['responsive']){
+				// Mobile Responsive
+				$mobile_css = array('float:none','width:auto','margin-bottom:'.$panels_margin_bottom.'px');
+				foreach($mobile_css as $c){
+					if(empty($css[767][$c])) $css[767][$c] = array();
+					$css[767][$c][] = '#pg-'.$gi.' .panel-grid-cell';
+				}
 			}
 		}
 		
@@ -243,6 +252,8 @@ function siteorigin_panels_css(){
 		$css_text = '';
 		krsort($css);
 		foreach($css as $res => $def){
+			if(empty($def)) continue;
+			
 			if($res < 1920){
 				$css_text .= '@media (max-width:'.$res.'px)';
 				$css_text .= ' { ';
