@@ -18,7 +18,7 @@ jQuery(function($){
         if(data != undefined){
             // Add the data
             for (field in data) {
-                newSlide.find('*[data-field="'+field+'"]').val(data[field]);
+                newSlide.find('*[data-field="'+field+'"]').val(data[field]).trigger('change');
             }
 
             if(data.title != undefined && data.title != '') newSlide.find('.slide-title strong').html(data.title);
@@ -27,24 +27,46 @@ jQuery(function($){
 
     /**
      * Update all siteorigin media fields
-     * @param par
+     * @param parent
      */
-    var updateMedia = function(par){
-        if(par == undefined) par = $('body');
+    var updateMedia = function(parent){
+        if(parent == undefined) parent = $('body');
 
-        par.find('select.siteorigin-media').each(function(){
+        parent.find('select.siteorigin-media').each(function(){
             var $$ = $(this);
-            var v = $$.val();
+            var v = Number($$.val());
             
-            $$.find('option[value!="-1"]').remove();
-            for(var i in siteoriginSlider.images){
-                $$.append($('<option>'+siteoriginSlider.images[i]+'</option>').attr('value', i));
+            if(Object.keys(siteoriginSlider.images).length){
+                $$.find('option[value!="-1"]').remove();
+                
+                // siteoriginSlider is defined as a script localization
+                for(var i in siteoriginSlider.images){
+                    $$.append(
+                        $('<option>'+siteoriginSlider.images[i]['title']+'</option>')
+                            .attr('value', i)
+                            .attr('data-url', siteoriginSlider.images[i]['url'])
+                    );
+                }
             }
             
+            if(v == -1) for(var i in siteoriginSlider.images){ v = i; break;}
             $$.val(v);
-        })
-        
+        });
     }
+
+    // Update the thumbnail when a new slide images is chosen
+    $('.siteorigin-media').live('change', function(){
+        var $$ = $(this);
+        var s = $$.find('option:selected');
+        
+        if(Number(s.val()) == -1){
+            $$.siblings('.thumbnail-wrapper').slideUp();
+        }
+        else{
+            $$.siblings('.thumbnail-wrapper').slideDown().find('.thumbnail').attr('src', s.attr('data-url'));
+        }
+        
+    })
     
     // Add all the initial slides
     if(siteoriginSlider.slides.length){
@@ -101,6 +123,7 @@ jQuery(function($){
         };
     });
     
+    // Handle deleting a slide
     $('#slider-builder a.delete').live('click', function(){
         var $$ = $(this);
         if(confirm($$.attr('data-confirm'))){

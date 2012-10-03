@@ -123,7 +123,11 @@ function siteorigin_slider_get_post_images($post_id){
 	));
 	$images = array();
 	foreach($attachments as $attachment){
-		$images[$attachment->ID] = $attachment->post_title;
+		$src = wp_get_attachment_image_src($attachment->ID, 'thumbnail');
+		$images[$attachment->ID] = array(
+			'title' => $attachment->post_title,
+			'url' => $src[0],
+		);
 	}
 	
 	return $images;

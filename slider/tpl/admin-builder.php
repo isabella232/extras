@@ -22,6 +22,9 @@
 					<tr valign="top">
 						<th scope="row"><label><?php _e('Image', 'siteorigin') ?></label></th>
 						<td>
+							<div class="thumbnail-wrapper">
+								<img src="#" width="75" height="75" class="thumbnail" />
+							</div>
 							<select class="siteorigin-media" name="siteorigin_slider[image][]" data-field="image">
 								<option value="-1"><?php _e('None', 'siteorigin') ?></option>
 							</select>
