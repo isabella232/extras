@@ -1,9 +1,10 @@
 <?php
 
-/**
- * All the current Google web fonts. 
- */
 return array (
+	'ABeeZee' =>
+	array (
+		0 => 'regular',
+	),
 	'Abel' =>
 	array (
 		0 => 'regular',
@@ -39,6 +40,10 @@ return array (
 		6 => '700',
 	),
 	'Aguafina Script' =>
+	array (
+		0 => 'regular',
+	),
+	'Akronim' =>
 	array (
 		0 => 'regular',
 	),
@@ -84,7 +89,8 @@ return array (
 	),
 	'Allan' =>
 	array (
-		0 => '700',
+		0 => 'regular',
+		1 => '700',
 	),
 	'Allerta' =>
 	array (
@@ -170,9 +176,22 @@ return array (
 	array (
 		0 => 'regular',
 	),
+	'Arbutus Slab' =>
+	array (
+		0 => 'regular',
+	),
 	'Architects Daughter' =>
 	array (
 		0 => 'regular',
+	),
+	'Archivo Black' =>
+	array (
+		0 => 'regular',
+	),
+	'Archivo Narrow' =>
+	array (
+		0 => 'regular',
+		1 => '700',
 	),
 	'Arimo' =>
 	array (
@@ -224,6 +243,10 @@ return array (
 		0 => 'regular',
 	),
 	'Audiowide' =>
+	array (
+		0 => 'regular',
+	),
+	'Autour One' =>
 	array (
 		0 => 'regular',
 	),
@@ -290,6 +313,12 @@ return array (
 	array (
 		0 => 'regular',
 	),
+	'BenchNine' =>
+	array (
+		0 => '300',
+		1 => 'regular',
+		2 => '700',
+	),
 	'Bentham' =>
 	array (
 		0 => 'regular',
@@ -352,6 +381,10 @@ return array (
 		0 => 'regular',
 	),
 	'Bubblegum Sans' =>
+	array (
+		0 => 'regular',
+	),
+	'Bubbler One' =>
 	array (
 		0 => 'regular',
 	),
@@ -437,6 +470,14 @@ return array (
 	array (
 		0 => 'regular',
 	),
+	'Carrois Gothic' =>
+	array (
+		0 => 'regular',
+	),
+	'Carrois Gothic SC' =>
+	array (
+		0 => 'regular',
+	),
 	'Carter One' =>
 	array (
 		0 => 'regular',
@@ -504,6 +545,10 @@ return array (
 	array (
 		0 => '300',
 		1 => 'regular',
+	),
+	'Combo' =>
+	array (
+		0 => 'regular',
 	),
 	'Comfortaa' =>
 	array (
@@ -797,6 +842,14 @@ return array (
 	array (
 		0 => 'regular',
 	),
+	'Fenix' =>
+	array (
+		0 => 'regular',
+	),
+	'Finger Paint' =>
+	array (
+		0 => 'regular',
+	),
 	'Fjord One' =>
 	array (
 		0 => 'regular',
@@ -938,6 +991,10 @@ return array (
 	array (
 		0 => 'regular',
 	),
+	'Griffy' =>
+	array (
+		0 => 'regular',
+	),
 	'Gruppo' =>
 	array (
 		0 => 'regular',
@@ -1047,6 +1104,7 @@ return array (
 	'Inconsolata' =>
 	array (
 		0 => 'regular',
+		1 => '700',
 	),
 	'Inder' =>
 	array (
@@ -1075,6 +1133,14 @@ return array (
 		0 => 'regular',
 	),
 	'Italianno' =>
+	array (
+		0 => 'regular',
+	),
+	'Jacques Francois' =>
+	array (
+		0 => 'regular',
+	),
+	'Jacques Francois Shadow' =>
 	array (
 		0 => 'regular',
 	),
@@ -1319,6 +1385,14 @@ return array (
 	array (
 		0 => 'regular',
 	),
+	'Marcellus' =>
+	array (
+		0 => 'regular',
+	),
+	'Marcellus SC' =>
+	array (
+		0 => 'regular',
+	),
 	'Marck Script' =>
 	array (
 		0 => 'regular',
@@ -1430,6 +1504,9 @@ return array (
 	array (
 		0 => 'regular',
 	),
+	'Molle' =>
+	array (
+	),
 	'Monofett' =>
 	array (
 		0 => 'regular',
@@ -1453,6 +1530,17 @@ return array (
 	'Montserrat' =>
 	array (
 		0 => 'regular',
+		1 => '700',
+	),
+	'Montserrat Alternates' =>
+	array (
+		0 => 'regular',
+		1 => '700',
+	),
+	'Montserrat Subrayada' =>
+	array (
+		0 => 'regular',
+		1 => '700',
 	),
 	'Moul' =>
 	array (
@@ -1636,6 +1724,10 @@ return array (
 	array (
 		0 => 'regular',
 	),
+	'Orienta' =>
+	array (
+		0 => 'regular',
+	),
 	'Original Surfer' =>
 	array (
 		0 => 'regular',
@@ -1665,6 +1757,10 @@ return array (
 		0 => 'regular',
 	),
 	'Oxygen' =>
+	array (
+		0 => 'regular',
+	),
+	'Oxygen Mono' =>
 	array (
 		0 => 'regular',
 	),
@@ -1731,6 +1827,10 @@ return array (
 		0 => 'regular',
 	),
 	'Permanent Marker' =>
+	array (
+		0 => 'regular',
+	),
+	'Petit Formal Script' =>
 	array (
 		0 => 'regular',
 	),
@@ -1874,8 +1974,24 @@ return array (
 	'Raleway' =>
 	array (
 		0 => '100',
+		1 => '200',
+		2 => '300',
+		3 => 'regular',
+		4 => '500',
+		5 => '600',
+		6 => '700',
+		7 => '800',
+		8 => '900',
+	),
+	'Raleway Dots' =>
+	array (
+		0 => 'regular',
 	),
 	'Rammetto One' =>
+	array (
+		0 => 'regular',
+	),
+	'Ranchers' =>
 	array (
 		0 => 'regular',
 	),
@@ -1999,6 +2115,11 @@ return array (
 	array (
 		0 => 'regular',
 	),
+	'Scada' =>
+	array (
+		0 => 'regular',
+		1 => '700',
+	),
 	'Schoolbell' =>
 	array (
 		0 => 'regular',
@@ -2096,6 +2217,10 @@ return array (
 	array (
 		0 => 'regular',
 	),
+	'Sofadi One' =>
+	array (
+		0 => 'regular',
+	),
 	'Sofia' =>
 	array (
 		0 => 'regular',
@@ -2107,6 +2232,15 @@ return array (
 	'Sorts Mill Goudy' =>
 	array (
 		0 => 'regular',
+	),
+	'Source Code Pro' =>
+	array (
+		0 => '200',
+		1 => '300',
+		2 => 'regular',
+		3 => '600',
+		4 => '700',
+		5 => '900',
 	),
 	'Source Sans Pro' =>
 	array (
@@ -2134,6 +2268,10 @@ return array (
 		0 => 'regular',
 	),
 	'Squada One' =>
+	array (
+		0 => 'regular',
+	),
+	'Stalinist One' =>
 	array (
 		0 => 'regular',
 	),
@@ -2216,6 +2354,15 @@ return array (
 	array (
 		0 => 'regular',
 	),
+	'Titillium Web' =>
+	array (
+		0 => '200',
+		1 => '300',
+		2 => 'regular',
+		3 => '600',
+		4 => '700',
+		5 => '900',
+	),
 	'Trade Winds' =>
 	array (
 		0 => 'regular',
@@ -2258,6 +2405,10 @@ return array (
 		0 => 'regular',
 	),
 	'Uncial Antiqua' =>
+	array (
+		0 => 'regular',
+	),
+	'Underdog' =>
 	array (
 		0 => 'regular',
 	),
@@ -2337,6 +2488,10 @@ return array (
 		0 => 'regular',
 	),
 	'Walter Turncoat' =>
+	array (
+		0 => 'regular',
+	),
+	'Warnes' =>
 	array (
 		0 => 'regular',
 	),
