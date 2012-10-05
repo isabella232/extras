@@ -152,7 +152,6 @@ add_action('admin_print_styles-edit.php', 'siteorigin_panels_admin_enqueue_icon_
  * Save the panels data
  * 
  * @param $post_id
- * @param $post
  * 
  * @action save_post
  */
@@ -246,7 +245,11 @@ function siteorigin_panels_css(){
 				}
 			}
 		}
-		
+
+		/**
+		 * Filter the unprocessed CSS array
+		 */
+		$css = apply_filters('siteorigin_panels_css', $css);
 
 		// Build the CSS
 		$css_text = '';
@@ -304,6 +307,7 @@ function siteorigin_panels_render($post_id = false){
 	else $post = get_post($post_id);
 
 	$panels_data = get_post_meta($post->ID, 'panels_data', true);
+	$panels_data = apply_filters('siteorigin_panels_data', $panels_data, $post_id);
 	
 	// Create the skeleton of the grids
 	$grids = array();
@@ -321,8 +325,6 @@ function siteorigin_panels_render($post_id = false){
 	
 	ob_start();
 	foreach($grids as $gi => $cells){
-		$grid = $panels_data['grids'][$gi];
-		
 		?><div class="panel-grid" id="pg-<?php echo $gi ?>"><?php
 		foreach($cells as $ci => $widgets){
 			?><div class="panel-grid-cell" id="pgc-<?php echo $gi.'-'.$ci ?>"><?php
@@ -354,6 +356,7 @@ function siteorigin_panels_render($post_id = false){
 		?><div class="clear"></div></div><?php
 	}
 	$html = ob_get_clean();
+	
 	echo apply_filters('panels_render', $html, $post_id, $post);
 }
 
