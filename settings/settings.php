@@ -16,10 +16,10 @@ function siteorigin_settings_init( $theme_name = null ) {
 		$theme_name = basename( get_template_directory() );
 	}
 
-	$GLOBALS[ 'siteorigin_settings_theme_name' ] = $theme_name;
-	$GLOBALS[ 'siteorigin_settings_name' ] = $theme_name . '_theme_settings';
-	$GLOBALS[ 'siteorigin_settings_defaults' ] = apply_filters( 'siteorigin_theme_default_settings', array() );
-	$GLOBALS[ 'siteorigin_settings' ] = wp_parse_args( get_option( $theme_name . '_theme_settings', array() ), $GLOBALS[ 'siteorigin_settings_defaults' ] );
+	$GLOBALS['siteorigin_settings_theme_name'] = $theme_name;
+	$GLOBALS['siteorigin_settings_name'] = $theme_name . '_theme_settings';
+	$GLOBALS['siteorigin_settings_defaults'] = apply_filters( 'siteorigin_theme_default_settings', array() );
+	$GLOBALS['siteorigin_settings'] = wp_parse_args( get_option( $theme_name . '_theme_settings', array() ), $GLOBALS['siteorigin_settings_defaults'] );
 
 	// Register all the actions for the settings page
 	add_action( 'admin_menu', 'siteorigin_settings_admin_menu' );
@@ -65,7 +65,7 @@ function siteorigin_settings_help_tab() {
  * @action admin_init
  */
 function siteorigin_settings_admin_init() {
-	register_setting( 'theme_settings', $GLOBALS[ 'siteorigin_settings_name' ], 'siteorigin_settings_validate' );
+	register_setting( 'theme_settings', $GLOBALS['siteorigin_settings_name'], 'siteorigin_settings_validate' );
 }
 
 /**
@@ -111,7 +111,7 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 function siteorigin_settings_adminbar( $bar ) {
 	$screen = get_current_screen();
 	if ( $screen->id == 'appearance_page_theme_settings_page' ) {
-		$bar = (object)array( 'id' => $GLOBALS[ 'siteorigin_settings_name' ], 'message' => array( 'extras/settings/message' ) );
+		$bar = (object)array( 'id' => $GLOBALS['siteorigin_settings_name'], 'message' => array( 'extras/settings/message' ) );
 	}
 
 	return $bar;
@@ -137,9 +137,9 @@ function siteorigin_settings_add_section( $id, $name ) {
  * @param array $args
  */
 function siteorigin_settings_add_field( $section, $id, $type, $name, $args = array() ) {
-	if ( isset( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ] ) ) {
-		if ( isset( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'args' ][ 'type' ] ) && $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'args' ][ 'type' ] == 'teaser' )
-			unset( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ] );
+	if ( isset( $wp_settings_fields['theme_settings'][ $section ][ $id ] ) ) {
+		if ( isset( $wp_settings_fields['theme_settings'][ $section ][ $id ]['args']['type'] ) && $wp_settings_fields['theme_settings'][ $section ][ $id ]['args']['type'] == 'teaser' )
+			unset( $wp_settings_fields['theme_settings'][ $section ][ $id ] );
 		else return;
 	}
 
@@ -162,7 +162,7 @@ function siteorigin_settings_add_field( $section, $id, $type, $name, $args = arr
  */
 function siteorigin_settings_add_teaser( $section, $id, $name, $args = array() ) {
 	global $wp_settings_fields;
-	if ( isset( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ] ) ) return;
+	if ( isset( $wp_settings_fields['theme_settings'][ $section ][ $id ] ) ) return;
 
 	$args = wp_parse_args( $args, array(
 		'section' => $section,
@@ -180,8 +180,8 @@ function siteorigin_settings_add_teaser( $section, $id, $name, $args = array() )
  * @return mixed
  */
 function siteorigin_setting( $name ) {
-	if ( !isset( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) return null;
-	else return $GLOBALS[ 'siteorigin_settings' ][ $name ];
+	if ( !isset( $GLOBALS['siteorigin_settings'][ $name ] ) ) return null;
+	else return $GLOBALS['siteorigin_settings'][ $name ];
 }
 
 /**
@@ -190,15 +190,15 @@ function siteorigin_setting( $name ) {
  * @param $args
  */
 function siteorigin_settings_field( $args ) {
-	$field_name = $GLOBALS[ 'siteorigin_settings_name' ] . '[' . $args[ 'section' ] . '_' . $args[ 'field' ] . ']';
-	$field_id = $args[ 'section' ] . '_' . $args[ 'field' ];
-	$current = isset( $GLOBALS[ 'siteorigin_settings' ][ $field_id ] ) ? $GLOBALS[ 'siteorigin_settings' ][ $field_id ] : null;
+	$field_name = $GLOBALS['siteorigin_settings_name'] . '[' . $args['section'] . '_' . $args['field'] . ']';
+	$field_id = $args['section'] . '_' . $args['field'];
+	$current = isset( $GLOBALS['siteorigin_settings'][ $field_id ] ) ? $GLOBALS['siteorigin_settings'][ $field_id ] : null;
 
-	switch ( $args[ 'type' ] ) {
+	switch ( $args['type'] ) {
 		case 'checkbox' :
 			?>
 			<input id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>" type="checkbox" <?php checked( $current ) ?> />
-			<label for="<?php echo esc_attr( $field_id ) ?>"><?php echo esc_attr( !empty( $args[ 'label' ] ) ? $args[ 'label' ] : __( 'Enabled', 'siteorigin' ) ) ?></label>
+			<label for="<?php echo esc_attr( $field_id ) ?>"><?php echo esc_attr( !empty( $args['label'] ) ? $args['label'] : __( 'Enabled', 'siteorigin' ) ) ?></label>
 			<?php
 			break;
 		case 'text' :
@@ -207,16 +207,16 @@ function siteorigin_settings_field( $args ) {
 			<input
 				id="<?php echo esc_attr( $field_id ) ?>"
 				name="<?php echo esc_attr( $field_name ) ?>"
-				class="<?php echo esc_attr( $args[ 'type' ] == 'number' ? 'small-text' : 'regular-text' ) ?>"
+				class="<?php echo esc_attr( $args['type'] == 'number' ? 'small-text' : 'regular-text' ) ?>"
 				size="25"
-				type="<?php echo esc_attr( $args[ 'type' ] ) ?>"
+				type="<?php echo esc_attr( $args['type'] ) ?>"
 				value="<?php echo esc_attr( $current ) ?>" /><?php
 			break;
 
 		case 'select' :
 			?>
 			<select id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>">
-				<?php foreach ( $args[ 'options' ] as $option_id => $label ) : ?>
+				<?php foreach ( $args['options'] as $option_id => $label ) : ?>
 				<option value="<?php echo esc_attr( $option_id ) ?>" <?php selected( $option_id, $current ) ?>><?php echo esc_attr( $label ) ?></option>
 				<?php endforeach ?>
 			</select>
@@ -251,7 +251,7 @@ function siteorigin_settings_field( $args ) {
 			break;
 	}
 
-	if ( !empty( $args[ 'description' ] ) ) echo '<p class="description">' . $args[ 'description' ] . '</p>';
+	if ( !empty( $args['description'] ) ) echo '<p class="description">' . $args['description'] . '</p>';
 }
 
 /**
@@ -266,24 +266,24 @@ function siteorigin_settings_validate( $values ) {
 	$theme_name = basename( get_template_directory() );
 	$current = get_option( $theme_name . '_theme_settings', array() );
 
-	set_theme_mod( '_theme_settings_current_tab', isset( $_REQUEST[ 'theme_settings_current_tab' ] ) ? $_REQUEST[ 'theme_settings_current_tab' ] : 0 );
+	set_theme_mod( '_theme_settings_current_tab', isset( $_REQUEST['theme_settings_current_tab'] ) ? $_REQUEST['theme_settings_current_tab'] : 0 );
 
 	$changed = false;
-	foreach ( $wp_settings_fields[ 'theme_settings' ] as $section_id => $fields ) {
+	foreach ( $wp_settings_fields['theme_settings'] as $section_id => $fields ) {
 		foreach ( $fields as $field_id => $field ) {
 			$name = $section_id . '_' . $field_id;
 
-			if ( $field[ 'args' ][ 'type' ] == 'checkbox' ) {
+			if ( $field['args']['type'] == 'checkbox' ) {
 				$values[ $name ] = !empty( $values[ $name ] );
-			} elseif ( $field[ 'args' ][ 'type' ] == 'number' ) {
-				$values[ $name ] = isset( $values[ $name ] ) ? intval( $values[ $name ] ) : $GLOBALS[ 'siteorigin_settings_defaults' ][ $name ];
+			} elseif ( $field['args']['type'] == 'number' ) {
+				$values[ $name ] = isset( $values[ $name ] ) ? intval( $values[ $name ] ) : $GLOBALS['siteorigin_settings_defaults'][ $name ];
 			}
 
 			if ( !isset( $current[ $name ] ) || $values[ $name ] != $current[ $name ] ) $changed = true;
 
 			// See if this needs any special validation
-			if ( !empty( $field[ 'args' ][ 'validator' ] ) && method_exists( 'SiteOrigin_Settings_Validator', $field[ 'args' ][ 'validator' ] ) ) {
-				$values[ $name ] = call_user_func( array( 'SiteOrigin_Settings_Validator', $field[ 'args' ][ 'validator' ] ), $values[ $name ] );
+			if ( !empty( $field['args']['validator'] ) && method_exists( 'SiteOrigin_Settings_Validator', $field['args']['validator'] ) ) {
+				$values[ $name ] = call_user_func( array( 'SiteOrigin_Settings_Validator', $field['args']['validator'] ), $values[ $name ] );
 			}
 		}
 	}
@@ -339,15 +339,15 @@ class SiteOrigin_Settings_Validator {
 		$url = parse_url( $twitter );
 
 		// Check if this is a twitter URL
-		if ( isset( $url[ 'host' ] ) && !in_array( $url[ 'host' ], array( 'twitter.com', 'www.twitter.com' ) ) ) return false;
+		if ( isset( $url['host'] ) && !in_array( $url['host'], array( 'twitter.com', 'www.twitter.com' ) ) ) return false;
 
 		// Check if this is a fragment URL
-		if ( isset( $url[ 'fragment' ] ) && $url[ 'fragment' ][ 0 ] == '!' )
-			return substr( $url[ 'fragment' ], 2 );
+		if ( isset( $url['fragment'] ) && $url['fragment'][ 0 ] == '!' )
+			return substr( $url['fragment'], 2 );
 
 		// And our very last attempt... take it that the username is on the end of the path
-		if ( isset( $url[ 'path' ] ) ) {
-			$parts = explode( '/', $url[ 'path' ] );
+		if ( isset( $url['path'] ) ) {
+			$parts = explode( '/', $url['path'] );
 			$username = array_pop( $parts );
 			return $username;
 		}

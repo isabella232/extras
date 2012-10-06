@@ -29,7 +29,7 @@ function siteorigin_adminbar_init() {
 		if ( empty( $bar->icon ) ) $bar->icon = 'http://www.gravatar.com/avatar/' . md5( 'greg@siteorigin.com' ) . '?s=44';
 	}
 
-	$GLOBALS[ 'siteorigin_adminbar_active' ] = $bar;
+	$GLOBALS['siteorigin_adminbar_active'] = $bar;
 }
 add_action( 'current_screen', 'siteorigin_adminbar_init' );
 
@@ -59,7 +59,7 @@ add_filter( 'siteorigin_adminbar', 'siteorigin_adminbar_defaults' );
  */
 function siteorigin_adminbar_enqueue( $suffix ) {
 	// Only enqueue these if there's an active admin bar
-	if ( empty( $GLOBALS[ 'siteorigin_adminbar_active' ] ) ) return;
+	if ( empty( $GLOBALS['siteorigin_adminbar_active'] ) ) return;
 
 	wp_enqueue_script( 'siteorigin-admin-bar', get_template_directory_uri() . '/extras/admin/assets/bar.js', array( 'jquery' ) );
 	wp_enqueue_style( 'siteorigin-admin-bar', get_template_directory_uri() . '/extras/admin/assets/bar.css' );
@@ -73,14 +73,14 @@ add_action( 'admin_enqueue_scripts', 'siteorigin_adminbar_enqueue' );
  * @action in_admin_header
  */
 function siteorigin_adminbar_render() {
-	if ( empty( $GLOBALS[ 'siteorigin_adminbar_active' ] ) ) return;
+	if ( empty( $GLOBALS['siteorigin_adminbar_active'] ) ) return;
 
 	?>
-	<div id="siteorigin-admin-bar" data-type="<?php echo esc_attr( $GLOBALS[ 'siteorigin_adminbar_active' ]->id ) ?>">
+	<div id="siteorigin-admin-bar" data-type="<?php echo esc_attr( $GLOBALS['siteorigin_adminbar_active']->id ) ?>">
 		<div class="inner">
-			<img src="<?php echo esc_url( $GLOBALS[ 'siteorigin_adminbar_active' ]->icon ) ?>" class="icon" width="44" height="44" />
+			<img src="<?php echo esc_url( $GLOBALS['siteorigin_adminbar_active']->icon ) ?>" class="icon" width="44" height="44" />
 			<a href="#dismiss" class="dismiss"><?php _e( 'dismiss', 'siteorigin' ) ?></a>
-			<strong><?php call_user_func_array( 'get_template_part', $GLOBALS[ 'siteorigin_adminbar_active' ]->message ) ?></strong>
+			<strong><?php call_user_func_array( 'get_template_part', $GLOBALS['siteorigin_adminbar_active']->message ) ?></strong>
 		</div>
 	</div>
 	<?php
@@ -95,7 +95,7 @@ function siteorigin_adminbar_dismiss_bar() {
 	$dismiss = $previous = get_user_meta( get_current_user_id(), 'siteorigin_admin_bars_dismissed', true );
 	if ( empty( $dismiss ) ) $dismiss = array();
 
-	$bar = stripslashes( $_POST[ 'bar' ] );
+	$bar = stripslashes( $_POST['bar'] );
 	$dismiss[ $bar ] = true;
 
 	update_user_meta( get_current_user_id(), 'siteorigin_admin_bars_dismissed', $dismiss, $previous );

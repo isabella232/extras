@@ -24,15 +24,15 @@ function siteorigin_demo_init( $query ) {
 	$siteorigin_demo_page = null;
 
 	global $wp_query;
-	if ( isset( $_GET[ 'demo_page' ] ) && isset( $demo_pages[ $_GET[ 'demo_page' ] ] ) ) {
+	if ( isset( $_GET['demo_page'] ) && isset( $demo_pages[ $_GET['demo_page'] ] ) ) {
 		$siteorigin_is_demo = true;
-		$siteorigin_demo_page = $demo_pages[ $_GET[ 'demo_page' ] ];
-		get_template_part( $demo_pages[ $_GET[ 'demo_page' ] ] );
+		$siteorigin_demo_page = $demo_pages[ $_GET['demo_page'] ];
+		get_template_part( $demo_pages[ $_GET['demo_page'] ] );
 		exit();
-	} else if ( $wp_query->is_home() && isset( $demo_pages[ 'index' ] ) ) {
+	} else if ( $wp_query->is_home() && isset( $demo_pages['index'] ) ) {
 		$siteorigin_is_demo = true;
-		$siteorigin_demo_page = $demo_pages[ 'index' ];
-		get_template_part( $demo_pages[ 'index' ] );
+		$siteorigin_demo_page = $demo_pages['index'];
+		get_template_part( $demo_pages['index'] );
 		exit();
 	}
 }
@@ -73,8 +73,8 @@ function siteorigin_demo_page_title( $title, $sep, $sep_location ) {
 	else {
 		$titles = apply_filters( 'siteorigin_demo_page_titles', array() );
 
-		if ( isset( $_GET[ 'demo_page' ] ) && isset( $titles[ $_GET[ 'demo_page' ] ] ) )
-			$title = $titles[ $_GET[ 'demo_page' ] ] . ' ' . $sep;
+		if ( isset( $_GET['demo_page'] ) && isset( $titles[ $_GET['demo_page'] ] ) )
+			$title = $titles[ $_GET['demo_page'] ] . ' ' . $sep;
 	}
 
 	if ( empty( $sep ) ) return $title;
@@ -89,10 +89,10 @@ add_filter( 'wp_title', 'siteorigin_demo_page_title', 15, 3 );
  * @action admin_init
  */
 function siteorigin_demo_admin_init() {
-	if ( !isset( $_POST[ '_wpdemo_nonce' ] ) || !wp_verify_nonce( $_POST[ '_wpdemo_nonce' ], 'save' ) ) return;
+	if ( !isset( $_POST['_wpdemo_nonce'] ) || !wp_verify_nonce( $_POST['_wpdemo_nonce'], 'save' ) ) return;
 
-	set_theme_mod( 'is_demo_mode', $_POST[ 'siteorigin_demo_disable_confirm' ] != 'on' );
-	if ( $_POST[ 'siteorigin_demo_disable_confirm' ] == 'on' ) {
+	set_theme_mod( 'is_demo_mode', $_POST['siteorigin_demo_disable_confirm'] != 'on' );
+	if ( $_POST['siteorigin_demo_disable_confirm'] == 'on' ) {
 		header( 'location: ' . admin_url( 'themes.php' ) );
 	}
 

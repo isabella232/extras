@@ -51,7 +51,7 @@ function siteorigin_slider_metaboxes() {
  * Add custom slider admin columns
  */
 function siteorigin_slider_admin_columns( $columns ) {
-	$columns[ 'slides' ] = __( 'Slides', 'siteorigin' );
+	$columns['slides'] = __( 'Slides', 'siteorigin' );
 	return $columns;
 }
 add_filter( 'manage_slider_posts_columns', 'siteorigin_slider_admin_columns' );
@@ -108,7 +108,7 @@ add_action( 'admin_print_scripts-post.php', 'siteorigin_slider_admin_enqueue' );
  */
 function siteorigin_slider_action_images() {
 	header( 'content-type: text/json', true );
-	echo json_encode( siteorigin_slider_get_post_images( intval( $_REQUEST[ 'post_ID' ] ) ) );
+	echo json_encode( siteorigin_slider_get_post_images( intval( $_REQUEST['post_ID'] ) ) );
 	exit();
 }
 add_action( 'wp_ajax_siteorigin_slider_images', 'siteorigin_slider_action_images' );
@@ -156,10 +156,10 @@ function siteorigin_slider_metabox_slider_slides( $post, $post_id ) {
  */
 function siteorigin_slider_save_post( $post_id ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
-	if ( empty( $_POST[ '_siteorigin_slider_nonce' ] ) || !wp_verify_nonce( $_POST[ '_siteorigin_slider_nonce' ], 'save_slider' ) ) return;
+	if ( empty( $_POST['_siteorigin_slider_nonce'] ) || !wp_verify_nonce( $_POST['_siteorigin_slider_nonce'], 'save_slider' ) ) return;
 
 	$slider = array();
-	foreach ( $_REQUEST[ 'siteorigin_slider' ] as $field => $vals ) {
+	foreach ( $_REQUEST['siteorigin_slider'] as $field => $vals ) {
 		foreach ( $vals as $slide => $val ) {
 			if ( empty( $slider[ $slide ] ) ) $slider[ $slide ] = array();
 			$slider[ $slide ][ $field ] = $val;
@@ -212,15 +212,15 @@ class SiteOrigin_Slider_Widget extends WP_Widget {
 
 	function widget( $args, $instance ) {
 
-		echo $args[ 'before_widget' ];
+		echo $args['before_widget'];
 
-		if ( $instance[ 'slider_id' ] == -1 ) {
+		if ( $instance['slider_id'] == -1 ) {
 			_e( 'Please select a slider.', 'siteorigin' );
-			echo $args[ 'after_widget' ];
+			echo $args['after_widget'];
 			return;
 		}
 
-		$post = get_post( $instance[ 'slider_id' ] );
+		$post = get_post( $instance['slider_id'] );
 		$slides = get_post_meta( $post->ID, 'siteorigin_slider', true );
 
 		?><ul class="slides"><?php
@@ -229,12 +229,12 @@ class SiteOrigin_Slider_Widget extends WP_Widget {
 			<li>
 				<?php do_action( 'siteorigin_slide_before', $slide ) ?>
 	
-				<?php echo wp_get_attachment_image( $slide[ 'image' ], !empty( $data[ 'image_size' ] ) ? $data[ 'image_size' ] : 'large' ); ?>
-				<?php if ( !empty( $slide[ 'title' ] ) || !empty( $slide[ 'extra' ] ) ) : ?>
+				<?php echo wp_get_attachment_image( $slide['image'], !empty( $data['image_size'] ) ? $data['image_size'] : 'large' ); ?>
+				<?php if ( !empty( $slide['title'] ) || !empty( $slide['extra'] ) ) : ?>
 				<div class="slide-text">
-					<h3><?php print esc_html( $slide[ 'title' ] ) ?></h3>
+					<h3><?php print esc_html( $slide['title'] ) ?></h3>
 	
-					<p><?php print esc_html( $slide[ 'extra' ] ) ?></p>
+					<p><?php print esc_html( $slide['extra'] ) ?></p>
 				</div>
 				<?php endif; ?>
 	
@@ -243,7 +243,7 @@ class SiteOrigin_Slider_Widget extends WP_Widget {
 			<?php
 		}
 		?></ul><?php
-		print $args[ 'after_widget' ];
+		print $args['after_widget'];
 	}
 
 	/**

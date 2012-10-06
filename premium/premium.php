@@ -20,7 +20,7 @@ add_action( 'admin_menu', 'siteorigin_premium_admin_menu' );
 function siteorigin_premium_page_render() {
 	$theme = basename( get_template_directory() );
 
-	if ( isset( $_GET[ 'action' ] ) ) $action = $_GET[ 'action' ];
+	if ( isset( $_GET['action'] ) ) $action = $_GET['action'];
 	else $action = 'view';
 
 
@@ -66,32 +66,32 @@ function siteorigin_premium_page_render() {
 				</form>
 
 				<a href="#" id="theme-upgrade-already-paid"><?php _e( 'Already Paid?', 'siteorigin' ) ?></a>
-				<?php if ( isset( $premium[ 'premium_title' ] ) ) : ?><h2><?php echo $premium[ 'premium_title' ] ?></h2><?php endif; ?>
-				<?php if ( isset( $premium[ 'premium_summary' ] ) ) : ?><p><?php echo $premium[ 'premium_summary' ] ?></p><?php endif; ?>
+				<?php if ( isset( $premium['premium_title'] ) ) : ?><h2><?php echo $premium['premium_title'] ?></h2><?php endif; ?>
+				<?php if ( isset( $premium['premium_summary'] ) ) : ?><p><?php echo $premium['premium_summary'] ?></p><?php endif; ?>
 
-				<?php if ( isset( $premium[ 'buy_button' ] ) && isset( $premium[ 'buy_url' ] ) ) : ?>
+				<?php if ( isset( $premium['buy_button'] ) && isset( $premium['buy_url'] ) ) : ?>
 				<p class="download">
-					<a href="<?php echo esc_url( $premium[ 'buy_url' ] ) ?>" class="buy-button"><img src="<?php echo esc_url( $premium[ 'buy_button' ] ) ?>" /></a>
-					<?php if ( isset( $premium[ 'buy_message_1' ] ) ) : ?><span><?php echo $premium[ 'buy_message_1' ] ?></span><?php endif; ?>
+					<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button"><img src="<?php echo esc_url( $premium['buy_button'] ) ?>" /></a>
+					<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
 				</p>
 				<?php endif; ?>
 
-				<?php if ( !empty( $premium[ 'featured' ] ) ) : ?>
+				<?php if ( !empty( $premium['featured'] ) ) : ?>
 				<p id="promo-image">
-					<img src="<?php echo esc_url( $premium[ 'featured' ][ 0 ] ) ?>" width="<?php echo intval( $premium[ 'featured' ][ 1 ] ) ?>" height="<?php echo intval( $premium[ 'featured' ][ 2 ] ) ?>" class="magnify" />
+					<img src="<?php echo esc_url( $premium['featured'][ 0 ] ) ?>" width="<?php echo intval( $premium['featured'][ 1 ] ) ?>" height="<?php echo intval( $premium['featured'][ 2 ] ) ?>" class="magnify" />
 				</p>
 				<?php endif; ?>
 				<div class="content">
-					<?php if ( !empty( $premium[ 'features' ] ) ) : foreach ( $premium[ 'features' ] as $feature ) : ?>
-					<h3><?php echo $feature[ 'heading' ] ?></h3>
-					<p><?php echo $feature[ 'content' ] ?></p>
+					<?php if ( !empty( $premium['features'] ) ) : foreach ( $premium['features'] as $feature ) : ?>
+					<h3><?php echo $feature['heading'] ?></h3>
+					<p><?php echo $feature['content'] ?></p>
 					<?php endforeach; endif; ?>
 				</div>
 
-				<?php if ( isset( $premium[ 'buy_button' ] ) && isset( $premium[ 'buy_url' ] ) ) : ?>
+				<?php if ( isset( $premium['buy_button'] ) && isset( $premium['buy_url'] ) ) : ?>
 				<p class="download">
-					<a href="<?php echo esc_url( $premium[ 'buy_url' ] ) ?>" class="buy-button"><img src="<?php echo esc_url( $premium[ 'buy_button' ] ) ?>" /></a>
-					<?php if ( isset( $premium[ 'buy_message_2' ] ) ) : ?><span><?php echo $premium[ 'buy_message_2' ] ?></span><?php endif; ?>
+					<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button"><img src="<?php echo esc_url( $premium['buy_button'] ) ?>" /></a>
+					<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
 				</p>
 				<?php endif; ?>
 
@@ -104,8 +104,8 @@ function siteorigin_premium_page_render() {
 
 		case 'enter-order' :
 			$option_name = 'siteorigin_order_number_' . $theme;
-			if ( isset( $_POST[ '_upgrade_nonce' ] ) && wp_verify_nonce( $_POST[ '_upgrade_nonce' ], 'save_order_number' ) && isset( $_POST[ 'order_number' ] ) ) {
-				update_option( $option_name, trim( $_POST[ 'order_number' ] ) );
+			if ( isset( $_POST['_upgrade_nonce'] ) && wp_verify_nonce( $_POST['_upgrade_nonce'], 'save_order_number' ) && isset( $_POST['order_number'] ) ) {
+				update_option( $option_name, trim( $_POST['order_number'] ) );
 			}
 
 			// Validate the order number
@@ -117,8 +117,8 @@ function siteorigin_premium_page_render() {
 			);
 			$valid = null;
 			if ( !is_wp_error( $result ) ) {
-				$validation_result = unserialize( $result[ 'body' ] );
-				$valid = isset( $validation_result[ 'valid' ] ) ? $validation_result[ 'valid' ] : null;
+				$validation_result = unserialize( $result['body'] );
+				$valid = isset( $validation_result['valid'] ) ? $validation_result['valid'] : null;
 				if ( $valid ) {
 					// Trigger a refresh of the theme update information
 					set_site_transient( 'update_themes', null );
