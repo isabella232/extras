@@ -308,7 +308,7 @@ function siteorigin_settings_change_message() {
 		remove_theme_mod( 'siteorigin_settings_changed' );
 
 		?>
-		<div id="setting-error-settings_updated" class="updated settings-error">
+		<div id="setting-updated" class="updated">
 			<p><strong><?php _e( 'Settings saved.', 'siteorigin' ) ?></strong></p>
 		</div>
 		<?php

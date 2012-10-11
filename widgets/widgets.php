@@ -375,7 +375,8 @@ class SiteOrigin_Widgets_PostList extends WP_Widget {
 					<a href="<?php the_permalink() ?>">
 						<?php if ( has_post_thumbnail() ) : the_post_thumbnail( $thumbnail_size ) ?>
 						<?php else : ?>
-						<!-- Temporary thumbnail -->
+							<!-- Temporary thumbnail -->
+							<img src="<?php echo get_template_directory_uri() ?>/images/thumbnail-placeholder.jpg" width="250" height="175" />
 						<?php endif ?>
 					</a>
 				</div>
