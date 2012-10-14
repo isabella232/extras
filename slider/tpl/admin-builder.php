@@ -31,13 +31,13 @@
 							<div class="loading"></div>
 						</td>
 					</tr>
-				
+					
 					<?php do_action('siteorigin_slider_after_builder_form'); ?>
 					
 				</tbody>
 			</table>
 			
-			<p><a href="#" class="delete" data-confirm="<?php esc_attr_e('Are you sure you want to delete this?', 'siteorigin') ?>">Delete</a></p>
+			<p><a href="#" class="delete" data-confirm="<?php esc_attr_e('Are you sure you want to delete this?', 'siteorigin') ?>"><?php _e('Delete', 'siteorigin') ?></a></p>
 		</div>
 	</div>
 	
