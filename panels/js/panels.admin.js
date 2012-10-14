@@ -87,8 +87,6 @@ jQuery( function ( $ ) {
                 var f = panel.find( '.form *[name="' + $( this ).attr( 'name' ) + '"]' );
 
                 if ( f.attr( 'type' ) == 'checkbox' ) {
-                    console.log( 'bar' );
-                    console.log( $( this ).is( ':checked' ) );
                     f.prop( "checked", $( this ).is( ':checked' ) );
                 }
                 else f.val( $( this ).val() );
@@ -112,8 +110,6 @@ jQuery( function ( $ ) {
                         var f = dialog.find( '*[name="' + $( this ).attr( 'name' ) + '"]' );
 
                         if ( f.attr( 'type' ) == 'checkbox' ) {
-                            console.log( 'foo' );
-                            console.log( $( this ).is( ':checked' ) );
                             f.prop( "checked", $( this ).is( ':checked' ) )
                         }
                         else f.val( $( this ).val() );

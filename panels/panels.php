@@ -335,26 +335,10 @@ function siteorigin_panels_render( $post_id = false ) {
 		foreach ( $cells as $ci => $widgets ) {
 			?><div class="panel-grid-cell" id="pgc-<?php echo $gi . '-' . $ci ?>"><?php
 			foreach ( $widgets as $pi => $widget_info ) {
-				// Skip this if the class no longer exists
-				if ( !class_exists( $widget_info['info']['class'] ) ) continue;
-
-				$the_widget = new $widget_info['info']['class'];
-
 				$data = $widget_info;
 				unset( $data['info'] );
-
-				$classes = array( 'panel', 'widget' );
-				if ( !empty( $the_widget->id_base ) ) $classes[ ] = 'widget_' . $the_widget->id_base;
-				if ( $pi == 0 ) $classes[ ] = 'panel-first-child';
-				if ( $pi == count( $widgets ) - 1 ) $classes[ ] = 'panel-last-child';
-
-				$the_widget->widget( array(
-					'before_widget' => '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" id="panel-' . $gi . '-' . $ci . '-' . $pi . '">',
-					'after_widget' => '</div>',
-					'before_title' => '<h3 class="widget-title">',
-					'after_title' => '</h3>',
-					'widget_id' => 'widget-' . $gi . '-' . $ci . '-' . $pi
-				), $data );
+				
+				siteorigin_panels_the_widget( $widget_info['info']['class'], $data, $gi, $ci, $pi, $pi == 0, $pi == count( $widgets ) - 1 );
 			}
 			if ( empty( $widgets ) ) echo '&nbsp;';
 			?></div><?php
@@ -429,3 +413,22 @@ function siteorigin_panels_filter_post_link( $permalink, $post ) {
 	return $permalink;
 }
 add_filter( 'post_type_link', 'siteorigin_panels_filter_post_link', 10, 2 );
+
+function siteorigin_panels_the_widget($widget, $instance, $grid, $cell, $panel, $is_first, $is_last){
+	if(!class_exists($widget)) return;
+
+	$the_widget = new $widget;
+
+	$classes = array( 'panel', 'widget' );
+	if ( !empty( $the_widget->id_base ) ) $classes[ ] = 'widget_' . $the_widget->id_base;
+	if ( $is_first ) $classes[ ] = 'panel-first-child';
+	if ( $is_last ) $classes[ ] = 'panel-last-child';
+
+	$the_widget->widget( array(
+		'before_widget' => '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" id="panel-' . $grid . '-' . $cell . '-' . $panel . '">',
+		'after_widget' => '</div>',
+		'before_title' => '<h3 class="widget-title">',
+		'after_title' => '</h3>',
+		'widget_id' => 'widget-' . $grid . '-' . $cell . '-' . $panel
+	), $instance );
+}
