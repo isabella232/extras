@@ -27,36 +27,6 @@ function siteorigin_settings_init( $theme_name = null ) {
 	add_action( 'siteorigin_adminbar', 'siteorigin_settings_adminbar' );
 
 	add_action( 'admin_enqueue_scripts', 'siteorigin_settings_enqueue_scripts' );
-
-	// Set up the help tabs
-	add_action( 'load-appearance_page_theme_settings_page', 'siteorigin_settings_help_tab' );
-}
-
-/**
- * Add the settings help tab
- */
-function siteorigin_settings_help_tab() {
-	$screen = get_current_screen();
-	$theme = basename( get_template_directory() );
-
-	ob_start();
-	?>
-	<p>
-		<?php
-		printf(
-			__( "Please read %s's <a href='%s'>Documentation</a>.", 'siteorigin' ),
-			ucfirst( $theme ),
-			'http://siteorigin.com/doc/' . $theme . '/'
-		);
-		?>
-	</p>
-	<?php
-	$content = ob_get_clean();
-	$screen->add_help_tab( array(
-		'id' => 'theme_settings_documentation',
-		'title' => __( 'Theme Documentation', 'siteorigin' ),
-		'content' => $content
-	) );
 }
 
 /**
@@ -74,7 +44,9 @@ function siteorigin_settings_admin_init() {
  * @action admin_menu
  */
 function siteorigin_settings_admin_menu() {
-	add_theme_page( __( 'Theme Settings', 'siteorigin' ), __( 'Theme Settings', 'siteorigin' ), 'edit_theme_options', 'theme_settings_page', 'siteorigin_settings_render' );
+	$page = add_theme_page( __( 'Theme Settings', 'siteorigin' ), __( 'Theme Settings', 'siteorigin' ), 'edit_theme_options', 'theme_settings_page', 'siteorigin_settings_render' );
+
+	add_action( 'load-' . $page, 'siteorigin_settings_theme_help' );
 }
 
 /**
@@ -302,7 +274,7 @@ function siteorigin_settings_validate( $values ) {
 }
 
 /**
- *
+ * Display a message when the settings have been changed
  */
 function siteorigin_settings_change_message() {
 	if ( get_theme_mod( 'siteorigin_settings_changed' ) ) {
@@ -319,6 +291,23 @@ function siteorigin_settings_change_message() {
 		 */
 		do_action( 'siteorigin_settings_changed_message' );
 	}
+}
+
+function siteorigin_settings_theme_help(){
+	$screen = get_current_screen();
+	$theme_name = basename( get_template_directory() );
+	
+	$text = sprintf(
+		__( "Read %s's <a href='%s'>theme documentation</a> for help with these settings.", 'siteorigin' ),
+		ucfirst($theme_name),
+		'http://siteorigin.com/doc/'.$theme_name.'/'
+	); 
+	
+	$screen->add_help_tab( array(
+		'id' => 'siteorigin_settings_help_tab',
+		'title' => __( 'Settings Help', 'siteorigin' ),
+		'content' => '<p>' . $text . '</p>',
+	) );
 }
 
 /**
