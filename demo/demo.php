@@ -8,6 +8,19 @@
  */
 
 /**
+ * Setup theme demo mode
+ */
+function siteorigin_demo_after_setup(){
+	if ( !get_theme_mod( 'is_demo_mode', true ) ) return;
+	
+	if(!is_admin()){
+		// Don't use the theme's default page on front when in demo mode
+		add_filter('option_page_on_front', '__return_false');
+	}
+}
+add_action('after_setup_theme', 'siteorigin_demo_after_setup');
+
+/**
  * Initialize the demo mode.
  *
  * @param WP_Query $query
