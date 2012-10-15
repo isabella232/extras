@@ -137,6 +137,7 @@ function siteorigin_settings_add_section( $id, $name ) {
  * @param array $args
  */
 function siteorigin_settings_add_field( $section, $id, $type, $name, $args = array() ) {
+	global $wp_settings_fields;
 	if ( isset( $wp_settings_fields['theme_settings'][ $section ][ $id ] ) ) {
 		if ( isset( $wp_settings_fields['theme_settings'][ $section ][ $id ]['args']['type'] ) && $wp_settings_fields['theme_settings'][ $section ][ $id ]['args']['type'] == 'teaser' )
 			unset( $wp_settings_fields['theme_settings'][ $section ][ $id ] );
