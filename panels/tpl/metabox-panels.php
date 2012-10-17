@@ -47,6 +47,10 @@ foreach($wp_widget_factory->widgets as $class => $info){
 	<div id="panels-dialog" data-title="<?php esc_attr_e('Add Widget','siteorigin') ?>" class="panels-admin-dialog">
 		<div id="panels-dialog-tabs">
 			
+			<div class="panels-text-filter">
+				<input type="search" class="widefat" placeholder="Filter" id="panels-text-filter-input" />
+			</div>
+			
 			<ul class="panel-type-list">
 				<?php $i = 0; foreach($panel_widgets as $widget) : $i++; ?>
 					<li class="panel-type"
@@ -61,9 +65,9 @@ foreach($wp_widget_factory->widgets as $class => $info){
 							<?php endif; ?>
 						</div>
 					</li>
-					<?php if($i % 4 == 0) : ?><div class="clear"></div><?php endif; ?>
 				<?php endforeach; ?>
-				<?php if($i % 4 != 0) : ?><div class="clear"></div><?php endif; ?>
+				
+				<div class="clear"></div>
 			</ul>
 			
 			<?php if(!defined('SITEORIGIN_IS_PREMIUM')) : ?>

@@ -180,6 +180,21 @@ jQuery( function ( $ ) {
             panel.find( 'h4' ).html( panel.data( 'title' ) + ': ' + titleValue );
         }
     }
+    
+    // Handle filtering in the panels dialog
+    $('#panels-text-filter-input').keyup(function(){
+        var value = $(this ).val();
+        // Filter the panels
+        $('#panels-dialog .panel-type-list .panel-type')
+            .show()
+            .each(function(){
+                if(value == '') return;
+                
+                if($(this).find('h3' ).html().toLowerCase().indexOf(value) == -1){
+                    $(this ).hide();
+                }
+            })
+    } ).click(function(){  $(this ).keyup() });
 
     // Handle adding a new panel
     $( '#panels-dialog .panel-type' ).click( function () {

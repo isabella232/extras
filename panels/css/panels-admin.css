@@ -8,8 +8,7 @@ html {
 
 /* @group Panel List */
 
-.panel-type-list,
-.panel-grid-list{
+.panel-type-list {
     margin: 0 -5px;
 }
 
@@ -17,8 +16,7 @@ html {
     margin-bottom: -10px
 }
 
-.panel-type-list .panel-type,
-.panel-grid-list .panel-grid {
+.panel-type-list .panel-type {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
@@ -29,8 +27,7 @@ html {
     float: left;
 }
 
-.panel-type-list .panel-type-wrapper,
-.panel-grid-list .panel-grid-wrapper {
+.panel-type-list .panel-type-wrapper {
     padding: 10px;
     background: #808080;
 
@@ -51,10 +48,15 @@ html {
     cursor: pointer;
 }
 
-.panel-type-list .panel-type h3,
-.panel-grid-list .panel-grid h3 {
+.panel-type-list .panel-type h3 {
     margin: 0 0 7px 0;
+    height: 1.2em;
     font-weight: 600;
+}
+
+.panel-type-list .panel-type small{
+    height: 3em;
+    display: block;
 }
 
 /* @end */
@@ -272,6 +274,10 @@ html {
 #grid-setting-dialog,
 #grid-add-dialog{
 	display: none;
+}
+
+#panels-dialog .panels-text-filter{
+    margin-bottom: 10px;
 }
 
 /* @end */
