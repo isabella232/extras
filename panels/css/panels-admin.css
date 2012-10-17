@@ -299,3 +299,31 @@ html {
 }
 
 /* @end */
+
+#content-panels{
+    position: relative;
+    z-index: 10;
+}
+
+#so-panels-panels{
+    border: 1px solid #CCC;
+    position: relative;
+    z-index: 9;
+}
+
+#so-panels-panels h3.hndle{
+    border-bottom: 1px solid #CCC;
+    background-color: #E9E9E9;
+    background-image: -ms-linear-gradient(bottom,#DDD,#E9E9E9);
+    background-image: -moz-linear-gradient(bottom,#DDD,#E9E9E9);
+    background-image: -o-linear-gradient(bottom,#DDD,#E9E9E9);
+    background-image: -webkit-linear-gradient(bottom,#DDD,#E9E9E9);
+    background-image: linear-gradient(bottom,#DDD,#E9E9E9);
+}
+
+#content-panels.panels-tab-active {
+    border-color: #CCC #CCC #E9E9E9 #CCC;
+    background-color: #E9E9E9;
+    color: #333;
+    z-index: 10;
+}

@@ -240,4 +240,46 @@ jQuery( function ( $ ) {
     $( window ).resize( function () {
         $( '.panels-admin-dialog' ).dialog( "option", "position", "center" );
     } );
+    
+    // This is the part where we move the panels box into a tab of the content editor
+    $('#wp-content-editor-tools')
+        .find('.wp-switch-editor' ).click(function(){
+            $('#wp-content-editor-container, #post-status-info').show();
+            $('#so-panels-panels' ).hide();
+            $('#content-panels' ).removeClass('panels-tab-active');
+            
+            // Double toggling resets the content editor
+            switchEditors.go();
+            switchEditors.go();
+        } ).end()
+        .prepend(
+            $('<a id="content-panels" class="hide-if-no-js wp-switch-editor switch-panels">' + $('#so-panels-panels h3.hndle span' ).html() + '</a>')
+                .click(function(){
+                    var $$ = $(this);
+                    // This is so the inactive tabs dont show as active
+                    $('#wp-content-wrap' ).removeClass('tmce-active html-active');
+                    
+                    // Hide all the standard content editor stuff
+                    $('#wp-content-editor-container, #post-status-info').hide();
+                    
+                    $('#so-panels-panels' ).show();
+                    $('#content-panels' ).addClass('panels-tab-active');
+                    
+                    // Trigger a window resize to make sure all the columns are properly laid out
+                    $( window ).resize();
+                })
+        )
+    
+    if(typeof panelsData != 'undefined'){
+        setTimeout(function(){
+            $('#content-panels' ).click();
+        }, 50);
+    }
+    
+    // Reposition the panels box
+    $('#so-panels-panels' )
+        .insertAfter('#wp-content-editor-container')
+        .addClass('wp-editor-container')
+        .hide()
+        .find('.handlediv' ).remove();
 } );

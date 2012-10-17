@@ -7,7 +7,7 @@ function siteorigin_widgets_enqueue_widget_scripts() {
 	global $wp_registered_widgets, $post;
 	$active_widgets = array();
 
-	if ( is_single() && $post->post_type == 'panel' ) {
+	if ( is_page() ) {
 		$panel_widget_classes = array();
 		$data = get_post_meta( $post->ID, 'panels_data', true );
 
