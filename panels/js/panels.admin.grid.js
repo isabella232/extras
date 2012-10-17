@@ -169,15 +169,21 @@ jQuery( function ( $ ) {
                     } )
                     .attr( 'data-tooltip', panelsLoc.buttons['delete'] )
                     .click( function () {
-                        if ( confirm( 'Are you sure you want to delete this grid?' ) ) {
+                        // Use this to indicate which grid we're going to remove
+                        container.css( 'opacity', 0.25 );
+                        if ( confirm( panelsLoc.messages['confirmDeleteColumns'] ) ) {
                             container.slideUp( function () {
-                                container.find( '[data-tooltip]' ).removeTooltip();
+
                                 container.remove();
 
                                 $( '#panels-container' )
                                     .sortable( "refresh" )
                                     .find( '.panels-container' ).trigger( 'refreshcells' );
                             } );
+                        }
+                        else {
+                            // Restore the container
+                            container.animate( {opacity:1}, 'normal' );
                         }
                         return false;
                     } )

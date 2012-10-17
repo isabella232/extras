@@ -1,6 +1,7 @@
 <?php
 
 /**
+/**
  * Callback to register the Panels Metaboxes
  */
 function siteorigin_panels_metaboxes() {
@@ -47,7 +48,8 @@ function siteorigin_panels_admin_enqueue_scripts() {
 			'done' => __( 'Done', 'siteorigin' ),
 		),
 		'messages' => array(
-			'confirmDeletePanel' => __( 'Are you sure you want to delete this panel?', 'siteorigin' ),
+			'confirmDeleteColumns' => __( 'Are you sure you want to delete these columns?', 'siteorigin' ),
+			'confirmDeleteWidget' => __( 'Are you sure you want to delete this widget?', 'siteorigin' ),
 		)
 	) );
 

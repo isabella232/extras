@@ -163,6 +163,10 @@ html {
 
 /* @group Controls */
 
+#panels-container .grid-container {
+    position: relative;
+}
+
 #panels-container .grid-container .controls{
 	line-height: 1;
 	margin-bottom: 2px;
