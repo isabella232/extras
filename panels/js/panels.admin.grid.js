@@ -247,6 +247,7 @@ jQuery( function ( $ ) {
 
     // Create the add grid dialog
     $( '#grid-add-dialog' ).show().dialog( {
+        dialogClass: 'panels-admin-dialog',
         autoOpen:false,
         modal:   true,
         title:   $( '#grid-add-dialog' ).attr( 'data-title' ),

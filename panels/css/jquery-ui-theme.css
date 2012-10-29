@@ -49,7 +49,7 @@
 
 /* jQuery UI Dialog */
 
-.ui-dialog{
+.ui-dialog.panels-admin-dialog{
 	border: 1px solid #dfdfdf;
     background: white;
 
@@ -58,7 +58,7 @@
 	border-radius: 3px;
 }
 
-.ui-dialog .ui-dialog-titlebar{
+.ui-dialog.panels-admin-dialog .ui-dialog-titlebar{
     background: #f8f8f8;
     background: -moz-linear-gradient(top,  #f8f8f8 0%, #ececec 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f8f8f8), color-stop(100%,#ececec));
@@ -88,91 +88,26 @@
     margin: -1px -1px 0 -1px;
 }
 
-.ui-dialog .ui-dialog-titlebar-close{
+.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close{
     position: absolute;
     top: 5px;
     right: 8px;
 }
 
-.ui-dialog .ui-dialog-titlebar-close .ui-icon{
+.ui-dialog.panels-admin-dialog .ui-dialog-titlebar-close .ui-icon{
     display: block;
     width: 8px;
     height: 8px;
     background: url(images/icons/close.png);
 }
 
-.ui-dialog .ui-dialog-content{
+.ui-dialog.panels-admin-dialog .ui-dialog-content{
     padding: 10px;
 }
 
-.ui-dialog .ui-dialog-content input,
-.ui-dialog .ui-dialog-content textarea{
+.ui-dialog.panels-admin-dialog .ui-dialog-content input,
+.ui-dialog.panels-admin-dialog .ui-dialog-content textarea{
 	-moz-box-sizing:border-box;
 	-webkit-box-sizing:border-box;
 	box-sizing:border-box;
-}
-
-/* jQuery UI Tabs */
-
-.ui-dialog{
-    -moz-box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    -webkit-box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
-    
-}
-
-.ui-dialog .ui-tabs .ui-tabs-nav{
-    border-bottom: 1px solid #CCC;
-    margin-bottom: 8px;
-    line-height:1; 
-}
-
-.ui-dialog .ui-tabs .ui-tabs-nav li{
-    display: inline-block;
-    margin: 0 2px -1px 2px;
-
-    -webkit-border-top-left-radius: 3px;
-    -webkit-border-top-right-radius: 3px;
-    -moz-border-radius-topleft: 3px;
-    -moz-border-radius-topright: 3px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
-    
-    border: 1px solid #DFDFDF;
-    border-bottom-color: #CCC;
-}
-
-.ui-dialog .ui-tabs .ui-tabs-nav li a{
-    display: block;
-    color: #AAA;
-    text-decoration: none;
-    padding: 7px 10px;
-}
-
-.ui-dialog .ui-tabs .ui-tabs-nav li.ui-state-active{
-    border-color: #CCC;
-    border-bottom-color: white;
-}
-
-.ui-dialog .ui-tabs .ui-tabs-nav li.ui-state-active a{
-    color: #464646;
-}
-
-.ui-dialog .ui-dialog-buttonset{
-	padding: 0 10px 10px 10px;
-	text-align: right;
-}
-
-.ui-dialog .ui-dialog-buttonset .ui-button{
-    margin-left: 5px
-}
-
-.ui-dialog .ui-dialog-buttonset .ui-button:first-child{
-    margin-left: 0;
-}
-
-/* Resizable Stuff */
-
-.ui-resizable-e{
-    
 }

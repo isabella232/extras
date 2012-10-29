@@ -23,6 +23,8 @@ jQuery( function ( $ ) {
 
             if ( data.title != undefined && data.title != '' ) newSlide.find( '.slide-title strong' ).html( data.title );
         }
+
+        $( '.siteorigin-media' ).change();
     }
 
     /**

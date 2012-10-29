@@ -56,7 +56,7 @@ class SiteOrigin_Widgets_CTA extends WP_Widget {
 
 		echo $args['before_widget'];
 		if ( !empty( $instance['headline'] ) ) echo '<h2 class="cta-headline">' . esc_html( $instance['headline'] ) . '</h2>';
-		if ( !empty( $instance['text'] ) ) echo '<p class="cta-sub-text">' . esc_html( $instance['headline'] ) . '</p>';
+		if ( !empty( $instance['text'] ) ) echo '<p class="cta-sub-text">' . esc_html( $instance['text'] ) . '</p>';
 		if ( !empty( $instance['url'] ) ) {
 			?>
 		<a href="<?php echo esc_url( $instance['url'] ) ?>" class="button cta-button <?php if ( !empty( $instance['button_style'] ) ) echo esc_attr( 'button-' . $instance['button_style'] . ' cta-button-' . $instance['button_style'] ) ?>">

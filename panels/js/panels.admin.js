@@ -1,6 +1,7 @@
 jQuery( function ( $ ) {
     // Create the main dialog
     $( '#panels-dialog' ).show().dialog( {
+        dialogClass: 'panels-admin-dialog',
         autoOpen: false,
         resizable:false,
         draggable:false,

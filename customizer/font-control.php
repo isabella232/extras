@@ -24,7 +24,8 @@ class SiteOrigin_Customize_Fonts_Control extends WP_Customize_Control {
 			foreach ( $variants as $variant ) {
 				if ( $variant == 'regular' || $variant == 400 ) {
 					$choices[ $font ] = $font;
-				} else {
+				}
+				else {
 					$choices[ $font . ':' . $variant ] = $font . ' (' . $variant . ')';
 				}
 			}
