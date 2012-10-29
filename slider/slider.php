@@ -229,7 +229,7 @@ class SiteOrigin_Slider_Widget extends WP_Widget {
 			<li>
 				<?php do_action( 'siteorigin_slide_before', $slide ) ?>
 	
-				<?php echo wp_get_attachment_image( $slide['image'], !empty( $data['image_size'] ) ? $data['image_size'] : 'large' ); ?>
+				<?php echo wp_get_attachment_image( $slide['image'], !empty( $instance['image_size'] ) ? $instance['image_size'] : 'large' ); ?>
 				<?php if ( !empty( $slide['title'] ) || !empty( $slide['extra'] ) ) : ?>
 				<div class="slide-text">
 					<h3><?php print esc_html( $slide['title'] ) ?></h3>
