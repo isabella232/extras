@@ -1,2 +1,1 @@
-<?php _e("", 'siteorigin') ?> 
-<?php printf(__("Create custom tileable background images using our free <a href='%s' target='_blank'>background image generator</a>.", 'siteorigin'), 'http://bg.siteorigin.com/') ?> 
+<?php printf( __( "Create custom tileable background images using our free <a href='%s' target='_blank'>background image generator</a>.", 'siteorigin' ), 'http://bg.siteorigin.com/' ) ?> 
