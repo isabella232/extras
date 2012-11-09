@@ -101,6 +101,30 @@ function siteorigin_panels_admin_enqueue_styles() {
 add_action( 'admin_print_styles-post-new.php', 'siteorigin_panels_admin_enqueue_styles' );
 add_action( 'admin_print_styles-post.php', 'siteorigin_panels_admin_enqueue_styles' );
 
+/**
+ * Add a help tab to the page, page.
+ */
+function siteorigin_panels_add_help_tab() {
+	$screen = get_current_screen();
+	if($screen->id != 'page') return;
+	
+	$screen->add_help_tab( array(
+		'id' => 'panels-help-tab', //unique id for the tab
+		'title' => __( 'Panels', 'siteorigin' ), //unique visible title for the tab
+		'callback' => 'siteorigin_panels_add_help_tab_content'
+	) );
+}
+add_action('load-page.php', 'siteorigin_panels_add_help_tab');
+add_action('load-post-new.php', 'siteorigin_panels_add_help_tab');
+
+/**
+ * Display the content for the help tab.
+ */
+function siteorigin_panels_add_help_tab_content(){
+	?>
+	<p><?php printf( __( 'Panels is a drag and drop page builder. You can find the <a href="%s">full documentation</a> on SiteOrigin.', 'siteorigin' ), 'http://siteorigin.com/doc/panels/' ) ?></p>
+	<?php
+}
 
 /**
  * Save the panels data

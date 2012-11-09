@@ -100,6 +100,7 @@ jQuery( function ( $ ) {
 
         dialog = $( '<div id="panel-dialog" />' ).addClass( 'dialog-form' )
             .html( formHtml ).dialog( {
+                dialogClass: 'panels-admin-dialog',
                 autoOpen:false,
                 modal:   true,
                 title:   ('Edit %s Panel').replace( '%s', $$.attr( 'data-title' ) ),

@@ -101,8 +101,13 @@
     background: url(images/icons/close.png);
 }
 
-.ui-dialog.panels-admin-dialog .ui-dialog-content{
+.ui-dialog.panels-admin-dialog .ui-dialog-content,
+.ui-dialog.panels-admin-dialog .ui-dialog-buttonpane{
     padding: 10px;
+}
+
+.ui-dialog.panels-admin-dialog .ui-dialog-buttonpane .ui-button{
+    margin-right: 5px;
 }
 
 .ui-dialog.panels-admin-dialog .ui-dialog-content input,

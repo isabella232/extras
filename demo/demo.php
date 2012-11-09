@@ -63,7 +63,7 @@ function siteorigin_demo_footer() {
 	?>
 	<div id="so-demo-mode-bar">
 		<div id="so-demo-mode-bar-wrapper">
-			<?php printf( __( "You're using %s in demo mode. <a href='%s'>Click here</a> to disable demo mode and start building your own site.", 'siteorigin' ), ucfirst( get_option( 'stylesheet' ) ), admin_url( 'themes.php?page=siteorigin_demo_mode_disable' ) ) ?>
+			<?php printf( __( "You're using %s in demo mode. <a href='%s'>Click here</a> to disable all demo content.", 'siteorigin' ), ucfirst( get_option( 'stylesheet' ) ), admin_url( 'themes.php?page=siteorigin_demo_mode_disable' ) ) ?>
 		</div>
 	</div>
 	<?php
