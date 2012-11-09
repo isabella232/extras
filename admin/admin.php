@@ -45,7 +45,10 @@ function siteorigin_adminbar_defaults( $bar ) {
 
 	if ( $screen->id == 'themes' && defined( 'SITEORIGIN_FIRST_RUN_ACTIVE' ) )
 		$bar = (object)array( 'id' => 'firstrun', 'message' => array( 'extras/admin/messages/message', 'firstrun' ) );
-
+	
+	if($screen->id == 'appearance_page_custom-background')
+		$bar = (object)array( 'id' => 'custom-background', 'message' => array( 'extras/admin/messages/message', 'background' ) );
+	
 	return $bar;
 }
 add_filter( 'siteorigin_adminbar', 'siteorigin_adminbar_defaults' );
