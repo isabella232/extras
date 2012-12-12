@@ -11,7 +11,7 @@ jQuery( function ( $ ) {
             .appendTo( '#slider-builder-slides' );
 
         newSlide.find( '.slide-content' ).hide();
-        $( '#slider-builder-slides' ).sortable( "refresh" );
+        $( '#slider-builder-slides' ).filter(':data(sortable)').sortable( "refresh" );
         updateMedia( newSlide );
 
 
