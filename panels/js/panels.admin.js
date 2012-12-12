@@ -262,6 +262,7 @@ jQuery( function ( $ ) {
     }
 
     $( window ).resize( function () {
+        // When the window is resized, we want to center any panels-admin-dialog dialogs
         $( '.panels-admin-dialog' ).filter( ':data(dialog)' ).dialog( 'option', 'position', 'center' );
     } );
 
