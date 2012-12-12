@@ -2,13 +2,13 @@ jQuery( function ( $ ) {
     // Create the main dialog
     $( '#panels-dialog' ).show().dialog( {
         dialogClass: 'panels-admin-dialog',
-        autoOpen: false,
-        resizable:false,
-        draggable:false,
-        modal:    true,
-        title:    $( '#panels-dialog' ).attr( 'data-title' ),
-        minWidth: 960,
-        close:    function () {
+        autoOpen:    false,
+        resizable:   false,
+        draggable:   false,
+        modal:       true,
+        title:       $( '#panels-dialog' ).attr( 'data-title' ),
+        minWidth:    960,
+        close:       function () {
             $( '#panels-container .panel.new-panel' ).hide().fadeIn( 'slow' ).removeClass( 'new-panel' );
         }
     } ).find( '.panel-type' ).disableSelection();
@@ -16,8 +16,8 @@ jQuery( function ( $ ) {
     // The button for adding a panel
     $( '#panels .panels-add' )
         .button( {
-            icons:{primary:'ui-icon-add'},
-            text: false
+            icons: {primary: 'ui-icon-add'},
+            text:  false
         } )
         .click( function () {
             $( '#panels-dialog' ).dialog( 'open' );
@@ -27,8 +27,8 @@ jQuery( function ( $ ) {
     // The button for adding a grid
     $( '#panels .grid-add' )
         .button( {
-            icons:{primary:'ui-icon-columns'},
-            text: false
+            icons: {primary: 'ui-icon-columns'},
+            text:  false
         } )
         .click( function () {
             $( '#grid-add-dialog' ).dialog( 'open' );
@@ -41,6 +41,8 @@ jQuery( function ( $ ) {
      * Create a new panel
      *
      * @param type
+     * @param {} Initial data.
+     *
      * @return {*}
      */
     var createPanel = function ( type, data ) {
@@ -57,8 +59,8 @@ jQuery( function ( $ ) {
         panel
             .data( {
                 // We need this data to update the title
-                'title-field':$$.attr( 'data-title-field' ),
-                'title':      $$.attr( 'data-title' )
+                'title-field': $$.attr( 'data-title-field' ),
+                'title':       $$.attr( 'data-title' )
             } )
             .find( 'h4' ).click( function () {
                 dialog.dialog( 'open' );
@@ -78,6 +80,7 @@ jQuery( function ( $ ) {
                 dialog.dialog( 'close' );
             }
         };
+
         // The done button
         dialogButtons[panelsLoc.buttons['done']] = function () {
             $( this ).trigger( 'panelsdone' );
@@ -98,14 +101,15 @@ jQuery( function ( $ ) {
             dialog.dialog( 'close' );
         }
 
-        dialog = $( '<div id="panel-dialog" />' ).addClass( 'dialog-form' )
-            .html( formHtml ).dialog( {
+        dialog = $( '<div class="dialog-form"></div>' )
+            .html( formHtml )
+            .dialog( {
                 dialogClass: 'panels-admin-dialog',
-                autoOpen:false,
-                modal:   true,
-                title:   ('Edit %s Panel').replace( '%s', $$.attr( 'data-title' ) ),
-                minWidth:700,
-                open:    function () {
+                autoOpen:    false,
+                modal:       true,
+                title:       ('Edit %s Panel').replace( '%s', $$.attr( 'data-title' ) ),
+                minWidth:    700,
+                open:        function () {
                     // Transfer the values of the form to the dialog
                     panel.find( '.form *[name]' ).not( '[data-info-field]' ).each( function () {
                         var f = dialog.find( '*[name="' + $( this ).attr( 'name' ) + '"]' );
@@ -119,7 +123,7 @@ jQuery( function ( $ ) {
                     // This gives panel types a chance to influence the form
                     $( this ).trigger( 'panelsopen' );
                 },
-                buttons: dialogButtons
+                buttons:     dialogButtons
             } );
 
         dialog.find( 'label' ).each( function () {
@@ -183,19 +187,21 @@ jQuery( function ( $ ) {
     }
 
     // Handle filtering in the panels dialog
-    $( '#panels-text-filter-input' ).keyup(function () {
-        var value = $( this ).val();
-        // Filter the panels
-        $( '#panels-dialog .panel-type-list .panel-type' )
-            .show()
-            .each( function () {
-                if ( value == '' ) return;
+    $( '#panels-text-filter-input' )
+        .keyup( function () {
+            var value = $( this ).val();
+            // Filter the panels
+            $( '#panels-dialog .panel-type-list .panel-type' )
+                .show()
+                .each( function () {
+                    if ( value == '' ) return;
 
-                if ( $( this ).find( 'h3' ).html().toLowerCase().indexOf( value ) == -1 ) {
-                    $( this ).hide();
-                }
-            } )
-    } ).click( function () {
+                    if ( $( this ).find( 'h3' ).html().toLowerCase().indexOf( value ) == -1 ) {
+                        $( this ).hide();
+                    }
+                } )
+        } )
+        .click( function () {
             $( this ).keyup()
         } );
 
@@ -256,7 +262,7 @@ jQuery( function ( $ ) {
     }
 
     $( window ).resize( function () {
-        $( '.panels-admin-dialog' ).dialog( "option", "position", "center" );
+        $( '.panels-admin-dialog' ).filter( ':data(dialog)' ).dialog( 'option', 'position', 'center' );
     } );
 
     // This is the part where we move the panels box into a tab of the content editor
@@ -271,22 +277,22 @@ jQuery( function ( $ ) {
             switchEditors.go();
         } ).end()
         .prepend(
-        $( '<a id="content-panels" class="hide-if-no-js wp-switch-editor switch-panels">' + $( '#so-panels-panels h3.hndle span' ).html() + '</a>' )
-            .click( function () {
-                var $$ = $( this );
-                // This is so the inactive tabs dont show as active
-                $( '#wp-content-wrap' ).removeClass( 'tmce-active html-active' );
+            $( '<a id="content-panels" class="hide-if-no-js wp-switch-editor switch-panels">' + $( '#so-panels-panels h3.hndle span' ).html() + '</a>' )
+                .click( function () {
+                    var $$ = $( this );
+                    // This is so the inactive tabs dont show as active
+                    $( '#wp-content-wrap' ).removeClass( 'tmce-active html-active' );
 
-                // Hide all the standard content editor stuff
-                $( '#wp-content-editor-container, #post-status-info' ).hide();
+                    // Hide all the standard content editor stuff
+                    $( '#wp-content-editor-container, #post-status-info' ).hide();
 
-                $( '#so-panels-panels' ).show();
-                $( '#content-panels' ).addClass( 'panels-tab-active' );
+                    $( '#so-panels-panels' ).show();
+                    $( '#content-panels' ).addClass( 'panels-tab-active' );
 
-                // Trigger a window resize to make sure all the columns are properly laid out
-                $( window ).resize();
-            } )
-    )
+                    // Trigger a window resize to make sure all the columns are properly laid out
+                    $( window ).resize();
+                } )
+        )
 
     if ( typeof panelsData != 'undefined' ) {
         setTimeout( function () {

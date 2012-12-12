@@ -90,7 +90,6 @@ function siteorigin_panels_admin_enqueue_styles() {
 	$screen = get_current_screen();
 	if ( $screen->id != 'page' ) return;
 
-	wp_enqueue_style( "wp-jquery-ui-dialog" );
 	wp_enqueue_style( 'so-panels-jquery-ui', get_template_directory_uri() . '/extras/panels/css/jquery-ui-theme.css' );
 	wp_enqueue_style( 'so-panels-admin', get_template_directory_uri() . '/extras/panels/css/panels-admin.css' );
 	wp_enqueue_style( 'so-panels-icon', get_template_directory_uri() . '/extras/panels/css/panels-icon.css' );
