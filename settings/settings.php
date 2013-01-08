@@ -69,9 +69,15 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 	wp_localize_script( 'siteorigin-settings', 'soSettings', array(
 		'tab' => get_theme_mod( '_theme_settings_current_tab', 0 ),
 	) );
-
-	wp_enqueue_style( 'farbtastic' );
-	wp_enqueue_script( 'farbtastic' );
+	
+	if(wp_script_is('wp-color-picker', 'registered')){
+		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_script( 'wp-color-picker' );
+	}
+	else{
+		wp_enqueue_style( 'farbtastic' );
+		wp_enqueue_script( 'farbtastic' );
+	}
 }
 
 /**
@@ -201,14 +207,19 @@ function siteorigin_settings_field( $args ) {
 			break;
 
 		case 'color' :
-			?>
-			<div class="colorpicker-wrapper">
-				<div class="color-indicator" style="background-color: <?php echo esc_attr( $current ) ?>"></div>
-				<input type="text" id="<?php echo esc_attr( $field_id ) ?>" value="<?php echo esc_attr( $current ) ?>" name="<?php echo esc_attr( $field_name ) ?>" />
+			if(wp_script_is('wp-color-picker', 'registered')){
+				?><input type="text" value="<?php echo esc_attr( $current ) ?>" class="color-field" /><?php
+			}
+			else{
+				?>
+				<div class="colorpicker-wrapper">
+					<div class="color-indicator" style="background-color: <?php echo esc_attr( $current ) ?>"></div>
+					<input type="text" id="<?php echo esc_attr( $field_id ) ?>" value="<?php echo esc_attr( $current ) ?>" name="<?php echo esc_attr( $field_name ) ?>" />
 
-				<div class="farbtastic-container"></div>
-			</div>
-			<?php
+					<div class="farbtastic-container"></div>
+				</div>
+				<?php
+			}
 			break;
 
 		case 'teaser' :
