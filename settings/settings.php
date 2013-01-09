@@ -200,10 +200,10 @@ function siteorigin_settings_field( $args ) {
 			?>
 			<select id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>">
 				<?php foreach ( $args['options'] as $option_id => $label ) : ?>
-				<option value="<?php echo esc_attr( $option_id ) ?>" <?php selected( $option_id, $current ) ?>><?php echo esc_attr( $label ) ?></option>
+					<option value="<?php echo esc_attr( $option_id ) ?>" <?php selected( $option_id, $current ) ?>><?php echo esc_attr( $label ) ?></option>
 				<?php endforeach ?>
 			</select>
-				<?php
+			<?php
 			break;
 
 		case 'textarea' :

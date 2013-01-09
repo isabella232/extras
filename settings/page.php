@@ -1,6 +1,6 @@
 <div class="wrap">
-	<div id="icon-themes" class="icon32"><br></div>
-	<h2><?php _e( 'Theme Settings', 'siteorigin' ) ?></h2>
+	<div id="icon-options-general" class="icon32"><br></div>
+	<h2><?php printf(__( '%s Theme Settings', 'siteorigin' ), ucfirst(basename(get_template()))) ?></h2>
 	
 	<?php siteorigin_settings_change_message(); ?>
 	

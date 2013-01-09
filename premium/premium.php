@@ -76,7 +76,7 @@ function siteorigin_premium_page_render() {
 				<?php if ( isset( $premium['buy_url'] ) ) : ?>
 				<p class="download">
 					<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
-						<span><?php _e('Download Now', 'siteorigin') ?></span><em><?php echo $premium['buy_price'] ?></em>
+						<span><?php _e('Buy Upgrade', 'siteorigin') ?></span><em><?php echo $premium['buy_price'] ?></em>
 					</a>
 					<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
 				</p>
@@ -97,7 +97,7 @@ function siteorigin_premium_page_render() {
 				<?php if ( isset( $premium['buy_url'] ) ) : ?>
 				<p class="download">
 					<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
-						<span><?php _e('Download Now', 'siteorigin') ?></span><em><?php echo $premium['buy_price'] ?></em>
+						<span><?php _e('Buy Upgrade', 'siteorigin') ?></span><em><?php echo $premium['buy_price'] ?></em>
 					</a>
 					<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
 				</p>
@@ -206,5 +206,28 @@ function siteorigin_premium_admin_enqueue( $prefix ) {
 	wp_enqueue_script( 'siteorigin-premium-upgrade', get_template_directory_uri() . '/extras/premium/premium.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_style( 'siteorigin-premium-upgrade', get_template_directory_uri() . '/extras/premium/premium.css', array(), SITEORIGIN_THEME_VERSION );
 }
-
 add_action( 'admin_enqueue_scripts', 'siteorigin_premium_admin_enqueue' );
+
+function siteorigin_premium_enqueue_notification_style(){
+	wp_enqueue_style( 'siteorigin-premium-notification', get_template_directory_uri() . '/extras/premium/premium-notification.css', array(), SITEORIGIN_THEME_VERSION );
+}
+
+function siteorigin_premium_call_function($callback, $param_array, $args = array()){
+	if(defined('SITEORIGIN_IS_PREMIUM') && function_exists($callback)){
+		call_user_func_array($callback, $param_array);
+	}
+	else{
+		$theme = basename( get_template_directory() );
+		if(!empty($args['before'])) echo $args['before'];
+		?>
+		<a class="siteorigin-premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>">
+			<em></em>
+			<?php printf( __( 'This feature is available in <strong>%s Premium</strong> - <strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ), ucfirst($theme) ) ?>
+		</a>
+		<?php if(!empty($args['description'])) : ?>
+		<div class="siteorigin-premium-teaser-description"><?php echo $args['description'] ?></div>
+		<?php
+		endif;
+		if(!empty($args['after'])) echo $args['after'];
+	}
+}

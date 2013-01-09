@@ -135,6 +135,19 @@
 }
 
 #theme-upgrade .buy-button:hover{
+	background: #cee688;
+	background: -moz-linear-gradient(top,  #cee688 0%, #a3d25a 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cee688), color-stop(100%,#a3d25a));
+	background: -webkit-linear-gradient(top,  #cee688 0%,#a3d25a 100%);
+	background: -o-linear-gradient(top,  #cee688 0%,#a3d25a 100%);
+	background: -ms-linear-gradient(top,  #cee688 0%,#a3d25a 100%);
+	background: linear-gradient(to bottom,  #cee688 0%,#a3d25a 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cee688', endColorstr='#a3d25a',GradientType=0 );
+
+	box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.25);
+}
+
+#theme-upgrade .buy-button:active{
 	background: #b3d46c;
 	background: -moz-linear-gradient(top,  #b3d46c 0%, #bbd975 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b3d46c), color-stop(100%,#bbd975));
@@ -143,11 +156,7 @@
 	background: -ms-linear-gradient(top,  #b3d46c 0%,#bbd975 100%);
 	background: linear-gradient(to bottom,  #b3d46c 0%,#bbd975 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3d46c', endColorstr='#bbd975',GradientType=0 );
-	
-	box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.25);
-}
 
-#theme-upgrade .buy-button:active{
 	margin-top: 1px;
 	margin-bottom: -1px;
 	outline: none;
@@ -167,7 +176,7 @@
 }
 
 #theme-upgrade .buy-button:hover span{
-	text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+	text-shadow: 0 1px 2px rgba(0,0,0,0.425);
 }
 
 #theme-upgrade .buy-button em{
