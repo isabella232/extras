@@ -15,4 +15,11 @@ jQuery( function ( $ ) {
         $( '#theme-upgrade-info' ).slideToggle();
         return false;
     } );
+    
+    // Set up the testimonial cycle
+    $('#theme-upgrade .testimonials' ).cycle({
+        fx: 'fade',
+        random: true,
+        timeout : 5000
+    });
 } );

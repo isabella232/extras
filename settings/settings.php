@@ -261,7 +261,7 @@ function siteorigin_settings_field( $args ) {
 			?>
 			<a class="premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>">
 				<em></em>
-				<?php printf( __( 'This setting available in <strong>%s Premium</strong> - <strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ), ucfirst($theme) ) ?>
+				<?php printf( __( 'This setting is available in <strong>%s Premium</strong> - <strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ), ucfirst($theme) ) ?>
 			</a>
 			<?php
 			break;

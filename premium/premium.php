@@ -55,7 +55,11 @@ function siteorigin_premium_page_render() {
 							__( "After you pay for %s Premium, we'll email you a download link and an order number to your <strong>PayPal email address</strong>. ", 'siteorigin' ) ,
 							ucfirst( $theme )
 						);
-						_e( 'You can install manually, or enter your order number here to enable an automatic upgrade.', 'siteorigin' );
+						printf(
+							__( "Use <a href='%s' target='_blank'>this form</a> if you don't receive your order number in the next 15 minutes. ", 'siteorigin' ) ,
+							'http://siteorigin.com/orders/'
+						);
+						_e( 'Be sure to check your spam folder.', 'siteorigin' );
 						?>
 					</p>
 
@@ -65,7 +69,7 @@ function siteorigin_premium_page_render() {
 					<?php wp_nonce_field( 'save_order_number', '_upgrade_nonce' ) ?>
 				</form>
 				
-				<a href="#" id="theme-upgrade-already-paid"><?php _e( 'Already Paid?', 'siteorigin' ) ?></a>
+				<a href="#" id="theme-upgrade-already-paid" class="button"><?php _e( 'Already Paid?', 'siteorigin' ) ?></a>
 				<?php if ( isset( $premium['premium_title'] ) ) : ?><h2><?php echo $premium['premium_title'] ?></h2><?php endif; ?>
 				<?php if ( isset( $premium['premium_summary'] ) ) : ?><p><?php echo $premium['premium_summary'] ?></p><?php endif; ?>
 
@@ -98,7 +102,21 @@ function siteorigin_premium_page_render() {
 					<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
 				</p>
 				<?php endif; ?>
-
+				
+				<?php if(!empty($premium['testimonials'])): ?>
+					<ul class="testimonials">
+						<?php foreach($premium['testimonials'] as $testimonial) : ?>
+							<li>
+								<div class="avatar" style="background-image: url(http://www.gravatar.com/avatar/<?php echo esc_attr($testimonial['gravatar']) ?>?d=identicon&s=55)"></div>
+								<div class="text">
+									<div class="content"><?php echo $testimonial['content'] ?></div>
+									<div class="name"><?php echo $testimonial['name'] ?></div>
+								</div>
+								<div class="clear"></div>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				<?php endif; ?>
 			</div>
 			<div id="magnifier">
 				<div class="image"></div>
@@ -184,6 +202,7 @@ function siteorigin_premium_admin_enqueue( $prefix ) {
 	if ( $prefix != 'appearance_page_premium_upgrade' ) return;
 
 	wp_enqueue_script( 'siteorigin-magnifier', get_template_directory_uri() . '/extras/premium/magnifier.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+	wp_enqueue_script( 'siteorigin-cycle', get_template_directory_uri() . '/extras/premium/cycle.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_script( 'siteorigin-premium-upgrade', get_template_directory_uri() . '/extras/premium/premium.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_style( 'siteorigin-premium-upgrade', get_template_directory_uri() . '/extras/premium/premium.css', array(), SITEORIGIN_THEME_VERSION );
 }
