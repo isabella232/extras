@@ -50,6 +50,14 @@ jQuery( function ( $ ) {
         return false;
     });
     
+    $('.media-field-wrapper' )
+        .mouseenter(function(){
+            if($(this ).closest('td').find('input[type=hidden]' ).val() != '') $(this ).find('.media-remove-button').fadeIn();
+        })
+        .mouseleave(function(){
+            $(this ).find('.media-remove-button').fadeOut('fast');
+        })
+    
     $('.media-field-wrapper .current' )
         .mouseenter(function(){
             var t = $(this ).find('.title' );
@@ -61,13 +69,15 @@ jQuery( function ( $ ) {
             $(this ).find('.title' ).clearQueue().fadeOut('fast');
         })
     
-    $('a.media-remove-button' ).click(function(){
-        var $$ = $(this ).closest('td');
-        
-        $$.find('.current .title' ).html('');
-        $$.find('input[type=hidden]' ).val('');
-        $$.find('.current .thumbnail' ).fadeOut('fast');
-    })
+    $('a.media-remove-button' )
+        .click(function(){
+            var $$ = $(this ).closest('td');
+            
+            $$.find('.current .title' ).html('');
+            $$.find('input[type=hidden]' ).val('');
+            $$.find('.current .thumbnail' ).fadeOut('fast');
+            $(this ).fadeOut('fast');
+        });
     
     // We're going to use jQuery to transform the settings page into a tabbed interface
     var $$ = $( 'form[action="options.php"]' );

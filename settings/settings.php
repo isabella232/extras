@@ -259,9 +259,10 @@ function siteorigin_settings_field( $args ) {
 		case 'teaser' :
 			$theme = basename( get_template_directory() );
 			?>
-			<div class="premium-teaser">
-				<?php printf( __( 'Upgrade to <a href="%s">%s Premium</a> to unlock this setting', 'siteorigin' ), admin_url( 'themes.php?page=premium_upgrade' ) , ucfirst($theme)) ?>
-			</div>
+			<a class="premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>">
+				<em></em>
+				<?php printf( __( 'This setting available in <strong>%s Premium</strong> - <strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ), ucfirst($theme) ) ?>
+			</a>
 			<?php
 			break;
 
