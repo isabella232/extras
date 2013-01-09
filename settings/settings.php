@@ -63,6 +63,7 @@ function siteorigin_settings_render() {
  */
 function siteorigin_settings_enqueue_scripts( $prefix ) {
 	if ( $prefix != 'appearance_page_theme_settings_page' ) return;
+	
 	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/settings.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/settings.css', array(), SITEORIGIN_THEME_VERSION );
 
@@ -78,6 +79,9 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 		wp_enqueue_style( 'farbtastic' );
 		wp_enqueue_script( 'farbtastic' );
 	}
+	
+	// This is for the media uploader
+	wp_enqueue_media();
 }
 
 /**
@@ -221,11 +225,42 @@ function siteorigin_settings_field( $args ) {
 				<?php
 			}
 			break;
+		
+		case 'media':
+			if(version_compare(get_bloginfo('version'), '3.5', '<')){
+				printf(__('You need to <a href="%s">upgrade</a> to WordPress 3.5 to use media fields', 'siteorigin'), admin_url('update-core.php'));
+				break;
+			}
+			
+			if(!empty($current)) {
+				$post = get_post($current);
+				$src = wp_get_attachment_image_src($current, 'thumbnail');
+				if(empty($src)) $src = wp_get_attachment_image_src($current, 'thumbnail', true);
+			}
+			?>
+				<div class="media-field-wrapper">
+					<div class="current">
+						<div class="thumbnail-wrapper">
+							<img src="<?php echo esc_url($src[0]) ?>" class="thumbnail" <?php if(empty($post)) echo "style='display:none'" ?> />
+						</div>
+						<div class="title"><?php echo esc_attr($post->post_title) ?></div>
+					</div>
+					<a href="#" class="media-upload-button">
+						<?php _e('Select Media', 'siteorigin') ?>
+					</a>
 
+					<a href="#" class="media-remove-button"><?php _e('Remove', 'siteorigin') ?></a>
+				</div>
+
+				<input type="hidden" id="<?php echo esc_attr( $field_id ) ?>" value="<?php echo esc_attr( $current ) ?>" name="<?php echo esc_attr( $field_name ) ?>" />
+			<?php
+			break;
+		
 		case 'teaser' :
+			$theme = basename( get_template_directory() );
 			?>
 			<div class="premium-teaser">
-				<?php printf( __( '<a href="%s">Premium version</a> only', 'siteorigin' ), admin_url( 'themes.php?page=premium_upgrade' ) ) ?>
+				<?php printf( __( 'Upgrade to <a href="%s">%s Premium</a> to unlock this setting', 'siteorigin' ), admin_url( 'themes.php?page=premium_upgrade' ) , ucfirst($theme)) ?>
 			</div>
 			<?php
 			break;
@@ -311,7 +346,7 @@ function siteorigin_settings_theme_help(){
 	$text = sprintf(
 		__( "Read %s's <a href='%s'>theme documentation</a> for help with these settings.", 'siteorigin' ),
 		ucfirst($theme_name),
-		'http://siteorigin.com/doc/'.$theme_name.'/'
+		'http://support.siteorigin.com/'.$theme_name.'/'
 	); 
 	
 	$screen->add_help_tab( array(
@@ -320,6 +355,27 @@ function siteorigin_settings_theme_help(){
 		'content' => '<p>' . $text . '</p>',
 	) );
 }
+
+function siteorigin_settings_media_view_strings($strings, $post){
+	if(!empty($post)) return $strings;
+	$screen = get_current_screen();
+	if($screen->id != 'appearance_page_theme_settings_page') return $strings;
+	
+	// Remove these strings, to remove the tabs
+	// Luckily the JS gracefully handles these being unset
+	unset($strings['createNewGallery']);
+	unset($strings['createGalleryTitle']);
+	unset($strings['insertFromUrlTitle']);
+	
+	$strings['insertIntoPost'] = __('Set Media File', 'siteorigin');
+	
+	//var_dump($strings);
+	//die();
+	
+	
+	return $strings;
+}
+add_filter('media_view_strings', 'siteorigin_settings_media_view_strings', 10, 2);
 
 /**
  * Settings validators.

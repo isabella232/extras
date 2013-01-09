@@ -27,7 +27,48 @@ jQuery( function ( $ ) {
                 } );
         } );
     }
+    
+    // Handle the media uploader
+    $('a.media-upload-button' ).click(function(){
+        var $$ = $(this ).closest('td');
+        wp.media.editor.open('settings');
 
+        // We want our own insert into post handler
+        wp.media.editor.send.attachment = function(props, attachment){
+            console.log(attachment);
+            $$.find('.current .title' ).html(attachment.title);
+            $$.find('input[type=hidden]' ).val(attachment.id);
+            
+            if(typeof attachment.sizes != 'undefined'){
+                $$.find('.current .thumbnail' ).attr('src', attachment.sizes.thumbnail.url).fadeIn();
+            }
+            else{
+                $$.find('.current .thumbnail' ).attr('src', attachment.icon).fadeIn();
+            }
+        }
+        
+        return false;
+    });
+    
+    $('.media-field-wrapper .current' )
+        .mouseenter(function(){
+            var t = $(this ).find('.title' );
+            if( t.html() != ''){
+                t.fadeIn('fast');
+            }
+        })
+        .mouseleave(function(){
+            $(this ).find('.title' ).clearQueue().fadeOut('fast');
+        })
+    
+    $('a.media-remove-button' ).click(function(){
+        var $$ = $(this ).closest('td');
+        
+        $$.find('.current .title' ).html('');
+        $$.find('input[type=hidden]' ).val('');
+        $$.find('.current .thumbnail' ).fadeOut('fast');
+    })
+    
     // We're going to use jQuery to transform the settings page into a tabbed interface
     var $$ = $( 'form[action="options.php"]' );
     var tabs = $( '<h2></h2>' ).addClass( 'nav-tab-wrapper' ).prependTo( $$ );
