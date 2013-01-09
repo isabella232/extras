@@ -33,7 +33,7 @@
 	display: inline-block;
 	position: relative;
 
-	padding: 10px 15px 10px 30px;
+	padding: 10px 15px 10px 29px;
 	line-height: 1em;
 	background: #f4f4f4;
 	background: -moz-linear-gradient(top,  #f9f9f9 0%, #f2f2f2 100%);
@@ -61,11 +61,11 @@
 
 .premium-teaser em{
 	position: absolute;
-	left: 8px;
+	left: 9px;
 	top: 50%;
-	width: 14px;
-	height: 15px;
-	margin-top: -7px;
+	width: 12px;
+	height: 13px;
+	margin-top: -6px;
 	background: url(img/upgrade.png) no-repeat;
 }
 
