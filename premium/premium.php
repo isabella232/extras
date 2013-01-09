@@ -52,10 +52,10 @@ function siteorigin_premium_page_render() {
 					<p>
 						<?php
 						printf(
-							__( "After you pay for %s Premium, we'll email you a download link and an order number to your <strong>PayPal email address</strong>. ", 'siteorigin' ) .
-								__( 'You can install manually, or enter your order number here to enable an automatic upgrade.', 'siteorigin' ),
+							__( "After you pay for %s Premium, we'll email you a download link and an order number to your <strong>PayPal email address</strong>. ", 'siteorigin' ) ,
 							ucfirst( $theme )
 						);
+						_e( 'You can install manually, or enter your order number here to enable an automatic upgrade.', 'siteorigin' );
 						?>
 					</p>
 
@@ -64,34 +64,38 @@ function siteorigin_premium_page_render() {
 					<input type="submit" value="<?php esc_attr_e( 'Enable Upgrade', 'siteorigin' ) ?>" />
 					<?php wp_nonce_field( 'save_order_number', '_upgrade_nonce' ) ?>
 				</form>
-
+				
 				<a href="#" id="theme-upgrade-already-paid"><?php _e( 'Already Paid?', 'siteorigin' ) ?></a>
 				<?php if ( isset( $premium['premium_title'] ) ) : ?><h2><?php echo $premium['premium_title'] ?></h2><?php endif; ?>
 				<?php if ( isset( $premium['premium_summary'] ) ) : ?><p><?php echo $premium['premium_summary'] ?></p><?php endif; ?>
 
-				<?php if ( isset( $premium['buy_button'] ) && isset( $premium['buy_url'] ) ) : ?>
+				<?php if ( isset( $premium['buy_url'] ) ) : ?>
 				<p class="download">
-					<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button"><img src="<?php echo esc_url( $premium['buy_button'] ) ?>" /></a>
-					<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
+					<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
+						<span><?php _e('Download Now', 'siteorigin') ?></span><em><?php echo $premium['buy_price'] ?></em>
+					</a>
+					<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
 				</p>
 				<?php endif; ?>
 
 				<?php if ( !empty( $premium['featured'] ) ) : ?>
-				<p id="promo-image">
-					<img src="<?php echo esc_url( $premium['featured'][ 0 ] ) ?>" width="<?php echo intval( $premium['featured'][ 1 ] ) ?>" height="<?php echo intval( $premium['featured'][ 2 ] ) ?>" class="magnify" />
-				</p>
+					<p id="promo-image">
+						<img src="<?php echo esc_url( $premium['featured'][ 0 ] ) ?>" width="<?php echo intval( $premium['featured'][ 1 ] ) ?>" height="<?php echo intval( $premium['featured'][ 2 ] ) ?>" class="magnify" />
+					</p>
 				<?php endif; ?>
 				<div class="content">
 					<?php if ( !empty( $premium['features'] ) ) : foreach ( $premium['features'] as $feature ) : ?>
-					<h3><?php echo $feature['heading'] ?></h3>
-					<p><?php echo $feature['content'] ?></p>
+						<h3><?php echo $feature['heading'] ?></h3>
+						<p><?php echo $feature['content'] ?></p>
 					<?php endforeach; endif; ?>
 				</div>
 
-				<?php if ( isset( $premium['buy_button'] ) && isset( $premium['buy_url'] ) ) : ?>
+				<?php if ( isset( $premium['buy_url'] ) ) : ?>
 				<p class="download">
-					<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button"><img src="<?php echo esc_url( $premium['buy_button'] ) ?>" /></a>
-					<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
+					<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
+						<span><?php _e('Download Now', 'siteorigin') ?></span><em><?php echo $premium['buy_price'] ?></em>
+					</a>
+					<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
 				</p>
 				<?php endif; ?>
 
