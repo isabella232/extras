@@ -41,6 +41,8 @@
 }
 
 .siteorigin-premium-teaser:active{
+	color: #476118;
+
     background: #b3d46c;
     background: -moz-linear-gradient(top,  #b3d46c 0%, #bbd975 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b3d46c), color-stop(100%,#bbd975));

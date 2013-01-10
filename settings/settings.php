@@ -63,6 +63,9 @@ function siteorigin_settings_render() {
  */
 function siteorigin_settings_enqueue_scripts( $prefix ) {
 	if ( $prefix != 'appearance_page_theme_settings_page' ) return;
+
+	// This is for the premium update notifications
+	siteorigin_premium_enqueue_notification_style();
 	
 	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/settings.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/settings.css', array(), SITEORIGIN_THEME_VERSION );
@@ -259,7 +262,7 @@ function siteorigin_settings_field( $args ) {
 		case 'teaser' :
 			$theme = basename( get_template_directory() );
 			?>
-			<a class="premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>">
+			<a class="premium-teaser siteorigin-premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>">
 				<em></em>
 				<?php printf( __( 'This setting is available in <strong>%s Premium</strong> - <strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ), ucfirst($theme) ) ?>
 			</a>

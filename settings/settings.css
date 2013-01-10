@@ -25,55 +25,9 @@
 
 /* @group Premium Teaser */
 
-
-
 .premium-teaser{
-	text-decoration: none;
-	color: #666;
-	display: inline-block;
-	position: relative;
-
-	padding: 10px 15px 10px 29px;
-	line-height: 1em;
-	background: #f4f4f4;
-	background: -moz-linear-gradient(top,  #f9f9f9 0%, #f2f2f2 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#f2f2f2));
-	background: -webkit-linear-gradient(top,  #f9f9f9 0%,#f2f2f2 100%);
-	background: -o-linear-gradient(top,  #f9f9f9 0%,#f2f2f2 100%);
-	background: -ms-linear-gradient(top,  #f9f9f9 0%,#f2f2f2 100%);
-	background: linear-gradient(to bottom,  #f9f9f9 0%,#f2f2f2 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#f2f2f2',GradientType=0 );
-	
-	
-	border-radius: 3px;
-	border: 1px solid #bbbbbb;
-	text-shadow: 0 1px 0 #FFF;
-	
-	box-shadow: 0 1px 2px rgba(0,0,0,0.115);
+    display: inline-block;
 }
-
-.premium-teaser:hover{
-	color: #555;
-	
-	background: #FAFAFA;
-	box-shadow: 0 1px 2px rgba(0,0,0,0.15);
-}
-
-.premium-teaser em{
-	position: absolute;
-	left: 9px;
-	top: 50%;
-	width: 12px;
-	height: 13px;
-	margin-top: -6px;
-	background: url(img/upgrade.png) no-repeat;
-}
-
-.premium-teaser strong{
-	color: #505050;
-}
-
-
 
 /* @end */
 
@@ -200,8 +154,3 @@
 	color: #BC0B0B;
 }
 /* @end */
-
-.premium-teaser .upgrade{
-	font-weight: bold;
-	color: #21759B;
-}
