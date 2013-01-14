@@ -23,14 +23,6 @@
     z-index: 2;
 }
 
-/* @group Premium Teaser */
-
-.premium-teaser{
-    display: inline-block;
-}
-
-/* @end */
-
 /* @group Media Field */
 
 .media-field-wrapper {

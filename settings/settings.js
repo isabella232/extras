@@ -40,7 +40,10 @@ jQuery( function ( $ ) {
             $$.find('input[type=hidden]' ).val(attachment.id);
             
             if(typeof attachment.sizes != 'undefined'){
-                $$.find('.current .thumbnail' ).attr('src', attachment.sizes.thumbnail.url).fadeIn();
+                if(typeof attachment.sizes.thumbnail != 'undefined')
+                    $$.find('.current .thumbnail' ).attr('src', attachment.sizes.thumbnail.url).fadeIn();
+                else
+                    $$.find('.current .thumbnail' ).attr('src', attachment.sizes.full.url).fadeIn();
             }
             else{
                 $$.find('.current .thumbnail' ).attr('src', attachment.icon).fadeIn();
@@ -52,7 +55,7 @@ jQuery( function ( $ ) {
     
     $('.media-field-wrapper' )
         .mouseenter(function(){
-            if($(this ).closest('td').find('input[type=hidden]' ).val() != '') $(this ).find('.media-remove-button').fadeIn();
+            if($(this ).closest('td').find('input[type=hidden]' ).val() != '') $(this ).find('.media-remove-button').fadeIn('fast');
         })
         .mouseleave(function(){
             $(this ).find('.media-remove-button').fadeOut('fast');
@@ -100,7 +103,15 @@ jQuery( function ( $ ) {
 
         if ( i == soSettings.tab ) a.click();
     } );
-
+    
+    // Autofill
+    $('.input-field-select')
+        .change(function(){
+            var c = $(this ).closest('td' ).find('input');
+            c.val($(this ).val());
+            $(this ).val('')
+        });
+    
     setTimeout( function () {
         $( '#setting-updated' ).slideUp();
     }, 5000 );

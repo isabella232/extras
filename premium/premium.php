@@ -75,9 +75,11 @@ function siteorigin_premium_page_render() {
 
 				<?php if ( isset( $premium['buy_url'] ) ) : ?>
 				<p class="download">
-					<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
-						<span><?php _e('Buy Upgrade', 'siteorigin') ?></span><em><?php echo $premium['buy_price'] ?></em>
-					</a>
+					<span class="buy-button-wrapper">
+						<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
+							<span><?php _e('Buy Upgrade', 'siteorigin') ?></span><em><?php echo $premium['buy_price'] ?></em>
+						</a>
+					</span>
 					<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
 				</p>
 				<?php endif; ?>
@@ -96,9 +98,11 @@ function siteorigin_premium_page_render() {
 
 				<?php if ( isset( $premium['buy_url'] ) ) : ?>
 				<p class="download">
-					<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
-						<span><?php _e('Buy Upgrade', 'siteorigin') ?></span><em><?php echo $premium['buy_price'] ?></em>
-					</a>
+					<span class="buy-button-wrapper">
+						<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
+							<span><?php _e('Buy Upgrade', 'siteorigin') ?></span><em><?php echo $premium['buy_price'] ?></em>
+						</a>
+					</span>
 					<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
 				</p>
 				<?php endif; ?>
@@ -208,8 +212,9 @@ function siteorigin_premium_admin_enqueue( $prefix ) {
 }
 add_action( 'admin_enqueue_scripts', 'siteorigin_premium_admin_enqueue' );
 
-function siteorigin_premium_enqueue_notification_style(){
-	wp_enqueue_style( 'siteorigin-premium-notification', get_template_directory_uri() . '/extras/premium/premium-notification.css', array(), SITEORIGIN_THEME_VERSION );
+function siteorigin_premium_enqueue_teaser(){
+	wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
+	wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.js', array('jquery'), SITEORIGIN_THEME_VERSION );
 }
 
 function siteorigin_premium_call_function($callback, $param_array, $args = array()){
@@ -220,12 +225,15 @@ function siteorigin_premium_call_function($callback, $param_array, $args = array
 		$theme = basename( get_template_directory() );
 		if(!empty($args['before'])) echo $args['before'];
 		?>
-		<a class="siteorigin-premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>">
+		<a class="siteorigin-premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>" target="_blank">
 			<em></em>
 			<?php printf( __( 'This feature is available in <strong>%s Premium</strong> - <strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ), ucfirst($theme) ) ?>
+			<?php if(!empty($args['teaser-image'])) : ?>
+				<div class="teaser-image"><img src="<?php echo esc_url($args['teaser-image']) ?>" width="220" height="120" /><div class="pointer"></div></div>
+			<?php endif; ?>
 		</a>
 		<?php if(!empty($args['description'])) : ?>
-		<div class="siteorigin-premium-teaser-description"><?php echo $args['description'] ?></div>
+			<div class="siteorigin-premium-teaser-description"><?php echo $args['description'] ?></div>
 		<?php
 		endif;
 		if(!empty($args['after'])) echo $args['after'];

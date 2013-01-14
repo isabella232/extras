@@ -65,7 +65,7 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 	if ( $prefix != 'appearance_page_theme_settings_page' ) return;
 
 	// This is for the premium update notifications
-	siteorigin_premium_enqueue_notification_style();
+	siteorigin_premium_enqueue_teaser();
 	
 	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/settings.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/settings.css', array(), SITEORIGIN_THEME_VERSION );
@@ -118,14 +118,30 @@ function siteorigin_settings_add_section( $id, $name ) {
  * @param string $section
  * @param string $id
  * @param string $type
- * @param string $name
+ * @param string $title
  * @param array $args
  */
-function siteorigin_settings_add_field( $section, $id, $type, $name, $args = array() ) {
+function siteorigin_settings_add_field( $section, $id, $type, $title = null, $args = array() ) {
 	global $wp_settings_fields;
-	if ( isset( $wp_settings_fields['theme_settings'][ $section ][ $id ] ) ) {
-		if ( isset( $wp_settings_fields['theme_settings'][ $section ][ $id ]['args']['type'] ) && $wp_settings_fields['theme_settings'][ $section ][ $id ]['args']['type'] == 'teaser' )
-			unset( $wp_settings_fields['theme_settings'][ $section ][ $id ] );
+	if ( isset( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ] ) ) {
+		if ( isset( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'args' ][ 'type' ] ) && $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'args' ][ 'type' ] == 'teaser' ) {
+			if ( empty( $args[ 'description' ] ) && !empty( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'args' ][ 'description' ] ) ) {
+				// Copy across the description field from the teaser
+				$args[ 'description' ] = $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'args' ][ 'description' ];
+			}
+			if ( empty( $name ) && !empty( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'title' ] ) ) {
+				// Copy across the title field
+				$title = $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'title' ];
+			}
+			
+			// Replace the teaser field with the actual setting
+			$wp_settings_fields[ 'theme_settings' ][ $section ][ $id ] = array(
+				'id' => $id,
+				'title' => $title,
+				'callback' => 'siteorigin_settings_field',
+				'args' => $args
+			);
+		}
 		else return;
 	}
 
@@ -135,7 +151,7 @@ function siteorigin_settings_add_field( $section, $id, $type, $name, $args = arr
 		'type' => $type,
 	) );
 
-	add_settings_field( $id, $name, 'siteorigin_settings_field', 'theme_settings', $section, $args );
+	add_settings_field( $id, $title, 'siteorigin_settings_field', 'theme_settings', $section, $args );
 }
 
 /**
@@ -154,6 +170,7 @@ function siteorigin_settings_add_teaser( $section, $id, $name, $args = array() )
 		'section' => $section,
 		'field' => $id,
 		'type' => 'teaser',
+		'real_type' =>$type,
 	) );
 
 	add_settings_field( $id, $name, 'siteorigin_settings_field', 'theme_settings', $section, $args );
@@ -196,7 +213,15 @@ function siteorigin_settings_field( $args ) {
 				class="<?php echo esc_attr( $args['type'] == 'number' ? 'small-text' : 'regular-text' ) ?>"
 				size="25"
 				type="<?php echo esc_attr( $args['type'] ) ?>"
-				value="<?php echo esc_attr( $current ) ?>" /><?php
+				value="<?php echo esc_attr( $current ) ?>" />
+			<?php if(!empty($args['options'])) : ?>
+				<select class="input-field-select">
+					<option></option>
+					<?php foreach($args['options'] as $value => $label) : ?>
+						<option value="<?php echo esc_attr($value) ?>"><?php echo esc_html($label) ?></option>
+					<?php endforeach; ?>
+				</select>
+			<?php endif;
 			break;
 
 		case 'select' :
@@ -262,9 +287,12 @@ function siteorigin_settings_field( $args ) {
 		case 'teaser' :
 			$theme = basename( get_template_directory() );
 			?>
-			<a class="premium-teaser siteorigin-premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>">
+			<a class="premium-teaser siteorigin-premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>" target="_blank">
 				<em></em>
 				<?php printf( __( 'This setting is available in <strong>%s Premium</strong> - <strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ), ucfirst($theme) ) ?>
+				<?php if(!empty($args['teaser-image'])) : ?>
+					<div class="teaser-image"><img src="<?php echo esc_url($args['teaser-image']) ?>" width="220" height="120" /><div class="pointer"></div></div>
+				<?php endif; ?>
 			</a>
 			<?php
 			break;

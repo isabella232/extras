@@ -12,6 +12,7 @@
 	-moz-box-sizing: border-box;
 	
 	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    z-index: 999;
 }
 
 .mobile-nav-frame .title{
