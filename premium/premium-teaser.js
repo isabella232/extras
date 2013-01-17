@@ -6,7 +6,6 @@ jQuery(function($){
         })
         .mouseenter(function(){
             var $$ = $(this ).find('.teaser-image' );
-            console.log($$.is(':hover'));
             if($$.is(':hover')) return;
             $$.fadeIn(100);
         })

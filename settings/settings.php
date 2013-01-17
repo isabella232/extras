@@ -182,7 +182,9 @@ function siteorigin_settings_add_teaser( $section, $id, $name, $args = array() )
  * @param string $name The setting name
  * @return mixed
  */
-function siteorigin_setting( $name ) {
+function siteorigin_setting( $name , $default = null) {
+	if ( !is_null( $default ) && empty( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) return $default;
+	
 	if ( !isset( $GLOBALS['siteorigin_settings'][ $name ] ) ) return null;
 	else return $GLOBALS['siteorigin_settings'][ $name ];
 }

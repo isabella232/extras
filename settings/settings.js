@@ -35,7 +35,6 @@ jQuery( function ( $ ) {
 
         // We want our own insert into post handler
         wp.media.editor.send.attachment = function(props, attachment){
-            console.log(attachment);
             $$.find('.current .title' ).html(attachment.title);
             $$.find('input[type=hidden]' ).val(attachment.id);
             
