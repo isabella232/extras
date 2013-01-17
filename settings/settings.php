@@ -170,7 +170,6 @@ function siteorigin_settings_add_teaser( $section, $id, $name, $args = array() )
 		'section' => $section,
 		'field' => $id,
 		'type' => 'teaser',
-		'real_type' =>$type,
 	) );
 
 	add_settings_field( $id, $name, 'siteorigin_settings_field', 'theme_settings', $section, $args );
