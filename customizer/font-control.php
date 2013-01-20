@@ -7,7 +7,7 @@ if ( class_exists( 'WP_Customize_Control' ) ) :
 class SiteOrigin_Customize_Fonts_Control extends WP_Customize_Control {
 
 	function __construct( $manager, $id, $args = array() ) {
-		$google_web_fonts = include( get_template_directory() . '/extras/customizer/google-web-fonts.php' );
+		$google_web_fonts = include get_template_directory() . '/extras/customizer/google-web-fonts.php' ;
 
 		// Let other themes and plugins process the web fonts array
 		$google_web_fonts = apply_filters( 'siteorigin_google_web_fonts', $google_web_fonts );
