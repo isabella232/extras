@@ -334,7 +334,7 @@ function siteorigin_settings_validate( $values ) {
 				$values[ $name ] = isset( $values[ $name ] ) ? intval( $values[ $name ] ) : $GLOBALS['siteorigin_settings_defaults'][ $name ];
 			}
 
-			if ( !isset( $current[ $name ] ) || $values[ $name ] != $current[ $name ] ) $changed = true;
+			if ( !isset( $current[ $name ] ) || ( isset( $values[ $name ] ) && isset( $current[ $name ] ) && $values[ $name ] != $current[ $name ] ) ) $changed = true;
 
 			// See if this needs any special validation
 			if ( !empty( $field['args']['validator'] ) && method_exists( 'SiteOrigin_Settings_Validator', $field['args']['validator'] ) ) {
