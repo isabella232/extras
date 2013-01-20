@@ -183,8 +183,11 @@ function siteorigin_settings_add_teaser( $section, $id, $name, $args = array() )
  */
 function siteorigin_setting( $name , $default = null) {
 	if ( !is_null( $default ) && empty( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) return $default;
-	
-	if ( !isset( $GLOBALS['siteorigin_settings'][ $name ] ) ) return null;
+
+	if ( !isset( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) {
+		trigger_error( 'Calling undefined setting [' . $name . ']' );
+		return null;
+	}
 	else return $GLOBALS['siteorigin_settings'][ $name ];
 }
 
