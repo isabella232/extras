@@ -1,5 +1,5 @@
 <?php $theme = basename( get_template_directory() ); ?>
-<?php printf( __( "Check out the <a href='%s'>documentation</a> for %s. ", 'siteorigin' ), 'http://siteorigin.com/doc/' . $theme . '/', ucfirst( $theme ) ) ?>
+<?php printf( __( "Check out the <a href='%s'>documentation</a> for %s. ", 'siteorigin' ), 'http://support.siteorigin.com/' . $theme . '/', ucfirst( $theme ) ) ?>
 <?php _e('Please like and follow SiteOrigin to hear about my new WordPress freebies.', 'siteorigin') ?>
 
 <div class="social">
