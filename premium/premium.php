@@ -23,7 +23,6 @@ function siteorigin_premium_page_render() {
 	if ( isset( $_GET['action'] ) ) $action = $_GET['action'];
 	else $action = 'view';
 
-
 	switch ( $action ) {
 		case 'view':
 			$premium = apply_filters( 'siteorigin_premium_content', array() );
