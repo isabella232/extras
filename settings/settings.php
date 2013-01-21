@@ -192,17 +192,6 @@ function siteorigin_setting( $name , $default = null) {
 }
 
 /**
- * This is a wrapper for siteorigin_setting to support legacy child themes.
- * 
- * @param $name
- * @param null $default
- * @return mixed
- */
-function so_setting($name, $default = null){
-	return siteorigin_setting($name, $default);
-}
-
-/**
  * Render a settings field.
  *
  * @param $args
