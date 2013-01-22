@@ -84,7 +84,7 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 	}
 	
 	// This is for the media uploader
-	wp_enqueue_media();
+	if ( function_exists( 'wp_enqueue_media' ) ) wp_enqueue_media();
 }
 
 /**
