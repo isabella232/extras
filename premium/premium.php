@@ -209,17 +209,27 @@ function siteorigin_premium_admin_enqueue( $prefix ) {
 		wp_enqueue_style( 'siteorigin-premium-upgrade', get_template_directory_uri() . '/extras/premium/premium.css', array(), SITEORIGIN_THEME_VERSION );
 	}
 	elseif ( ( $prefix == 'post.php' || $prefix == 'post-new.php' ) && !defined( 'SITEORIGIN_IS_PREMIUM' ) && !empty( $GLOBALS[ 'siteorigin_premium_teaser_post_types' ] ) ) {
+		// Enqueue if we're on a post page that has requested premium teasers.
 		$screen = get_current_screen();
-		
 		if ( is_array( $GLOBALS[ 'siteorigin_premium_teaser_post_types' ] ) && in_array( $screen->id, $GLOBALS[ 'siteorigin_premium_teaser_post_types' ] ) ) {
 			wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
 			wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		}
 	}
+	elseif ( $prefix == 'appearance_page_theme_settings_page' ) {
+		// Enqueue the premium teasers if we're on the theme settings page
+		wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+	}
 }
 
 add_action( 'admin_enqueue_scripts', 'siteorigin_premium_admin_enqueue' );
 
+/**
+ * Adds one or more post types to the list that are requesting the premium teaser scripts.
+ * 
+ * @param $post_types
+ */
 function siteorigin_premium_teaser_post_types( $post_types ) {
 	$post_types = (array)$post_types;
 	if ( empty( $GLOBALS[ 'siteorigin_premium_teaser_post_types' ] ) )

@@ -64,9 +64,6 @@ function siteorigin_settings_render() {
 function siteorigin_settings_enqueue_scripts( $prefix ) {
 	if ( $prefix != 'appearance_page_theme_settings_page' ) return;
 
-	// This is for the premium update notifications
-	siteorigin_premium_enqueue_teaser();
-	
 	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/settings.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/settings.css', array(), SITEORIGIN_THEME_VERSION );
 
