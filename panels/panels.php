@@ -121,7 +121,7 @@ add_action('load-post-new.php', 'siteorigin_panels_add_help_tab');
  */
 function siteorigin_panels_add_help_tab_content(){
 	?>
-	<p><?php printf( __( 'Panels is a drag and drop page builder. You can find the <a href="%s">full documentation</a> on SiteOrigin.', 'siteorigin' ), 'http://siteorigin.com/doc/panels/' ) ?></p>
+	<p><?php printf( __( 'Panels is a drag and drop page builder. You can find the <a href="%s">full documentation</a> on SiteOrigin.', 'siteorigin' ), 'http://support.siteorigin.com/panel/' ) ?></p>
 	<?php
 }
 
