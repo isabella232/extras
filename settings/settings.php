@@ -182,7 +182,7 @@ function siteorigin_setting( $name , $default = null) {
 	if ( !is_null( $default ) && empty( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) return $default;
 
 	if ( !isset( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) {
-		trigger_error( 'Calling undefined setting [' . $name . ']' );
+		trigger_error( sprintf( __( 'Calling undefined setting [%s]', 'siteorigin' ), $name ) );
 		return null;
 	}
 	else return $GLOBALS['siteorigin_settings'][ $name ];

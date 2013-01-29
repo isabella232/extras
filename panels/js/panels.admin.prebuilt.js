@@ -24,8 +24,6 @@ jQuery(function($){
         var $$ = $(this);
         if($$.val() == '') return;
         
-        console.log(panelsLoc);
-        
         if(confirm(panelsLoc.messages.confirmLayout)){
             var s = $$.find(':selected');
             
