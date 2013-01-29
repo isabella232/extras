@@ -1,36 +1,36 @@
 <?php
 
-return array(
+return array (
 	'ABeeZee' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Abel' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Abril Fatface' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Aclonica' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Acme' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Actor' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Adamina' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Advent Pro' =>
-	array(
+	array (
 		0 => '100',
 		1 => '200',
 		2 => '300',
@@ -40,673 +40,735 @@ return array(
 		6 => '700',
 	),
 	'Aguafina Script' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Akronim' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Aladin' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Aldrich' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Alegreya' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 		2 => '900',
 	),
 	'Alegreya SC' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 		2 => '900',
 	),
 	'Alex Brush' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Alfa Slab One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Alice' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Alike' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Alike Angular' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Allan' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Allerta' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Allerta Stencil' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Allura' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Almendra' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
+	'Almendra Display' =>
+	array (
+		0 => 'regular',
+	),
 	'Almendra SC' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Amarante' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Amaranth' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Amatic SC' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Amethysta' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Anaheim' =>
+	array (
 		0 => 'regular',
 	),
 	'Andada' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Andika' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Angkor' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Annie Use Your Telescope' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Anonymous Pro' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Antic' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Antic Didone' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Antic Slab' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Anton' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Arapey' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Arbutus' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Arbutus Slab' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Architects Daughter' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Archivo Black' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Archivo Narrow' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Arimo' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Arizonia' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Armata' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Artifika' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Arvo' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Asap' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Asset' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Astloch' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Asul' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Atomic Age' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Aubrey' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Audiowide' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Autour One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Average' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Average Sans' =>
+	array (
 		0 => 'regular',
 	),
 	'Averia Gruesa Libre' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Averia Libre' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '700',
 	),
 	'Averia Sans Libre' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '700',
 	),
 	'Averia Serif Libre' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '700',
 	),
 	'Bad Script' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Balthazar' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bangers' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Basic' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Battambang' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Baumans' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bayon' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Belgrano' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Belleza' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'BenchNine' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '700',
 	),
 	'Bentham' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Berkshire Swash' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bevan' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Bigelow Rules' =>
+	array (
 		0 => 'regular',
 	),
 	'Bigshot One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bilbo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bilbo Swash Caps' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bitter' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Black Ops One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bokor' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bonbon' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Boogaloo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bowlby One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bowlby One SC' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Brawler' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bree Serif' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bubblegum Sans' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Bubbler One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Buda' =>
-	array(
+	array (
 		0 => '300',
 	),
 	'Buenard' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Butcherman' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Butterfly Kids' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Cabin' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '500',
 		2 => '600',
 		3 => '700',
 	),
 	'Cabin Condensed' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '500',
 		2 => '600',
 		3 => '700',
 	),
 	'Cabin Sketch' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Caesar Dressing' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Cagliostro' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Calligraffitti' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Cambo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Candal' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Cantarell' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Cantata One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Cantora One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Capriola' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Cardo' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Carme' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Carrois Gothic' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Carrois Gothic SC' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Carter One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Caudex' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Cedarville Cursive' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ceviche One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Changa One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Chango' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Chau Philomene One' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Chela One' =>
+	array (
 		0 => 'regular',
 	),
 	'Chelsea Market' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Chenla' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Cherry Cream Soda' =>
-	array(
+	array (
 		0 => 'regular',
 	),
+	'Cherry Swash' =>
+	array (
+		0 => 'regular',
+		1 => '700',
+	),
 	'Chewy' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Chicle' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Chivo' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '900',
 	),
+	'Cinzel' =>
+	array (
+		0 => 'regular',
+		1 => '700',
+		2 => '900',
+	),
+	'Cinzel Decorative' =>
+	array (
+		0 => 'regular',
+		1 => '700',
+		2 => '900',
+	),
+	'Clicker Script' =>
+	array (
+		0 => 'regular',
+	),
 	'Coda' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '800',
 	),
 	'Coda Caption' =>
-	array(
+	array (
 		0 => '800',
 	),
 	'Codystar' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 	),
 	'Combo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Comfortaa' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '700',
 	),
 	'Coming Soon' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Concert One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Condiment' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Content' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Contrail One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Convergence' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Cookie' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Copse' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Corben' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Courgette' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Cousine' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Coustard' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '900',
 	),
 	'Covered By Your Grace' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Crafty Girls' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Creepster' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Crete Round' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Crimson Text' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '600',
 		2 => '700',
 	),
+	'Croissant One' =>
+	array (
+		0 => 'regular',
+	),
 	'Crushed' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Cuprum' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Cutive' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Cutive Mono' =>
+	array (
 		0 => 'regular',
 	),
 	'Damion' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Dancing Script' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Dangrek' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Dawning of a New Day' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Days One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Delius' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Delius Swash Caps' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Delius Unicase' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Della Respira' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Denk One' =>
+	array (
 		0 => 'regular',
 	),
 	'Devonshire' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Didact Gothic' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Diplomata' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Diplomata SC' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Domine' =>
+	array (
+		0 => 'regular',
+		1 => '700',
+	),
+	'Donegal One' =>
+	array (
 		0 => 'regular',
 	),
 	'Doppio One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Dorsa' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Dosis' =>
-	array(
+	array (
 		0 => '200',
 		1 => '300',
 		2 => 'regular',
@@ -716,87 +778,101 @@ return array(
 		6 => '800',
 	),
 	'Dr Sugiyama' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Droid Sans' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Droid Sans Mono' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Droid Serif' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Duru Sans' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Dynalight' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'EB Garamond' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Eagle Lake' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Eater' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Economica' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Electrolize' =>
-	array(
+	array (
 		0 => 'regular',
 	),
+	'Elsie' =>
+	array (
+		0 => 'regular',
+		1 => '900',
+	),
+	'Elsie Swash Caps' =>
+	array (
+		0 => 'regular',
+		1 => '900',
+	),
 	'Emblema One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Emilys Candy' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Engagement' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Englebert' =>
+	array (
 		0 => 'regular',
 	),
 	'Enriqueta' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Erica One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Esteban' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Euphoria Script' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ewert' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Exo' =>
-	array(
+	array (
 		0 => '100',
 		1 => '200',
 		2 => '300',
@@ -808,356 +884,392 @@ return array(
 		8 => '900',
 	),
 	'Expletus Sans' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '500',
 		2 => '600',
 		3 => '700',
 	),
 	'Fanwood Text' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Fascinate' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Fascinate Inline' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Faster One' =>
+	array (
 		0 => 'regular',
 	),
 	'Fasthand' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Federant' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Federo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Felipa' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Fenix' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Finger Paint' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Fjalla One' =>
+	array (
 		0 => 'regular',
 	),
 	'Fjord One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Flamenco' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 	),
 	'Flavors' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Fondamento' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Fontdiner Swanky' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Forum' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Francois One' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Freckle Face' =>
+	array (
 		0 => 'regular',
 	),
 	'Fredericka the Great' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Fredoka One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Freehand' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Fresca' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Frijole' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Fruktur' =>
+	array (
 		0 => 'regular',
 	),
 	'Fugaz One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'GFS Didot' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'GFS Neohellenic' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
+	'Gafata' =>
+	array (
+		0 => 'regular',
+	),
 	'Galdeano' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Galindo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Gentium Basic' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Gentium Book Basic' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Geo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Geostar' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Geostar Fill' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Germania One' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Gilda Display' =>
+	array (
 		0 => 'regular',
 	),
 	'Give You Glory' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Glass Antiqua' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Glegoo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Gloria Hallelujah' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Goblin One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Gochi Hand' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Gorditas' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Goudy Bookletter 1911' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Graduate' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Grand Hotel' =>
+	array (
 		0 => 'regular',
 	),
 	'Gravitas One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Great Vibes' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Griffy' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Gruppo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Gudea' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Habibi' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Hammersmith One' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Hanalei' =>
+	array (
+		0 => 'regular',
+	),
+	'Hanalei Fill' =>
+	array (
 		0 => 'regular',
 	),
 	'Handlee' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Hanuman' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Happy Monkey' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Headland One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Henny Penny' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Herr Von Muellerhoff' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Holtwood One SC' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Homemade Apple' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Homenaje' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'IM Fell DW Pica' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'IM Fell DW Pica SC' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'IM Fell Double Pica' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'IM Fell Double Pica SC' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'IM Fell English' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'IM Fell English SC' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'IM Fell French Canon' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'IM Fell French Canon SC' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'IM Fell Great Primer' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'IM Fell Great Primer SC' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Iceberg' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Iceland' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Imprima' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Inconsolata' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Inder' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Indie Flower' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Inika' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Irish Grover' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Istok Web' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Italiana' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Italianno' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Jacques Francois' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Jacques Francois Shadow' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Jim Nightshade' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Jockey One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Jolly Lodger' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Josefin Sans' =>
-	array(
+	array (
 		0 => '100',
 		1 => '300',
 		2 => 'regular',
@@ -1165,107 +1277,127 @@ return array(
 		4 => '700',
 	),
 	'Josefin Slab' =>
-	array(
+	array (
 		0 => '100',
 		1 => '300',
 		2 => 'regular',
 		3 => '600',
 		4 => '700',
 	),
+	'Joti One' =>
+	array (
+		0 => 'regular',
+	),
 	'Judson' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Julee' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Julius Sans One' =>
+	array (
 		0 => 'regular',
 	),
 	'Junge' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Jura' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '500',
 		3 => '600',
 	),
 	'Just Another Hand' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Just Me Again Down Here' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Kameron' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Karla' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Kaushan Script' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Kavoon' =>
+	array (
+		0 => 'regular',
+	),
+	'Keania One' =>
+	array (
 		0 => 'regular',
 	),
 	'Kelly Slab' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Kenia' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Khmer' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Kite One' =>
+	array (
 		0 => 'regular',
 	),
 	'Knewave' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Kotta One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Koulen' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Kranky' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Kreon' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '700',
 	),
 	'Kristi' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Krona One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'La Belle Aurore' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Lancelot' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Lato' =>
-	array(
+	array (
 		0 => '100',
 		1 => '300',
 		2 => 'regular',
@@ -1273,431 +1405,472 @@ return array(
 		4 => '900',
 	),
 	'League Script' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Leckerli One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ledger' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Lekton' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Lemon' =>
-	array(
+	array (
 		0 => 'regular',
+	),
+	'Libre Baskerville' =>
+	array (
+		0 => 'regular',
+		1 => '700',
 	),
 	'Life Savers' =>
-	array(
+	array (
 		0 => 'regular',
+		1 => '700',
 	),
 	'Lilita One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Limelight' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Linden Hill' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Lobster' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Lobster Two' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Londrina Outline' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Londrina Shadow' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Londrina Sketch' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Londrina Solid' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Lora' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Love Ya Like A Sister' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Loved by the King' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Lovers Quarrel' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Luckiest Guy' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Lusitana' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Lustria' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Macondo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Macondo Swash Caps' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Magra' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Maiden Orange' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Mako' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Marcellus' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Marcellus SC' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Marck Script' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Margarine' =>
+	array (
 		0 => 'regular',
 	),
 	'Marko One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Marmelad' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Marvel' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Mate' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Mate SC' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Maven Pro' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '500',
 		2 => '700',
 		3 => '900',
 	),
 	'McLaren' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Meddon' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'MedievalSharp' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Medula One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Megrim' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Meie Script' =>
-	array(
+	array (
 		0 => 'regular',
 	),
+	'Merienda' =>
+	array (
+		0 => 'regular',
+		1 => '700',
+	),
 	'Merienda One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Merriweather' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '700',
 		3 => '900',
 	),
 	'Metal' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Metal Mania' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Metamorphous' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Metrophobic' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Michroma' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Milonga' =>
+	array (
 		0 => 'regular',
 	),
 	'Miltonian' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Miltonian Tattoo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Miniver' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Miss Fajardose' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Modern Antiqua' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Molengo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Molle' =>
-	array(
+	array (
+	),
+	'Monda' =>
+	array (
+		0 => 'regular',
+		1 => '700',
 	),
 	'Monofett' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Monoton' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Monsieur La Doulaise' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Montaga' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Montez' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Montserrat' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Montserrat Alternates' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Montserrat Subrayada' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Moul' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Moulpali' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Mountains of Christmas' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
+	'Mouse Memoirs' =>
+	array (
+		0 => 'regular',
+	),
 	'Mr Bedfort' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Mr Dafoe' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Mr De Haviland' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Mrs Saint Delafield' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Mrs Sheppards' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Muli' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 	),
 	'Mystery Quest' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Neucha' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Neuton' =>
-	array(
+	array (
 		0 => '200',
 		1 => '300',
 		2 => 'regular',
 		3 => '700',
 		4 => '800',
 	),
+	'New Rocker' =>
+	array (
+		0 => 'regular',
+	),
 	'News Cycle' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Niconne' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Nixie One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Nobile' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Nokora' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Norican' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Nosifer' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Nothing You Could Do' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Noticia Text' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Nova Cut' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Nova Flat' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Nova Mono' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Nova Oval' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Nova Round' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Nova Script' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Nova Slim' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Nova Square' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Numans' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Nunito' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '700',
 	),
 	'Odor Mean Chey' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Offside' =>
+	array (
 		0 => 'regular',
 	),
 	'Old Standard TT' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Oldenburg' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Oleo Script' =>
-	array(
+	array (
+		0 => 'regular',
+		1 => '700',
+	),
+	'Oleo Script Swash Caps' =>
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Open Sans' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '600',
@@ -1705,274 +1878,300 @@ return array(
 		4 => '800',
 	),
 	'Open Sans Condensed' =>
-	array(
+	array (
 		0 => '300',
 		1 => '700',
 	),
 	'Oranienbaum' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Orbitron' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '500',
 		2 => '700',
 		3 => '900',
 	),
 	'Oregano' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Orienta' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Original Surfer' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Oswald' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '700',
 	),
 	'Over the Rainbow' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Overlock' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 		2 => '900',
 	),
 	'Overlock SC' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ovo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Oxygen' =>
-	array(
-		0 => 'regular',
+	array (
+		0 => '300',
+		1 => 'regular',
+		2 => '700',
 	),
 	'Oxygen Mono' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'PT Mono' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'PT Sans' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'PT Sans Caption' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'PT Sans Narrow' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'PT Serif' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'PT Serif Caption' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Pacifico' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Paprika' =>
+	array (
 		0 => 'regular',
 	),
 	'Parisienne' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Passero One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Passion One' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 		2 => '900',
 	),
 	'Patrick Hand' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Patua One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Paytone One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Peralta' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Permanent Marker' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Petit Formal Script' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Petrona' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Philosopher' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Piedra' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Pinyon Script' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Pirata One' =>
+	array (
 		0 => 'regular',
 	),
 	'Plaster' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Play' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Playball' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Playfair Display' =>
-	array(
+	array (
 		0 => 'regular',
+		1 => '700',
+		2 => '900',
+	),
+	'Playfair Display SC' =>
+	array (
+		0 => 'regular',
+		1 => '700',
+		2 => '900',
 	),
 	'Podkova' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Poiret One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Poller One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Poly' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Pompiere' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Pontano Sans' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Port Lligat Sans' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Port Lligat Slab' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Prata' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Preahvihear' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Press Start 2P' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Princess Sofia' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Prociono' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Prosto One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Puritan' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
+	'Purple Purse' =>
+	array (
+		0 => 'regular',
+	),
 	'Quando' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Quantico' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Quattrocento' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Quattrocento Sans' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Questrial' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Quicksand' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '700',
 	),
+	'Quintessential' =>
+	array (
+		0 => 'regular',
+	),
 	'Qwigley' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Racing Sans One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Radley' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Raleway' =>
-	array(
+	array (
 		0 => '100',
 		1 => '200',
 		2 => '300',
@@ -1984,266 +2183,324 @@ return array(
 		8 => '900',
 	),
 	'Raleway Dots' =>
-	array(
+	array (
 		0 => 'regular',
 	),
+	'Rambla' =>
+	array (
+		0 => 'regular',
+		1 => '700',
+	),
 	'Rammetto One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ranchers' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Rancho' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Rationale' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Redressed' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Reenie Beanie' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Revalia' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ribeye' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ribeye Marrow' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Righteous' =>
-	array(
+	array (
 		0 => 'regular',
 	),
+	'Risque' =>
+	array (
+		0 => 'regular',
+	),
+	'Roboto' =>
+	array (
+		0 => '100',
+		1 => '300',
+		2 => 'regular',
+		3 => '500',
+		4 => '700',
+		5 => '900',
+	),
+	'Roboto Condensed' =>
+	array (
+		0 => '300',
+		1 => 'regular',
+		2 => '700',
+	),
 	'Rochester' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Rock Salt' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Rokkitt' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Romanesco' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ropa Sans' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Rosario' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Rosarivo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Rouge Script' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ruda' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 		2 => '900',
 	),
+	'Rufina' =>
+	array (
+		0 => 'regular',
+		1 => '700',
+	),
 	'Ruge Boogie' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ruluko' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Rum Raisin' =>
+	array (
 		0 => 'regular',
 	),
 	'Ruslan Display' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Russo One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ruthie' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Rye' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Sacramento' =>
+	array (
 		0 => 'regular',
 	),
 	'Sail' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Salsa' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Sanchez' =>
+	array (
 		0 => 'regular',
 	),
 	'Sancreek' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Sansita One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Sarina' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Satisfy' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Scada' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Schoolbell' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Seaweed Script' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Sevillana' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Seymour One' =>
+	array (
 		0 => 'regular',
 	),
 	'Shadows Into Light' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Shadows Into Light Two' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Shanti' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Share' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
+	'Share Tech' =>
+	array (
+		0 => 'regular',
+	),
+	'Share Tech Mono' =>
+	array (
+		0 => 'regular',
+	),
 	'Shojumaru' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Short Stack' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Siemreap' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Sigmar One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Signika' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '600',
 		3 => '700',
 	),
 	'Signika Negative' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '600',
 		3 => '700',
 	),
 	'Simonetta' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '900',
 	),
 	'Sirin Stencil' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Six Caps' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Skranji' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Slackey' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Smokum' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Smythe' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Sniglet' =>
-	array(
+	array (
 		0 => '800',
 	),
 	'Snippet' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Snowburst One' =>
+	array (
 		0 => 'regular',
 	),
 	'Sofadi One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Sofia' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Sonsie One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Sorts Mill Goudy' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Source Code Pro' =>
-	array(
+	array (
 		0 => '200',
 		1 => '300',
 		2 => 'regular',
-		3 => '600',
-		4 => '700',
-		5 => '900',
+		3 => '500',
+		4 => '600',
+		5 => '700',
+		6 => '900',
 	),
 	'Source Sans Pro' =>
-	array(
+	array (
 		0 => '200',
 		1 => '300',
 		2 => 'regular',
@@ -2252,110 +2509,122 @@ return array(
 		5 => '900',
 	),
 	'Special Elite' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Spicy Rice' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Spinnaker' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Spirax' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Squada One' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Stalemate' =>
+	array (
 		0 => 'regular',
 	),
 	'Stalinist One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Stardos Stencil' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Stint Ultra Condensed' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Stint Ultra Expanded' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Stoke' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 	),
+	'Strait' =>
+	array (
+		0 => 'regular',
+	),
 	'Sue Ellen Francisco' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Sunshiney' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Supermercado One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Suwannaphum' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Swanky and Moo Moo' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Syncopate' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Tangerine' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Taprom' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Telex' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Tenor Sans' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Text Me One' =>
+	array (
 		0 => 'regular',
 	),
 	'The Girl Next Door' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Tienne' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 		2 => '900',
 	),
 	'Tinos' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Titan One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Titillium Web' =>
-	array(
+	array (
 		0 => '200',
 		1 => '300',
 		2 => 'regular',
@@ -2364,166 +2633,178 @@ return array(
 		5 => '900',
 	),
 	'Trade Winds' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Trocchi' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Trochut' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Trykker' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Tulpen One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ubuntu' =>
-	array(
+	array (
 		0 => '300',
 		1 => 'regular',
 		2 => '500',
 		3 => '700',
 	),
 	'Ubuntu Condensed' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Ubuntu Mono' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Ultra' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Uncial Antiqua' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Underdog' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Unica One' =>
+	array (
 		0 => 'regular',
 	),
 	'UnifrakturCook' =>
-	array(
+	array (
 		0 => '700',
 	),
 	'UnifrakturMaguntia' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Unkempt' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Unlock' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Unna' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'VT323' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Vampiro One' =>
+	array (
 		0 => 'regular',
 	),
 	'Varela' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Varela Round' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Vast Shadow' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Vibur' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Vidaloka' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Viga' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Voces' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Volkhov' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Vollkorn' =>
-	array(
+	array (
 		0 => 'regular',
 		1 => '700',
 	),
 	'Voltaire' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Waiting for the Sunrise' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Wallpoet' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Walter Turncoat' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Warnes' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Wellfleet' =>
-	array(
+	array (
+		0 => 'regular',
+	),
+	'Wendy One' =>
+	array (
 		0 => 'regular',
 	),
 	'Wire One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Yanone Kaffeesatz' =>
-	array(
+	array (
 		0 => '200',
 		1 => '300',
 		2 => 'regular',
 		3 => '700',
 	),
 	'Yellowtail' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Yeseva One' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Yesteryear' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 	'Zeyada' =>
-	array(
+	array (
 		0 => 'regular',
 	),
 );
