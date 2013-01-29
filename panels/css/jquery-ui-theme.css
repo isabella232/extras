@@ -42,6 +42,7 @@
 }
 
 .ui-button .ui-icon.ui-icon-add{ background: url(images/icons/add.png); }
+.ui-button .ui-icon.ui-icon-prebuilt{ background: url(images/icons/brush.png); }
 .ui-button .ui-icon.ui-icon-columns{ background: url(images/icons/columns.png); }
 .ui-button .ui-icon.ui-icon-settings{ background: url(images/icons/settings.png); }
 .ui-button .ui-icon.ui-icon-move{ background: url(images/icons/move.png); }

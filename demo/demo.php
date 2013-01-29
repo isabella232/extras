@@ -166,3 +166,17 @@ function siteorigin_demo_admin_disable() {
 	</div>
 	<?php
 }
+
+/**
+ * Display the admin bar when we're still in demo mode.
+ */
+function siteorigin_demo_admin_bar_display(){
+	if ( !get_theme_mod( 'is_demo_mode', true ) ) return;
+	
+	?>
+	<div class="error">
+		<p><?php printf(__('Your site is displaying the demo content from your theme. <a href="%s">Disable demo mode</a> to start creating and displaying your own content.', 'prospect'), admin_url( 'themes.php?page=siteorigin_demo_mode_disable' )); ?></p>
+	</div>
+	<?php
+}
+add_action('admin_footer', 'siteorigin_demo_admin_bar_display');

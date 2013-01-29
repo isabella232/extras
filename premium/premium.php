@@ -6,7 +6,7 @@
  * @action admin_menu
  */
 function siteorigin_premium_admin_menu() {
-	// Don't display this page if the user has alreeady upgraded to premium
+	// Don't display this page if the user has already upgraded to premium
 	if ( defined( 'SITEORIGIN_IS_PREMIUM' ) ) return;
 
 	add_theme_page( __( 'Premium Upgrade', 'siteorigin' ), __( 'Premium Upgrade', 'siteorigin' ), 'switch_themes', 'premium_upgrade', 'siteorigin_premium_page_render' );
@@ -216,7 +216,7 @@ function siteorigin_premium_admin_enqueue( $prefix ) {
 			wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		}
 	}
-	elseif ( $prefix == 'appearance_page_theme_settings_page' ) {
+	elseif ( in_array( $prefix, apply_filters( 'siteorigin_premium_teaser_pages', array( 'appearance_page_theme_settings_page' ) ) ) ) {
 		// Enqueue the premium teasers if we're on the theme settings page
 		wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
 		wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );

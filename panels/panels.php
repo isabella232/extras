@@ -40,8 +40,9 @@ function siteorigin_panels_admin_enqueue_scripts() {
 
 	wp_enqueue_script( 'so-panels-admin-grid', get_template_directory_uri() . '/extras/panels/js/panels.admin.grid.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_script( 'so-panels-admin', get_template_directory_uri() . '/extras/panels/js/panels.admin.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+	wp_enqueue_script( 'so-panels-admin-prebuilt', get_template_directory_uri() . '/extras/panels/js/panels.admin.prebuilt.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_script( 'so-panels-admin-tooltip', get_template_directory_uri() . '/extras/panels/js/panels.admin.tooltip.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
-
+	
 	wp_localize_script( 'so-panels-admin', 'panelsLoc', array(
 		'buttons' => array(
 			'delete' => __( 'Delete', 'siteorigin' ),
@@ -50,11 +51,12 @@ function siteorigin_panels_admin_enqueue_scripts() {
 		'messages' => array(
 			'confirmDeleteColumns' => __( 'Are you sure you want to delete these columns?', 'siteorigin' ),
 			'confirmDeleteWidget' => __( 'Are you sure you want to delete this widget?', 'siteorigin' ),
-		)
+			'confirmLayout' => __( 'Are you sure you want to load this layout? It will overwrite all your current grids.', 'siteorigin' ),
+		),
 	) );
 
-	global $siteorigin_panel_grids;
-	wp_localize_script( 'so-panels-admin-grid', 'panelsGrids', $siteorigin_panel_grids );
+	$GLOBALS['siteorigin_panels_prebuilt_layouts'] = apply_filters('siteorigin_panels_prebuilt_layouts', array());
+	wp_localize_script('so-panels-admin-prebuilt', 'panelsPrebuiltLayouts', $GLOBALS['siteorigin_panels_prebuilt_layouts']); 
 
 	// Localize the panels with the panels data
 	global $post;

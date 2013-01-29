@@ -272,7 +272,8 @@ html {
 
 #panels-dialog,
 #grid-setting-dialog,
-#grid-add-dialog{
+#grid-add-dialog,
+#grid-prebuilt-dialog{
 	display: none;
 }
 

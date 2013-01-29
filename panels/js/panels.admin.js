@@ -1,5 +1,7 @@
+if(typeof window.panels == 'undefined') window.panels = {};
+
 jQuery( function ( $ ) {
-    // Create the main dialog
+    // Create the main add widgets dialog
     $( '#panels-dialog' ).show().dialog( {
         dialogClass: 'panels-admin-dialog',
         autoOpen:    false,
@@ -20,6 +22,7 @@ jQuery( function ( $ ) {
             text:  false
         } )
         .click( function () {
+            $('#panels-text-filter-input' ).val('' ).keyup();
             $( '#panels-dialog' ).dialog( 'open' );
             return false;
         } );
@@ -34,18 +37,18 @@ jQuery( function ( $ ) {
             $( '#grid-add-dialog' ).dialog( 'open' );
             return false;
         } );
-
+    
     var newPanelId = 0;
 
     /**
      * Create a new panel
      *
      * @param type
-     * @param {} Initial data.
+     * @param data
      *
      * @return {*}
      */
-    var createPanel = function ( type, data ) {
+    window.panels.createPanel = function ( type, data ) {
         var $$;
         if ( typeof type == 'string' ) $$ = $( '#panels-dialog .panel-type[data-class="' + type + '"]' );
         else $$ = type;
@@ -207,39 +210,47 @@ jQuery( function ( $ ) {
 
     // Handle adding a new panel
     $( '#panels-dialog .panel-type' ).click( function () {
-        var panel = createPanel( $( this ) );
+        var panel = window.panels.createPanel( $( this ) );
         $( '#panels-container .cell .panels-container' ).last().append( panel );
         $( '#panels-container .cell .panels-container' ).sortable( "refresh" ).trigger( 'refreshcells' );
-        $.grid.resizeCells( $( '#panels-container .cell .panels-container' ).last().closest( '.grid-container' ) );
+        window.panels.resizeCells( $( '#panels-container .cell .panels-container' ).last().closest( '.grid-container' ) );
 
         // Close the add panel dialog
         $( '#panels-dialog' ).dialog( 'close' );
     } );
 
-    if ( typeof panelsData != 'undefined' ) {
+
+    /**
+     * Loads panel data
+     * 
+     * @param data
+     */
+    window.panels.loadPanels = function(data){
+        window.panels.clearGrids();
+        
         // Create all the content
-        for ( var gi in panelsData.grids ) {
+        for ( var gi in data.grids ) {
             var cellWeights = [];
 
             // Get the cell weights
-            for ( var ci in panelsData.grid_cells ) {
-                if ( Number( panelsData.grid_cells[ci]['grid'] ) == gi ) {
-                    cellWeights[cellWeights.length] = Number( panelsData.grid_cells[ci].weight );
+            for ( var ci in data.grid_cells ) {
+                if ( Number( data.grid_cells[ci]['grid'] ) == gi ) {
+                    cellWeights[cellWeights.length] = Number( data.grid_cells[ci].weight );
                 }
             }
 
             // Create the grids
-            var grid = $.grid.createGrid( Number( panelsData.grids[gi]['cells'] ), cellWeights );
-            $.grid.setupGrid( grid );
+            var grid = window.panels.createGrid( Number( data.grids[gi]['cells'] ), cellWeights );
+            window.panels.setupGrid( grid );
 
             // Add panels to the grid cells
-            for ( var pi in panelsData.widgets ) {
+            for ( var pi in data.widgets ) {
 
-                if ( Number( panelsData.widgets[pi]['info']['grid'] ) == gi ) {
-                    var pd = panelsData.widgets[pi];
-                    var panel = createPanel( pd['info']['class'], pd );
+                if ( Number( data.widgets[pi]['info']['grid'] ) == gi ) {
+                    var pd = data.widgets[pi];
+                    var panel = window.panels.createPanel( pd['info']['class'], pd );
                     grid
-                        .find( '.panels-container' ).eq( Number( panelsData.widgets[pi]['info']['cell'] ) )
+                        .find( '.panels-container' ).eq( Number( data.widgets[pi]['info']['cell'] ) )
                         .append( panel )
                 }
             }
@@ -253,35 +264,38 @@ jQuery( function ( $ ) {
         $( '#panels-container .panel' ).removeClass( 'new-panel' );
         // Make sure everything is sized properly
         $( '#panels-container .grid-container' ).each( function () {
-            $.grid.resizeCells( $( this ) );
+            window.panels.resizeCells( $( this ) );
         } );
     }
-    else {
-        // Create an initial grid container
-        $.grid.setupGrid( $.grid.createGrid( 1 ) );
-    }
-
+    
+    // Either setup an initial grid or load one from the panels data
+    if ( typeof panelsData != 'undefined' ) window.panels.loadPanels(panelsData);
+    else window.panels.setupGrid( window.panels.createGrid( 1 ) );
+    
     $( window ).resize( function () {
         // When the window is resized, we want to center any panels-admin-dialog dialogs
         $( '.panels-admin-dialog' ).filter( ':data(dialog)' ).dialog( 'option', 'position', 'center' );
     } );
-
+    
     // This is the part where we move the panels box into a tab of the content editor
     $( '#wp-content-editor-tools' )
-        .find( '.wp-switch-editor' ).click(function () {
+        .find( '.wp-switch-editor' )
+        .click(function () {
             $( '#wp-content-editor-container, #post-status-info' ).show();
             $( '#so-panels-panels' ).hide();
             $( '#content-panels' ).removeClass( 'panels-tab-active' );
 
-            // Double toggling resets the content editor
-            switchEditors.go();
-            switchEditors.go();
+            setTimeout( function () {
+                // Double toggling resets the content editor to make sure panels isn't being displayed
+                switchEditors.go();
+                switchEditors.go();
+            }, 1000 );
         } ).end()
         .prepend(
             $( '<a id="content-panels" class="hide-if-no-js wp-switch-editor switch-panels">' + $( '#so-panels-panels h3.hndle span' ).html() + '</a>' )
                 .click( function () {
                     var $$ = $( this );
-                    // This is so the inactive tabs dont show as active
+                    // This is so the inactive tabs don't show as active
                     $( '#wp-content-wrap' ).removeClass( 'tmce-active html-active' );
 
                     // Hide all the standard content editor stuff

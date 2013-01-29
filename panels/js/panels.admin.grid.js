@@ -1,12 +1,11 @@
-jQuery( function ( $ ) {
-    $.grid = {};
+if(typeof window.panels == 'undefined') window.panels = {};
 
+jQuery( function ( $ ) {
     /**
-     *
      * @param $$
      */
-    $.grid.setupGrid = function ( $$ ) {
-        $.grid.resizeCells( $$ );
+    window.panels.setupGrid = function ( $$ ) {
+        window.panels.resizeCells( $$ );
 
         $$.find( '.grid .cell' ).not( '.first' ).each( function () {
             var sharedCellWidth, sharedCellLeft;
@@ -38,7 +37,7 @@ jQuery( function ( $ ) {
                             $( this ).attr( 'data-percent', percent ).find( 'input[name$="[weight]"]' ).val( percent );
                         } );
 
-                    $.grid.resizeCells( $$, true );
+                    window.panels.resizeCells( $$, true );
                 }
             } );
         } );
@@ -51,7 +50,7 @@ jQuery( function ( $ ) {
             c1.attr( 'data-percent', totalPercent / 2 ).find( 'input[name$="[weight]"]' ).val( totalPercent / 2 );
             c2.attr( 'data-percent', totalPercent / 2 ).find( 'input[name$="[weight]"]' ).val( totalPercent / 2 );
             c1.add( c2 ).find( '.cell-width-value span' ).html( Math.round( totalPercent / 2 * 1000 ) / 10 + '%' );
-            $.grid.resizeCells( $$ );
+            window.panels.resizeCells( $$ );
 
             return false;
         } );
@@ -67,12 +66,12 @@ jQuery( function ( $ ) {
                 connectWith:".panels-container",
                 tolerance:  'pointer',
                 change:     function () {
-                    $.grid.resizeCells( $$, true );
+                    window.panels.resizeCells( $$, true );
                 },
                 stop:       function () {
                     // Refresh all the cell sizes after we stop sorting
                     $( '#panels-container .grid-container' ).each( function () {
-                        $.grid.resizeCells( $( this ), true );
+                        window.panels.resizeCells( $( this ), true );
                     } );
                 },
                 receive:    function () {
@@ -81,7 +80,7 @@ jQuery( function ( $ ) {
             } )
             .bind( 'refreshcells', function () {
                 // Set the cell for each panel
-                $.grid.resizeCells( $$ );
+                window.panels.resizeCells( $$ );
 
                 $( '#panels-container .panel' ).each( function () {
                     var container = $( this ).closest( '.grid-container' );
@@ -102,7 +101,7 @@ jQuery( function ( $ ) {
      * @param $$
      * @param onlyHeight
      */
-    $.grid.resizeCells = function ( $$, onlyHeight ) {
+    window.panels.resizeCells = function ( $$, onlyHeight ) {
         if ( onlyHeight == undefined ) onlyHeight = false;
 
         $$.find( '.grid .cell, .grid .cell-wrapper' ).css( 'height', 'auto' );
@@ -142,7 +141,7 @@ jQuery( function ( $ ) {
      * @param weights
      * @return {*}
      */
-    $.grid.createGrid = function ( cells, weights ) {
+    window.panels.createGrid = function ( cells, weights ) {
         if ( weights == undefined ) {
             weights = [];
             for ( var i = 0; i < cells; i++ ) {
@@ -222,11 +221,18 @@ jQuery( function ( $ ) {
         return container;
     }
 
+    /**
+     * Clears all the grids
+     */
+    window.panels.clearGrids = function(){
+        $('#panels-container .grid-container' ).remove();
+    }
+
     $( window ).bind( 'resize', function ( event ) {
         if ( $( event.target ).hasClass( 'ui-resizable' ) ) return;
 
         $( '#panels-container .grid-container' ).each( function () {
-            $.grid.resizeCells( $( this ) );
+            window.panels.resizeCells( $( this ) );
         } );
     } );
 
@@ -265,7 +271,7 @@ jQuery( function ( $ ) {
                 num = Math.round( num );
                 num = Math.max( 1, num );
                 num = Math.min( 10, num );
-                $.grid.setupGrid( $.grid.createGrid( num ) );
+                window.panels.setupGrid( window.panels.createGrid( num ) );
                 $( this ).dialog( 'close' );
             }
         }
@@ -276,7 +282,7 @@ jQuery( function ( $ ) {
         var $$ = $( this );
         var cells = $$.attr( 'data-cells' ).split( '|' );
         cells = cells.map( Number );
-        $.grid.setupGrid( $.grid.createGrid( cells.length, cells, $$.attr( 'data-type' ) ) );
+        window.panels.setupGrid( window.panels.createGrid( cells.length, cells, $$.attr( 'data-type' ) ) );
 
         $( '#grid-add-dialog' ).dialog( 'close' );
     } );
