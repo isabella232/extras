@@ -175,7 +175,7 @@ function siteorigin_demo_admin_bar_display(){
 	
 	?>
 	<div class="error">
-		<p><?php printf(__('%s is displaying demo content. <a href="%s">Disable demo mode</a> to start creating and displaying your own content.', 'prospect'), ucfirst(get_option('stylesheet')), admin_url( 'themes.php?page=siteorigin_demo_mode_disable' )); ?></p>
+		<p><?php printf(__('%s is displaying demo content. <a href="%s">Disable demo mode</a> to start creating and displaying your own content.', 'siteorigin'), ucfirst(get_option('stylesheet')), admin_url( 'themes.php?page=siteorigin_demo_mode_disable' )); ?></p>
 	</div>
 	<?php
 }
