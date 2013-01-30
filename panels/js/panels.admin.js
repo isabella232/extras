@@ -170,6 +170,13 @@ jQuery( function ( $ ) {
         return panel;
     }
 
+    window.panels.addPanel = function(panel){
+        $( '#panels-container .cell .panels-container' ).last().append( panel );
+        $( '#panels-container .cell .panels-container' ).sortable( "refresh" ).trigger( 'refreshcells' );
+        window.panels.resizeCells( $( '#panels-container .cell .panels-container' ).last().closest( '.grid-container' ) );
+        $( '#panels-container .panel.new-panel' ).hide().fadeIn( 'slow' ).removeClass( 'new-panel' );
+    }
+
     /**
      * Set the title of the panel
      *
@@ -214,7 +221,8 @@ jQuery( function ( $ ) {
     $( '#panels-dialog .panel-type' ).click( function () {
         var panel = window.panels.createPanel( $( this ) );
         
-
+        window.panels.addPanel(panel);
+        
         // Close the add panel dialog
         $( '#panels-dialog' ).dialog( 'close' );
     } );

@@ -263,7 +263,7 @@ class SiteOrigin_Widgets_IconText extends WP_Widget {
 		}
 
 		if ( !empty( $instance['icon'] ) ) {
-			?><div class="feature-icon"><img src="<?php echo esc_attr( get_template_directory_uri() . '/images/feature-icons/' . $instance['icon'] ) ?>" /></div><?php
+			?><div class="feature-icon"><?php echo wp_get_attachment_image($instance['icon'], 'thumbnail') ?></div><?php
 		}
 
 		if ( !empty( $instance['text'] ) ) {
@@ -296,14 +296,20 @@ class SiteOrigin_Widgets_IconText extends WP_Widget {
 	 * @return string|void
 	 */
 	function form( $instance ) {
-		$icons = glob( get_template_directory() . '/images/feature-icons/*.png' );
 		$instance = wp_parse_args( $instance, array(
 			'headline' => '',
 			'text' => '',
 			'url' => '',
 			'icon' => false,
-		) )
-
+		) ) ;
+		
+		$attachments = get_posts(array(
+			'post_type' => 'attachment',
+			'post_mime_type' => 'image',
+			'posts_per_page' => -1,
+			'post_status' => 'any'
+		));
+		
 		?>
 		<p><label for="<?php echo $this->get_field_id( 'headline' ) ?>"><?php _e( 'Headline', 'siteorigin' ) ?></label></p>
 		<p>
@@ -319,14 +325,25 @@ class SiteOrigin_Widgets_IconText extends WP_Widget {
 		<p>
 			<input class="widefat" name="<?php echo $this->get_field_name( 'url' ) ?>" id="<?php echo $this->get_field_id( 'url' ) ?>" value="<?php echo esc_attr( $instance['url'] ) ?>">
 		</p>
-	
-		<p><label for="<?php echo $this->get_field_id( 'icon' ) ?>"><?php _e( 'Headline', 'siteorigin' ) ?></label></p>
+		
+		<p><label for="<?php echo $this->get_field_id( 'icon' ) ?>"><?php _e( 'Icon', 'siteorigin' ) ?></label></p>
 		<p>
 			<select name="<?php echo $this->get_field_name( 'icon' ) ?>" id="<?php echo $this->get_field_id( 'icon' ) ?>">
-				<?php foreach ( $icons as $icon ) : ?>
-				<option value="<?php echo esc_attr( basename( $icon ) ) ?>" <?php selected( $instance['icon'], $icon ) ?>><?php echo esc_html( basename( $icon ) ) ?></option>
+				<option value="0" <?php selected( !empty($instance['icon']) ) ?>><?php echo esc_html_e('None') ?></option>
+				<?php foreach ( $attachments as $attachment ) : ?>
+					<option value="<?php echo $attachment->ID ?>" <?php selected( $instance['icon'], $attachment->ID ) ?>><?php echo esc_html( $attachment->post_title ) ?></option>
 				<?php endforeach; ?>
 			</select>
+			<p class="description">
+				<?php
+					printf(
+						//__('Upload icon images to your <a href="%$2s" onclick="return confirm(\'%$1s\')">media library</a>. Find <a href="%$3s" onclick="return confirm(\'%$1s\')">free icon packs.', 'siteorigin'),
+						__('Upload icon images to your <a href="%s" target="_blank">media library</a>. Find <a href="%s" target="_blank">free icon packs.', 'siteorigin'),
+						admin_url('upload.php'),
+						'http://support.siteorigin.com/icon-sets/'
+					);
+				?>
+			</p>
 		</p>
 		<?php
 	}
@@ -580,10 +597,10 @@ class SiteOrigin_Widgets_Gallery extends WP_Widget {
 			<?php _e("Comma separated attachment IDs. Defaults to all current page's attachments.") ?>
 		</p>
 		
-		<p><label for="<?php echo $this->get_field_id( 'image_size' ) ?>"><?php _e( 'Image Size', 'siteorigin' ) ?></label>
+		<p><label for="<?php echo $this->get_field_id( 'size' ) ?>"><?php _e( 'Image Size', 'siteorigin' ) ?></label>
 		</p>
 		<p>
-			<select name="<?php echo $this->get_field_name( 'image_size' ) ?>" id="<?php echo $this->get_field_id( 'image_size' ) ?>">
+			<select name="<?php echo $this->get_field_name( 'size' ) ?>" id="<?php echo $this->get_field_id( 'size' ) ?>">
 				<option value="" <?php selected(empty($instance['image_size'])) ?>><?php esc_html_e('Default', 'siteorigin') ?></option>
 				<option value="large" <?php selected('large', $instance['image_size']) ?>><?php esc_html_e( 'Large', 'siteorigin' ) ?></option>
 				<option value="medium" <?php selected('medium', $instance['image_size']) ?>><?php esc_html_e( 'Medium', 'siteorigin' ) ?></option>

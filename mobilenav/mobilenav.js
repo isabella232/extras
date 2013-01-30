@@ -22,6 +22,7 @@ jQuery( function ( $ ) {
                 $( window ).scrollTop( 0 );
 
                 if ( frame == null ) {
+                    // Create the frame if we haven't already
                     frame = $( '<div class="mobile-nav-frame"><div class="title"><h3>' + mobileNav.text.navigate + '</h3></div><div class="slides"><div class="slides-container"></div></div></div>' ).appendTo( 'body' );
                     frame.find( '.title' )
                         .prepend( '<a href="#" class="back">Back</a><a href="#" class="close">Close</a>' )
@@ -92,7 +93,12 @@ jQuery( function ( $ ) {
                             slide.find( 'ul' ).append( li );
 
                             if ( $$.find( '> ul' ).length > 0 ) {
-                                var next = $( '<a href="#" class="next"></a>' );
+                                var image = $( '<img />' )
+                                    .attr( 'src', mobileNav.nextIconUrl + '?foo=car')
+                                    .attr( 'width', 18 )
+                                    .attr( 'height', 26 );
+
+                                var next = $( '<a href="#" class="next"></a>' ).append( image );
                                 li.prepend( next );
 
                                 var child = $$.find( '> ul' ).eq( 0 );

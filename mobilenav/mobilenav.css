@@ -46,6 +46,7 @@
 
 .mobile-nav-frame .title .close,
 .mobile-nav-frame .title .back{
+    position: absolute;
 	background: black;
 	padding: 7px;
 	font-size: 11.5px;
@@ -74,14 +75,12 @@
 }
 
 .mobile-nav-frame .title .close{
-	position: absolute;
-	top: 10px;
+	top: 11px;
 	right: 10px;
 }
 
 .mobile-nav-frame .title .back{
-	position: absolute;
-	top: 10px;
+	top: 11px;
 	left: 10px;
 }
 
@@ -161,8 +160,13 @@
 .mobile-nav-frame .next{
 	float: right;
 	width: 26px;
-	height: 25px;
-	background: url(images/next.png) no-repeat;
+	height: 26px;
+    line-height: 0;
+}
+
+.mobile-nav-frame .next img{
+    width: 18px;
+    height: 26px;
 }
 
 /* @end */

@@ -14,8 +14,9 @@ function siteorigin_mobilenav_enqueue_scripts() {
 		'text' => array(
 			'navigate' => __( 'Navigate', 'siteorigin' ),
 			'back' => __( 'Back', 'siteorigin' ),
-			'close' => __( 'Close', 'siteorigin' )
-		)
+			'close' => __( 'Close', 'siteorigin' ),
+		),
+		'nextIconUrl' => get_template_directory_uri().'/extras/mobilenav/images/next.png',
 	) );
 	wp_enqueue_style( 'siteorigin-mobilenav', get_template_directory_uri() . '/extras/mobilenav/mobilenav.css', array(), SITEORIGIN_THEME_VERSION );
 }
