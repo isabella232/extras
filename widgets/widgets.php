@@ -607,4 +607,5 @@ function siteorigin_widgets_init() {
 	register_widget( 'SiteOrigin_Widgets_IconText' );
 	register_widget( 'SiteOrigin_Widgets_PostList' );
 	register_widget( 'SiteOrigin_Widgets_Headline' );
+	register_widget( 'SiteOrigin_Widgets_Gallery' );
 }
