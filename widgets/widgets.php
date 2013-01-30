@@ -597,3 +597,14 @@ class SiteOrigin_Widgets_Gallery extends WP_Widget {
 		<?php
 	}
 }
+
+/**
+ * Initialize the SiteOrigin widgets. This can be called on widgets_init
+ */
+function siteorigin_widgets_init() {
+	register_widget( 'SiteOrigin_Widgets_CTA' );
+	register_widget( 'SiteOrigin_Widgets_Button' );
+	register_widget( 'SiteOrigin_Widgets_IconText' );
+	register_widget( 'SiteOrigin_Widgets_PostList' );
+	register_widget( 'SiteOrigin_Widgets_Headline' );
+}
