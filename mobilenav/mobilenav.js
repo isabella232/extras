@@ -15,6 +15,7 @@ jQuery( function ( $ ) {
             .html( mobileNav.text.navigate )
             .addClass( 'mobilenav' )
             .insertAfter( $$ )
+            .prepend('<span class="mobilenav-icon"></span>')
             .click( function () {
                 // Store the initial scroll top
                 var startScrollTop = $( window ).scrollTop();
