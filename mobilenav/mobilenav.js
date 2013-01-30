@@ -94,7 +94,7 @@ jQuery( function ( $ ) {
 
                             if ( $$.find( '> ul' ).length > 0 ) {
                                 var image = $( '<img />' )
-                                    .attr( 'src', mobileNav.nextIconUrl + '?foo=car')
+                                    .attr( 'src', mobileNav.nextIconUrl )
                                     .attr( 'width', 18 )
                                     .attr( 'height', 26 );
 
