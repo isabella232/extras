@@ -42,6 +42,7 @@ function siteorigin_panels_admin_enqueue_scripts() {
 	wp_enqueue_script( 'so-panels-admin', get_template_directory_uri() . '/extras/panels/js/panels.admin.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_script( 'so-panels-admin-prebuilt', get_template_directory_uri() . '/extras/panels/js/panels.admin.prebuilt.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_script( 'so-panels-admin-tooltip', get_template_directory_uri() . '/extras/panels/js/panels.admin.tooltip.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+	wp_enqueue_script( 'so-panels-admin-gallery', get_template_directory_uri() . '/extras/panels/js/panels.admin.gallery.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	
 	wp_localize_script( 'so-panels-admin', 'panelsLoc', array(
 		'buttons' => array(

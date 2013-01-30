@@ -53,7 +53,7 @@ jQuery( function ( $ ) {
         if ( typeof type == 'string' ) $$ = $( '#panels-dialog .panel-type[data-class="' + type + '"]' );
         else $$ = type;
         
-        if($$.length == 0) return;
+        if($$.length == 0) return null;
 
         var panel = $( '<div class="panel new-panel"><div class="panel-wrapper"><h4></h4><small class="description"></small><div class="form"></div></div></div>' );
         var dialog;
@@ -213,9 +213,7 @@ jQuery( function ( $ ) {
     // Handle adding a new panel
     $( '#panels-dialog .panel-type' ).click( function () {
         var panel = window.panels.createPanel( $( this ) );
-        $( '#panels-container .cell .panels-container' ).last().append( panel );
-        $( '#panels-container .cell .panels-container' ).sortable( "refresh" ).trigger( 'refreshcells' );
-        window.panels.resizeCells( $( '#panels-container .cell .panels-container' ).last().closest( '.grid-container' ) );
+        
 
         // Close the add panel dialog
         $( '#panels-dialog' ).dialog( 'close' );
