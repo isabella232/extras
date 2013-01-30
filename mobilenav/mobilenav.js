@@ -123,7 +123,9 @@ jQuery( function ( $ ) {
                 }
 
                 $( window ).resize();
-                frame.hide().fadeIn();
+                frame.hide().fadeIn(function(){
+                    $( window ).resize();
+                });
                 showSlide( 0 );
 
                 return false;
