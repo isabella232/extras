@@ -202,6 +202,7 @@ function siteorigin_premium_page_render() {
  * @action admin_enqueue_scripts
  */
 function siteorigin_premium_admin_enqueue( $prefix ) {
+	$screen = get_current_screen();
 	if ( $prefix == 'appearance_page_premium_upgrade' ) {
 		wp_enqueue_script( 'siteorigin-magnifier', get_template_directory_uri() . '/extras/premium/magnifier.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		wp_enqueue_script( 'siteorigin-cycle', get_template_directory_uri() . '/extras/premium/cycle.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
@@ -215,6 +216,10 @@ function siteorigin_premium_admin_enqueue( $prefix ) {
 			wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
 			wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		}
+	}
+	elseif ( $screen->id == 'page' && get_theme_support( 'siteorigin-panels' ) !== false && !defined( 'SITEORIGIN_IS_PREMIUM' ) ) {
+		wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	}
 	elseif ( in_array( $prefix, apply_filters( 'siteorigin_premium_teaser_pages', array( 'appearance_page_theme_settings_page' ) ) ) ) {
 		// Enqueue the premium teasers if we're on the theme settings page
@@ -242,7 +247,7 @@ function siteorigin_premium_teaser_post_types( $post_types ) {
 }
 
 function siteorigin_premium_call_function($callback, $param_array, $args = array()){
-	if(defined('SITEORIGIN_IS_PREMIUM') && function_exists($callback)){
+	if(function_exists($callback)){
 		call_user_func_array($callback, $param_array);
 	}
 	else{
@@ -262,4 +267,18 @@ function siteorigin_premium_call_function($callback, $param_array, $args = array
 		endif;
 		if(!empty($args['after'])) echo $args['after'];
 	}
+}
+
+function siteorigin_premium_teaser($text, $description = null){
+	if(defined('SITEORIGIN_IS_PREMIUM')) return;
+
+	?>
+	<a class="siteorigin-premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>" target="_blank">
+		<em></em>
+		<?php echo $text ?>
+		<?php printf( __( '<strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ) ) ?>
+	</a>
+	<?php if(!empty($description)) : ?>
+	<div class="siteorigin-premium-teaser-description"><?php echo $description ?></div>
+	<?php endif;
 }

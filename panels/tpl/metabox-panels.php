@@ -74,9 +74,11 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 				<div class="clear"></div>
 			</ul>
 			
-			<?php if(!defined('SITEORIGIN_IS_PREMIUM')) : ?>
-				<p><?php printf(__('Additional widgets are available in <a href="%s">%s Premium</a>'), admin_url('themes.php?page=premium_upgrade'), ucfirst(get_option('stylesheet'))) ?></p>
-			<?php endif; ?>
+			<?php
+			if ( function_exists( 'siteorigin_premium_teaser' ) ) {
+				siteorigin_premium_teaser( sprintf( __( 'Additional widgets are available in %s Premium', 'siteorigin' ), ucfirst( get_option( 'stylesheet' ) ) ) );
+			}
+			?>
 		</div>
 		
 	</div>
