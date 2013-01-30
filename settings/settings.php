@@ -176,6 +176,7 @@ function siteorigin_settings_add_teaser( $section, $id, $name, $args = array() )
  * Get the value of a setting, or the default value.
  *
  * @param string $name The setting name
+ * @param mixed $default The default setting
  * @return mixed
  */
 function siteorigin_setting( $name , $default = null) {
@@ -241,7 +242,7 @@ function siteorigin_settings_field( $args ) {
 
 		case 'color' :
 			if(wp_script_is('wp-color-picker', 'registered')){
-				?><input type="text" value="<?php echo esc_attr( $current ) ?>" class="color-field" /><?php
+				?><input type="text" value="<?php echo esc_attr( $current ) ?>" class="color-field" name="<?php echo esc_attr( $field_name ) ?>" /><?php
 			}
 			else{
 				?>

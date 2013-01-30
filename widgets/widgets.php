@@ -532,19 +532,68 @@ class SiteOrigin_Widgets_Headline extends WP_Widget {
 		</p>
 		<?php
 	}
-
-
 }
 
-/**
- * Initialize the SiteOrigin widgets
- */
-function siteorigin_widgets_init() {
-	register_widget( 'SiteOrigin_Widgets_CTA' );
-	register_widget( 'SiteOrigin_Widgets_Button' );
-	register_widget( 'SiteOrigin_Widgets_IconText' );
-	register_widget( 'SiteOrigin_Widgets_PostList' );
-	register_widget( 'SiteOrigin_Widgets_Headline' );
-}
+class SiteOrigin_Widgets_Gallery extends WP_Widget {
+	function __construct() {
+		parent::__construct(
+			'headline',
+			__( 'Gallery', 'siteorigin' ),
+			array(
+				'description' => __( 'Displays a gallery.', 'siteorigin' ),
+			)
+		);
+	}
 
-add_action( 'widgets_init', 'siteorigin_widgets_init' );
+	function widget( $args, $instance ) {
+		echo $args['before_widget'];
+		
+		$shortcode_attr = array();
+		foreach($instance as $k => $v){
+			if(empty($v)) continue;
+			$shortcode_attr[] = $k.'="'.esc_attr($v).'"';
+		}
+		
+		echo do_shortcode('[gallery '.implode(' ', $shortcode_attr).']');
+		
+		echo $args['after_widget'];
+	}
+
+	function update( $new, $old ) {
+		return $new;
+	}
+
+	function form( $instance ) {
+		global $_wp_additional_image_sizes;
+
+		$instance = wp_parse_args($instance, array(
+			'ids' => '',
+			'image_size' => '',
+		));
+		
+		?>
+		<p><label for="<?php echo $this->get_field_id( 'ids' ) ?>"><?php _e( 'Attachment IDs', 'siteorigin' ) ?></label>
+		<p>
+			<input type="text" class="widefat" value="<?php echo esc_attr($instance['ids']) ?>" name="<?php echo $this->get_field_name('ids') ?>" />
+		</p>
+		<p class="description">
+			<?php _e("Comma separated attachment IDs. Defaults to all current page's attachments.") ?>
+		</p>
+		
+		<p><label for="<?php echo $this->get_field_id( 'image_size' ) ?>"><?php _e( 'Image Size', 'siteorigin' ) ?></label>
+		</p>
+		<p>
+			<select name="<?php echo $this->get_field_name( 'image_size' ) ?>" id="<?php echo $this->get_field_id( 'image_size' ) ?>">
+				<option value="" <?php selected(empty($instance['image_size'])) ?>><?php esc_html_e('Default', 'siteorigin') ?></option>
+				<option value="large" <?php selected('large', $instance['image_size']) ?>><?php esc_html_e( 'Large', 'siteorigin' ) ?></option>
+				<option value="medium" <?php selected('medium', $instance['image_size']) ?>><?php esc_html_e( 'Medium', 'siteorigin' ) ?></option>
+				<option value="thumbnail" <?php selected('thumbnail', $instance['image_size']) ?>><?php esc_html_e( 'Thumbnail', 'siteorigin' ) ?></option>
+				<option value="full" <?php selected('full', $instance['image_size']) ?>><?php esc_html_e( 'Full', 'siteorigin' ) ?></option>
+				<?php foreach ( $_wp_additional_image_sizes as $name => $info ) : ?>
+					<option value="<?php echo esc_attr( $name ) ?>" <?php selected($name, $instance['image_size']) ?>><?php echo esc_html( $name ) ?></option>
+				<?php endforeach ?>
+			</select>
+		</p>
+		<?php
+	}
+}

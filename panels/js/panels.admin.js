@@ -52,10 +52,12 @@ jQuery( function ( $ ) {
         var $$;
         if ( typeof type == 'string' ) $$ = $( '#panels-dialog .panel-type[data-class="' + type + '"]' );
         else $$ = type;
+        
+        if($$.length == 0) return;
 
         var panel = $( '<div class="panel new-panel"><div class="panel-wrapper"><h4></h4><small class="description"></small><div class="form"></div></div></div>' );
         var dialog;
-
+        
         var formHtml = $$.attr( 'data-form' );
         formHtml = formHtml.replace( /\{\$id\}/g, newPanelId++ );
 
@@ -284,12 +286,18 @@ jQuery( function ( $ ) {
             $( '#wp-content-editor-container, #post-status-info' ).show();
             $( '#so-panels-panels' ).hide();
             $( '#content-panels' ).removeClass( 'panels-tab-active' );
-
-            setTimeout( function () {
-                // Double toggling resets the content editor to make sure panels isn't being displayed
-                switchEditors.go();
-                switchEditors.go();
-            }, 1000 );
+            
+            var self = this;
+            
+            // Double toggling resets the content editor to make sure panels isn't being displayed
+            switchEditors.go('content', 'toggle');
+            switchEditors.switchto(self);
+            setTimeout(function(){
+                // This is to reset the change.
+                switchEditors.go('content', 'toggle');
+                switchEditors.switchto(self);
+            }, 100);
+            return false;
         } ).end()
         .prepend(
             $( '<a id="content-panels" class="hide-if-no-js wp-switch-editor switch-panels">' + $( '#so-panels-panels h3.hndle span' ).html() + '</a>' )
@@ -303,8 +311,7 @@ jQuery( function ( $ ) {
 
                     $( '#so-panels-panels' ).show();
                     $( '#content-panels' ).addClass( 'panels-tab-active' );
-
-                    // Trigger a window resize to make sure all the columns are properly laid out
+                    
                     $( window ).resize();
                 } )
         )
@@ -314,6 +321,11 @@ jQuery( function ( $ ) {
             $( '#content-panels' ).click();
         }, 50 );
     }
+    
+    // Prevent minimizing the panels display
+    setTimeout(function(){
+        $('#so-panels-panels .hndle' ).unbind('click');
+    }, 500);
 
     // Reposition the panels box
     $( '#so-panels-panels' )
