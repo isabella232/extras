@@ -5,8 +5,9 @@
     display: inline-block;
     position: relative;
 
-    padding: 10px 15px 10px 29px;
-    line-height: 1em;
+    padding: 10px 15px 10px 49px;
+    font-size: 13px;
+    line-height: 16px;
 
     background: #cbe385;
     background: -moz-linear-gradient(top,  #cbe385 0%, #9ccc54 100%);
@@ -15,31 +16,40 @@
     background: -o-linear-gradient(top,  #cbe385 0%,#9ccc54 100%);
     background: -ms-linear-gradient(top,  #cbe385 0%,#9ccc54 100%);
     background: linear-gradient(to bottom,  #cbe385 0%,#9ccc54 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cbe385', endColorstr='#9ccc54',GradientType=0 );
-
 
     border-radius: 3px;
     text-shadow: 0 1px 0 rgba(255,255,255,0.5);
 
     box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5);
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5);
+    -o-box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5);
+    
     border: 1px solid #83a44d;
     
     position: relative;
+
+    transition: background 0.5s, color 0.5s, box-shadow 0.5;
+    -moz-transition: background 0.5s, color 0.5s, -moz-box-shadow 0.5;
+    -webkit-transition: background 0.5s, color 0.5s, -webkit-box-shadow 0.5;
+    -o-transition: background 0.5s, color 0.5s, -o-box-shadow 0.5;
 }
 
 .siteorigin-premium-teaser:hover{
-    color: #476118;
-    
-    background: #cee688;
-    background: -moz-linear-gradient(top,  #cee688 0%, #a3d25a 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cee688), color-stop(100%,#a3d25a));
-    background: -webkit-linear-gradient(top,  #cee688 0%,#a3d25a 100%);
-    background: -o-linear-gradient(top,  #cee688 0%,#a3d25a 100%);
-    background: -ms-linear-gradient(top,  #cee688 0%,#a3d25a 100%);
-    background: linear-gradient(to bottom,  #cee688 0%,#a3d25a 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cee688', endColorstr='#a3d25a',GradientType=0 );
+    color: #4a641b;
+
+    background: #d4ec8d;
+    background: -moz-linear-gradient(top,  #d4ec8d 0%, #a8d85f 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d4ec8d), color-stop(100%,#a8d85f));
+    background: -webkit-linear-gradient(top,  #d4ec8d 0%,#a8d85f 100%);
+    background: -o-linear-gradient(top,  #d4ec8d 0%,#a8d85f 100%);
+    background: -ms-linear-gradient(top,  #d4ec8d 0%,#a8d85f 100%);
+    background: linear-gradient(to bottom,  #d4ec8d 0%,#a8d85f 100%);
 
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.25);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.25);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.25);
+    -o-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.25);
 }
 
 .siteorigin-premium-teaser:active{
@@ -62,12 +72,21 @@
 
 .siteorigin-premium-teaser em{
     position: absolute;
-    left: 9px;
-    top: 50%;
-    width: 12px;
-    height: 13px;
-    margin-top: -6px;
-    background: url(img/upgrade.png) no-repeat;
+    left: 0;
+    top: 0;
+    width: 35px;
+    height: 100%;
+
+    background: rgba(255,255,255,0.125) url(img/upgrade.png) no-repeat 1px center;
+    border-right: 1px solid rgba(0,0,0,0.09);
+
+    transition: 0.25s;
+    -moz-transition: 0.25s;
+    -webkit-transition: 0.25s;
+}
+
+.siteorigin-premium-teaser:hover em{
+    background-position: -34px center;
 }
 
 .siteorigin-premium-teaser strong{
