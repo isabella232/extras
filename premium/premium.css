@@ -111,13 +111,18 @@
     margin-top: 15px;
 }
 
-#theme-upgrade .feature-image{
-    float: right;
-    cursor: pointer;
-    margin-left: 25px;
-    margin-bottom: 20px;
+#theme-upgrade .feature-image-wrapper{
+    padding: 5px;
+    background: #F6F6F6;
     border: 1px solid #D0D0D0;
     box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+    float: right;
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+#theme-upgrade .feature-image{
+    cursor: pointer;
 }
 
 /* @group Buy Button */

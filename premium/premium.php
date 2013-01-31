@@ -90,7 +90,7 @@ function siteorigin_premium_page_render() {
 				<?php endif; ?>
 				<div class="content">
 					<?php if ( !empty( $premium['features'] ) ) : foreach ( $premium['features'] as $feature ) : ?>
-						<?php if(!empty($feature['image'])) echo '<img src="'.esc_url($feature['image']).'" width="220" height="120" class="feature-image" />' ?>
+						<?php if(!empty($feature['image'])) echo '<div class="feature-image-wrapper"><img src="'.esc_url($feature['image']).'" width="220" height="120" class="feature-image" /></div>' ?>
 						<h3><?php echo $feature['heading'] ?></h3>
 						<p><?php echo $feature['content'] ?></p>
 						<div class="clear"></div>
