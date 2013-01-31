@@ -83,7 +83,7 @@
 
 #promo-image{
     position: relative;
-    background: #EAEAEA url(img/loader.gif) no-repeat center center;
+    background: #EAEAEA url(../img/loader.gif) no-repeat center center;
 }
 
 /* Overlay */

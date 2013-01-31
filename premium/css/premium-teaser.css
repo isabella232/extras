@@ -77,7 +77,7 @@
     width: 35px;
     height: 100%;
 
-    background: rgba(255,255,255,0.125) url(img/upgrade.png) no-repeat 1px center;
+    background: rgba(255,255,255,0.125) url(../img/upgrade.png) no-repeat 1px center;
     border-right: 1px solid rgba(0,0,0,0.09);
 
     transition: 0.25s;
@@ -120,7 +120,7 @@
 	left: -9px;
 	top: 50%;
 	margin-top: -6px;
-	background: url('img/pointer.png') no-repeat left top;
+	background: url('../img/pointer.png') no-repeat left top;
 }
 
 .siteorigin-premium-teaser .teaser-image .loading{
