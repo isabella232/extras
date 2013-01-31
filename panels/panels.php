@@ -6,7 +6,9 @@
  */
 function siteorigin_panels_metaboxes() {
 	if ( get_theme_support( 'siteorigin-panels' ) === false ) return;
+	
 	add_meta_box( 'so-panels-panels', __( 'Panels', 'siteorigin' ), 'siteorigin_panels_metabox_render', 'page', 'advanced', 'high', array( 'panels' ) );
+	add_meta_box( 'so-panels-settings', __( 'Panels Settings', 'siteorigin' ), 'siteorigin_panels_metabox_render', 'page', 'side', 'high', array( 'settings' ) );
 }
 
 add_action( 'add_meta_boxes', 'siteorigin_panels_metaboxes' );
@@ -19,7 +21,18 @@ add_action( 'add_meta_boxes', 'siteorigin_panels_metaboxes' );
  * @param $args
  */
 function siteorigin_panels_metabox_render( $post, $args ) {
-	get_template_part( 'extras/panels/tpl/metabox', $args['args'][0] );
+	if($args['args'][0] == 'settings') {
+		siteorigin_premium_call_function(
+			'siteorigin_premium_panels_settings_metabox',
+			array(),
+			array(
+				'description' => __( 'Advanced functionality like the ability to create post type and page templates', 'siteorigin' )
+			)
+		);
+	}
+	else{
+		get_template_part( 'extras/panels/tpl/metabox', $args['args'][0] );
+	}
 }
 
 

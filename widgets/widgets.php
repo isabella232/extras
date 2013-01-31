@@ -615,6 +615,73 @@ class SiteOrigin_Widgets_Gallery extends WP_Widget {
 	}
 }
 
+class SiteOrigin_Widgets_PostContent extends WP_Widget {
+	function __construct() {
+		parent::__construct(
+			'headline',
+			__( 'Post Content', 'siteorigin' ),
+			array(
+				'description' => __( 'Displays some form of post content form the current post.', 'siteorigin' ),
+			)
+		);
+	}
+
+	function widget( $args, $instance ) {
+		echo $args['before_widget'];
+		$content = apply_filters('siteorigin_widget_post_content', $this->default_content($instance['type']));
+		echo $content;
+		echo $args['after_widget'];
+	}
+
+	/**
+	 * The default content for post types
+	 * @param $type
+	 * @return string
+	 */
+	function default_content($type){
+		switch($type) {
+			case 'title' :
+				return '<h1 class="entry-title">' . get_the_title() . '</h1>';
+			case 'content' :
+				return '<div class="entry-content">' . get_the_content() . '</div>';
+			case 'featured' :
+				if(!has_post_thumbnail()) return '';
+				return '<div class="featured-image">' . get_the_post_thumbnail() . '</div>';
+			default :
+				return '';
+		}
+	}
+	
+	function update($new, $old){
+		return $new;
+	}
+
+	function form( $instance ) {
+		$instance = wp_parse_args($instance, array(
+			'type' => 'content',
+		));
+		
+		$types = apply_filters('siteorigin_widget_post_content_types', array(
+			'title' => __('Title', 'siteorigin'),
+			'content' => __('Content', 'siteorigin'),
+			'featured' => __('Featured Image', 'siteorigin'),
+			'tags' => __('Post Tags', 'siteorigin'),
+			'categories' => __('Post Categories', 'siteorigin'),
+		));
+		
+		?>
+		<p><label for="<?php echo $this->get_field_id( 'type' ) ?>"><?php _e( 'Display Content', 'siteorigin' ) ?></label>
+		<p>
+			<select id="<?php echo $this->get_field_id( 'type' ) ?>" name="<?php echo $this->get_field_name( 'type' ) ?>">
+				<?php foreach ($types as $type_id => $title) : ?>
+					<option value="<?php echo esc_attr($type_id) ?>" <?php selected($type_id, $instance['type']) ?>><?php echo esc_html($title) ?></option>
+				<?php endforeach ?>
+			</select>
+		</p>
+		<?php
+	}
+}
+
 /**
  * Initialize the SiteOrigin widgets. This can be called on widgets_init
  */
@@ -625,4 +692,5 @@ function siteorigin_widgets_init() {
 	register_widget( 'SiteOrigin_Widgets_PostList' );
 	register_widget( 'SiteOrigin_Widgets_Headline' );
 	register_widget( 'SiteOrigin_Widgets_Gallery' );
+	register_widget( 'SiteOrigin_Widgets_PostContent' );
 }
