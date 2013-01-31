@@ -223,8 +223,13 @@
 
 /* @group Testimonials */
 
+#theme-upgrade .testimonials-heading{
+    margin: 45px 0 25px 0;
+    text-align: center;
+}
+
 #theme-upgrade .testimonials{
-	margin-top: 25px;
+	margin-top: 0;
 	list-style: none;
 	font: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }

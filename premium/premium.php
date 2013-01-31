@@ -109,6 +109,7 @@ function siteorigin_premium_page_render() {
 				<?php endif; ?>
 				
 				<?php if(!empty($premium['testimonials'])): ?>
+					<h3 class="testimonials-heading"><?php _e('Some of our User Comments') ?></h3>
 					<ul class="testimonials">
 						<?php foreach($premium['testimonials'] as $testimonial) : ?>
 							<li>
@@ -206,27 +207,27 @@ function siteorigin_premium_page_render() {
 function siteorigin_premium_admin_enqueue( $prefix ) {
 	$screen = get_current_screen();
 	if ( $prefix == 'appearance_page_premium_upgrade' ) {
-		wp_enqueue_script( 'siteorigin-magnifier', get_template_directory_uri() . '/extras/premium/magnifier.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
-		wp_enqueue_script( 'siteorigin-cycle', get_template_directory_uri() . '/extras/premium/cycle.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
-		wp_enqueue_script( 'siteorigin-premium-upgrade', get_template_directory_uri() . '/extras/premium/premium.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
-		wp_enqueue_style( 'siteorigin-premium-upgrade', get_template_directory_uri() . '/extras/premium/premium.css', array(), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_script( 'siteorigin-magnifier', get_template_directory_uri() . '/extras/premium/js/magnifier.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_script( 'siteorigin-cycle', get_template_directory_uri() . '/extras/premium/js/cycle.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_script( 'siteorigin-premium-upgrade', get_template_directory_uri() . '/extras/premium/js/premium.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_style( 'siteorigin-premium-upgrade', get_template_directory_uri() . '/extras/premium/css/premium.css', array(), SITEORIGIN_THEME_VERSION );
 	}
 	elseif ( ( $prefix == 'post.php' || $prefix == 'post-new.php' ) && !defined( 'SITEORIGIN_IS_PREMIUM' ) && !empty( $GLOBALS[ 'siteorigin_premium_teaser_post_types' ] ) ) {
 		// Enqueue if we're on a post page that has requested premium teasers.
 		$screen = get_current_screen();
 		if ( is_array( $GLOBALS[ 'siteorigin_premium_teaser_post_types' ] ) && in_array( $screen->id, $GLOBALS[ 'siteorigin_premium_teaser_post_types' ] ) ) {
-			wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
-			wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+			wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/css/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
+			wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/js/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		}
 	}
 	elseif ( $screen->id == 'page' && get_theme_support( 'siteorigin-panels' ) !== false && !defined( 'SITEORIGIN_IS_PREMIUM' ) ) {
-		wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
-		wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/css/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/js/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	}
 	elseif ( in_array( $prefix, apply_filters( 'siteorigin_premium_teaser_pages', array( 'appearance_page_theme_settings_page' ) ) ) ) {
 		// Enqueue the premium teasers if we're on the theme settings page
-		wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
-		wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/css/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/js/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	}
 }
 
