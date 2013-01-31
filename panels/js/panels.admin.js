@@ -27,17 +27,6 @@ jQuery( function ( $ ) {
             return false;
         } );
 
-    // The button for adding a grid
-    $( '#panels .grid-add' )
-        .button( {
-            icons: {primary: 'ui-icon-columns'},
-            text:  false
-        } )
-        .click( function () {
-            $( '#grid-add-dialog' ).dialog( 'open' );
-            return false;
-        } );
-    
     var newPanelId = 0;
 
     /**
@@ -114,6 +103,9 @@ jQuery( function ( $ ) {
                 modal:       true,
                 title:       ('Edit %s Panel').replace( '%s', $$.attr( 'data-title' ) ),
                 minWidth:    700,
+                create:      function(event, ui){
+                    $(this ).closest('.ui-dialog' ).find('.ui-dialog-buttonset button' ).eq(0 ).addClass('button-delete');
+                },
                 open:        function () {
                     // Transfer the values of the form to the dialog
                     panel.find( '.form *[name]' ).not( '[data-info-field]' ).each( function () {

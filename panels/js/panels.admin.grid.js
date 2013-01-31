@@ -1,6 +1,17 @@
 if(typeof window.panels == 'undefined') window.panels = {};
 
 jQuery( function ( $ ) {
+    // The button for adding a grid
+    $( '#panels .grid-add' )
+        .button( {
+            icons: {primary: 'ui-icon-columns'},
+            text:  false
+        } )
+        .click( function () {
+            $( '#grid-add-dialog' ).dialog( 'open' );
+            return false;
+        } );
+    
     /**
      * @param $$
      */

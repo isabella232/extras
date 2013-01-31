@@ -7,7 +7,16 @@ jQuery(function($){
         modal:       true,
         title:       $( '#grid-prebuilt-dialog' ).attr( 'data-title' ),
         minWidth:    600,
+        create:      function(event, ui){
+            $(this ).closest('.ui-dialog' ).find('.ui-dialog-buttonset button' ).eq(0 ).addClass('button-delete');
+        },
         buttons : [
+            {
+                text : panelsLoc.buttons.cancel,
+                click: function(){
+                    $( '#grid-prebuilt-dialog' ).dialog('close');
+                }
+            },
             {
                 text: panelsLoc.buttons.insert,
                 click: function(){
@@ -23,12 +32,6 @@ jQuery(function($){
                         // Then load the prebuilt layout
                         window.panels.loadPanels(panelsPrebuiltLayouts[s.attr('data-layout-id')]);
                     }
-                    $( '#grid-prebuilt-dialog' ).dialog('close');
-                }
-            },
-            {
-                text : panelsLoc.buttons.cancel,
-                click: function(){
                     $( '#grid-prebuilt-dialog' ).dialog('close');
                 }
             }

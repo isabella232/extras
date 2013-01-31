@@ -107,8 +107,72 @@
     padding: 10px;
 }
 
+.ui-dialog.panels-admin-dialog .ui-dialog-buttonpane{
+    padding-top: 0;
+}
+
+.ui-dialog.panels-admin-dialog .ui-dialog-content *:first-child{
+    margin-top: 0;
+}
+
+.ui-dialog.panels-admin-dialog .ui-dialog-content *:last-child{
+    margin-bottom: 0;
+}
+
+.ui-dialog.panels-admin-dialog label{
+    display: inline-block;
+    color: #333;
+}
+
+.ui-dialog.panels-admin-dialog p:hover label{
+    color: #1c1c1c;
+}
+
+.ui-dialog.panels-admin-dialog textarea,
+.ui-dialog.panels-admin-dialog input.widefat{
+    margin-top: 6px;
+}
+
+.ui-dialog.panels-admin-dialog .ui-dialog-content p{
+    margin: 15px 0 5px 0;
+}
+
+.ui-dialog.panels-admin-dialog .ui-dialog-content p.description {
+    margin-top: 5px;
+}
+
 .ui-dialog.panels-admin-dialog .ui-dialog-buttonpane .ui-button{
     margin-right: 5px;
+}
+
+.ui-dialog.panels-admin-dialog .ui-dialog-buttonpane .ui-button{
+    background-color: #278ab7;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#2e9fd2), to(#21759b));
+    background-image: -webkit-linear-gradient(top, #2e9fd2, #21759b);
+    background-image:    -moz-linear-gradient(top, #2e9fd2, #21759b);
+    background-image:     -ms-linear-gradient(top, #2e9fd2, #21759b);
+    background-image:      -o-linear-gradient(top, #2e9fd2, #21759b);
+    background-image:   linear-gradient(to bottom, #2e9fd2, #21759b);
+    border-color: #1b607f;
+    -webkit-box-shadow: inset 0 1px 0 rgba(120,200,230,0.6);
+    box-shadow: inset 0 1px 0 rgba(120,200,230,0.6);
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+}
+
+.ui-dialog.panels-admin-dialog .ui-dialog-buttonpane .ui-button.button-delete {
+    color: #FFF;
+    background: #ca3a3a;
+    background: -moz-linear-gradient(top,  #df474a 0%, #b72d2a 100%);
+    background: -webkit-linear-gradient(top,  #f26352 0%,#d7584a 100%);
+    background: -o-linear-gradient(top,  #df474a 0%,#b72d2a 100%);
+    background: -ms-linear-gradient(top,  #df474a 0%,#b72d2a 100%);
+    background: linear-gradient(to bottom,  #df474a 0%,#b72d2a 100%);
+    
+    text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+    border-color: #c93f34;
+    
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 .ui-dialog.panels-admin-dialog .ui-dialog-content input,
