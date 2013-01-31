@@ -6,7 +6,34 @@ jQuery(function($){
         draggable:   false,
         modal:       true,
         title:       $( '#grid-prebuilt-dialog' ).attr( 'data-title' ),
-        minWidth:    600
+        minWidth:    600,
+        buttons : [
+            {
+                text: panelsLoc.buttons.insert,
+                click: function(){
+                    var $$ = $('#grid-prebuilt-input' );
+                    if($$.val() == '') return;
+                    
+                    if(confirm(panelsLoc.messages.confirmLayout)){
+                        var s = $$.find(':selected');
+
+                        // First clear the grids
+                        window.panels.clearGrids();
+
+                        // Then load the prebuilt layout
+                        window.panels.loadPanels(panelsPrebuiltLayouts[s.attr('data-layout-id')]);
+                    }
+                    $( '#grid-prebuilt-dialog' ).dialog('close');
+                }
+            },
+            {
+                text : panelsLoc.buttons.cancel,
+                click: function(){
+                    $( '#grid-prebuilt-dialog' ).dialog('close');
+                }
+            }
+        ]
+        
     } );
 
     // Button for adding prebuilt layouts
@@ -19,23 +46,4 @@ jQuery(function($){
             $( '#grid-prebuilt-dialog' ).dialog( 'open' );
             return false;
         } );
-    
-    $('#grid-prebuilt-input' ).change(function(){
-        var $$ = $(this);
-        if($$.val() == '') return;
-        
-        if(confirm(panelsLoc.messages.confirmLayout)){
-            var s = $$.find(':selected');
-            
-            // First clear the grids
-            window.panels.clearGrids();
-            
-            // Then load the prebuilt layout
-            window.panels.loadPanels(panelsPrebuiltLayouts[s.attr('data-layout-id')]);
-            
-            // Close the dialog
-            $( '#grid-prebuilt-dialog' ).dialog('close');
-        }
-    });
-    
 });

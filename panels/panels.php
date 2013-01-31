@@ -58,6 +58,8 @@ function siteorigin_panels_admin_enqueue_scripts() {
 	
 	wp_localize_script( 'so-panels-admin', 'panelsLoc', array(
 		'buttons' => array(
+			'insert' => __( 'Insert', 'siteorigin' ),
+			'cancel' => __( 'cancel', 'siteorigin' ),
 			'delete' => __( 'Delete', 'siteorigin' ),
 			'done' => __( 'Done', 'siteorigin' ),
 		),
