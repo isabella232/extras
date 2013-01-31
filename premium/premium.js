@@ -16,6 +16,10 @@ jQuery( function ( $ ) {
         return false;
     } );
     
+    $('#theme-upgrade .feature-image' ).click(function(){
+        $('html, body').animate({scrollTop:0}, 'slow');
+    })
+    
     // Set up the testimonial cycle
     $('#theme-upgrade .testimonials' ).cycle({
         fx: 'fade',

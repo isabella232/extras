@@ -4,7 +4,7 @@
 /* CSS for the upgrade page */
 
 #theme-upgrade{
-    width: 700px;
+    width: 640px;
 }
 
 #theme-upgrade p.download{
@@ -113,6 +113,7 @@
 
 #theme-upgrade .feature-image{
     float: right;
+    cursor: pointer;
     margin-left: 25px;
     margin-bottom: 20px;
     border: 1px solid #D0D0D0;
