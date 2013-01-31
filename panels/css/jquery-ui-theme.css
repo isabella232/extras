@@ -142,7 +142,7 @@
 }
 
 .ui-dialog.panels-admin-dialog .ui-dialog-buttonpane .ui-button{
-    margin-right: 5px;
+    margin-right: 8px;
 }
 
 .ui-dialog.panels-admin-dialog .ui-dialog-buttonpane .ui-button{
@@ -168,11 +168,11 @@
     background: -o-linear-gradient(top,  #df474a 0%,#b72d2a 100%);
     background: -ms-linear-gradient(top,  #df474a 0%,#b72d2a 100%);
     background: linear-gradient(to bottom,  #df474a 0%,#b72d2a 100%);
-    
-    text-shadow: 0 1px 0 rgba(0,0,0,0.4);
+
+    text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
     border-color: #c93f34;
     
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
 }
 
 .ui-dialog.panels-admin-dialog .ui-dialog-content input,
