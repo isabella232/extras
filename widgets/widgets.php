@@ -611,7 +611,7 @@ class SiteOrigin_Widgets_Gallery extends WP_Widget {
 class SiteOrigin_Widgets_PostContent extends WP_Widget {
 	function __construct() {
 		parent::__construct(
-			'headline',
+			'post-content',
 			__( 'Post Content', 'siteorigin' ),
 			array(
 				'description' => __( 'Displays some form of post content form the current post.', 'siteorigin' ),
@@ -675,6 +675,56 @@ class SiteOrigin_Widgets_PostContent extends WP_Widget {
 	}
 }
 
+class SiteOrigin_Widgets_Image extends WP_Widget {
+	function __construct() {
+		parent::__construct(
+			'siteorigin-image',
+			__( 'Image', 'siteorigin' ),
+			array(
+				'description' => __( 'Displays a simple image.', 'siteorigin' ),
+			)
+		);
+	}
+
+	/**
+	 * @param array $args
+	 * @param array $instance
+	 */
+	function widget( $args, $instance ) {
+		echo $args['before_widget'];
+		if(!empty($instance['href'])) echo '<a href="' . $instance['href'] . '">';
+		echo '<img src="'.esc_url($instance['src']).'" />';
+		if(!empty($instance['href'])) echo '</a>';
+		echo $args['after_widget'];
+	}
+	
+	function update($new, $old){
+		$new = wp_parse_args($new, array(
+			'src' => '',
+			'href' => '',
+		));
+		return $new;
+	}
+	
+	function form( $instance ) {
+		$instance = wp_parse_args($instance, array(
+			'src' => '',
+			'href' => '',
+		));
+		
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'src' ) ?>"><?php _e( 'Image URL', 'siteorigin' ) ?></label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'src' ) ?>" name="<?php echo $this->get_field_name( 'src' ) ?>" value="<?php echo esc_attr($instance['src']) ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'href' ) ?>"><?php _e( 'Destination URL', 'siteorigin' ) ?></label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'href' ) ?>" name="<?php echo $this->get_field_name( 'href' ) ?>" value="<?php echo esc_attr($instance['href']) ?>" />
+		</p>
+		<?php
+	}
+}
+
 /**
  * Initialize the SiteOrigin widgets. This can be called on widgets_init
  */
@@ -686,4 +736,5 @@ function siteorigin_widgets_init() {
 	register_widget( 'SiteOrigin_Widgets_Headline' );
 	register_widget( 'SiteOrigin_Widgets_Gallery' );
 	register_widget( 'SiteOrigin_Widgets_PostContent' );
+	register_widget( 'SiteOrigin_Widgets_Image' );
 }
