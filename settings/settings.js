@@ -83,7 +83,7 @@ jQuery( function ( $ ) {
     
     // We're going to use jQuery to transform the settings page into a tabbed interface
     var $$ = $( 'form[action="options.php"]' );
-    var tabs = $( '<h2></h2>' ).addClass( 'nav-tab-wrapper' ).prependTo( $$ );
+    var tabs = $( '<h2></h2>' ).attr('id', 'siteorigin-settings-tab-wrapper').addClass( 'nav-tab-wrapper' ).prependTo( $$ );
     $$.find( 'h3' ).each( function ( i, el ) {
         var h = $( el ).hide();
         var a = $( '<a href="#"></a>' ).addClass( 'nav-tab' ).html( h.html() ).appendTo( tabs );
