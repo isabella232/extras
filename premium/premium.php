@@ -90,8 +90,10 @@ function siteorigin_premium_page_render() {
 				<?php endif; ?>
 				<div class="content">
 					<?php if ( !empty( $premium['features'] ) ) : foreach ( $premium['features'] as $feature ) : ?>
+						<?php if(!empty($feature['image'])) echo '<img src="'.esc_url($feature['image']).'" width="220" height="120" class="feature-image" />' ?>
 						<h3><?php echo $feature['heading'] ?></h3>
 						<p><?php echo $feature['content'] ?></p>
+						<div class="clear"></div>
 					<?php endforeach; endif; ?>
 				</div>
 
@@ -269,16 +271,19 @@ function siteorigin_premium_call_function($callback, $param_array, $args = array
 	}
 }
 
-function siteorigin_premium_teaser($text, $description = null){
+function siteorigin_premium_teaser($text, $args = null){
 	if(defined('SITEORIGIN_IS_PREMIUM')) return;
 
 	?>
 	<a class="siteorigin-premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>" target="_blank">
 		<em></em>
 		<?php echo $text ?>
-		<?php printf( __( '<strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ) ) ?>
+		<?php if(!empty($args['teaser-image'])) : ?>
+			<div class="teaser-image"><img src="<?php echo esc_url($args['teaser-image']) ?>" width="220" height="120" /><div class="pointer"></div></div>
+		<?php endif; ?>
 	</a>
-	<?php if(!empty($description)) : ?>
-	<div class="siteorigin-premium-teaser-description"><?php echo $description ?></div>
-	<?php endif;
+	<?php if(!empty($args['description'])) : ?>
+		<div class="siteorigin-premium-teaser-description"><?php echo $args['description'] ?></div>
+	<?php
+	endif;
 }
