@@ -28,6 +28,26 @@ jQuery( function ( $ ) {
         } );
 
     var newPanelId = 0;
+    var panelsUndoManager = new UndoManager();
+
+    /**
+     * A jQuery function to get panels data
+     */
+    $.fn.getPanelData = function(){
+        var $$ = $(this);
+        var data = {};
+        
+        $$.find( '.form *[name]' ).not( '[data-info-field]' ).each( function () {
+            
+            var name = /widgets\[[0-9]+\]\[([a-z0-9_]+)\]/.exec($(this).attr('name'));
+            name = name[1];
+            if ( $$.attr( 'type' ) == 'checkbox' ) data[name] = $( this ).is( ':checked' )
+            else data[name] = $( this ).val();
+        } );
+        
+        return;
+    }
+
 
     /**
      * Create a new panel
@@ -44,7 +64,7 @@ jQuery( function ( $ ) {
         
         if($$.length == 0) return null;
 
-        var panel = $( '<div class="panel new-panel"><div class="panel-wrapper"><h4></h4><small class="description"></small><div class="form"></div></div></div>' );
+        var panel = $( '<div class="panel new-panel"><div class="panel-wrapper"><h4></h4><small class="description"></small><div class="form"></div></div></div>' ).attr('data-type', type);
         var dialog;
         
         var formHtml = $$.attr( 'data-form' );
@@ -66,13 +86,50 @@ jQuery( function ( $ ) {
         var dialogButtons = {};
         // The delete button
         dialogButtons[panelsLoc.buttons['delete']] = function () {
-            if ( confirm( panelsLoc.messages['confirmDeleteWidget'] ) ) {
-                panel.fadeOut( function () {
-                    $( this ).remove();
-                    $( '#panels-container .panels-container' ).trigger( 'refreshcells' );
-                } );
-                dialog.dialog( 'close' );
-            }
+            // Add an entry to the undo manager
+            panelsUndoManager.register(
+                this,
+                function(type, data, container, position){
+                    // Readd the panel
+                    var panel = window.panels.createPanel(type, data, container);
+                    window.panels.addPanel(panel, container, position);
+                },
+                [panel.attr('data-type'), data, panel.closest('.panels-container'), panel.index()],
+                'Remove Panel'
+            );
+            
+            // Create the undo notification
+            $('#panels-undo-message' ).remove();
+            clearTimeout($('#panels-undo-message' ).data('message_timeout'));
+            $('<div id="panels-undo-message" class="updated"><p>Widget deleted - <a href="#">undo</a></p></div>' )
+                .appendTo('body')
+                .hide()
+                .fadeIn()
+                .mouseenter(function(){
+                    clearTimeout($(this ).data('message_timeout'));
+                } ).
+                mouseleave(function(){
+                    var timeout = setTimeout(function(){
+                        $('#panels-undo-message' ).fadeOut(function(){$(this ).remove()});
+                    }, 15000);
+                    $(this ).data('message_timeout', timeout);
+                })
+                .trigger('mouseleave')
+                .find('a')
+                .click(function(){
+                    panelsUndoManager.undo();
+                    clearTimeout($('#panels-undo-message' ).data('message_timeout'));
+                    $('#panels-undo-message' ).fadeOut(function(){
+                        $(this ).remove()
+                    });
+                    return false;
+                });
+
+            panel.fadeOut( function () {
+                $( this ).remove();
+                $( '#panels-container .panels-container' ).trigger( 'refreshcells' );
+            } );
+            dialog.dialog( 'close' );
         };
 
         // The done button
@@ -162,10 +219,20 @@ jQuery( function ( $ ) {
         return panel;
     }
 
-    window.panels.addPanel = function(panel){
-        $( '#panels-container .cell .panels-container' ).last().append( panel );
-        $( '#panels-container .cell .panels-container' ).sortable( "refresh" ).trigger( 'refreshcells' );
-        window.panels.resizeCells( $( '#panels-container .cell .panels-container' ).last().closest( '.grid-container' ) );
+    window.panels.addPanel = function(panel, container, position){
+        if(container == null) container = $( '#panels-container .cell .panels-container' ).last();
+        
+        if (position == null) container.append( panel );
+        else {
+            var current = container.find('.panel' ).eq(position);
+            if(current.length == 0) container.append( panel );
+            else {
+                panel.insertBefore(current);
+            }
+        }
+        
+        container.sortable( "refresh" ).trigger( 'refreshcells' );
+        window.panels.resizeCells( container.closest( '.grid-container' ) );
         $( '#panels-container .panel.new-panel' ).hide().fadeIn( 'slow' ).removeClass( 'new-panel' );
     }
 

@@ -50,6 +50,8 @@ function siteorigin_panels_admin_enqueue_scripts() {
 	wp_enqueue_script( 'jquery-ui-dialog' );
 	wp_enqueue_script( 'jquery-ui-button' );
 
+	wp_enqueue_script( 'so-undomanager', get_template_directory_uri() . '/extras/panels/js/undomanager.js', array( ), 'fb30d7f' );
+	
 	wp_enqueue_script( 'so-panels-admin-grid', get_template_directory_uri() . '/extras/panels/js/panels.admin.grid.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_script( 'so-panels-admin', get_template_directory_uri() . '/extras/panels/js/panels.admin.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_script( 'so-panels-admin-prebuilt', get_template_directory_uri() . '/extras/panels/js/panels.admin.prebuilt.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
@@ -153,7 +155,7 @@ function siteorigin_panels_save_post( $post_id ) {
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
 	if ( empty( $_POST['_sopanels_nonce'] ) || !wp_verify_nonce( $_POST['_sopanels_nonce'], 'save' ) ) return;
 	if ( !current_user_can( 'edit_post', $post_id ) ) return;
-
+	
 	$panels_data = array();
 
 	$panels_data['widgets'] = array_map( 'stripslashes_deep', isset( $_POST['widgets'] ) ? $_POST['widgets'] : array() );
