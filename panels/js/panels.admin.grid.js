@@ -82,6 +82,9 @@ jQuery( function ( $ ) {
                 change:     function () {
                     window.panels.resizeCells( $$, true );
                 },
+                helper: function(e, el){
+                    return el.clone().css('opacity', 0.9).addClass('panel-being-dragged');
+                },
                 stop:       function () {
                     // Refresh all the cell sizes after we stop sorting
                     $( '#panels-container .grid-container' ).each( function () {

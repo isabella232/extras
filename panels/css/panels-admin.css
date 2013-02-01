@@ -184,7 +184,7 @@ html {
 }
 
 #add-to-panels{
-	padding-top: 10px;
+    
 }
 
 /* @end */
@@ -235,7 +235,7 @@ html {
 .panels-container .panel h4{
 	display: inline-block;
 	cursor: pointer;
-    margin: 0 0 8px 0;
+    margin: 0 0 3px 0;
     font-weight: 600;
     height: 1em;
     line-height: 1;
@@ -245,12 +245,25 @@ html {
 
 .panels-container .panel .title a{
     display: none;
-    cursor: pointer;
     margin-right: 3px;
 }
 
 .panels-container .panel:hover .title a{
     display: inline-block;
+    opacity: 0.5;
+}
+
+.panels-container .panel.panel-being-dragged .title .actions {
+    display: none;
+}
+
+.panels-container .panel .title .actions {
+    float: right;
+    cursor: pointer;
+}
+
+.panels-container .panel .title .actions:hover a{
+    opacity: 1;
 }
 
 .panels-container .panel:hover .title a.delete{
@@ -344,20 +357,41 @@ html {
 
 #so-panels-panels h3.hndle{
     border-bottom: 1px solid #CCC;
-    background-color: #E9E9E9;
-    background-image: -ms-linear-gradient(bottom,#DDD,#E9E9E9);
-    background-image: -moz-linear-gradient(bottom,#DDD,#E9E9E9);
-    background-image: -o-linear-gradient(bottom,#DDD,#E9E9E9);
-    background-image: -webkit-linear-gradient(bottom,#DDD,#E9E9E9);
-    background-image: linear-gradient(bottom,#DDD,#E9E9E9);
+    background: #eee;
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#e5e5e5), to(#f4f4f4));
+    background-image: -webkit-linear-gradient(bottom, #e5e5e5, #f4f4f4);
+    background-image:    -moz-linear-gradient(bottom, #e5e5e5, #f4f4f4);
+    background-image:      -o-linear-gradient(bottom, #e5e5e5, #f4f4f4);
+    background-image: linear-gradient(to top, #e5e5e5, #f4f4f4);
+
+    padding: 4px 9px 4px 9px;
+}
+
+#so-panels-panels h3.hndle button{
+    padding: 7px 8px;
+    border-color: #aaa;
+
+    background: #eee;
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#e3e3e3), to(#fff));
+    background-image: -webkit-linear-gradient(bottom, #e3e3e3, #fff);
+    background-image:    -moz-linear-gradient(bottom, #e3e3e3, #fff);
+    background-image:      -o-linear-gradient(bottom, #e3e3e3, #fff);
+    background-image: linear-gradient(to top, #e3e3e3, #fff);
+    float: left;
+    margin-right: 2px;
+}
+
+#so-panels-panels .inside{
+    padding: 5px 12px 5px 10px;
 }
 
 #content-panels.panels-tab-active {
-    border-color: #CCC #CCC #E9E9E9 #CCC;
-    background-color: #E9E9E9;
+    border-color: #CCC #CCC #f4f4f4 #CCC;
+    background: #f4f4f4;
     color: #333;
     z-index: 10;
 }
+
 
 #panels-undo-message {
     position: fixed;

@@ -402,5 +402,14 @@ jQuery( function ( $ ) {
         .insertAfter( '#wp-content-editor-container' )
         .addClass( 'wp-editor-container' )
         .hide()
-        .find( '.handlediv' ).remove();
+        .find( '.handlediv' ).remove()
+        .end()
+        .find( '.hndle' ).html('' ).append(
+            $('#add-to-panels')
+        );
+    
+    if($('#panels-home-page' ).length){
+        $('#content-panels' ).click();
+        $('#content-tmce, #content-html' ).remove();
+    }
 } );

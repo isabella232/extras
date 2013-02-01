@@ -69,7 +69,8 @@
     background: linear-gradient(to bottom,  #f8f8f8 0%,#ececec 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#ececec',GradientType=0 );
 
-    border: 1px solid #dfdfdf;
+    border: 1px solid #ccc;
+    border-color: #ccc #ccc #dfdfdf;
     border-bottom: none;
     padding: 7px 10px;
 

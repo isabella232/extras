@@ -42,7 +42,7 @@ jQuery(function($){
     } );
 
     // Button for adding prebuilt layouts
-    $( '#panels .prebuilt-set' )
+    $( '#add-to-panels .prebuilt-set' )
         .button( {
             icons: {primary: 'ui-icon-prebuilt'},
             text:  false

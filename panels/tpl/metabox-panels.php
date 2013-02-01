@@ -45,6 +45,7 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 		<?php if(!empty($GLOBALS['siteorigin_panels_prebuilt_layouts'])) : ?>
 			<button class="prebuilt-set" data-tooltip="<?php esc_attr_e('Prebuilt Layouts','siteorigin') ?>"><?php _e('Prebuilt Layouts', 'siteorigin') ?></button>
 		<?php endif; ?>
+		<div class="clear"></div>
 	</div>
 	
 	<!-- The dialogs -->
