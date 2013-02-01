@@ -396,7 +396,11 @@ jQuery( function ( $ ) {
     // Prevent minimizing the panels display
     setTimeout(function(){
         $('#so-panels-panels .hndle' ).unbind('click');
-    }, 500);
+    }, 250);
+    
+    // This is for the home page panel
+    $('#panels-home-page #post-body' ).show();
+    $('#panels-home-page #post-body-wrapper' ).css('background', 'none');
 
     // Reposition the panels box
     $( '#so-panels-panels' )

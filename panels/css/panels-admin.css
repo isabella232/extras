@@ -402,7 +402,6 @@ html {
     margin-left: -125px;
     text-align: center;
     
-    
     border-top: none;
 
     -webkit-border-top-left-radius: 0px;
@@ -413,4 +412,13 @@ html {
     border-top-right-radius: 0px;
     
     z-index: 100;
+}
+
+#panels-home-page #post-body{
+    display: none;
+}
+
+#post-body-wrapper{
+    min-height: 100px;
+    background: url("images/loader.gif") no-repeat center center;
 }
