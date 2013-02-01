@@ -101,11 +101,12 @@ function siteorigin_panels_admin_enqueue_scripts($prefix) {
 				'cancel' => __( 'cancel', 'siteorigin' ),
 				'delete' => __( 'Delete', 'siteorigin' ),
 				'done' => __( 'Done', 'siteorigin' ),
+				'undo' => __( 'Undo', 'siteorigin' ),
 			),
 			'messages' => array(
-				'confirmDeleteColumns' => __( 'Are you sure you want to delete these columns?', 'siteorigin' ),
-				'confirmDeleteWidget' => __( 'Are you sure you want to delete this widget?', 'siteorigin' ),
-				'confirmLayout' => __( 'Are you sure you want to load this layout? It will overwrite all your current grids.', 'siteorigin' ),
+				'deleteColumns' => __( 'Columns deleted', 'siteorigin' ),
+				'deleteWidget' => __( 'Widget deleted', 'siteorigin' ),
+				'confirmLayout' => __( 'Are you sure you want to load this layout? It will overwrite your current page.', 'siteorigin' ),
 			),
 		) );
 

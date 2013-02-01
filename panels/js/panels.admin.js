@@ -92,7 +92,7 @@ jQuery( function ( $ ) {
                 function(type, data, container, position){
                     // Readd the panel
                     var panel = window.panels.createPanel(type, data, container);
-                    window.panels.addPanel(panel, container, position);
+                    window.panels.addPanel(panel, container, position, true);
                 },
                 [panel.attr('data-type'), panel.getPanelData(), panel.closest('.panels-container'), panel.index()],
                 'Remove Panel'
@@ -101,7 +101,7 @@ jQuery( function ( $ ) {
             // Create the undo notification
             // Create the undo notification
             $('#panels-undo-message' ).remove();
-            $('<div id="panels-undo-message" class="updated"><p>Widget deleted - <a href="#" class="undo">undo</a></p></div>' )
+            $('<div id="panels-undo-message" class="updated"><p>' + panelsLoc.messages.deleteWidget + ' - <a href="#" class="undo">' + panelsLoc.buttons.undo + '</a></p></div>' )
                 .appendTo('body')
                 .hide()
                 .fadeIn()
@@ -229,7 +229,7 @@ jQuery( function ( $ ) {
         return panel;
     }
 
-    window.panels.addPanel = function(panel, container, position){
+    window.panels.addPanel = function(panel, container, position, animate){
         if(container == null) container = $( '#panels-container .cell .panels-container' ).last();
         
         if (position == null) container.append( panel );
@@ -243,7 +243,7 @@ jQuery( function ( $ ) {
         
         container.sortable( "refresh" ).trigger( 'refreshcells' );
         window.panels.resizeCells( container.closest( '.grid-container' ) );
-        $( '#panels-container .panel.new-panel' ).hide().slideDown( 'slow' ).removeClass( 'new-panel' );
+        if(animate) $( '#panels-container .panel.new-panel' ).hide().slideDown( 'slow' ).removeClass( 'new-panel' );
     }
 
     /**
@@ -290,7 +290,7 @@ jQuery( function ( $ ) {
     $( '#panels-dialog .panel-type' ).click( function () {
         var panel = window.panels.createPanel( $( this ).attr('data-class') );
         
-        window.panels.addPanel(panel);
+        window.panels.addPanel(panel, null, null, true);
         
         // Close the add panel dialog
         $( '#panels-dialog' ).dialog( 'close' );

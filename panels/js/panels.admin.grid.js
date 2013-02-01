@@ -245,6 +245,7 @@ jQuery( function ( $ ) {
                                 gridContainer.hide().slideDown();
                                 
                                 
+                                
                             },
                             [containerData, container.index()],
                             'Remove Panel'
@@ -252,7 +253,7 @@ jQuery( function ( $ ) {
                         
                         // Create the undo notification
                         $('#panels-undo-message' ).remove();
-                        $('<div id="panels-undo-message" class="updated"><p>Grid deleted - <a href="#" class="undo">undo</a></p></div>' )
+                        $('<div id="panels-undo-message" class="updated"><p>' + panelsLoc.messages.deleteColumns + ' - <a href="#" class="undo">' + panelsLoc.buttons.undo + '</a></p></div>' )
                             .appendTo('body')
                             .hide()
                             .fadeIn()
