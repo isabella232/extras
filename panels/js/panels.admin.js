@@ -152,7 +152,8 @@ jQuery( function ( $ ) {
                 title:       ('Edit %s Panel').replace( '%s', $$.attr( 'data-title' ) ),
                 minWidth:    700,
                 create:      function(event, ui){
-                    $(this ).closest('.ui-dialog' ).find('.ui-dialog-buttonset button' ).eq(0 ).addClass('button-delete');
+                    $(this ).closest('.ui-dialog' ).find('.ui-dialog-buttonset button' ).eq(0 ).addClass('button-delete')
+                    $(this ).closest('.ui-dialog' ).find('.show-in-panels' ).show();
                 },
                 open:        function () {
                     // Transfer the values of the form to the dialog
@@ -167,6 +168,9 @@ jQuery( function ( $ ) {
 
                     // This gives panel types a chance to influence the form
                     $( this ).trigger( 'panelsopen' );
+                    
+                    // This fixes a weird a focus issue
+                    $(this ).closest('.ui-dialog' ).find('a' ).blur();
                 },
                 buttons:     dialogButtons
             } );
@@ -387,7 +391,7 @@ jQuery( function ( $ ) {
     if ( typeof panelsData != 'undefined' ) {
         setTimeout( function () {
             $( '#content-panels' ).click();
-        }, 500 );
+        }, 50 );
     }
     
     // Prevent minimizing the panels display

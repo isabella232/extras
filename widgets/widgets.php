@@ -586,6 +586,7 @@ class SiteOrigin_Widgets_Gallery extends WP_Widget {
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'ids' ) ?>"><?php _e( 'Attachment IDs', 'siteorigin' ) ?></label>
+			<a href="#" onclick="return false;" class="so-gallery-widget-select-attachments show-in-panels" style="display:none; float:right"><?php _e('change', 'siteorigin') ?></a>
 			<input type="text" class="widefat" value="<?php echo esc_attr($instance['ids']) ?>" name="<?php echo $this->get_field_name('ids') ?>" />
 		</p>
 		<p class="description">

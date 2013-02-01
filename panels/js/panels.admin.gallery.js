@@ -71,6 +71,8 @@ jQuery(function($){
     $('.so-gallery-widget-select-attachments' ).live('click', function(){
         // Activate the media editor
         var val = $(this ).closest('.ui-dialog' ).find('*[name$="[ids]"]').val();
+        if(val.indexOf('{demo:') === 0) val = '-'; // This removes the demo content
+        
         wp.media.gallery.edit('[gallery ids="' + val  + '"]');
         return false;
     });
