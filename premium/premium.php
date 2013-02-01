@@ -185,9 +185,9 @@ function siteorigin_premium_page_render() {
 				</p>
 				<?php else : ?>
 				<p>
-					<?php _e( 'We  <strong>invalid</strong>.', 'siteorigin' ) ?>
-					<?php _e( "Please try again, or upgrade manually using the ZIP file we sent you.", 'siteorigin' ) ?>
-					<?php _e( 'Note that you need a valid order number to receive automatic updates in the future.', 'siteorigin' ) ?>
+					<?php _e( "We couldn't validate your order number.", 'siteorigin' ) ?>
+					<?php _e( "There might be a problem with our validation server.", 'siteorigin' ) ?>
+					<?php _e( "Please try again later, or upgrade manually using the ZIP file we sent you.", 'siteorigin' ) ?>
 				</p>
 				<?php endif; ?>
 			</div>
