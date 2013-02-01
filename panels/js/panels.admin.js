@@ -28,7 +28,7 @@ jQuery( function ( $ ) {
         } );
 
     var newPanelId = 0;
-    var panelsUndoManager = new UndoManager();
+    window.panels.undoManager = new UndoManager();
 
     /**
      * A jQuery function to get panels data
@@ -45,7 +45,7 @@ jQuery( function ( $ ) {
             else data[name] = $( this ).val();
         } );
         
-        return;
+        return data;
     }
 
 
@@ -58,11 +58,11 @@ jQuery( function ( $ ) {
      * @return {*}
      */
     window.panels.createPanel = function ( type, data ) {
-        var $$;
-        if ( typeof type == 'string' ) $$ = $( '#panels-dialog .panel-type[data-class="' + type + '"]' );
-        else $$ = type;
-        
+        var $$ = $( '#panels-dialog .panel-type[data-class="' + type + '"]' );
         if($$.length == 0) return null;
+        
+        // Hide the undo message
+        $('#panels-undo-message' ).fadeOut(function(){ $(this ).remove() });
 
         var panel = $( '<div class="panel new-panel"><div class="panel-wrapper"><h4></h4><small class="description"></small><div class="form"></div></div></div>' ).attr('data-type', type);
         var dialog;
@@ -81,49 +81,41 @@ jQuery( function ( $ ) {
             } )
             .end().find( '.description' ).html( $$.find( '.description' ).html() )
             .end().find( '.form' ).html( formHtml );
-
+        
+        console.log(panel);
+        
         // Create the dialog buttons
         var dialogButtons = {};
         // The delete button
         dialogButtons[panelsLoc.buttons['delete']] = function () {
             // Add an entry to the undo manager
-            panelsUndoManager.register(
+            window.panels.undoManager.register(
                 this,
                 function(type, data, container, position){
                     // Readd the panel
                     var panel = window.panels.createPanel(type, data, container);
+                    console.log(panel.length);
+                    console.log(container.length);
                     window.panels.addPanel(panel, container, position);
                 },
-                [panel.attr('data-type'), data, panel.closest('.panels-container'), panel.index()],
+                [panel.attr('data-type'), panel.getPanelData(), panel.closest('.panels-container'), panel.index()],
                 'Remove Panel'
             );
             
             // Create the undo notification
+            // Create the undo notification
             $('#panels-undo-message' ).remove();
-            clearTimeout($('#panels-undo-message' ).data('message_timeout'));
-            $('<div id="panels-undo-message" class="updated"><p>Widget deleted - <a href="#">undo</a></p></div>' )
+            $('<div id="panels-undo-message" class="updated"><p>Widget deleted - <a href="#" class="undo">undo</a></p></div>' )
                 .appendTo('body')
                 .hide()
                 .fadeIn()
-                .mouseenter(function(){
-                    clearTimeout($(this ).data('message_timeout'));
-                } ).
-                mouseleave(function(){
-                    var timeout = setTimeout(function(){
-                        $('#panels-undo-message' ).fadeOut(function(){$(this ).remove()});
-                    }, 15000);
-                    $(this ).data('message_timeout', timeout);
-                })
-                .trigger('mouseleave')
-                .find('a')
+                .find('a.undo')
                 .click(function(){
-                    panelsUndoManager.undo();
-                    clearTimeout($('#panels-undo-message' ).data('message_timeout'));
-                    $('#panels-undo-message' ).fadeOut(function(){
-                        $(this ).remove()
-                    });
+                    window.panels.undoManager.undo();
+                    $('#panels-undo-message' ).fadeOut(function(){ $(this ).remove() });
                     return false;
-                });
+                })
+            ;
 
             panel.fadeOut( function () {
                 $( this ).remove();
@@ -278,7 +270,7 @@ jQuery( function ( $ ) {
 
     // Handle adding a new panel
     $( '#panels-dialog .panel-type' ).click( function () {
-        var panel = window.panels.createPanel( $( this ) );
+        var panel = window.panels.createPanel( $( this ).attr('data-class') );
         
         window.panels.addPanel(panel);
         
