@@ -360,9 +360,6 @@ jQuery( function ( $ ) {
             
             var self = this;
             
-            // Double toggling resets the content editor to make sure panels isn't being displayed
-            switchEditors.go('content', 'toggle');
-            switchEditors.switchto(self);
             setTimeout(function(){
                 // This is to reset the change.
                 switchEditors.go('content', 'toggle');
@@ -390,7 +387,7 @@ jQuery( function ( $ ) {
     if ( typeof panelsData != 'undefined' ) {
         setTimeout( function () {
             $( '#content-panels' ).click();
-        }, 50 );
+        }, 500 );
     }
     
     // Prevent minimizing the panels display
