@@ -64,7 +64,7 @@ jQuery( function ( $ ) {
         // Hide the undo message
         $('#panels-undo-message' ).fadeOut(function(){ $(this ).remove() });
 
-        var panel = $( '<div class="panel new-panel"><div class="panel-wrapper"><h4></h4><small class="description"></small><div class="form"></div></div></div>' ).attr('data-type', type);
+        var panel = $( '<div class="panel new-panel"><div class="panel-wrapper"><div class="title"><h4></h4><span class="actions"></span></div><small class="description"></small><div class="form"></div></div></div>' ).attr('data-type', type);
         var dialog;
         
         var formHtml = $$.attr( 'data-form' );
@@ -82,12 +82,10 @@ jQuery( function ( $ ) {
             .end().find( '.description' ).html( $$.find( '.description' ).html() )
             .end().find( '.form' ).html( formHtml );
         
-        console.log(panel);
-        
         // Create the dialog buttons
         var dialogButtons = {};
         // The delete button
-        dialogButtons[panelsLoc.buttons['delete']] = function () {
+        var deleteFunction = function () {
             // Add an entry to the undo manager
             window.panels.undoManager.register(
                 this,
@@ -123,6 +121,8 @@ jQuery( function ( $ ) {
             } );
             dialog.dialog( 'close' );
         };
+        
+        dialogButtons[panelsLoc.buttons['delete']] = deleteFunction;
 
         // The done button
         dialogButtons[panelsLoc.buttons['done']] = function () {
@@ -184,6 +184,21 @@ jQuery( function ( $ ) {
             } );
         } );
         panel.disableSelection();
+
+        // Add the action buttons
+        panel.find('.title .actions')
+            .append(
+                $('<a>edit<a>' ).addClass('edit' ).click(function(){
+                    dialog.dialog('open');
+                    return false;
+                })
+            )
+            .append(
+                $('<a>delete<a>' ).addClass('delete').click(function(){
+                    deleteFunction();
+                    return false;
+                })
+            );
 
         if ( data != undefined ) {
             // Populate the form values

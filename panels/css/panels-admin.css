@@ -240,6 +240,22 @@ html {
     height: 1em;
     line-height: 1;
     overflow: hidden;
+    margin-right: 15px;
+}
+
+.panels-container .panel .title a{
+    display: none;
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: 11px;
+}
+
+.panels-container .panel:hover .title a{
+    display: inline-block;
+}
+
+.panels-container .panel:hover .title a.delete{
+    color: #FF0000;
 }
 
 .panels-container .panel.ui-sortable-helper h4{
