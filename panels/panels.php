@@ -35,6 +35,10 @@ function siteorigin_panels_admin_init(){
 	if(!isset($_POST['_sopanels_home_nonce']) || !wp_verify_nonce($_POST['_sopanels_home_nonce'], 'save')) return;
 	if(!current_user_can('edit_theme_options')) return;
 	
+	// Check that we support the home page
+	$panels_support = get_theme_support( 'siteorigin-panels' );
+	if ( $panels_support === false || empty($panels_support[0]['home-page']) ) return;
+	
 	set_theme_mod('panels_home_page', siteorigin_panels_get_panels_data_from_post($_POST));
 	
 }
@@ -172,6 +176,8 @@ add_action( 'admin_print_styles-appearance_page_so_panels_home_page', 'siteorigi
  * Add a help tab to the page, page.
  */
 function siteorigin_panels_add_help_tab() {
+	if ( get_theme_support( 'siteorigin-panels' ) === false ) return;
+	
 	$screen = get_current_screen();
 	if($screen->id != 'page') return;
 	
@@ -201,6 +207,7 @@ function siteorigin_panels_add_help_tab_content(){
  * @action save_post
  */
 function siteorigin_panels_save_post( $post_id ) {
+	if ( get_theme_support( 'siteorigin-panels' ) === false ) return;
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
 	if ( empty( $_POST['_sopanels_nonce'] ) || !wp_verify_nonce( $_POST['_sopanels_nonce'], 'save' ) ) return;
 	if ( !current_user_can( 'edit_post', $post_id ) ) return;

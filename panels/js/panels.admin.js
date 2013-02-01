@@ -11,7 +11,7 @@ jQuery( function ( $ ) {
         title:       $( '#panels-dialog' ).attr( 'data-title' ),
         minWidth:    960,
         close:       function () {
-            $( '#panels-container .panel.new-panel' ).hide().fadeIn( 'slow' ).removeClass( 'new-panel' );
+            $( '#panels-container .panel.new-panel' ).hide().slideDown( 'slow' ).removeClass( 'new-panel' );
         }
     } ).find( '.panel-type' ).disableSelection();
 
@@ -105,6 +105,7 @@ jQuery( function ( $ ) {
                 .appendTo('body')
                 .hide()
                 .fadeIn()
+                .slideDown()
                 .find('a.undo')
                 .click(function(){
                     window.panels.undoManager.undo();
@@ -113,7 +114,7 @@ jQuery( function ( $ ) {
                 })
             ;
 
-            panel.fadeOut( function () {
+            panel.slideUp( function () {
                 $( this ).remove();
                 $( '#panels-container .panels-container' ).trigger( 'refreshcells' );
             } );
@@ -238,7 +239,7 @@ jQuery( function ( $ ) {
         
         container.sortable( "refresh" ).trigger( 'refreshcells' );
         window.panels.resizeCells( container.closest( '.grid-container' ) );
-        $( '#panels-container .panel.new-panel' ).hide().fadeIn( 'slow' ).removeClass( 'new-panel' );
+        $( '#panels-container .panel.new-panel' ).hide().slideDown( 'slow' ).removeClass( 'new-panel' );
     }
 
     /**
