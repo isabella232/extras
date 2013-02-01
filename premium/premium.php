@@ -109,7 +109,7 @@ function siteorigin_premium_page_render() {
 				<?php endif; ?>
 				
 				<?php if(!empty($premium['testimonials'])): ?>
-					<h3 class="testimonials-heading"><?php _e('Some of our User Comments') ?></h3>
+					<h3 class="testimonials-heading"><?php _e('Some of our User Comments', 'siteorigin') ?></h3>
 					<ul class="testimonials">
 						<?php foreach($premium['testimonials'] as $testimonial) : ?>
 							<li>

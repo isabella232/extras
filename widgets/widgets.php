@@ -217,6 +217,7 @@ class SiteOrigin_Widgets_Button extends WP_Widget {
 				<option value="left" <?php selected( 'left', $instance['align'] ) ?>><?php esc_html_e( 'Left', 'siteorigin' ) ?></option>
 				<option value="center" <?php selected( 'center', $instance['align'] ) ?>><?php esc_html_e( 'Center', 'siteorigin' ) ?></option>
 				<option value="right" <?php selected( 'right', $instance['align'] ) ?>><?php esc_html_e( 'Right', 'siteorigin' ) ?></option>
+				<option value="full" <?php selected( 'full', $instance['align'] ) ?>><?php esc_html_e( 'Full Width', 'siteorigin' ) ?></option>
 			</select>
 		</p>
 	

@@ -246,8 +246,7 @@ html {
 .panels-container .panel .title a{
     display: none;
     cursor: pointer;
-    margin-right: 5px;
-    font-size: 11px;
+    margin-right: 3px;
 }
 
 .panels-container .panel:hover .title a{
@@ -256,6 +255,11 @@ html {
 
 .panels-container .panel:hover .title a.delete{
     color: #FF0000;
+}
+
+.panels-container .panel:hover .title a.delete:hover{
+    color: white;
+    background: #FF0000;
 }
 
 .panels-container .panel.ui-sortable-helper h4{

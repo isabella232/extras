@@ -21,7 +21,9 @@ jQuery(function($){
                 text: panelsLoc.buttons.insert,
                 click: function(){
                     var $$ = $('#grid-prebuilt-input' );
-                    if($$.val() == '') return;
+                    if($$.val() == '') {
+                        
+                    }
                     
                     if(confirm(panelsLoc.messages.confirmLayout)){
                         var s = $$.find(':selected');

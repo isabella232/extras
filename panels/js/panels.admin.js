@@ -92,8 +92,6 @@ jQuery( function ( $ ) {
                 function(type, data, container, position){
                     // Readd the panel
                     var panel = window.panels.createPanel(type, data, container);
-                    console.log(panel.length);
-                    console.log(container.length);
                     window.panels.addPanel(panel, container, position);
                 },
                 [panel.attr('data-type'), panel.getPanelData(), panel.closest('.panels-container'), panel.index()],
