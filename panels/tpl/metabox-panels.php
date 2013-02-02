@@ -50,7 +50,7 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 	
 	<!-- The dialogs -->
 	
-	<div id="panels-dialog" data-title="<?php esc_attr_e('Add Widget','siteorigin') ?>" class="panels-admin-dialog">
+	<div id="panels-dialog" data-title="<?php esc_attr_e('Add New Widget','siteorigin') ?>" class="panels-admin-dialog">
 		<div id="panels-dialog-inner">
 			<div class="panels-text-filter">
 				<input type="search" class="widefat" placeholder="Filter" id="panels-text-filter-input" />

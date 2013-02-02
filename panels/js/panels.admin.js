@@ -1,4 +1,4 @@
-if(typeof window.panels == 'undefined') window.panels = {};
+window.panels = {};
 
 jQuery( function ( $ ) {
     // Create the main add widgets dialog
@@ -50,15 +50,20 @@ jQuery( function ( $ ) {
 
 
     /**
-     * Create a new panel
+     * Create and return a new panel
      *
      * @param type
      * @param data
      *
      * @return {*}
      */
-    window.panels.createPanel = function ( type, data ) {
-        var $$ = $( '#panels-dialog .panel-type[data-class="' + type + '"]' );
+    $.fn.panelsCreatePanel = function ( type, data ) {
+        var dialogWrapper = $(this );
+        
+        var $$ = dialogWrapper.find('.panel-type[data-class="' + type + '"]' );
+        console.log(dialogWrapper.attr('id'));
+        //console.log($$.length);
+        
         if($$.length == 0) return null;
         
         // Hide the undo message
@@ -91,7 +96,7 @@ jQuery( function ( $ ) {
                 this,
                 function(type, data, container, position){
                     // Readd the panel
-                    var panel = window.panels.createPanel(type, data, container);
+                    var panel = $('#panels-dialog').panelsCreatePanel(type, data, container);
                     window.panels.addPanel(panel, container, position, true);
                 },
                 [panel.attr('data-type'), panel.getPanelData(), panel.closest('.panels-container'), panel.index()],
@@ -138,7 +143,7 @@ jQuery( function ( $ ) {
             } );
 
             // Change the title of the panel
-            setPanelTitle( panel );
+            panel.panelsSetPanelTitle();
 
             dialog.dialog( 'close' );
         }
@@ -222,7 +227,7 @@ jQuery( function ( $ ) {
             }
         }
 
-        setPanelTitle( panel );
+        panel.panelsSetPanelTitle();
 
         // This is to refresh the dialog positions
         $( window ).resize();
@@ -242,29 +247,29 @@ jQuery( function ( $ ) {
         }
         
         container.sortable( "refresh" ).trigger( 'refreshcells' );
-        window.panels.resizeCells( container.closest( '.grid-container' ) );
+        container.closest( '.grid-container' ).panelsResizeCells();
         if(animate) $( '#panels-container .panel.new-panel' ).hide().slideDown( 'slow' ).removeClass( 'new-panel' );
     }
 
     /**
      * Set the title of the panel
-     *
-     * @param {*} panel
      */
-    var setPanelTitle = function ( panel ) {
-        var titleField = panel.data( 'title-field' );
-        var titleValue;
+    $.fn.panelsSetPanelTitle = function ( ) {
+        return $(this ).each(function(){
+            var titleField = $(this ).data( 'title-field' );
+            var titleValue;
 
-        if ( titleField != undefined ) {
-            titleValue = panel.find( '*[name$="[' + titleField + ']"]' ).val();
-        }
+            if ( titleField != undefined ) {
+                titleValue = $(this ).find( '*[name$="[' + titleField + ']"]' ).val();
+            }
 
-        if ( titleValue == '' || titleValue == undefined ) {
-            panel.find( 'h4' ).html( panel.data( 'title' ) );
-        }
-        else {
-            panel.find( 'h4' ).html( panel.data( 'title' ) + ': ' + titleValue );
-        }
+            if ( titleValue == '' || titleValue == undefined ) {
+                $(this ).find( 'h4' ).html( $(this ).data( 'title' ) );
+            }
+            else {
+                $(this ).find( 'h4' ).html( $(this ).data( 'title' ) + ': ' + titleValue );
+            }
+        });
     }
 
     // Handle filtering in the panels dialog
@@ -288,7 +293,7 @@ jQuery( function ( $ ) {
 
     // Handle adding a new panel
     $( '#panels-dialog .panel-type' ).click( function () {
-        var panel = window.panels.createPanel( $( this ).attr('data-class') );
+        var panel = $('#panels-dialog').panelsCreatePanel( $( this ).attr('data-class') );
         
         window.panels.addPanel(panel, null, null, true);
         
@@ -325,7 +330,7 @@ jQuery( function ( $ ) {
 
                 if ( Number( data.widgets[pi]['info']['grid'] ) == gi ) {
                     var pd = data.widgets[pi];
-                    var panel = window.panels.createPanel( pd['info']['class'], pd );
+                    var panel = $('#panels-dialog').panelsCreatePanel( pd['info']['class'], pd );
                     grid
                         .find( '.panels-container' ).eq( Number( data.widgets[pi]['info']['cell'] ) )
                         .append( panel )
@@ -341,7 +346,7 @@ jQuery( function ( $ ) {
         $( '#panels-container .panel' ).removeClass( 'new-panel' );
         // Make sure everything is sized properly
         $( '#panels-container .grid-container' ).each( function () {
-            window.panels.resizeCells( $( this ) );
+            $( this ).panelsResizeCells();
         } );
     }
     
@@ -379,6 +384,7 @@ jQuery( function ( $ ) {
                     $( '#so-panels-panels' ).show();
                     $( '#wp-content-wrap' ).addClass( 'panels-active' );
                     
+                    // Triggers full refresh
                     $( window ).resize();
                     $('#content-resize-handle' ).hide();
                     

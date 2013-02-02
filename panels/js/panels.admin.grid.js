@@ -19,7 +19,7 @@ jQuery( function ( $ ) {
         // Hide the undo message
         $('#panels-undo-message' ).fadeOut(function(){ $(this ).remove() });
         
-        window.panels.resizeCells( $$ );
+        $$.panelsResizeCells();
 
         $$.find( '.grid .cell' ).not( '.first' ).each( function () {
             var sharedCellWidth, sharedCellLeft;
@@ -51,7 +51,7 @@ jQuery( function ( $ ) {
                             $( this ).attr( 'data-percent', percent ).find( 'input[name$="[weight]"]' ).val( percent );
                         } );
 
-                    window.panels.resizeCells( $$, true );
+                    $$.panelsResizeCells(true);
                 }
             } );
         } );
@@ -64,7 +64,7 @@ jQuery( function ( $ ) {
             c1.attr( 'data-percent', totalPercent / 2 ).find( 'input[name$="[weight]"]' ).val( totalPercent / 2 );
             c2.attr( 'data-percent', totalPercent / 2 ).find( 'input[name$="[weight]"]' ).val( totalPercent / 2 );
             c1.add( c2 ).find( '.cell-width-value span' ).html( Math.round( totalPercent / 2 * 1000 ) / 10 + '%' );
-            window.panels.resizeCells( $$ );
+            $$.panelsResizeCells();
 
             return false;
         } );
@@ -80,7 +80,7 @@ jQuery( function ( $ ) {
                 connectWith:".panels-container",
                 tolerance:  'pointer',
                 change:     function () {
-                    window.panels.resizeCells( $$, true );
+                    $$.panelsResizeCells();
                 },
                 helper: function(e, el){
                     return el.clone().css('opacity', 0.9).addClass('panel-being-dragged');
@@ -88,7 +88,7 @@ jQuery( function ( $ ) {
                 stop:       function () {
                     // Refresh all the cell sizes after we stop sorting
                     $( '#panels-container .grid-container' ).each( function () {
-                        window.panels.resizeCells( $( this ), true );
+                        $(this).panelsResizeCells(true);
                     } );
                 },
                 receive:    function () {
@@ -97,7 +97,7 @@ jQuery( function ( $ ) {
             } )
             .bind( 'refreshcells', function () {
                 // Set the cell for each panel
-                window.panels.resizeCells( $$ );
+                $$.panelsResizeCells();
 
                 $( '#panels-container .panel' ).each( function () {
                     var container = $( this ).closest( '.grid-container' );
@@ -115,37 +115,40 @@ jQuery( function ( $ ) {
     /**
      * Resize all the cells
      *
-     * @param $$
      * @param onlyHeight
      */
-    window.panels.resizeCells = function ( $$, onlyHeight ) {
+    $.fn.panelsResizeCells = function(onlyHeight){
         if ( onlyHeight == undefined ) onlyHeight = false;
+        
+        return $(this ).each(function(){
+            var $$ = $(this);
 
-        $$.find( '.grid .cell, .grid .cell-wrapper' ).css( 'height', 'auto' );
-        var totalWidth = $$.find( '.grid' ).outerWidth();
+            $$.find( '.grid .cell, .grid .cell-wrapper' ).css( 'height', 'auto' );
+            var totalWidth = $$.find( '.grid' ).outerWidth();
 
-        if ( $$.find( '.grid .cell' ).length > 1 ) {
-            $$.find( '.grid .cell' ).each( function () {
-                if ( $( this ).is( '.first, .last' ) ) totalWidth -= 6;
-                else totalWidth -= 12;
-            } );
-        }
-
-        var left = 0;
-        var maxHeight = 0;
-        $$.find( '.grid .cell' ).each( function () {
-            maxHeight = Math.max( maxHeight, $( this ).outerHeight() );
-            if ( !onlyHeight ) {
-                $( this )
-                    .width( Math.floor( totalWidth * Number( $( this ).attr( 'data-percent' ) ) ) )
-                    .css( 'left', left );
-                left += $( this ).width() + 12;
+            if ( $$.find( '.grid .cell' ).length > 1 ) {
+                $$.find( '.grid .cell' ).each( function () {
+                    if ( $( this ).is( '.first, .last' ) ) totalWidth -= 6;
+                    else totalWidth -= 12;
+                } );
             }
-        } );
-        maxHeight = Math.max( maxHeight, 50 );
 
-        $$.find( '.grid' ).height( maxHeight );
-        $$.find( '.grid .cell .cell-wrapper' ).css( 'height', maxHeight );
+            var left = 0;
+            var maxHeight = 0;
+            $$.find( '.grid .cell' ).each( function () {
+                maxHeight = Math.max( maxHeight, $( this ).outerHeight() );
+                if ( !onlyHeight ) {
+                    $( this )
+                        .width( Math.floor( totalWidth * Number( $( this ).attr( 'data-percent' ) ) ) )
+                        .css( 'left', left );
+                    left += $( this ).width() + 12;
+                }
+            } );
+            maxHeight = Math.max( maxHeight, 50 );
+
+            $$.find( '.grid' ).height( maxHeight );
+            $$.find( '.grid .cell .cell-wrapper' ).css( 'height', maxHeight );
+        })
     }
 
     var gridId = 0;
@@ -222,7 +225,7 @@ jQuery( function ( $ ) {
                                     for(var j = 0; j < containerData[i].widgets.length; j++){
                                         // Readd the panel
                                         var theWidget = containerData[i].widgets[j];
-                                        var panel = window.panels.createPanel(theWidget.type, theWidget.data);
+                                        var panel = $('#panels-dialog').panelsCreatePanel(theWidget.type, theWidget.data);
                                         window.panels.addPanel(panel, gridContainer.find('.panels-container' ).eq(i));
                                     }
                                 }
@@ -318,10 +321,7 @@ jQuery( function ( $ ) {
 
     $( window ).bind( 'resize', function ( event ) {
         if ( $( event.target ).hasClass( 'ui-resizable' ) ) return;
-
-        $( '#panels-container .grid-container' ).each( function () {
-            window.panels.resizeCells( $( this ) );
-        } );
+        $( '#panels-container .grid-container' ).panelsResizeCells();
     } );
 
     // Create a sortable for the grids

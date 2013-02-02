@@ -28,8 +28,7 @@ html {
 }
 
 .panel-type-list .panel-type-wrapper {
-    padding: 10px;
-    background: #808080;
+    padding: 8px;
 
     background: #f8f8f8;
     background: -moz-linear-gradient(top,  #f8f8f8 0%, #ececec 100%);
@@ -38,25 +37,43 @@ html {
     background: -o-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
     background: -ms-linear-gradient(top,  #f8f8f8 0%,#ececec 100%);
     background: linear-gradient(to bottom,  #f8f8f8 0%,#ececec 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f8f8f8', endColorstr='#ececec',GradientType=0 );
 
-    border: 1px solid #dfdfdf;
+    border: 1px solid #cccccc;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
     
     cursor: pointer;
+    
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+}
+
+.panel-type-list .panel-type-wrapper:hover{
+    background: #fcfcfc;
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#f2f2f2), to(#fcfcfc));
+    background-image: -webkit-linear-gradient(bottom, #f2f2f2, #fcfcfc);
+    background-image:    -moz-linear-gradient(bottom, #f2f2f2, #fcfcfc);
+    background-image:      -o-linear-gradient(bottom, #f2f2f2, #fcfcfc);
+    background-image: linear-gradient(to top, #f2f2f2, #fcfcfc);
+    
+    border-color: #C0C0C0;
+    
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .panel-type-list .panel-type h3 {
     margin: 0 0 7px 0;
     height: 1.2em;
-    font-weight: 600;
+    color: #444444;
+    font-size: 14px;
 }
 
 .panel-type-list .panel-type small{
-    height: 3em;
+    font-size: 11px;
+    height: 2.5em;
+    line-height: 1.25em;
     display: block;
+    overflow: hidden;
 }
 
 /* @end */
@@ -379,6 +396,16 @@ html {
     background-image: linear-gradient(to top, #e3e3e3, #fff);
     float: left;
     margin-right: 2px;
+    
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.06);
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.06);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.06);
+}
+
+#so-panels-panels h3.hndle button:active{
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }
 
 #so-panels-panels .inside{
