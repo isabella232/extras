@@ -55,18 +55,14 @@ jQuery(function($){
         // Make sure the media gallery API exists
         if ( typeof wp === 'undefined' || ! wp.media || ! wp.media.gallery ) return;
         event.preventDefault();
-        
-        
-    });
-    
-    soPanelsGalleryChangeSelection = function(){
+
         // Activate the media editor
         var $$ = $(this);
 
         var dialog = $('.panels-admin-dialog:visible' );
         var val = dialog.find('*[name$="[ids]"]').val();
         if(val.indexOf('{demo:') === 0) val = '-'; // This removes the demo content
-        
+
         // Close the gallery dialog so it doesn't interfere with wp.media.gallery
         dialog.find('.ui-dialog-content' ).dialog('close');
 
@@ -75,16 +71,16 @@ jQuery(function($){
         frame.state('gallery-edit').on( 'update', function( selection ) {
             dialog.find('.ui-dialog-content' ).dialog('open');
             var ids = selection.models.map(function(e){ return e.id });
-            
+
             console.log(dialog.find('input[name$="[ids]"]' ).length);
             dialog.find('input[name$="[ids]"]' ).val(ids.join(','));
         });
-        
+
         frame.on('escape', function(){
             // Reopen the dialog
             dialog.find('.ui-dialog-content' ).dialog('open');
         });
 
         return false;
-    }
+    });
 });
