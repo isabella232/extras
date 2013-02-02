@@ -49,15 +49,7 @@ html {
 }
 
 .panel-type-list .panel-type-wrapper:hover{
-    background: #fcfcfc;
-    background-image: -webkit-gradient(linear, left bottom, left top, from(#f2f2f2), to(#fcfcfc));
-    background-image: -webkit-linear-gradient(bottom, #f2f2f2, #fcfcfc);
-    background-image:    -moz-linear-gradient(bottom, #f2f2f2, #fcfcfc);
-    background-image:      -o-linear-gradient(bottom, #f2f2f2, #fcfcfc);
-    background-image: linear-gradient(to top, #f2f2f2, #fcfcfc);
-    
     border-color: #C0C0C0;
-    
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
