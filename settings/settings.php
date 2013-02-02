@@ -67,10 +67,6 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/settings.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/settings.css', array(), SITEORIGIN_THEME_VERSION );
 
-	wp_localize_script( 'siteorigin-settings', 'soSettings', array(
-		'tab' => get_user_setting('siteorigin_settings_tab', 0),
-	) );
-	
 	if(wp_script_is('wp-color-picker', 'registered')){
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
