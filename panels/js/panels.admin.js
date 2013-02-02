@@ -358,19 +358,13 @@ jQuery( function ( $ ) {
     $( '#wp-content-editor-tools' )
         .find( '.wp-switch-editor' )
         .click(function () {
+            var $$ = $(this);
+            
             $( '#wp-content-editor-container, #post-status-info' ).show();
             $( '#so-panels-panels' ).hide();
-            $( '#content-panels' ).removeClass( 'panels-tab-active' );
+            $( '#wp-content-wrap' ).removeClass('panels-active');
             
-            var self = this;
-            
-            setTimeout(function(){
-                // This is to reset the change.
-                switchEditors.go('content', 'toggle');
-                switchEditors.switchto(self);
-            }, 500);
             $('#content-resize-handle' ).show();
-            return false;
         } ).end()
         .prepend(
             $( '<a id="content-panels" class="hide-if-no-js wp-switch-editor switch-panels">' + $( '#so-panels-panels h3.hndle span' ).html() + '</a>' )
@@ -383,14 +377,21 @@ jQuery( function ( $ ) {
                     $( '#wp-content-editor-container, #post-status-info' ).hide();
 
                     $( '#so-panels-panels' ).show();
-                    $( '#content-panels' ).addClass( 'panels-tab-active' );
+                    $( '#wp-content-wrap' ).addClass( 'panels-active' );
                     
                     $( window ).resize();
                     $('#content-resize-handle' ).hide();
                     
                     return false;
                 } )
-        )
+        );
+
+    $( '#wp-content-editor-tools .wp-switch-editor' ).click(function(){
+        // This fixes an occasional tab switching glitch
+        var $$ = $(this);
+        var p = $$.attr('id' ).split('-');
+        $( '#wp-content-wrap' ).addClass(p[1] + '-active');
+    });
 
     if ( typeof panelsData != 'undefined' ) {
         setTimeout( function () {

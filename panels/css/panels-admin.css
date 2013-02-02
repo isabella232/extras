@@ -385,7 +385,7 @@ html {
     padding: 5px 12px 5px 10px;
 }
 
-#content-panels.panels-tab-active {
+#wp-content-wrap.panels-active .switch-panels{
     border-color: #CCC #CCC #f4f4f4 #CCC;
     background: #f4f4f4;
     color: #333;
