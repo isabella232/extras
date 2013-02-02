@@ -49,31 +49,42 @@ jQuery(function($){
         
         originalInsert(h);
     }
-    
-    // When a user clicks on the gallery edit button, we'll try intercept
-    $('a.button.media-button-insert' ).live('click', function(){
-        // A slightly hackey way to make sure we just clicked on update gallery
-        if($(this ).html() != _wpMediaViewsL10n.updateGallery) return;
-        
-        var activeDialog = $('.panels-admin-dialog:visible' );
-        if(activeDialog.length == 0) return;
-        
-        var c = activeDialog.find('input[data-info-field="class"]');
-        if( c.val() != 'SiteOrigin_Widgets_Gallery') return;
-        
-        // We've made it past all the tests, so we know the active dialog is a gallery
-        
-        var ids = wp.media.gallery.frame.options.selection.models.map(function(e){return e.id});
-        activeDialog.find('input[name$="[ids]"]' ).val(ids.join(','));
-    });
 
     // When the user clicks on the select button, we need to display the gallery editing
-    $('.so-gallery-widget-select-attachments' ).live('click', function(){
+    $('.so-gallery-widget-select-attachments' ).live('click', function(event){
+        // Make sure the media gallery API exists
+        if ( typeof wp === 'undefined' || ! wp.media || ! wp.media.gallery ) return;
+        event.preventDefault();
+        
+        
+    });
+    
+    soPanelsGalleryChangeSelection = function(){
         // Activate the media editor
-        var val = $(this ).closest('.ui-dialog' ).find('*[name$="[ids]"]').val();
+        var $$ = $(this);
+
+        var dialog = $('.panels-admin-dialog:visible' );
+        var val = dialog.find('*[name$="[ids]"]').val();
         if(val.indexOf('{demo:') === 0) val = '-'; // This removes the demo content
         
-        wp.media.gallery.edit('[gallery ids="' + val  + '"]');
+        // Close the gallery dialog so it doesn't interfere with wp.media.gallery
+        dialog.find('.ui-dialog-content' ).dialog('close');
+
+        var frame = wp.media.gallery.edit('[gallery ids="' + val + '"]');
+
+        frame.state('gallery-edit').on( 'update', function( selection ) {
+            dialog.find('.ui-dialog-content' ).dialog('open');
+            var ids = selection.models.map(function(e){ return e.id });
+            
+            console.log(dialog.find('input[name$="[ids]"]' ).length);
+            dialog.find('input[name$="[ids]"]' ).val(ids.join(','));
+        });
+        
+        frame.on('escape', function(){
+            // Reopen the dialog
+            dialog.find('.ui-dialog-content' ).dialog('open');
+        });
+
         return false;
-    });
+    }
 });

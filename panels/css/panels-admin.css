@@ -453,3 +453,7 @@ html {
 #so-panels-panels .dialog-form a{
     outline: 0;
 }
+
+.so-gallery-widget-select-attachments{
+    float:right
+}

@@ -59,10 +59,7 @@ jQuery( function ( $ ) {
      */
     $.fn.panelsCreatePanel = function ( type, data ) {
         var dialogWrapper = $(this );
-        
         var $$ = dialogWrapper.find('.panel-type[data-class="' + type + '"]' );
-        console.log(dialogWrapper.attr('id'));
-        //console.log($$.length);
         
         if($$.length == 0) return null;
         
@@ -126,8 +123,6 @@ jQuery( function ( $ ) {
             dialog.dialog( 'close' );
         };
         
-        dialogButtons[panelsLoc.buttons['delete']] = deleteFunction;
-
         // The done button
         dialogButtons[panelsLoc.buttons['done']] = function () {
             $( this ).trigger( 'panelsdone' );
@@ -157,7 +152,6 @@ jQuery( function ( $ ) {
                 title:       ('Edit %s Panel').replace( '%s', $$.attr( 'data-title' ) ),
                 minWidth:    700,
                 create:      function(event, ui){
-                    $(this ).closest('.ui-dialog' ).find('.ui-dialog-buttonset button' ).eq(0 ).addClass('button-delete')
                     $(this ).closest('.ui-dialog' ).find('.show-in-panels' ).show();
                 },
                 open:        function () {
