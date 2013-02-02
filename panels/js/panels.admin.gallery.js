@@ -1,10 +1,10 @@
 jQuery(function($){
     var originalInsert = wp.media.editor.insert;
-
+    
     wp.media.editor.insert = function(h){
         // Check that panels tab is active
-        if(!$('#wp-content-editor-tools #content-panels').hasClass('panels-tab-active')) return originalInsert(h);
-
+        if(!$('#wp-content-wrap').hasClass('panels-active')) return originalInsert(h);
+        
         if(h.indexOf('[gallery') !== -1) {
             // Get the IDs of the gallery
             var attachments = wp.media.gallery.attachments( wp.shortcode.next( 'gallery', h ).shortcode );

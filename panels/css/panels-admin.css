@@ -56,7 +56,7 @@ html {
 .panel-type-list .panel-type h3 {
     margin: 0 0 7px 0;
     height: 1.2em;
-    color: #444444;
+    color: #333333;
     font-size: 14px;
 }
 
@@ -218,7 +218,7 @@ html {
 /* @group Panel Container */
 
 .panels-container .panel{
-    margin-bottom: 4px;
+    margin-bottom: 5px;
 
     background: #f8f8f8;
     background-image: -webkit-gradient(linear, left bottom, left top, from(#e9ebeb), to(#f8f8f8));
@@ -240,7 +240,7 @@ html {
 }
 
 .panels-container .panel .panel-wrapper{
-	padding: 7px;
+	padding: 7px 9px;
 }
 
 .panels-container .panel h4{
@@ -273,6 +273,7 @@ html {
 .panels-container .panel .title .actions {
     float: right;
     cursor: pointer;
+    padding: 0 0 0 15px;
 }
 
 .panels-container .panel .title .actions:hover a{
@@ -300,16 +301,17 @@ html {
 	display: none;
 }
 
+/* Acts as a placeholder for dragging */
 .panels-container .ui-state-highlight{
-	border: 1px dashed #D6D6D6;
+	border: 1px dashed #f7eba9;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
     
     height: 47px;
     
-    background: rgba(231,236,235,0.5);
-    margin-bottom: 4px;
+    background: #fdf1ae url('images/highlight-bg.png') no-repeat;
+    margin-bottom: 5px;
 }
 
 /* @end */

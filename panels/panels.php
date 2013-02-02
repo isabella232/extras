@@ -141,6 +141,9 @@ function siteorigin_panels_admin_enqueue_scripts($prefix) {
 
 		// This gives panels a chance to enqueue scripts too, without having to check the screen ID.
 		do_action( 'siteorigin_panel_enqueue_admin_scripts' );
+		
+		// Incase any widgets have special scripts
+		do_action( 'admin_enqueue_scripts' , 'widgets.php');
 	}
 }
 add_action( 'admin_print_scripts-post-new.php', 'siteorigin_panels_admin_enqueue_scripts' );

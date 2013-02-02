@@ -89,8 +89,7 @@
     background-image: linear-gradient(to top, #e0e0e0, #ededed);
 
     border: 1px solid #ccc;
-    border-color: #ccc #ccc #dfdfdf;
-    border-bottom: none;
+    border-color: #ccc #ccc #c0c0c0 #ccc;
     padding: 8px 10px;
 
     -webkit-border-top-left-radius: 3px;
