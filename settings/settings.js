@@ -97,6 +97,10 @@ jQuery( function ( $ ) {
             a.addClass( 'nav-tab-active' );
 
             $( '#current-tab-field' ).val( i );
+            
+            // Set the tab for this user
+            setUserSetting('siteorigin_settings_tab', i);
+            
             return false;
         } );
 
