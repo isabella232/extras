@@ -1,5 +1,5 @@
 <div class="wrap" id="panels-home-page">
-	<div id="icon-edit-pages" class="icon32 icon32-posts-page"><br></div>
+	<div id="icon-index" class="icon32"><br></div>
 	<h2><?php esc_html_e('Home Page', 'siteorigin') ?></h2>
 	
 	<div id="post-body-wrapper">

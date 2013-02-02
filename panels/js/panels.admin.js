@@ -368,7 +368,8 @@ jQuery( function ( $ ) {
                 // This is to reset the change.
                 switchEditors.go('content', 'toggle');
                 switchEditors.switchto(self);
-            }, 100);
+            }, 500);
+            $('#content-resize-handle' ).show();
             return false;
         } ).end()
         .prepend(
@@ -385,6 +386,9 @@ jQuery( function ( $ ) {
                     $( '#content-panels' ).addClass( 'panels-tab-active' );
                     
                     $( window ).resize();
+                    $('#content-resize-handle' ).hide();
+                    
+                    return false;
                 } )
         )
 
