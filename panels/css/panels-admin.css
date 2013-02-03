@@ -91,7 +91,7 @@ html {
 }
 
 #panels-container .grid .cell.cell-selected{
-    background: #e4eff4;
+    background: #e4eff4 url("images/cell-selected.png") repeat;
     border-color: #bcccd2;
 }
 
