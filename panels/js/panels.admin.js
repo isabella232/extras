@@ -80,6 +80,7 @@ jQuery( function ( $ ) {
             } )
             .find( 'h4' ).click( function () {
                 dialog.dialog( 'open' );
+                return false;
             } )
             .end().find( '.description' ).html( $$.find( '.description' ).html() )
             .end().find( '.form' ).html( formHtml );
