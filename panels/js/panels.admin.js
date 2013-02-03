@@ -11,7 +11,7 @@ jQuery( function ( $ ) {
         title:       $( '#panels-dialog' ).attr( 'data-title' ),
         minWidth:    960,
         close:       function () {
-            $( '#panels-container .panel.new-panel' ).hide().fadeIn( 'slow' ).removeClass( 'new-panel' );
+            $( '#panels-container .panel.new-panel' ).hide().fadeIn( 1000 ).removeClass( 'new-panel' );
         }
     } ).find( '.panel-type' ).disableSelection();
 
@@ -106,7 +106,6 @@ jQuery( function ( $ ) {
             $('<div id="panels-undo-message" class="updated"><p>' + panelsLoc.messages.deleteWidget + ' - <a href="#" class="undo">' + panelsLoc.buttons.undo + '</a></p></div>' )
                 .appendTo('body')
                 .hide()
-                .fadeIn()
                 .slideDown()
                 .find('a.undo')
                 .click(function(){
@@ -244,7 +243,7 @@ jQuery( function ( $ ) {
         
         container.sortable( "refresh" ).trigger( 'refreshcells' );
         container.closest( '.grid-container' ).panelsResizeCells();
-        if(animate) $( '#panels-container .panel.new-panel' ).hide().fadeIn( 'slow' ).removeClass( 'new-panel' );
+        if(animate) $( '#panels-container .panel.new-panel' ).hide().fadeIn( 1000 ).removeClass( 'new-panel' );
     }
 
     /**
@@ -413,11 +412,11 @@ jQuery( function ( $ ) {
     $('#content-panels' ).click(function(){
         $(window ).resize();
     });
-    
+
     if ( typeof panelsData != 'undefined' || $('#panels-home-page' ).length) $( '#content-panels' ).click();
     // Click again after the panels have been set up
     setTimeout(function(){
-        $( '#content-panels' ).click();
+        if ( typeof panelsData != 'undefined' || $('#panels-home-page' ).length) $( '#content-panels' ).click();
         $('#so-panels-panels .hndle' ).unbind('click');
     }, 150);
     
