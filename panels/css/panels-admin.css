@@ -79,20 +79,20 @@ html {
 #panels-container .grid {
 	margin-bottom: 20px;
 	position: relative;
-	background: url(images/grid-bg.png) repeat;
+	background: #edf8fe url("images/cell-selected.png") repeat;
 }
 
-#panels-container .grid .cell {	
-	background: #fff8bd;
-	border: 1px solid #ecd800;
-	
-	position: absolute;
-	top: 0;
+#panels-container .grid .cell {
+    background: #e4eff4;
+    border: 1px solid #bcccd2;
+
+    position: absolute;
+    top: 0;
 }
 
 #panels-container .grid .cell.cell-selected{
-    background: #e4eff4 url("images/cell-selected.png") repeat;
-    border-color: #bcccd2;
+    background: #fff8bd url("images/cell-selected.png") repeat;
+    border-color: #ecd800;
 }
 
 #panels-container .grid .cell .cell-wrapper{
@@ -158,8 +158,8 @@ html {
 }
 
 #panels-container .grid .ui-resizable-handle.ui-resizable-w{
-    width: 12px;
-    left: -12px;
+    width: 10px;
+    left: -11px;
 	cursor: move;
     background: rgba(0,150,211, 0);
 
@@ -310,8 +310,7 @@ html {
 
 /* Acts as a placeholder for dragging */
 .panels-container .ui-state-highlight{
-	border: 1px solid #d8cd75;
-    border-color: #d8cd75 #d9ce75 #ddd374 #d9ce75;
+	border: 1px solid;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
@@ -319,10 +318,11 @@ html {
     height: 47px;
 
     background: #f8f8f8;
-    background-image: -webkit-linear-gradient(bottom, #fbf2ae, #f8efab);
-    background-image:    -moz-linear-gradient(bottom, #fbf2ae, #f8efab);
-    background-image:      -o-linear-gradient(bottom, #fbf2ae, #f8efab);
-    background-image: linear-gradient(to top, #fbf2ae, #f8efab);
+    background-image: -webkit-linear-gradient(bottom, #e5f1f7, #e1eef4);
+    background-image:    -moz-linear-gradient(bottom, #e5f1f7, #e1eef4);
+    background-image:      -o-linear-gradient(bottom, #e5f1f7, #e1eef4);
+    background-image: linear-gradient(to top, #e5f1f7, #e1eef4);
+    border-color: #c3ced3 #c4cfd4 #c8d3d8 #c4cfd4;
     
     margin-bottom: 5px;
     
@@ -333,9 +333,13 @@ html {
     position: relative;
 }
 
-.panels-container .cell.cell-selected .ui-state-highlight{
-    background-image:none;
-    background: green;
+.cell-selected .panels-container .ui-state-highlight{
+    background: #f8f8f8;
+    background-image: -webkit-linear-gradient(bottom, #fbf2ae, #f8efab);
+    background-image:    -moz-linear-gradient(bottom, #fbf2ae, #f8efab);
+    background-image:      -o-linear-gradient(bottom, #fbf2ae, #f8efab);
+    background-image: linear-gradient(to top, #fbf2ae, #f8efab);
+    border-color: #d8cd75 #d9ce75 #ddd374 #d9ce75;
 }
 
 /* @end */

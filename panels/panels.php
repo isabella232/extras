@@ -254,7 +254,8 @@ function siteorigin_panels_get_home_page_data(){
 	$panels_data = get_theme_mod('panels_home_page', null);
 	if(is_null($panels_data)){
 		// Load the default layout
-		$panels_data = apply_filters('siteorigin_panels_home_page_default_layout', array());
+		$layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
+		$panels_data = !empty($layouts['default_home']) ? $layouts['default_home'] : current($layouts);
 	}
 	
 	return $panels_data;
@@ -380,7 +381,8 @@ function siteorigin_panels_render( $post_id = false ) {
 		$panels_data = get_theme_mod('panels_home_page', null);
 		if(is_null($panels_data)){
 			// Load the default layout
-			$panels_data = apply_filters('siteorigin_panels_home_page_default_layout', array());
+			$layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
+			$panels_data = !empty($layouts['default_home']) ? $layouts['default_home'] : current($layouts);
 		}
 	}
 	else{

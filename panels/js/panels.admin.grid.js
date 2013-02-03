@@ -84,7 +84,7 @@ jQuery( function ( $ ) {
                 placeholder:"ui-state-highlight",
                 connectWith:".panels-container",
                 tolerance:  'pointer',
-                change:     function () {
+                change:     function (ui) {
                     var thisContainer = $('#panels-container .ui-state-highlight' ).closest('.cell' ).get(0);
                     if(typeof this.lastContainer != 'undefined' && this.lastContainer != thisContainer){
                         // Resize the new and the last containers
