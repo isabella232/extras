@@ -294,8 +294,7 @@ jQuery( function ( $ ) {
         // Close the add panel dialog
         $( '#panels-dialog' ).dialog( 'close' );
     } );
-
-
+    
     /**
      * Loads panel data
      * 
@@ -393,17 +392,6 @@ jQuery( function ( $ ) {
         $( '#wp-content-wrap' ).addClass(p[1] + '-active');
     });
 
-    if ( typeof panelsData != 'undefined' ) {
-        setTimeout( function () {
-            $( '#content-panels' ).click();
-        }, 50 );
-    }
-    
-    // Prevent minimizing the panels display
-    setTimeout(function(){
-        $('#so-panels-panels .hndle' ).unbind('click');
-    }, 250);
-    
     // This is for the home page panel
     $('#panels-home-page #post-body' ).show();
     $('#panels-home-page #post-body-wrapper' ).css('background', 'none');
@@ -418,9 +406,17 @@ jQuery( function ( $ ) {
         .find( '.hndle' ).html('' ).append(
             $('#add-to-panels')
         );
+
+    // When the content panels button is clicked, trigger a window resize to set up the columns
+    $('#content-panels' ).click(function(){
+        $(window ).resize();
+    });
+    
+    if ( typeof panelsData != 'undefined' || $('#panels-home-page' ).length) $( '#content-panels' ).click();
+    $('#so-panels-panels .hndle' ).unbind('click');
     
     if($('#panels-home-page' ).length){
-        $('#content-panels' ).click();
         $('#content-tmce, #content-html' ).remove();
+        $('#content-panels' ).hide();
     }
 } );

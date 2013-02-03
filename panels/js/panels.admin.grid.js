@@ -75,12 +75,22 @@ jQuery( function ( $ ) {
                 $( this ).find( '.cell-width-value span' ).html( Math.round( percent * 1000 ) / 10 + '%' );
             } )
             .find( '.panels-container' )
+            // This sortable handles the widgets inside the cell
             .sortable( {
                 placeholder:"ui-state-highlight",
                 connectWith:".panels-container",
                 tolerance:  'pointer',
                 change:     function () {
-                    $$.panelsResizeCells();
+                    var thisContainer = $('#panels-container .ui-state-highlight' ).closest('.cell' ).get(0);
+                    if(typeof this.lastContainer != 'undefined' && this.lastContainer != thisContainer){
+                        // Resize the new and the last containers
+                        $(this.lastContainer ).closest('.grid-container').panelsResizeCells();
+                        $(thisContainer).closest('.grid-container').panelsResizeCells();
+                    }
+                    
+                    // Refresh all the cell sizes after we stop sorting
+                    this.lastContainer = thisContainer; 
+                    
                 },
                 helper: function(e, el){
                     return el.clone().css('opacity', 0.9).addClass('panel-being-dragged');
@@ -88,7 +98,7 @@ jQuery( function ( $ ) {
                 stop:       function () {
                     // Refresh all the cell sizes after we stop sorting
                     $( '#panels-container .grid-container' ).each( function () {
-                        $(this).panelsResizeCells(true);
+                        $(this).panelsResizeCells();
                     } );
                 },
                 receive:    function () {
@@ -97,7 +107,10 @@ jQuery( function ( $ ) {
             } )
             .bind( 'refreshcells', function () {
                 // Set the cell for each panel
-                $$.panelsResizeCells();
+                // Refresh all the cell sizes after we stop sorting
+                $( '#panels-container .grid-container' ).each( function () {
+                    $(this).panelsResizeCells(true);
+                } );
 
                 $( '#panels-container .panel' ).each( function () {
                     var container = $( this ).closest( '.grid-container' );
@@ -117,37 +130,31 @@ jQuery( function ( $ ) {
      *
      * @param onlyHeight
      */
-    $.fn.panelsResizeCells = function(onlyHeight){
-        if ( onlyHeight == undefined ) onlyHeight = false;
+    $.fn.panelsResizeCells = function(){
         
         return $(this ).each(function(){
             var $$ = $(this);
 
-            $$.find( '.grid .cell, .grid .cell-wrapper' ).css( 'height', 'auto' );
+            $$.find( '.grid, .grid .cell .cell-wrapper' ).css( 'height', 'auto' );
             var totalWidth = $$.find( '.grid' ).outerWidth();
 
-            if ( $$.find( '.grid .cell' ).length > 1 ) {
-                $$.find( '.grid .cell' ).each( function () {
-                    if ( $( this ).is( '.first, .last' ) ) totalWidth -= 6;
-                    else totalWidth -= 12;
-                } );
-            }
-
+            $$.find( '.grid .cell' ).each( function () {
+                if ( $( this ).is( '.first, .last' ) ) totalWidth -= 6;
+                else totalWidth -= 12;
+            } );
+            
             var left = 0;
             var maxHeight = 0;
             $$.find( '.grid .cell' ).each( function () {
-                maxHeight = Math.max( maxHeight, $( this ).outerHeight() );
-                if ( !onlyHeight ) {
-                    $( this )
-                        .width( Math.floor( totalWidth * Number( $( this ).attr( 'data-percent' ) ) ) )
-                        .css( 'left', left );
-                    left += $( this ).width() + 12;
-                }
+                maxHeight = Math.max( maxHeight, $( this ).height() );
+                $( this )
+                    .width( Math.floor( totalWidth * Number( $( this ).attr( 'data-percent' ) ) ) )
+                    .css( 'left', left );
+                left += $( this ).width() + 12;
             } );
-            maxHeight = Math.max( maxHeight, 50 );
-
-            $$.find( '.grid' ).height( maxHeight );
-            $$.find( '.grid .cell .cell-wrapper' ).css( 'height', maxHeight );
+            
+            // Resize all the grids and cell wrappers
+            $$.find( '.grid, .grid .cell .cell-wrapper' ).css( 'height', Math.max( maxHeight, 45 ) );
         })
     }
 

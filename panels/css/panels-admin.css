@@ -95,7 +95,7 @@ html {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	
-	padding: 10px 10px 6px 10px; /* 6px bottom to remove bottom margin from panels */
+	padding: 10px 10px 4px 10px; /* 6px bottom to remove bottom margin from panels */
 }
 
 #panels-container .grid .cell.first{
@@ -295,6 +295,8 @@ html {
 
 .panels-container .panel small{
 	display: block;
+    height: 16px;
+    overflow: hidden;
 }
 
 .panels-container .panel .form{
@@ -303,15 +305,27 @@ html {
 
 /* Acts as a placeholder for dragging */
 .panels-container .ui-state-highlight{
-	border: 1px dashed #f7eba9;
+	border: 1px solid #d8cd75;
+    border-color: #d8cd75 #d9ce75 #ddd374 #d9ce75;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
     
     height: 47px;
+
+    background: #f8f8f8;
+    background-image: -webkit-linear-gradient(bottom, #fbf2ae, #f8efab);
+    background-image:    -moz-linear-gradient(bottom, #fbf2ae, #f8efab);
+    background-image:      -o-linear-gradient(bottom, #fbf2ae, #f8efab);
+    background-image: linear-gradient(to top, #fbf2ae, #f8efab);
     
-    background: #fdf1ae url('images/highlight-bg.png') no-repeat;
     margin-bottom: 5px;
+    
+    -moz-box-shadow: 0 1px 0 rgba(255,255,255,0.7), inset 0 1px 2px rgba(0,0,0,0.075);
+    -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.7), inset 0 1px 2px rgba(0,0,0,0.075);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.7), inset 0 1px 2px rgba(0,0,0,0.075);
+    
+    position: relative;
 }
 
 /* @end */

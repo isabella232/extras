@@ -17,7 +17,7 @@ jQuery(function($){
             
             // The panel couldn't be created. Possible the widgets gallery isn't being used.
             if(panel == null) originalInsert(h);
-            else window.panels.addPanel(panel);
+            else window.panels.addPanel(panel, null, null, true);
             
             return;
         }
@@ -42,11 +42,12 @@ jQuery(function($){
 
             // The panel couldn't be created. Possible the widgets gallery isn't being used.
             if(panel == null) originalInsert(h);
-            else window.panels.addPanel(panel);
+            else window.panels.addPanel(panel, null, null, true);
             
             return;
         }
         
+        // Incase we've added any new panels
         originalInsert(h);
     }
 
@@ -67,12 +68,12 @@ jQuery(function($){
         dialog.find('.ui-dialog-content' ).dialog('close');
 
         var frame = wp.media.gallery.edit('[gallery ids="' + val + '"]');
-
+        
+        // When the gallery-edit state is updated, copy the attachment ids across
         frame.state('gallery-edit').on( 'update', function( selection ) {
             dialog.find('.ui-dialog-content' ).dialog('open');
             var ids = selection.models.map(function(e){ return e.id });
 
-            console.log(dialog.find('input[name$="[ids]"]' ).length);
             dialog.find('input[name$="[ids]"]' ).val(ids.join(','));
         });
 
