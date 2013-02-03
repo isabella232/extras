@@ -232,16 +232,17 @@ html {
     background-image:      -o-linear-gradient(bottom, #e9ebeb, #f8f8f8);
     background-image: linear-gradient(to top, #e9ebeb, #f8f8f8);
     
-    border: 1px solid #C9C9C9;
+    border: 1px solid;
+    border-color: #c9c9c9 #c2c2c3 #babbbf #c1c2c3;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
     
     cursor: move;
     
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.075), inset 0 0 2px #FFF;
-    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.075), inset 0 0 2px #FFF;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.075), inset 0 0 2px #FFF;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.08), inset 0 0 2px #FFF;
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.08), inset 0 0 2px #FFF;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.08), inset 0 0 2px #FFF;
 }
 
 .panels-container .panel .panel-wrapper{
@@ -317,11 +318,7 @@ html {
     
     height: 47px;
 
-    background: #f8f8f8;
-    background-image: -webkit-linear-gradient(bottom, #e5f1f7, #e1eef4);
-    background-image:    -moz-linear-gradient(bottom, #e5f1f7, #e1eef4);
-    background-image:      -o-linear-gradient(bottom, #e5f1f7, #e1eef4);
-    background-image: linear-gradient(to top, #e5f1f7, #e1eef4);
+    background: #e1eef4;
     border-color: #c3ced3 #c4cfd4 #c8d3d8 #c4cfd4;
     
     margin-bottom: 5px;
@@ -334,11 +331,7 @@ html {
 }
 
 .cell-selected .panels-container .ui-state-highlight{
-    background: #f8f8f8;
-    background-image: -webkit-linear-gradient(bottom, #fbf2ae, #f8efab);
-    background-image:    -moz-linear-gradient(bottom, #fbf2ae, #f8efab);
-    background-image:      -o-linear-gradient(bottom, #fbf2ae, #f8efab);
-    background-image: linear-gradient(to top, #fbf2ae, #f8efab);
+    background: #fbf2ae;
     border-color: #d8cd75 #d9ce75 #ddd374 #d9ce75;
 }
 

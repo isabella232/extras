@@ -11,7 +11,7 @@ jQuery( function ( $ ) {
         title:       $( '#panels-dialog' ).attr( 'data-title' ),
         minWidth:    960,
         close:       function () {
-            $( '#panels-container .panel.new-panel' ).hide().slideDown( 'slow' ).removeClass( 'new-panel' );
+            $( '#panels-container .panel.new-panel' ).hide().fadeIn( 'slow' ).removeClass( 'new-panel' );
         }
     } ).find( '.panel-type' ).disableSelection();
 
@@ -101,7 +101,6 @@ jQuery( function ( $ ) {
                 'Remove Panel'
             );
             
-            // Create the undo notification
             // Create the undo notification
             $('#panels-undo-message' ).remove();
             $('<div id="panels-undo-message" class="updated"><p>' + panelsLoc.messages.deleteWidget + ' - <a href="#" class="undo">' + panelsLoc.buttons.undo + '</a></p></div>' )
@@ -245,7 +244,7 @@ jQuery( function ( $ ) {
         
         container.sortable( "refresh" ).trigger( 'refreshcells' );
         container.closest( '.grid-container' ).panelsResizeCells();
-        if(animate) $( '#panels-container .panel.new-panel' ).hide().slideDown( 'slow' ).removeClass( 'new-panel' );
+        if(animate) $( '#panels-container .panel.new-panel' ).hide().fadeIn( 'slow' ).removeClass( 'new-panel' );
     }
 
     /**
