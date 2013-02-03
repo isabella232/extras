@@ -419,9 +419,8 @@ jQuery( function ( $ ) {
     // Click again after the panels have been set up
     setTimeout(function(){
         $( '#content-panels' ).click();
+        $('#so-panels-panels .hndle' ).unbind('click');
     }, 150);
-    
-    $('#so-panels-panels .hndle' ).unbind('click');
     
     if($('#panels-home-page' ).length){
         $('#content-tmce, #content-html' ).remove();
