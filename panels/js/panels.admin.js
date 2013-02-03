@@ -415,6 +415,11 @@ jQuery( function ( $ ) {
     });
     
     if ( typeof panelsData != 'undefined' || $('#panels-home-page' ).length) $( '#content-panels' ).click();
+    // Click again after the panels have been set up
+    setTimeout(function(){
+        $( '#content-panels' ).click();
+    }, 150);
+    
     $('#so-panels-panels .hndle' ).unbind('click');
     
     if($('#panels-home-page' ).length){

@@ -646,14 +646,17 @@ class SiteOrigin_Widgets_PostContent extends WP_Widget {
 	 * @return string
 	 */
 	function default_content($type){
+		global $post;
+		if(empty($post)) return;
+		
 		switch($type) {
 			case 'title' :
-				return '<h1 class="entry-title">' . get_the_title() . '</h1>';
+				return '<h1 class="entry-title">' . $post->post_title . '</h1>';
 			case 'content' :
-				return '<div class="entry-content">' . get_the_content() . '</div>';
+				return '<div class="entry-content">' . wpautop($post->post_content) . '</div>';
 			case 'featured' :
 				if(!has_post_thumbnail()) return '';
-				return '<div class="featured-image">' . get_the_post_thumbnail() . '</div>';
+				return '<div class="featured-image">' . get_the_post_thumbnail($post->ID) . '</div>';
 			default :
 				return '';
 		}
