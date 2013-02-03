@@ -585,7 +585,7 @@ class SiteOrigin_Widgets_Gallery extends WP_Widget {
 		
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'ids' ) ?>"><?php _e( 'Image IDs', 'siteorigin' ) ?></label>
+			<label for="<?php echo $this->get_field_id( 'ids' ) ?>"><?php _e( 'Gallery Images', 'siteorigin' ) ?></label>
 			<a href="#" onclick="return false;" class="so-gallery-widget-select-attachments show-in-panels hidden"><?php _e('edit gallery', 'siteorigin') ?></a>
 			<input type="text" class="widefat" value="<?php echo esc_attr($instance['ids']) ?>" name="<?php echo $this->get_field_name('ids') ?>" />
 		</p>
