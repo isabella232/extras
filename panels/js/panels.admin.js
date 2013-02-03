@@ -229,8 +229,9 @@ jQuery( function ( $ ) {
     }
 
     window.panels.addPanel = function(panel, container, position, animate){
-        if(container == null) container = $( '#panels-container .cell.cell-selected .panels-container' ).last();
-        if(container == null) container = $( '#panels-container .cell .panels-container' ).last();
+        if(container == null) container = $( '#panels-container .cell.cell-selected .panels-container' ).eq(0);
+        if(container.length == 0) container = $( '#panels-container .cell .panels-container' ).eq(0);
+        if(container.length == 0) return;
         
         if (position == null) container.append( panel );
         else {
