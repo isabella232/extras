@@ -583,6 +583,8 @@ class SiteOrigin_Widgets_Gallery extends WP_Widget {
 			'image_size' => '',
 		));
 		
+		$types = apply_filters('siteorigin_gallery_types', array());
+		
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'ids' ) ?>"><?php _e( 'Gallery Images', 'siteorigin' ) ?></label>
@@ -603,6 +605,16 @@ class SiteOrigin_Widgets_Gallery extends WP_Widget {
 				<option value="full" <?php selected('full', $instance['image_size']) ?>><?php esc_html_e( 'Full', 'siteorigin' ) ?></option>
 				<?php foreach ( $_wp_additional_image_sizes as $name => $info ) : ?>
 					<option value="<?php echo esc_attr( $name ) ?>" <?php selected($name, $instance['image_size']) ?>><?php echo esc_html( $name ) ?></option>
+				<?php endforeach ?>
+			</select>
+		</p>
+		
+		<p>
+			<label for="<?php echo $this->get_field_id( 'type' ) ?>"><?php _e( 'Gallery Type', 'siteorigin' ) ?></label>
+			<select name="<?php echo $this->get_field_name( 'type' ) ?>" id="<?php echo $this->get_field_id( 'type' ) ?>">
+				<option value="" <?php selected(empty($instance['type'])) ?>><?php esc_html_e('Default', 'siteorigin') ?></option>
+				<?php foreach($types as $id => $name) : ?>
+					<option value="<?php echo esc_attr( $id ) ?>" <?php selected($id, $instance['type']) ?>><?php echo esc_html( $name ) ?></option>
 				<?php endforeach ?>
 			</select>
 		</p>
