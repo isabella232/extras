@@ -90,6 +90,7 @@ jQuery( function ( $ ) {
                         // Resize the new and the last containers
                         $(this.lastContainer ).closest('.grid-container').panelsResizeCells();
                         $(thisContainer).closest('.grid-container').panelsResizeCells();
+                        thisContainer.click();
                     }
                     
                     // Refresh all the cell sizes after we stop sorting
@@ -99,7 +100,7 @@ jQuery( function ( $ ) {
                 helper: function(e, el){
                     return el.clone().css('opacity', 0.9).addClass('panel-being-dragged');
                 },
-                stop:       function () {
+                stop:       function (ui, el) {
                     // Refresh all the cell sizes after we stop sorting
                     $( '#panels-container .grid-container' ).each( function () {
                         $(this).panelsResizeCells();
