@@ -549,7 +549,7 @@ class SiteOrigin_Widgets_Headline extends WP_Widget {
 class SiteOrigin_Widgets_Gallery extends WP_Widget {
 	function __construct() {
 		parent::__construct(
-			'headline',
+			'gallery',
 			__( 'Gallery', 'siteorigin' ),
 			array(
 				'description' => __( 'Displays a gallery.', 'siteorigin' ),

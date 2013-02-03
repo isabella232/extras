@@ -418,6 +418,7 @@ jQuery( function ( $ ) {
     setTimeout(function(){
         if ( typeof panelsData != 'undefined' || $('#panels-home-page' ).length) $( '#content-panels' ).click();
         $('#so-panels-panels .hndle' ).unbind('click');
+        $('#so-panels-panels .cell' ).eq(0 ).click();
     }, 150);
     
     if($('#panels-home-page' ).length){
