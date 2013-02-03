@@ -70,6 +70,10 @@ jQuery( function ( $ ) {
         } );
 
         $$.find( '.grid .cell' )
+            .click(function(){
+                $( '.grid .cell' ).removeClass('cell-selected');
+                $(this ).addClass('cell-selected');
+            })
             .each( function () {
                 var percent = Number( $( this ).attr( 'data-percent' ) );
                 $( this ).find( '.cell-width-value span' ).html( Math.round( percent * 1000 ) / 10 + '%' );
@@ -156,7 +160,7 @@ jQuery( function ( $ ) {
             } );
             
             // Resize all the grids and cell wrappers
-            $$.find( '.grid, .grid .cell .cell-wrapper' ).css( 'height', Math.max( maxHeight, 45 ) );
+            $$.find( '.grid, .grid .cell .cell-wrapper' ).css( 'height', Math.max( maxHeight, 68 ) );
         })
     }
 

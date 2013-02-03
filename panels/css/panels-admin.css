@@ -90,6 +90,11 @@ html {
 	top: 0;
 }
 
+#panels-container .grid .cell.cell-selected{
+    background: #e4eff4;
+    border-color: #bcccd2;
+}
+
 #panels-container .grid .cell .cell-wrapper{
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
@@ -326,6 +331,11 @@ html {
     box-shadow: 0 1px 0 rgba(255,255,255,0.7), inset 0 1px 2px rgba(0,0,0,0.075);
     
     position: relative;
+}
+
+.panels-container .cell.cell-selected .ui-state-highlight{
+    background-image:none;
+    background: green;
 }
 
 /* @end */
