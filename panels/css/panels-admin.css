@@ -323,8 +323,8 @@ html {
     
     height: 47px;
 
-    background: #e1eef4;
-    border-color: #c3ced3 #c4cfd4 #c8d3d8 #c4cfd4;
+    background: #ddebef;
+    border-color: #bcccd2;
     
     margin-bottom: 5px;
     
@@ -336,8 +336,8 @@ html {
 }
 
 .cell-selected .panels-container .ui-state-highlight{
-    background: #fbf2ae;
-    border-color: #d8cd75 #d9ce75 #ddd374 #d9ce75;
+    background: #c8e1ec;
+    border-color: #a4c4ce;
 }
 
 /* @end */
