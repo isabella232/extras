@@ -138,10 +138,12 @@ jQuery( function ( $ ) {
             $$.find( '.grid, .grid .cell .cell-wrapper' ).css( 'height', 'auto' );
             var totalWidth = $$.find( '.grid' ).outerWidth();
 
-            $$.find( '.grid .cell' ).each( function () {
-                if ( $( this ).is( '.first, .last' ) ) totalWidth -= 6;
-                else totalWidth -= 12;
-            } );
+            if ( $$.find( '.grid .cell' ).length > 1 ) {
+                $$.find( '.grid .cell' ).each( function () {
+                    if ( $( this ).is( '.first, .last' ) ) totalWidth -= 6;
+                    else totalWidth -= 12;
+                } );
+            }
             
             var left = 0;
             var maxHeight = 0;
