@@ -29,25 +29,61 @@ jQuery( function ( $ ) {
     }
 
     // Handle the media uploader
-    $('a.media-upload-button' ).click(function(){
-        var $$ = $(this ).closest('td');
-        wp.media.editor.open('settings');
+    $('a.media-upload-button' ).click(function(event){
+        var $$ = $(this);
+        var $c = $(this ).closest('td');
+        var frame = $(this ).data('frame');
+        console.log(frame);
+        
+        // If the media frame already exists, reopen it.
+        if ( frame ) {
+            frame.open();
+            return;
+        }
 
-        // We want our own insert into post handler
-        wp.media.editor.send.attachment = function(props, attachment){
-            $$.find('.current .title' ).html(attachment.title);
-            $$.find('input[type=hidden]' ).val(attachment.id);
-            
+        // Create the media frame.
+        frame = wp.media({
+            // Set the title of the modal.
+            title: $$.data('choose'),
+
+            // Tell the modal to show only images.
+            library: {
+                type: 'image'
+            },
+
+            // Customize the submit button.
+            button: {
+                // Set the text of the button.
+                text: $$.data('update'),
+                // Tell the button not to close the modal, since we're
+                // going to refresh the page when the image is selected.
+                close: false
+            }
+        });
+
+        // When an image is selected, run a callback.
+        frame.on( 'select', function() {
+            // Grab the selected attachment.
+            var attachment = frame.state().get('selection').first().attributes;
+
+            $c.find('.current .title' ).html(attachment.title);
+            $c.find('input[type=hidden]' ).val(attachment.id);
+
             if(typeof attachment.sizes != 'undefined'){
                 if(typeof attachment.sizes.thumbnail != 'undefined')
-                    $$.find('.current .thumbnail' ).attr('src', attachment.sizes.thumbnail.url).fadeIn();
+                    $c.find('.current .thumbnail' ).attr('src', attachment.sizes.thumbnail.url).fadeIn();
                 else
-                    $$.find('.current .thumbnail' ).attr('src', attachment.sizes.full.url).fadeIn();
+                    $c.find('.current .thumbnail' ).attr('src', attachment.sizes.full.url).fadeIn();
             }
             else{
-                $$.find('.current .thumbnail' ).attr('src', attachment.icon).fadeIn();
+                $c.find('.current .thumbnail' ).attr('src', attachment.icon).fadeIn();
             }
-        }
+            
+            frame.close();
+        });
+
+        // Finally, open the modal.
+        frame.open();
         
         return false;
     });

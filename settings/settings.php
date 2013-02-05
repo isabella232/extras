@@ -267,6 +267,9 @@ function siteorigin_settings_field( $args ) {
 				$src = array('', 0, 0);
 			}
 			
+			$choose_title = empty($args['choose']) ? __('Choose Media', 'siteorigin') : $args['choose'];
+			$update_button = empty($args['update']) ? __('Set Media', 'siteorigin') : $args['update'];
+			
 			?>
 				<div class="media-field-wrapper">
 					<div class="current">
@@ -275,8 +278,8 @@ function siteorigin_settings_field( $args ) {
 						</div>
 						<div class="title"><?php if(!empty($post)) echo esc_attr($post->post_title) ?></div>
 					</div>
-					<a href="#" class="media-upload-button">
-						<?php _e('Select Media', 'siteorigin') ?>
+					<a href="#" class="media-upload-button" data-choose="<?php echo esc_attr($choose_title) ?>" data-update="<?php echo esc_attr($update_button) ?>">
+						<?php echo esc_html($choose_title) ?>
 					</a>
 
 					<a href="#" class="media-remove-button"><?php _e('Remove', 'siteorigin') ?></a>

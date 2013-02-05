@@ -32,13 +32,7 @@ function siteorigin_premium_page_render() {
 				<div class="wrap" id="theme-upgrade">
 					<h2><?php _e( 'Premium Upgrade', 'siteorigin' ) ?></h2>
 					<p>
-						<?php
-						printf(
-							__( "There's a premium version of %s available, <a href='%s'>find out more</a>.", 'siteorigin' ),
-							ucfirst( $theme ),
-							'http://siteorigin.com/premium/' . $theme . '/'
-						);
-						?>
+						<?php printf(__( "There's a premium version of %s coming soon.", 'siteorigin' ),ucfirst( $theme )); ?>
 					</p>
 				</div>
 				<?php
