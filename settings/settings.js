@@ -27,7 +27,7 @@ jQuery( function ( $ ) {
                 } );
         } );
     }
-    
+
     // Handle the media uploader
     $('a.media-upload-button' ).click(function(){
         var $$ = $(this ).closest('td');

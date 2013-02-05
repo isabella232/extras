@@ -263,13 +263,17 @@ function siteorigin_settings_field( $args ) {
 				$src = wp_get_attachment_image_src($current, 'thumbnail');
 				if(empty($src)) $src = wp_get_attachment_image_src($current, 'thumbnail', true);
 			}
+			else{
+				$src = array('', 0, 0);
+			}
+			
 			?>
 				<div class="media-field-wrapper">
 					<div class="current">
 						<div class="thumbnail-wrapper">
 							<img src="<?php echo esc_url($src[0]) ?>" class="thumbnail" <?php if(empty($post)) echo "style='display:none'" ?> />
 						</div>
-						<div class="title"><?php echo esc_attr($post->post_title) ?></div>
+						<div class="title"><?php if(!empty($post)) echo esc_attr($post->post_title) ?></div>
 					</div>
 					<a href="#" class="media-upload-button">
 						<?php _e('Select Media', 'siteorigin') ?>
