@@ -32,7 +32,7 @@ jQuery( function ( $ ) {
                     sharedCellLeft = $( this ).prev().position().left;
                 },
                 stop:       function ( event, ui ) {
-                    $$.find( '.grid .cell' ).resizable( 'disable' ).resizable( 'enable' );
+                    $$.find( '.grid .cell' ).not( '.first' ).resizable( 'disable' ).resizable( 'enable' );
                 },
                 resize:     function ( event, ui ) {
                     var c = $( this );
@@ -354,32 +354,44 @@ jQuery( function ( $ ) {
     } );
 
     // Create the add grid dialog
-    $( '#grid-add-dialog' ).show().dialog( {
-        dialogClass: 'panels-admin-dialog',
-        autoOpen:false,
-        modal:   true,
-        title:   $( '#grid-add-dialog' ).attr( 'data-title' ),
-        open:    function () {
-            $( this ).find( 'input' ).val( 3 );
-        },
-        buttons: {
-            'Add':function () {
-                var num = Number( $( this ).find( 'input' ).val() );
-                if ( num == NaN ) {
-                    alert( 'Invalid Number' );
-                    return false;
-                }
-
-                num = Math.round( num );
-                num = Math.max( 1, num );
-                num = Math.min( 10, num );
-                var gridContainer = window.panels.createGrid( num );
-                window.panels.setupGrid( gridContainer );
-                gridContainer.hide().slideDown();
-                $( this ).dialog( 'close' );
-            }
+    var gridAddDialogButtons = {};
+    gridAddDialogButtons[panelsLoc.buttons.add] = function () {
+        var num = Number( $( '#grid-add-dialog' ).find( 'input' ).val() );
+        
+        if ( num == NaN ) {
+            alert( 'Invalid Number' );
+            return false;
         }
-    } );
+
+        num = Math.round( num );
+        num = Math.max( 1, num );
+        num = Math.min( 10, num );
+        var gridContainer = window.panels.createGrid( num );
+        window.panels.setupGrid( gridContainer );
+        gridContainer.hide().slideDown();
+        $( '#grid-add-dialog' ).dialog( 'close' );
+    };
+    
+    $( '#grid-add-dialog' )
+        .show()
+        .dialog( {
+            dialogClass: 'panels-admin-dialog',
+            autoOpen:false,
+            modal:   true,
+            title:   $( '#grid-add-dialog' ).attr( 'data-title' ),
+            open:    function () {
+                $( this ).find( 'input' ).val( 2 ).select();
+            },
+            buttons: gridAddDialogButtons
+        })
+        .keypress(function(e) {
+            if (e.keyCode == $.ui.keyCode.ENTER) {
+                // This is the same as clicking the add button
+                $(this ).closest('.ui-dialog').find('.ui-button:eq(0)').click();
+            }
+        });
+    ;
+    console.log('here');
 
     $( '#so-panels-panels .handlediv' ).click( function () {
         // Trigger the resize to reorganise the columns

@@ -101,6 +101,7 @@ function siteorigin_panels_admin_enqueue_scripts($prefix) {
 				'delete' => __( 'Delete', 'siteorigin' ),
 				'done' => __( 'Done', 'siteorigin' ),
 				'undo' => __( 'Undo', 'siteorigin' ),
+				'add' => __( 'Add', 'siteorigin' ),
 			),
 			'messages' => array(
 				'deleteColumns' => __( 'Columns deleted', 'siteorigin' ),
@@ -174,22 +175,26 @@ add_action( 'admin_print_styles-post.php', 'siteorigin_panels_admin_enqueue_styl
 add_action( 'admin_print_styles-appearance_page_so_panels_home_page', 'siteorigin_panels_admin_enqueue_styles' );
 
 /**
- * Add a help tab to the page, page.
+ * Add a help tab to pages with panels.
  */
-function siteorigin_panels_add_help_tab() {
+function siteorigin_panels_add_help_tab($prefix) {
 	if ( get_theme_support( 'siteorigin-panels' ) === false ) return;
 	
 	$screen = get_current_screen();
-	if($screen->id != 'page') return;
-	
-	$screen->add_help_tab( array(
-		'id' => 'panels-help-tab', //unique id for the tab
-		'title' => __( 'Panels', 'siteorigin' ), //unique visible title for the tab
-		'callback' => 'siteorigin_panels_add_help_tab_content'
-	) );
+	if(
+		($screen->base == 'post' && ($screen->id == 'page' || $screen->id == ''))
+		|| ($screen->id == 'appearance_page_so_panels_home_page')
+	) {
+		$screen->add_help_tab( array(
+			'id' => 'panels-help-tab', //unique id for the tab
+			'title' => __( 'Panels', 'siteorigin' ), //unique visible title for the tab
+			'callback' => 'siteorigin_panels_add_help_tab_content'
+		) );
+	}
 }
 add_action('load-page.php', 'siteorigin_panels_add_help_tab');
 add_action('load-post-new.php', 'siteorigin_panels_add_help_tab');
+add_action('load-appearance_page_so_panels_home_page', 'siteorigin_panels_add_help_tab');
 
 /**
  * Display the content for the help tab.
@@ -276,7 +281,7 @@ function siteorigin_panels_css() {
 	if ( is_page() ) {
 		$panels_data = get_post_meta( $post->ID, 'panels_data', true );
 	}
-	elseif(is_home() && !empty($panels_support['home-page']) && get_option( 'show_on_front' ) == 'posts'){
+	elseif(is_front_page() && !empty($panels_support['home-page']) && get_option( 'show_on_front' ) == 'posts'){
 		$panels_data = siteorigin_panels_get_home_page_data();
 	}
 	

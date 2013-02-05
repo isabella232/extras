@@ -4,7 +4,7 @@
 	
 	<?php if(isset($_POST['_sopanels_home_nonce']) && wp_verify_nonce($_POST['_sopanels_home_nonce'], 'save')) : ?>
 		<div id="message" class="updated">
-			<p><?php printf('Home page updated. <a href="%s">View page</a>', get_home_url()) ?></p>
+			<p><?php printf(__('Home page updated. <a href="%s">View page</a>', 'siteorigin'), get_home_url()) ?></p>
 		</div>
 	<?php endif; ?>
 	

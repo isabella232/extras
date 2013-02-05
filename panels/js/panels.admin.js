@@ -141,8 +141,8 @@ jQuery( function ( $ ) {
 
             dialog.dialog( 'close' );
         }
-
-        dialog = $( '<div class="dialog-form"></div>' )
+        
+        dialog = $( '<div class="panel-dialog dialog-form"></div>' )
             .html( formHtml )
             .dialog( {
                 dialogClass: 'panels-admin-dialog',
@@ -171,8 +171,18 @@ jQuery( function ( $ ) {
                     $(this ).closest('.ui-dialog' ).find('a' ).blur();
                 },
                 buttons:     dialogButtons
-            } );
-
+            } )
+            .keypress(function(e) {
+                if (e.keyCode == $.ui.keyCode.ENTER) {
+                    if($(this ).closest('.ui-dialog' ).find('textarea:focus' ).length > 0) return;
+                    
+                    // This is the same as clicking the add button
+                    $(this ).closest('.ui-dialog').find('.ui-button:eq(0)').click();
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        
         dialog.find( 'label' ).each( function () {
             // Make labels work as expected
             var f = $( '#' + $( this ).attr( 'for' ) );
@@ -269,7 +279,14 @@ jQuery( function ( $ ) {
 
     // Handle filtering in the panels dialog
     $( '#panels-text-filter-input' )
-        .keyup( function () {
+        .keyup( function (e) {
+            if( e.keyCode == 13 ) {
+                // If we pressed enter and there's only one widget, click it
+                var p = $( '#panels-dialog .panel-type-list .panel-type:visible' );
+                if( p.length == 1 ) p.click();
+                return;
+            }
+            
             var value = $( this ).val();
             // Filter the panels
             $( '#panels-dialog .panel-type-list .panel-type' )
