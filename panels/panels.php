@@ -288,7 +288,7 @@ function siteorigin_panels_css() {
 	// Exit if we don't have panels data
 	if ( empty( $panels_data ) ) return;
 
-	$panels_margin_bottom = $panels_support['margin-bottom'];
+	$panels_margin_bottom = empty($panels_support['margin-bottom']) ? 30 : $panels_support['margin-bottom'];
 
 	$css = array();
 	$css[1920] = array();
