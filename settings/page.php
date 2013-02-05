@@ -9,6 +9,6 @@
 		<?php do_settings_sections( 'theme_settings' ) ?>
 
 		<p class="submit"><input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save Settings', 'siteorigin'); ?>" /></p>
-		<input type="hidden" id="current-tab-field" name="theme_settings_current_tab" value="<?php echo get_theme_mod('_theme_settings_current_tab', 0) ?>" />
+		<input type="hidden" id="current-tab-field" name="theme_settings_current_tab" value="<?php echo intval(get_theme_mod('_theme_settings_current_tab', 0)) ?>" />
 	</form>
 </div> 
