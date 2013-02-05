@@ -391,7 +391,6 @@ jQuery( function ( $ ) {
             }
         });
     ;
-    console.log('here');
 
     $( '#so-panels-panels .handlediv' ).click( function () {
         // Trigger the resize to reorganise the columns
