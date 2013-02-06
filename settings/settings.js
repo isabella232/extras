@@ -33,7 +33,6 @@ jQuery( function ( $ ) {
         var $$ = $(this);
         var $c = $(this ).closest('td');
         var frame = $(this ).data('frame');
-        console.log(frame);
         
         // If the media frame already exists, reopen it.
         if ( frame ) {
