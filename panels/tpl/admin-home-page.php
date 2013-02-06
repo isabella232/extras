@@ -36,7 +36,7 @@ $panels_support = $panels_support[0];
 			</div>
 		</div>
 		
-		<input type="hidden" id="panels-home-enabled" name="panels_home_enabled" value="<?php echo get_theme_mod('panels_home_enabled', $panels_support['home-page-default']) ? 'true' : 'false'; ?>" />
+		<input type="hidden" id="panels-home-enabled" name="panels_home_enabled" value="<?php echo get_theme_mod('panels_home_page_enabled', $panels_support['home-page-default']) ? 'true' : 'false'; ?>" />
 		<?php wp_nonce_field('save', '_sopanels_home_nonce') ?>
 	</form>
 </div> 
