@@ -60,7 +60,6 @@ function siteorigin_panels_filter_home_template($template){
 	
 	return locate_template(array(
 		'home-panels.php',
-		'index-panels.php',
 		$template
 	));
 }
