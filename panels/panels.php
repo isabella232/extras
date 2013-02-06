@@ -20,7 +20,6 @@ function siteorigin_panels_render_admin_home_page(){
 }
 
 /**
-/**
  * Callback to register the Panels Metaboxes
  */
 function siteorigin_panels_metaboxes() {
@@ -40,8 +39,32 @@ function siteorigin_panels_admin_init(){
 	if ( $panels_support === false || empty($panels_support[0]['home-page']) ) return;
 	
 	set_theme_mod('panels_home_page', siteorigin_panels_get_panels_data_from_post($_POST));
+	set_theme_mod('panels_home_page_enabled', $_POST['panels_home_enabled'] == 'true' ? true : false);
 }
 add_action('admin_init', 'siteorigin_panels_admin_init');
+
+/**
+ * @param $template
+ * @return string
+ */
+function siteorigin_panels_filter_home_template($template){
+	$panels_support = get_theme_support( 'siteorigin-panels' );
+	if ( empty( $panels_support ) ) return $template;
+	$panels_support = $panels_support[0];
+	
+	if(empty($panels_support['home-page'])) return $template;
+	if(!get_theme_mod('panels_home_page_enabled', $panels_support['home-page'])) return $template;
+	
+	global $wp_query;
+	if($wp_query->get('paged') != 0) return $template;
+	
+	return locate_template(array(
+		'home-panels.php',
+		'index-panels.php',
+		$template
+	));
+}
+add_filter('frontpage_template', 'siteorigin_panels_filter_home_template');
 
 function siteorigin_panels_home_page_content(){
 	echo siteorigin_panels_render('home');
@@ -462,17 +485,18 @@ function siteorigin_panels_the_widget( $widget, $instance, $grid, $cell, $panel,
  * @param WP_Admin_Bar $admin_bar
  */
 function siteorigin_panels_admin_bar_menu($admin_bar){
-	if(!is_home()) return $admin_bar;
-	
-	// Check that we support the home page
-	$panels_support = get_theme_support( 'siteorigin-panels' );
-	if ( $panels_support === false || empty($panels_support[0]['home-page']) || !current_user_can('edit_theme_options')) return $admin_bar;
-	
-	$admin_bar->add_node(array(
-		'id' => 'edit-home-page',
-		'title' => __('Edit Home Page', 'siteorigin'),
-		'href' => admin_url('themes.php?page=so_panels_home_page')
-	));
+	global $wp_query;
+	if($wp_query->is_home() && $wp_query->get('paged') == 0 ){
+		// Check that we support the home page
+		$panels_support = get_theme_support( 'siteorigin-panels' );
+		if ( $panels_support === false || empty($panels_support[0]['home-page']) || !current_user_can('edit_theme_options')) return $admin_bar;
+
+		$admin_bar->add_node(array(
+			'id' => 'edit-home-page',
+			'title' => __('Edit Home Page', 'siteorigin'),
+			'href' => admin_url('themes.php?page=so_panels_home_page')
+		));
+	}
 	
 	return $admin_bar;
 }

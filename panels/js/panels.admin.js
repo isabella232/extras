@@ -439,7 +439,14 @@ jQuery( function ( $ ) {
     }, 150);
     
     if($('#panels-home-page' ).length){
+        // Lets do some home page settings
         $('#content-tmce, #content-html' ).remove();
         $('#content-panels' ).hide();
+        
+        $('#panels-toggle-switch' ).click(function(){
+            $(this ).toggleClass('state-off');
+            
+            $('#panels-home-enabled' ).val( $(this ).hasClass('state-off') ? 'false' : 'true' );
+        });
     }
 } );
