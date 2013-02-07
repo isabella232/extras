@@ -494,7 +494,7 @@ html {
     width: 75px;
     height: 28px;
     
-    background: #6db2df;
+    background: #67afd8;
     
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
@@ -526,7 +526,7 @@ html {
 }
 
 #panels-toggle-switch .on-text{
-    color: #174e77;
+    color: #004f72;
     text-shadow: 0 1px 0 rgba(255,255,255,0.5);
     left: 10px;
     opacity: 1;

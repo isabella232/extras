@@ -1,3 +1,10 @@
+/**
+ * Handles pre-built Panel layouts.
+ *
+ * @copyright Greg Priday 2013
+ * @license GPL 2.0 http://www.gnu.org/licenses/gpl-2.0.html
+ */
+
 jQuery(function($){
     $( '#grid-prebuilt-dialog' ).show().dialog( {
         dialogClass: 'panels-admin-dialog',

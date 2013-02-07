@@ -5,12 +5,12 @@ $panels_support = $panels_support[0];
 ?>
 
 <div class="wrap" id="panels-home-page">
-	<form action="<?php echo add_query_arg('page', 'so_panels_home_page') ?>" method="post">
+	<form action="<?php echo add_query_arg('page', 'so_panels_home_page') ?>" class="hide-if-no-js" method="post">
 		<div id="icon-index" class="icon32"><br></div>
 		<h2>
 			<?php esc_html_e('Panels Home Page', 'siteorigin') ?>
 
-			<div id="panels-toggle-switch" class="hide-if-no-js <?php if(!get_theme_mod('panels_home_page_enabled', $panels_support['home-page-default'])) echo 'state-off' ?>">
+			<div id="panels-toggle-switch" class="<?php if(!get_theme_mod('panels_home_page_enabled', $panels_support['home-page-default'])) echo 'state-off' ?>">
 				<div class="on-text"><?php _e('ON', 'siteorigin') ?></div>
 				<div class="off-text"><?php _e('OFF', 'siteorigin') ?></div>
 				<div class="handle"></div>
@@ -39,4 +39,5 @@ $panels_support = $panels_support[0];
 		<input type="hidden" id="panels-home-enabled" name="panels_home_enabled" value="<?php echo get_theme_mod('panels_home_page_enabled', $panels_support['home-page-default']) ? 'true' : 'false'; ?>" />
 		<?php wp_nonce_field('save', '_sopanels_home_nonce') ?>
 	</form>
+	<noscript><p><?php _e('This interface requires Javascript', 'siteorigin') ?></p></noscript>
 </div> 

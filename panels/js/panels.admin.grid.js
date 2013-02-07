@@ -1,3 +1,10 @@
+/**
+ * Grid layout for the Panel interface
+ *
+ * @copyright Greg Priday 2013
+ * @license GPL 2.0 http://www.gnu.org/licenses/gpl-2.0.html
+ */
+
 if(typeof window.panels == 'undefined') window.panels = {};
 
 jQuery( function ( $ ) {

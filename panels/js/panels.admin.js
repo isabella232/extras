@@ -1,3 +1,10 @@
+/**
+ * Main admin control for the Panel interface
+ *
+ * @copyright Greg Priday 2013
+ * @license GPL 2.0 http://www.gnu.org/licenses/gpl-2.0.html
+ */
+
 window.panels = {};
 
 jQuery( function ( $ ) {
@@ -443,10 +450,10 @@ jQuery( function ( $ ) {
         $('#content-tmce, #content-html' ).remove();
         $('#content-panels' ).hide();
         
+        // Initialize the toggle switch
         $('#panels-toggle-switch' ).click(function(){
             $(this ).toggleClass('state-off');
-            
             $('#panels-home-enabled' ).val( $(this ).hasClass('state-off') ? 'false' : 'true' );
-        });
+        } ).add('#panels-toggle-switch *').disableSelection();
     }
 } );

@@ -1,3 +1,10 @@
+/**
+ * Intercepts the standard WordPress gallery insert and edit.
+ *
+ * @copyright Greg Priday 2013
+ * @license GPL 2.0 http://www.gnu.org/licenses/gpl-2.0.html
+ */
+
 jQuery(function($){
     var originalInsert = wp.media.editor.insert;
     
