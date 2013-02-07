@@ -13,7 +13,7 @@ $panels_support = $panels_support[0];
 			<div id="panels-toggle-switch" class="<?php echo (!get_theme_mod('panels_home_page_enabled', $panels_support['home-page-default'])) ? 'state-off' : 'state-on'; ?>">
 				<div class="on-text"><?php _e('ON', 'siteorigin') ?></div>
 				<div class="off-text"><?php _e('OFF', 'siteorigin') ?></div>
-				<div class="handle"></div>
+				<img src="<?php echo get_template_directory_uri() ?>/extras/panels/css/images/handle.png" class="handle" />
 			</div>
 		</h2>
 		
