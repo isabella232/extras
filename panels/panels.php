@@ -15,7 +15,7 @@ function siteorigin_panels_admin_menu(){
 add_action('admin_menu', 'siteorigin_panels_admin_menu');
 
 function siteorigin_panels_render_admin_home_page(){
-	add_meta_box( 'so-panels-panels', __( 'Panels', 'siteorigin' ), 'siteorigin_panels_metabox_render', 'appearance_page_so_panels_home_page', 'advanced', 'high', array( 'panels' ) );
+	add_meta_box( 'so-panels-panels', __( 'Page Builder', 'siteorigin' ), 'siteorigin_panels_metabox_render', 'appearance_page_so_panels_home_page', 'advanced', 'high', array( 'panels' ) );
 	get_template_part('extras/panels/tpl/admin', 'home-page');
 }
 
@@ -25,7 +25,7 @@ function siteorigin_panels_render_admin_home_page(){
 function siteorigin_panels_metaboxes() {
 	if ( get_theme_support( 'siteorigin-panels' ) === false ) return;
 	
-	add_meta_box( 'so-panels-panels', __( 'Panels', 'siteorigin' ), 'siteorigin_panels_metabox_render', 'page', 'advanced', 'high', array( 'panels' ) );
+	add_meta_box( 'so-panels-panels', __( 'Page Builder', 'siteorigin' ), 'siteorigin_panels_metabox_render', 'page', 'advanced', 'high', array( 'panels' ) );
 }
 
 add_action( 'add_meta_boxes', 'siteorigin_panels_metaboxes' );
@@ -209,7 +209,7 @@ function siteorigin_panels_add_help_tab($prefix) {
 	) {
 		$screen->add_help_tab( array(
 			'id' => 'panels-help-tab', //unique id for the tab
-			'title' => __( 'Panels', 'siteorigin' ), //unique visible title for the tab
+			'title' => __( 'Page Builder', 'siteorigin' ), //unique visible title for the tab
 			'callback' => 'siteorigin_panels_add_help_tab_content'
 		) );
 	}
@@ -222,9 +222,7 @@ add_action('load-appearance_page_so_panels_home_page', 'siteorigin_panels_add_he
  * Display the content for the help tab.
  */
 function siteorigin_panels_add_help_tab_content(){
-	?>
-	<p><?php printf( __( 'Panels is a drag and drop page builder. You can find the <a href="%s">full documentation</a> on SiteOrigin.', 'siteorigin' ), 'http://support.siteorigin.com/panel/' ) ?></p>
-	<?php
+	get_template_part('extras/panels/tpl/help');
 }
 
 /**
