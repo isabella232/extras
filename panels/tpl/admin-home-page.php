@@ -8,7 +8,7 @@ $panels_support = $panels_support[0];
 	<form action="<?php echo add_query_arg('page', 'so_panels_home_page') ?>" class="hide-if-no-js" method="post">
 		<div id="icon-index" class="icon32"><br></div>
 		<h2>
-			<?php esc_html_e('Panels Home Page', 'siteorigin') ?>
+			<?php esc_html_e('Custom Home Page', 'siteorigin') ?>
 
 			<div id="panels-toggle-switch" class="<?php echo (!get_theme_mod('panels_home_page_enabled', $panels_support['home-page-default'])) ? 'state-off' : 'state-on'; ?>">
 				<div class="on-text"><?php _e('ON', 'siteorigin') ?></div>
