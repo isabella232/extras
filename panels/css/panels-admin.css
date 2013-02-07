@@ -504,6 +504,8 @@ html {
     
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
     cursor: pointer;
+    
+    overflow: hidden;
 }
 
 #panels-toggle-switch .handle{
@@ -535,7 +537,7 @@ html {
 #panels-toggle-switch .off-text{
     color: #919191;
     text-shadow: 0 1px 0 rgba(255,255,255,0.5);
-    right: 7px;
+    right: -23px;
     opacity: 0;
 }
 
@@ -551,10 +553,31 @@ html {
 
 #panels-toggle-switch.state-off .on-text{
     opacity: 0;
+    left: -21px;
 }
 
 #panels-toggle-switch.state-off .off-text{
     opacity: 1;
+    right: 8px;
+}
+
+/* Hovers */
+
+#panels-toggle-switch.state-on:hover{
+    background: #6fb7e0;
+}
+
+#panels-toggle-switch.state-off:hover{
+    background: #eeeeee;
+}
+
+#panels-toggle-switch.state-off.subtle-move:hover .handle {
+    left:7px;
+}
+
+#panels-toggle-switch.state-off.subtle-move:hover .off-text {
+    opacity: 0.8;
+    right: 5px;
 }
 
 /* Transitions */

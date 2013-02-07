@@ -10,7 +10,7 @@ $panels_support = $panels_support[0];
 		<h2>
 			<?php esc_html_e('Panels Home Page', 'siteorigin') ?>
 
-			<div id="panels-toggle-switch" class="<?php if(!get_theme_mod('panels_home_page_enabled', $panels_support['home-page-default'])) echo 'state-off' ?>">
+			<div id="panels-toggle-switch" class="<?php echo (!get_theme_mod('panels_home_page_enabled', $panels_support['home-page-default'])) ? 'state-off' : 'state-on'; ?>">
 				<div class="on-text"><?php _e('ON', 'siteorigin') ?></div>
 				<div class="off-text"><?php _e('OFF', 'siteorigin') ?></div>
 				<div class="handle"></div>

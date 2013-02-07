@@ -18,7 +18,7 @@ jQuery( function ( $ ) {
         title:       $( '#panels-dialog' ).attr( 'data-title' ),
         minWidth:    960,
         close:       function () {
-            $( '#panels-container .panel.new-panel' ).hide().fadeIn( 1000 ).removeClass( 'new-panel' );
+            $( '#panels-container .panel.new-panel' ).hide().slideDown( 1000 ).removeClass( 'new-panel' );
         }
     } ).find( '.panel-type' ).disableSelection();
 
@@ -260,7 +260,7 @@ jQuery( function ( $ ) {
         
         container.sortable( "refresh" ).trigger( 'refreshcells' );
         container.closest( '.grid-container' ).panelsResizeCells();
-        if(animate) $( '#panels-container .panel.new-panel' ).hide().fadeIn( 1000 ).removeClass( 'new-panel' );
+        if(animate) $( '#panels-container .panel.new-panel' ).hide().slideDown( 1000 ).removeClass( 'new-panel' );
     }
 
     /**
@@ -451,9 +451,14 @@ jQuery( function ( $ ) {
         $('#content-panels' ).hide();
         
         // Initialize the toggle switch
-        $('#panels-toggle-switch' ).click(function(){
-            $(this ).toggleClass('state-off');
-            $('#panels-home-enabled' ).val( $(this ).hasClass('state-off') ? 'false' : 'true' );
-        } ).add('#panels-toggle-switch *').disableSelection();
+        $('#panels-toggle-switch' )
+            .mouseenter(function(){
+                $(this ).addClass('subtle-move');
+            })
+            .click(function(){
+                $(this ).toggleClass('state-off').toggleClass('state-on' ).removeClass('subtle-move');
+                $('#panels-home-enabled' ).val( $(this ).hasClass('state-off') ? 'false' : 'true' );
+            } )
+            .add('#panels-toggle-switch *').disableSelection();
     }
 } );
