@@ -53,7 +53,7 @@ function siteorigin_panels_filter_home_template($template){
 	$panels_support = $panels_support[0];
 	
 	if(empty($panels_support['home-page'])) return $template;
-	if(!get_theme_mod('panels_home_page_enabled', $panels_support['home-page'])) return $template;
+	if(!get_theme_mod('panels_home_page_enabled', $panels_support['home-page-default'])) return $template;
 	
 	global $wp_query;
 	if($wp_query->get('paged') != 0) return $template;
