@@ -191,7 +191,6 @@ function siteorigin_panels_admin_enqueue_styles() {
 	if ( $screen->id == 'page' || $screen->base == 'appearance_page_so_panels_home_page') {
 		wp_enqueue_style( 'so-panels-jquery-ui', get_template_directory_uri() . '/extras/panels/css/jquery-ui-theme.css' );
 		wp_enqueue_style( 'so-panels-admin', get_template_directory_uri() . '/extras/panels/css/panels-admin.css' );
-		wp_enqueue_style( 'so-panels-icon', get_template_directory_uri() . '/extras/panels/css/panels-icon.css' );
 	
 		do_action( 'siteorigin_panel_enqueue_admin_styles' );
 	}

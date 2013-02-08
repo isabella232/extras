@@ -66,10 +66,11 @@ jQuery(function($){
 
         // Activate the media editor
         var $$ = $(this);
-
+        
         var dialog = $('.panels-admin-dialog:visible' );
         var val = dialog.find('*[name$="[ids]"]').val();
         if(val.indexOf('{demo') === 0 || val.indexOf('{default') === 0) val = '-'; // This removes the demo or default content
+        if(val == '' && $('#post_ID' ).val() == null) val = '-';
 
         // Close the gallery dialog so it doesn't interfere with wp.media.gallery
         dialog.find('.ui-dialog-content' ).dialog('close');
