@@ -132,15 +132,15 @@ function siteorigin_panels_admin_enqueue_scripts($prefix) {
 			),
 		) );
 
-		$GLOBALS['siteorigin_panels_prebuilt_layouts'] = apply_filters('siteorigin_panels_prebuilt_layouts', array());
-		wp_localize_script('so-panels-admin-prebuilt', 'panelsPrebuiltLayouts', $GLOBALS['siteorigin_panels_prebuilt_layouts']);
+		$layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
+		wp_localize_script('so-panels-admin-prebuilt', 'panelsPrebuiltLayouts', $layouts);
 
 		// Localize the panels with the panels data
 		if($screen->base == 'appearance_page_so_panels_home_page'){
 			$panels_data = get_theme_mod('panels_home_page', null);
 			if(is_null($panels_data)){
 				// Load the default layout
-				$panels_data = apply_filters('siteorigin_panels_home_page_default_layout', array());
+				$panels_data = !empty($layouts['home']) ? $layouts['home'] : current($layouts);
 			}
 		}
 		else{
@@ -407,7 +407,7 @@ function siteorigin_panels_render( $post_id = false ) {
 		if(is_null($panels_data)){
 			// Load the default layout
 			$layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
-			$panels_data = !empty($layouts['default_home']) ? $layouts['default_home'] : current($layouts);
+			$panels_data = !empty($layouts['home']) ? $layouts['home'] : current($layouts);
 		}
 	}
 	else{
