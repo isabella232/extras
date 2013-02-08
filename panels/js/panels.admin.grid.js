@@ -266,10 +266,10 @@ jQuery( function ( $ ) {
                                     }
                                 }
                                 
+                                // We don't want to animate the new widgets
+                                $( '#panels-container .panel' ).removeClass( 'new-panel' );
+                                
                                 gridContainer.hide().slideDown();
-                                
-                                
-                                
                             },
                             [containerData, container.index()],
                             'Remove Panel'

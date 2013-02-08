@@ -103,6 +103,9 @@ jQuery( function ( $ ) {
                     // Readd the panel
                     var panel = $('#panels-dialog').panelsCreatePanel(type, data, container);
                     window.panels.addPanel(panel, container, position, true);
+                    
+                    // We don't want to animate the undone panels
+                    $( '#panels-container .panel' ).removeClass( 'new-panel' );
                 },
                 [panel.attr('data-type'), panel.getPanelData(), panel.closest('.panels-container'), panel.index()],
                 'Remove Panel'
