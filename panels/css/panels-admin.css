@@ -371,6 +371,9 @@ html {
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 	font-size: 11px;
+    
+    /* Higher than the admin bar */
+    z-index: 999999;
 }
 
 .panels-tooltip .pointer{
