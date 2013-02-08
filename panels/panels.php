@@ -103,30 +103,32 @@ function siteorigin_panels_admin_enqueue_scripts($prefix) {
 		wp_enqueue_script( 'jquery-ui-tabs' );
 		wp_enqueue_script( 'jquery-ui-dialog' );
 		wp_enqueue_script( 'jquery-ui-button' );
-
+		
 		wp_enqueue_script( 'so-undomanager', get_template_directory_uri() . '/extras/panels/js/undomanager.js', array( ), 'fb30d7f' );
 
-		wp_enqueue_script( 'so-panels-admin-grid', get_template_directory_uri() . '/extras/panels/js/panels.admin.grid.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		wp_enqueue_script( 'so-panels-admin', get_template_directory_uri() . '/extras/panels/js/panels.admin.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_script( 'so-panels-admin-panels', get_template_directory_uri() . '/extras/panels/js/panels.admin.panels.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_script( 'so-panels-admin-grid', get_template_directory_uri() . '/extras/panels/js/panels.admin.grid.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		wp_enqueue_script( 'so-panels-admin-prebuilt', get_template_directory_uri() . '/extras/panels/js/panels.admin.prebuilt.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		wp_enqueue_script( 'so-panels-admin-tooltip', get_template_directory_uri() . '/extras/panels/js/panels.admin.tooltip.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
-		wp_enqueue_script( 'so-panels-admin-gallery', get_template_directory_uri() . '/extras/panels/js/panels.admin.gallery.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
-		wp_enqueue_script( 'so-panels-admin-preview', get_template_directory_uri() . '/extras/panels/js/panels.admin.preview.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_script( 'so-panels-admin-media', get_template_directory_uri() . '/extras/panels/js/panels.admin.media.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 
-		wp_localize_script( 'so-panels-admin', 'panelsLoc', array(
+		wp_localize_script( 'so-panels-admin', 'panels', array(
 			'previewUrl' => wp_nonce_url(add_query_arg('siteorigin_panels_preview', 'true', get_home_url()), 'siteorigin-panels-preview'),
-			'buttons' => array(
-				'insert' => __( 'Insert', 'siteorigin' ),
-				'cancel' => __( 'cancel', 'siteorigin' ),
-				'delete' => __( 'Delete', 'siteorigin' ),
-				'done' => __( 'Done', 'siteorigin' ),
-				'undo' => __( 'Undo', 'siteorigin' ),
-				'add' => __( 'Add', 'siteorigin' ),
-			),
-			'messages' => array(
-				'deleteColumns' => __( 'Columns deleted', 'siteorigin' ),
-				'deleteWidget' => __( 'Widget deleted', 'siteorigin' ),
-				'confirmLayout' => __( 'Are you sure you want to load this layout? It will overwrite your current page.', 'siteorigin' ),
+			'i10n' => array(
+				'buttons' => array(
+					'insert' => __( 'Insert', 'siteorigin' ),
+					'cancel' => __( 'cancel', 'siteorigin' ),
+					'delete' => __( 'Delete', 'siteorigin' ),
+					'done' => __( 'Done', 'siteorigin' ),
+					'undo' => __( 'Undo', 'siteorigin' ),
+					'add' => __( 'Add', 'siteorigin' ),
+				),
+				'messages' => array(
+					'deleteColumns' => __( 'Columns deleted', 'siteorigin' ),
+					'deleteWidget' => __( 'Widget deleted', 'siteorigin' ),
+					'confirmLayout' => __( 'Are you sure you want to load this layout? It will overwrite your current page.', 'siteorigin' ),
+				),
 			),
 		) );
 

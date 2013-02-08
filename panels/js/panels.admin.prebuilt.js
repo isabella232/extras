@@ -19,27 +19,27 @@ jQuery(function($){
         },
         buttons : [
             {
-                text : panelsLoc.buttons.cancel,
+                text : panels.i10n.buttons.cancel,
                 click: function(){
                     $( '#grid-prebuilt-dialog' ).dialog('close');
                 }
             },
             {
-                text: panelsLoc.buttons.insert,
+                text: panels.i10n.buttons.insert,
                 click: function(){
                     var $$ = $('#grid-prebuilt-input' );
                     if($$.val() == '') {
                         
                     }
                     
-                    if(confirm(panelsLoc.messages.confirmLayout)){
+                    if(confirm(panels.i10n.messages.confirmLayout)){
                         var s = $$.find(':selected');
 
                         // First clear the grids
-                        window.panels.clearGrids();
+                        panels.clearGrids();
 
                         // Then load the prebuilt layout
-                        window.panels.loadPanels(panelsPrebuiltLayouts[s.attr('data-layout-id')]);
+                        panels.loadPanels(panelsPrebuiltLayouts[s.attr('data-layout-id')]);
                     }
                     $( '#grid-prebuilt-dialog' ).dialog('close');
                 }
