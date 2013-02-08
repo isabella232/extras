@@ -432,6 +432,10 @@ html {
     box-shadow: none;
 }
 
+#so-panels-panels h3.hndle button.preview{
+    float: right;
+}
+
 #so-panels-panels .inside{
     padding: 5px 12px 5px 10px;
 }
@@ -587,4 +591,17 @@ html {
     -webkit-transition: all 0.22s;
     -o-transition: all 0.22s;
     transition: all 0.22s;
+}
+
+/* The preview button */
+
+#panels-home-page #post-body-content{
+    position: relative;
+}
+
+#panels-home-page #post-preview{
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 10;
 }

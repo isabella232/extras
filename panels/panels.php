@@ -65,10 +65,6 @@ function siteorigin_panels_filter_home_template($template){
 }
 add_filter('frontpage_template', 'siteorigin_panels_filter_home_template');
 
-function siteorigin_panels_home_page_content(){
-	echo siteorigin_panels_render('home');
-}
-
 /**
  * Render a panel metabox.
  *
@@ -115,8 +111,10 @@ function siteorigin_panels_admin_enqueue_scripts($prefix) {
 		wp_enqueue_script( 'so-panels-admin-prebuilt', get_template_directory_uri() . '/extras/panels/js/panels.admin.prebuilt.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		wp_enqueue_script( 'so-panels-admin-tooltip', get_template_directory_uri() . '/extras/panels/js/panels.admin.tooltip.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		wp_enqueue_script( 'so-panels-admin-gallery', get_template_directory_uri() . '/extras/panels/js/panels.admin.gallery.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_script( 'so-panels-admin-preview', get_template_directory_uri() . '/extras/panels/js/panels.admin.preview.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 
 		wp_localize_script( 'so-panels-admin', 'panelsLoc', array(
+			'previewUrl' => wp_nonce_url(add_query_arg('siteorigin_panels_preview', 'true', get_home_url()), 'siteorigin-panels-preview'),
 			'buttons' => array(
 				'insert' => __( 'Insert', 'siteorigin' ),
 				'cancel' => __( 'cancel', 'siteorigin' ),
@@ -498,3 +496,19 @@ function siteorigin_panels_admin_bar_menu($admin_bar){
 	return $admin_bar;
 }
 add_action('admin_bar_menu', 'siteorigin_panels_admin_bar_menu', 100);
+
+function siteorigin_panels_preview(){
+	if(isset($_GET['siteorigin_panels_preview']) && wp_verify_nonce($_GET['_wpnonce'], 'siteorigin-panels-preview')){
+		add_action('theme_mod_panels_home_page', 'siteorigin_panels_preview_load_data');
+		get_template_part('home', 'panels');
+		exit();
+	}
+}
+add_action('template_redirect', 'siteorigin_panels_preview');
+
+function siteorigin_panels_preview_load_data($mod){
+	if(isset($_GET['siteorigin_panels_preview'])){
+		$mod = siteorigin_panels_get_panels_data_from_post($_POST);
+	}
+	return $mod;
+}
