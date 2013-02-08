@@ -58,12 +58,17 @@ function siteorigin_panels_filter_home_template($template){
 	global $wp_query;
 	if($wp_query->get('paged') != 0) return $template;
 	
+	$GLOBALS['siteorigin_panels_is_panels_home'] = true;
 	return locate_template(array(
 		'home-panels.php',
 		$template
 	));
 }
 add_filter('frontpage_template', 'siteorigin_panels_filter_home_template');
+
+function siteorigin_panels_is_home(){
+	return !empty($GLOBALS['siteorigin_panels_is_panels_home']);
+}
 
 /**
  * Render a panel metabox.
@@ -501,6 +506,9 @@ add_action('admin_bar_menu', 'siteorigin_panels_admin_bar_menu', 100);
 
 function siteorigin_panels_preview(){
 	if(isset($_GET['siteorigin_panels_preview']) && wp_verify_nonce($_GET['_wpnonce'], 'siteorigin-panels-preview')){
+		// Set the panels home state to true
+		if(empty($_POST['post_id'])) $GLOBALS['siteorigin_panels_is_panels_home'] = true;
+		
 		add_action('theme_mod_panels_home_page', 'siteorigin_panels_preview_load_data');
 		get_template_part('home', 'panels');
 		exit();

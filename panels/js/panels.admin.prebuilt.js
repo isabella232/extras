@@ -31,14 +31,15 @@ jQuery(function($){
                     if($$.val() == '') {
                         
                     }
+
+                    var s = $$.find(':selected');
+                    if(s.attr('data-layout-id') == null){
+                        return;
+                    }
                     
                     if(confirm(panels.i10n.messages.confirmLayout)){
-                        var s = $$.find(':selected');
-
-                        // First clear the grids
+                        // Clear the grids and load the prebuilt layout
                         panels.clearGrids();
-
-                        // Then load the prebuilt layout
                         panels.loadPanels(panelsPrebuiltLayouts[s.attr('data-layout-id')]);
                     }
                     $( '#grid-prebuilt-dialog' ).dialog('close');
