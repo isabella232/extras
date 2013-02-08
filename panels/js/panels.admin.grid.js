@@ -68,8 +68,6 @@
         // Add the hidden field to store the grid order
         container.append( $( '<input type="hidden" name="grids[' + gridId + '][cells]" />' ).val( cells ) );
         
-        console.log(panels);
-        
         container
             .append(
                 $( '<div class="controls" />' )
