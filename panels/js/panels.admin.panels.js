@@ -131,7 +131,7 @@
                 dialogClass: 'panels-admin-dialog',
                 autoOpen:    false,
                 modal:       true,
-                title:       ('Edit %s Panel').replace( '%s', $$.attr( 'data-title' ) ),
+                title:       panels.i10n.messages.editWidget.replace( '%s', $$.attr( 'data-title' ) ),
                 minWidth:    700,
                 create:      function(event, ui){
                     $(this ).closest('.ui-dialog' ).find('.show-in-panels' ).show();

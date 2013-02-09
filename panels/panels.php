@@ -133,6 +133,7 @@ function siteorigin_panels_admin_enqueue_scripts($prefix) {
 					'deleteColumns' => __( 'Columns deleted', 'siteorigin' ),
 					'deleteWidget' => __( 'Widget deleted', 'siteorigin' ),
 					'confirmLayout' => __( 'Are you sure you want to load this layout? It will overwrite your current page.', 'siteorigin' ),
+					'editWidget' => __('Edit %s Widget', 'siteorigin')
 				),
 			),
 		) );

@@ -242,16 +242,16 @@ jQuery( function ( $ ) {
                 $('#panels-home-enabled' ).val( $(this ).hasClass('state-off') ? 'false' : 'true' );
             } )
             .add('#panels-toggle-switch *').disableSelection();
-    }
 
-    // Handle the previews
-    $('#post-preview' ).click(function(event){
-        // If we're currently displaying Panels
-        if($('#wp-content-wrap' ).hasClass('panels-active')){
-            var form = $('#panels-container' ).closest('form');
-            var originalAction = form.attr('action');
-            form.attr('action', panels.previewUrl ).attr('target', '_blank').submit().attr('action', originalAction).attr('target', '_self');
-            event.preventDefault();
-        }
-    });
+        // Handle the previews
+        $('#post-preview' ).click(function(event){
+            // If we're currently displaying Panels
+            if($('#wp-content-wrap' ).hasClass('panels-active')){
+                var form = $('#panels-container' ).closest('form');
+                var originalAction = form.attr('action');
+                form.attr('action', panels.previewUrl ).attr('target', '_blank').submit().attr('action', originalAction).attr('target', '_self');
+                event.preventDefault();
+            }
+        });
+    }
 } );

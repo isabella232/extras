@@ -139,7 +139,7 @@
                                         gridContainer.hide().slideDown();
                                     },
                                     [containerData, container.index()],
-                                    'Remove Panel'
+                                    'Remove Columns'
                                 );
 
                                 // Create the undo notification
