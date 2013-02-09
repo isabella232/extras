@@ -44,10 +44,10 @@ function siteorigin_adminbar_defaults( $bar ) {
 	$screen = get_current_screen();
 
 	if ( $screen->id == 'themes' && defined( 'SITEORIGIN_FIRST_RUN_ACTIVE' ) )
-		$bar = (object)array( 'id' => 'firstrun', 'message' => array( 'extras/admin/messages/message', 'firstrun' ) );
+		$bar = (object)array( 'id' => 'firstrun', 'message' => array( 'extras/adminbar/messages/message', 'firstrun' ) );
 	
 	if($screen->id == 'appearance_page_custom-background')
-		$bar = (object)array( 'id' => 'custom-background', 'message' => array( 'extras/admin/messages/message', 'background' ) );
+		$bar = (object)array( 'id' => 'custom-background', 'message' => array( 'extras/adminbar/messages/message', 'background' ) );
 	
 	return $bar;
 }
@@ -64,8 +64,8 @@ function siteorigin_adminbar_enqueue( $suffix ) {
 	// Only enqueue these if there's an active admin bar
 	if ( empty( $GLOBALS['siteorigin_adminbar_active'] ) ) return;
 
-	wp_enqueue_script( 'siteorigin-admin-bar', get_template_directory_uri() . '/extras/admin/assets/bar.js', array( 'jquery' ) );
-	wp_enqueue_style( 'siteorigin-admin-bar', get_template_directory_uri() . '/extras/admin/assets/bar.css' );
+	wp_enqueue_script( 'siteorigin-admin-bar', get_template_directory_uri() . '/extras/adminbar/assets/bar.js', array( 'jquery' ) );
+	wp_enqueue_style( 'siteorigin-admin-bar', get_template_directory_uri() . '/extras/adminbar/assets/bar.css' );
 }
 add_action( 'admin_enqueue_scripts', 'siteorigin_adminbar_enqueue' );
 
