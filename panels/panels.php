@@ -1,11 +1,21 @@
 <?php
 
+/**
+ * Initialize the panels extra
+ */
+function siteorigin_panels_init(){
+}
+add_action('after_setup_theme', 'siteorigin_panels_init');
+
+/**
+ * Add the admin menu entries
+ */
 function siteorigin_panels_admin_menu(){
 	$panels_support = get_theme_support( 'siteorigin-panels' );
 	if ( $panels_support === false || empty($panels_support[0]['home-page']) ) return;
 	
 	add_theme_page(
-		__('Home Page', 'siteorigin'),
+		__('Custom Home Page', 'siteorigin'),
 		__('Home Page', 'siteorigin'),
 		'edit_theme_options',
 		'so_panels_home_page',
@@ -14,6 +24,9 @@ function siteorigin_panels_admin_menu(){
 }
 add_action('admin_menu', 'siteorigin_panels_admin_menu');
 
+/**
+ * Render the page used to build the custom home page.
+ */
 function siteorigin_panels_render_admin_home_page(){
 	add_meta_box( 'so-panels-panels', __( 'Page Builder', 'siteorigin' ), 'siteorigin_panels_metabox_render', 'appearance_page_so_panels_home_page', 'advanced', 'high', array( 'panels' ) );
 	get_template_part('extras/panels/tpl/admin', 'home-page');
@@ -30,7 +43,7 @@ function siteorigin_panels_metaboxes() {
 
 add_action( 'add_meta_boxes', 'siteorigin_panels_metaboxes' );
 
-function siteorigin_panels_admin_init(){
+function siteorigin_panels_save_home_page(){
 	if(!isset($_POST['_sopanels_home_nonce']) || !wp_verify_nonce($_POST['_sopanels_home_nonce'], 'save')) return;
 	if(!current_user_can('edit_theme_options')) return;
 	
@@ -41,7 +54,7 @@ function siteorigin_panels_admin_init(){
 	set_theme_mod('panels_home_page', siteorigin_panels_get_panels_data_from_post($_POST));
 	set_theme_mod('panels_home_page_enabled', $_POST['panels_home_enabled'] == 'true' ? true : false);
 }
-add_action('admin_init', 'siteorigin_panels_admin_init');
+add_action('admin_init', 'siteorigin_panels_save_home_page');
 
 /**
  * @param $template

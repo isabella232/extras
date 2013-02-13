@@ -301,6 +301,7 @@
 
         // Remove the new-panel class from any of these created panels
         $( '#panels-container .panel' ).removeClass( 'new-panel' );
+        
         // Make sure everything is sized properly
         $( '#panels-container .grid-container' ).each( function () {
             $( this ).panelsResizeCells();

@@ -26,15 +26,12 @@ $panels_support = $panels_support[0];
 		<div id="post-body-wrapper">
 			<div id="post-body" class="metabox-holder columns-2">
 				<div id="post-body-content" style="position: relative">
-					
 					<a href="#" class="preview button" id="post-preview"><?php _e('Preview Changes', 'siteorigin') ?></a>
 					
 					<?php wp_editor('', 'content') ?>
 					<?php do_meta_boxes('appearance_page_so_panels_home_page', 'advanced', false) ?>
 					
-					<p>
-						<input type="submit" class="button button-primary" value="<?php esc_attr_e('Save Home Page', 'siteorigin') ?>" />
-					</p>
+					<p><input type="submit" class="button button-primary" value="<?php esc_attr_e('Save Home Page', 'siteorigin') ?>" /></p>
 				</div>
 			</div>
 		</div>
