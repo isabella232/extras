@@ -19,7 +19,7 @@
         return $(this ).each(function(){
             var $$ = $(this);
 
-            $$.find( '.grid, .grid .cell .cell-wrapper' ).css( 'height', 'auto' );
+            $$.find( '.grid, .grid .cell, .grid .cell .cell-wrapper' ).css( 'height', 'auto' );
             var totalWidth = $$.find( '.grid' ).outerWidth();
             
             if ( $$.find( '.grid .cell' ).length > 1 ) {
@@ -34,7 +34,8 @@
             $$.find( '.grid .cell' ).each( function () {
                 maxHeight = Math.max( maxHeight,
                     // The height of a panel is 54 (49 height with 5 bottom margin) and an extra 14 for top and bottom cell-wrapper paddings
-                    ($(this).find('.panel' ).length * 54) + 14
+                    //($(this).find('.panel').length * 54) + 14
+                    $(this ).height()
                 );
                 
                 $( this )
