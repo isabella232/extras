@@ -53,10 +53,15 @@ function siteorigin_panels_save_home_page(){
 	
 	set_theme_mod('panels_home_page', siteorigin_panels_get_panels_data_from_post($_POST));
 	set_theme_mod('panels_home_page_enabled', $_POST['panels_home_enabled'] == 'true' ? true : false);
+	
+	// If we've enabled the panels home page, change show_on_front to posts, this is reqired for the home page to work properly
+	if($_POST['panels_home_enabled'] == 'true') update_option('show_on_front', 'posts');
 }
 add_action('admin_init', 'siteorigin_panels_save_home_page');
 
 /**
+ * Modify the front page template
+ * 
  * @param $template
  * @return string
  */
@@ -69,7 +74,7 @@ function siteorigin_panels_filter_home_template($template){
 	if(!get_theme_mod('panels_home_page_enabled', $panels_support['home-page-default'])) return $template;
 	
 	global $wp_query;
-	if($wp_query->get('paged') != 0) return $template;
+	if($wp_query->is_home() && $wp_query->get('paged') != 0) return $template;
 	
 	$GLOBALS['siteorigin_panels_is_panels_home'] = true;
 	return locate_template(array(
@@ -81,6 +86,33 @@ add_filter('frontpage_template', 'siteorigin_panels_filter_home_template');
 
 function siteorigin_panels_is_home(){
 	return !empty($GLOBALS['siteorigin_panels_is_panels_home']);
+}
+
+/**
+ * Disable home page panels when we change show_on_front to something other than posts.
+ * @param $option
+ * @param $old
+ * @param $new
+ */
+function siteorigin_panels_disable_on_front_page_change($old, $new){
+	if($new != 'posts'){
+		// Disable panels home page
+		set_theme_mod('panels_home_page_enabled', false);
+	}
+}
+add_action('update_option_show_on_front', 'siteorigin_panels_disable_on_front_page_change', 10, 2);
+
+
+/**
+ * Check if we're currently viewing a panel.
+ *
+ * @param bool $can_edit Also check if the user can edit this page
+ * @return bool
+ */
+function siteorigin_panels_is_panel($can_edit = false){
+	// Check if this is a panel
+	$is_panel =  (siteorigin_panels_is_home() || ( is_singular() && get_post_meta(get_the_ID(), 'panels_data', false) != '' ));
+	return $is_panel && (!$can_edit || ( (is_singular() && current_user_can('edit_post', get_the_ID())) || ( siteorigin_panels_is_home() && current_user_can('edit_theme_options') ) ));
 }
 
 /**
@@ -209,7 +241,6 @@ function siteorigin_panels_admin_enqueue_styles() {
 		do_action( 'siteorigin_panel_enqueue_admin_styles' );
 	}
 }
-
 add_action( 'admin_print_styles-post-new.php', 'siteorigin_panels_admin_enqueue_styles' );
 add_action( 'admin_print_styles-post.php', 'siteorigin_panels_admin_enqueue_styles' );
 add_action( 'admin_print_styles-appearance_page_so_panels_home_page', 'siteorigin_panels_admin_enqueue_styles' );
@@ -316,10 +347,12 @@ function siteorigin_panels_css() {
 	if ( empty( $panels_support ) ) return;
 	$panels_support = $panels_support[0];
 	
-	if ( is_page() ) {
+	if(!siteorigin_panels_is_panel()) return;
+	
+	if ( !siteorigin_panels_is_home() ) {
 		$panels_data = get_post_meta( $post->ID, 'panels_data', true );
 	}
-	elseif(is_front_page() && !empty($panels_support['home-page']) && get_option( 'show_on_front' ) == 'posts'){
+	else {
 		$panels_data = siteorigin_panels_get_home_page_data();
 	}
 	
@@ -476,7 +509,17 @@ function siteorigin_panels_render( $post_id = false ) {
 	return apply_filters( 'panels_render', $html, $post_id, !empty($post) ? $post : null );
 }
 
-
+/**
+ * Render the widget. 
+ * 
+ * @param $widget
+ * @param $instance
+ * @param $grid
+ * @param $cell
+ * @param $panel
+ * @param $is_first
+ * @param $is_last
+ */
 function siteorigin_panels_the_widget( $widget, $instance, $grid, $cell, $panel, $is_first, $is_last ) {
 	if ( !class_exists( $widget ) ) return;
 
@@ -497,15 +540,22 @@ function siteorigin_panels_the_widget( $widget, $instance, $grid, $cell, $panel,
 }
 
 /**
+ * Add the Edit Home Page item to the admin bar.
+ * 
  * @param WP_Admin_Bar $admin_bar
+ * @return WP_Admin_Bar
  */
 function siteorigin_panels_admin_bar_menu($admin_bar){
+	/**
+	 * @var WP_Query $wp_query
+	 */
 	global $wp_query;
-	if($wp_query->is_home() && $wp_query->get('paged') == 0 ){
+	
+	if( ( $wp_query->is_home() && $wp_query->get('paged') == 0 && $wp_query->is_main_query() ) || siteorigin_panels_is_home() ){
 		// Check that we support the home page
 		$panels_support = get_theme_support( 'siteorigin-panels' );
-		if ( $panels_support === false || empty($panels_support[0]['home-page']) || !current_user_can('edit_theme_options')) return $admin_bar;
-
+		if ( $panels_support === false || empty($panels_support[0]['home-page']) || !current_user_can('edit_theme_options') ) return $admin_bar;
+		
 		$admin_bar->add_node(array(
 			'id' => 'edit-home-page',
 			'title' => __('Edit Home Page', 'siteorigin'),
@@ -517,6 +567,9 @@ function siteorigin_panels_admin_bar_menu($admin_bar){
 }
 add_action('admin_bar_menu', 'siteorigin_panels_admin_bar_menu', 100);
 
+/**
+ * Handles creating the preview.
+ */
 function siteorigin_panels_preview(){
 	if(isset($_GET['siteorigin_panels_preview']) && wp_verify_nonce($_GET['_wpnonce'], 'siteorigin-panels-preview')){
 		// Set the panels home state to true
@@ -529,9 +582,16 @@ function siteorigin_panels_preview(){
 }
 add_action('template_redirect', 'siteorigin_panels_preview');
 
+/**
+ * This is a way to show previews of panels, especially for the home page.
+ * 
+ * @param $mod
+ * @return array
+ */
 function siteorigin_panels_preview_load_data($mod){
 	if(isset($_GET['siteorigin_panels_preview'])){
 		$mod = siteorigin_panels_get_panels_data_from_post($_POST);
 	}
+	
 	return $mod;
 }
