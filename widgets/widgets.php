@@ -578,12 +578,13 @@ class SiteOrigin_Widgets_Gallery extends WP_Widget {
 	function form( $instance ) {
 		global $_wp_additional_image_sizes;
 
+		$types = apply_filters('siteorigin_gallery_types', array());
+		
 		$instance = wp_parse_args($instance, array(
 			'ids' => '',
 			'image_size' => '',
+			'type' => apply_filters('siteorigin_gallery_default_type', ''),
 		));
-		
-		$types = apply_filters('siteorigin_gallery_types', array());
 		
 		?>
 		<p>
@@ -742,6 +743,107 @@ class SiteOrigin_Widgets_Image extends WP_Widget {
 	}
 }
 
+class SiteOrigin_Widgets_PostLoop extends WP_Widget{
+	function __construct() {
+		parent::__construct(
+			'siteorigin-postloop',
+			__( 'Post Loop', 'siteorigin' ),
+			array(
+				'description' => __( 'Displays a post loop.', 'siteorigin' ),
+			)
+		);
+	}
+
+	function widget( $args, $instance ) {
+		$template = $instance['template'];
+		$query_args = $instance;
+		unset($query_args['template']);
+		unset($query_args['additional']);
+		
+		$query_args = wp_parse_args($instance['additional'], $query_args);
+		
+		global $wp_query;
+		$query_args['paged'] = $wp_query->get('paged');
+		
+		// Create the query
+		query_posts($query_args);
+		
+		locate_template($template, true, false);
+		
+		// Reset everything
+		wp_reset_query();
+		wp_reset_postdata();
+	}
+
+	function update($new, $old){
+		return $new;
+	}
+	
+	function get_loop_templates(){
+		$templates = array();
+		
+		$files = glob(get_template_directory().'/loop*.php');
+		foreach($files as $file){
+			$templates[] = basename($file);
+		}
+		$files = glob(get_stylesheet_directory().'/loop*.php');
+		foreach($files as $file){
+			$templates[] = basename($file);
+		}
+		$templates = array_unique($templates);
+		sort($templates);
+		
+		return $templates;
+	}
+
+	function form( $instance ) {
+		$instance = wp_parse_args($instance, array(
+			'template' => 'loop.php',
+			
+			// Query args
+			'posts_per_page' => 10,
+			'post_type' => 'post',
+			'additional' => '',
+		));
+		
+		// Get all the loop template files
+		$templates = $this->get_loop_templates();
+		$post_types = get_post_types(array('public' => true));
+		$post_types = array_values($post_types);
+		$post_types = array_diff($post_types, array('attachment', 'revision', 'nav_menu_item'));
+		
+		?>
+		<p>
+			<label <?php $this->get_field_id('template') ?>><?php _e('Template') ?></label>
+			<select id="<?php echo $this->get_field_id( 'template' ) ?>" name="<?php echo $this->get_field_name( 'template' ) ?>">
+				<?php foreach($templates as $template) : ?>
+					<option value="<?php echo esc_attr($template) ?>" <?php selected($instance['template'], $template) ?>><?php echo esc_html($template) ?></option>
+				<?php endforeach; ?>
+			</select>
+		</p>
+		<p>
+			<label <?php $this->get_field_id('post_type') ?>><?php _e('Post Type') ?></label>
+			<select id="<?php echo $this->get_field_id( 'post_type' ) ?>" name="<?php echo $this->get_field_name( 'post_type' ) ?>" value="<?php echo esc_attr($instance['post_type']) ?>">
+				<?php foreach($post_types as $type) : ?>
+					<option value="<?php echo esc_attr($type) ?>" <?php selected($instance['post_type'], $type) ?>><?php echo esc_html($type) ?></option>
+				<?php endforeach; ?>
+			</select>
+		</p>
+		
+		<p>
+			<label <?php $this->get_field_id('posts_per_page') ?>><?php _e('Posts Per Page') ?></label>
+			<input type="text" class="small-text" id="<?php echo $this->get_field_id( 'posts_per_page' ) ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ) ?>" value="<?php echo esc_attr($instance['posts_per_page']) ?>" />
+		</p>
+
+		<p>
+			<label <?php $this->get_field_id('additional') ?>><?php _e('Additional ') ?></label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'additional' ) ?>" name="<?php echo $this->get_field_name( 'additional' ) ?>" value="<?php echo esc_attr($instance['additional']) ?>" />
+			<small><?php printf(__('Additional query arguments. See <a href="%s" target="_blank">query_posts</a>.', 'siteorigin'), 'http://codex.wordpress.org/Function_Reference/query_posts') ?></small>
+		</p>
+		<?php
+	}
+}
+
 /**
  * Initialize the SiteOrigin widgets. This can be called on widgets_init
  */
@@ -754,4 +856,5 @@ function siteorigin_widgets_init() {
 	register_widget( 'SiteOrigin_Widgets_Gallery' );
 	register_widget( 'SiteOrigin_Widgets_PostContent' );
 	register_widget( 'SiteOrigin_Widgets_Image' );
+	register_widget( 'SiteOrigin_Widgets_PostLoop' );
 }

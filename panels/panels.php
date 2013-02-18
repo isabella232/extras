@@ -73,16 +73,13 @@ function siteorigin_panels_filter_home_template($template){
 	if(empty($panels_support['home-page'])) return $template;
 	if(!get_theme_mod('panels_home_page_enabled', $panels_support['home-page-default'])) return $template;
 	
-	global $wp_query;
-	if($wp_query->is_home() && $wp_query->get('paged') != 0) return $template;
-	
 	$GLOBALS['siteorigin_panels_is_panels_home'] = true;
 	return locate_template(array(
 		'home-panels.php',
 		$template
 	));
 }
-add_filter('frontpage_template', 'siteorigin_panels_filter_home_template');
+add_filter('home_template', 'siteorigin_panels_filter_home_template');
 
 function siteorigin_panels_is_home(){
 	return !empty($GLOBALS['siteorigin_panels_is_panels_home']);
@@ -551,7 +548,7 @@ function siteorigin_panels_admin_bar_menu($admin_bar){
 	 */
 	global $wp_query;
 	
-	if( ( $wp_query->is_home() && $wp_query->get('paged') == 0 && $wp_query->is_main_query() ) || siteorigin_panels_is_home() ){
+	if( ( $wp_query->is_home() && $wp_query->is_main_query() ) || siteorigin_panels_is_home() ){
 		// Check that we support the home page
 		$panels_support = get_theme_support( 'siteorigin-panels' );
 		if ( $panels_support === false || empty($panels_support[0]['home-page']) || !current_user_can('edit_theme_options') ) return $admin_bar;
