@@ -801,8 +801,12 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 			'template' => 'loop.php',
 			
 			// Query args
-			'posts_per_page' => 10,
 			'post_type' => 'post',
+			'posts_per_page' => '',
+			
+			'order' => 'DESC',
+			'orderby' => 'date',
+			
 			'additional' => '',
 		));
 		
@@ -833,6 +837,32 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 		<p>
 			<label <?php $this->get_field_id('posts_per_page') ?>><?php _e('Posts Per Page') ?></label>
 			<input type="text" class="small-text" id="<?php echo $this->get_field_id( 'posts_per_page' ) ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ) ?>" value="<?php echo esc_attr($instance['posts_per_page']) ?>" />
+		</p>
+
+		<p>
+			<label <?php $this->get_field_id('orderby') ?>><?php _e('Order By') ?></label>
+			<select id="<?php echo $this->get_field_id( 'orderby' ) ?>" name="<?php echo $this->get_field_name( 'orderby' ) ?>" value="<?php echo esc_attr($instance['orderby']) ?>">
+				<option value="none" <?php selected($instance['orderby'], 'none') ?>><?php esc_html_e('None', 'siteorigin') ?></option>
+				<option value="ID" <?php selected($instance['orderby'], 'ID') ?>><?php esc_html_e('Post ID', 'siteorigin') ?></option>
+				<option value="author" <?php selected($instance['orderby'], 'author') ?>><?php esc_html_e('Author', 'siteorigin') ?></option>
+				<option value="name" <?php selected($instance['orderby'], 'name') ?>><?php esc_html_e('Name', 'siteorigin') ?></option>
+				<option value="name" <?php selected($instance['orderby'], 'name') ?>><?php esc_html_e('Name', 'siteorigin') ?></option>
+				<option value="date" <?php selected($instance['orderby'], 'date') ?>><?php esc_html_e('Date', 'siteorigin') ?></option>
+				<option value="modified" <?php selected($instance['orderby'], 'modified') ?>><?php esc_html_e('Modified', 'siteorigin') ?></option>
+				<option value="parent" <?php selected($instance['orderby'], 'parent') ?>><?php esc_html_e('Parent', 'siteorigin') ?></option>
+				<option value="rand" <?php selected($instance['orderby'], 'rand') ?>><?php esc_html_e('Random', 'siteorigin') ?></option>
+				<option value="comment_count" <?php selected($instance['orderby'], 'comment_count') ?>><?php esc_html_e('Comment Count', 'siteorigin') ?></option>
+				<option value="menu_order" <?php selected($instance['orderby'], 'menu_order') ?>><?php esc_html_e('Menu Order', 'siteorigin') ?></option>
+				<option value="menu_order" <?php selected($instance['orderby'], 'menu_order') ?>><?php esc_html_e('Menu Order', 'siteorigin') ?></option>
+			</select>
+		</p>
+
+		<p>
+			<label <?php $this->get_field_id('order') ?>><?php _e('Order') ?></label>
+			<select id="<?php echo $this->get_field_id( 'order' ) ?>" name="<?php echo $this->get_field_name( 'order' ) ?>" value="<?php echo esc_attr($instance['order']) ?>">
+				<option value="DESC" <?php selected($instance['order'], 'DESC') ?>><?php esc_html_e('Descending', 'siteorigin') ?></option>
+				<option value="ASC" <?php selected($instance['order'], 'ASC') ?>><?php esc_html_e('Ascending', 'siteorigin') ?></option>
+			</select>
 		</p>
 
 		<p>
