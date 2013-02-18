@@ -759,16 +759,29 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 		$query_args = $instance;
 		unset($query_args['template']);
 		unset($query_args['additional']);
+		unset($query_args['sticky']);
 		
 		$query_args = wp_parse_args($instance['additional'], $query_args);
 		
 		global $wp_query;
 		$query_args['paged'] = $wp_query->get('paged');
 		
+		switch($instance['sticky']){
+			case 'ignore' :
+				$query_args['ignore_sticky_posts'] = 1;
+				break;
+			case 'only' :
+				$query_args['post__in'] = get_option( 'sticky_posts' );
+				break;
+			case 'exclude' :
+				$query_args['post__not_in'] = get_option( 'sticky_posts' );
+				break;
+		}
+		
 		// Create the query
 		query_posts($query_args);
 		
-		locate_template($template, true, false);
+		locate_template($instance['template'], true, false);
 		
 		// Reset everything
 		wp_reset_query();
@@ -806,6 +819,8 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 			
 			'order' => 'DESC',
 			'orderby' => 'date',
+			
+			'sticky' => '',
 			
 			'additional' => '',
 		));
@@ -862,6 +877,16 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 			<select id="<?php echo $this->get_field_id( 'order' ) ?>" name="<?php echo $this->get_field_name( 'order' ) ?>" value="<?php echo esc_attr($instance['order']) ?>">
 				<option value="DESC" <?php selected($instance['order'], 'DESC') ?>><?php esc_html_e('Descending', 'siteorigin') ?></option>
 				<option value="ASC" <?php selected($instance['order'], 'ASC') ?>><?php esc_html_e('Ascending', 'siteorigin') ?></option>
+			</select>
+		</p>
+
+		<p>
+			<label <?php $this->get_field_id('sticky') ?>><?php _e('Sticky Posts') ?></label>
+			<select id="<?php echo $this->get_field_id( 'sticky' ) ?>" name="<?php echo $this->get_field_name( 'sticky' ) ?>" value="<?php echo esc_attr($instance['sticky']) ?>">
+				<option value="" <?php selected($instance['sticky'], '') ?>><?php esc_html_e('Default', 'siteorigin') ?></option>
+				<option value="ignore" <?php selected($instance['sticky'], 'ignore') ?>><?php esc_html_e('Ignore Sticky', 'siteorigin') ?></option>
+				<option value="exclude" <?php selected($instance['sticky'], 'exclude') ?>><?php esc_html_e('Exclude Sticky', 'siteorigin') ?></option>
+				<option value="only" <?php selected($instance['sticky'], 'only') ?>><?php esc_html_e('Only Sticky', 'siteorigin') ?></option>
 			</select>
 		</p>
 
