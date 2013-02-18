@@ -76,14 +76,9 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 			</ul>
 			
 			<?php
-			if ( function_exists( 'siteorigin_premium_teaser' ) ) {
-				siteorigin_premium_teaser(
-					sprintf( __( 'Additional widgets are available in %s Premium', 'siteorigin' ), ucfirst( get_option( 'stylesheet' ) ) ),
-					array(
-						'teaser-image' => get_template_directory_uri().'/extras/panels/images/teaser.png'
-					)
-				);
-			}
+			siteorigin_premium_teaser(
+				sprintf( __( 'Additional widgets are available in %s Premium', 'siteorigin' ), ucfirst( get_option( 'stylesheet' ) ) )
+			);
 			?>
 		</div>
 		
