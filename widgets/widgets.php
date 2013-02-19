@@ -833,7 +833,7 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 		
 		?>
 		<p>
-			<label <?php $this->get_field_id('template') ?>><?php _e('Template') ?></label>
+			<label <?php $this->get_field_id('template') ?>><?php _e('Template', 'siteorigin') ?></label>
 			<select id="<?php echo $this->get_field_id( 'template' ) ?>" name="<?php echo $this->get_field_name( 'template' ) ?>">
 				<?php foreach($templates as $template) : ?>
 					<option value="<?php echo esc_attr($template) ?>" <?php selected($instance['template'], $template) ?>><?php echo esc_html($template) ?></option>
@@ -841,7 +841,7 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 			</select>
 		</p>
 		<p>
-			<label <?php $this->get_field_id('post_type') ?>><?php _e('Post Type') ?></label>
+			<label <?php $this->get_field_id('post_type') ?>><?php _e('Post Type', 'siteorigin') ?></label>
 			<select id="<?php echo $this->get_field_id( 'post_type' ) ?>" name="<?php echo $this->get_field_name( 'post_type' ) ?>" value="<?php echo esc_attr($instance['post_type']) ?>">
 				<?php foreach($post_types as $type) : ?>
 					<option value="<?php echo esc_attr($type) ?>" <?php selected($instance['post_type'], $type) ?>><?php echo esc_html($type) ?></option>
@@ -850,12 +850,12 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 		</p>
 		
 		<p>
-			<label <?php $this->get_field_id('posts_per_page') ?>><?php _e('Posts Per Page') ?></label>
+			<label <?php $this->get_field_id('posts_per_page') ?>><?php _e('Posts Per Page', 'siteorigin') ?></label>
 			<input type="text" class="small-text" id="<?php echo $this->get_field_id( 'posts_per_page' ) ?>" name="<?php echo $this->get_field_name( 'posts_per_page' ) ?>" value="<?php echo esc_attr($instance['posts_per_page']) ?>" />
 		</p>
 
 		<p>
-			<label <?php $this->get_field_id('orderby') ?>><?php _e('Order By') ?></label>
+			<label <?php $this->get_field_id('orderby') ?>><?php _e('Order By', 'siteorigin') ?></label>
 			<select id="<?php echo $this->get_field_id( 'orderby' ) ?>" name="<?php echo $this->get_field_name( 'orderby' ) ?>" value="<?php echo esc_attr($instance['orderby']) ?>">
 				<option value="none" <?php selected($instance['orderby'], 'none') ?>><?php esc_html_e('None', 'siteorigin') ?></option>
 				<option value="ID" <?php selected($instance['orderby'], 'ID') ?>><?php esc_html_e('Post ID', 'siteorigin') ?></option>
@@ -873,7 +873,7 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 		</p>
 
 		<p>
-			<label <?php $this->get_field_id('order') ?>><?php _e('Order') ?></label>
+			<label <?php $this->get_field_id('order') ?>><?php _e('Order', 'siteorigin') ?></label>
 			<select id="<?php echo $this->get_field_id( 'order' ) ?>" name="<?php echo $this->get_field_name( 'order' ) ?>" value="<?php echo esc_attr($instance['order']) ?>">
 				<option value="DESC" <?php selected($instance['order'], 'DESC') ?>><?php esc_html_e('Descending', 'siteorigin') ?></option>
 				<option value="ASC" <?php selected($instance['order'], 'ASC') ?>><?php esc_html_e('Ascending', 'siteorigin') ?></option>
@@ -881,7 +881,7 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 		</p>
 
 		<p>
-			<label <?php $this->get_field_id('sticky') ?>><?php _e('Sticky Posts') ?></label>
+			<label <?php $this->get_field_id('sticky') ?>><?php _e('Sticky Posts', 'siteorigin') ?></label>
 			<select id="<?php echo $this->get_field_id( 'sticky' ) ?>" name="<?php echo $this->get_field_name( 'sticky' ) ?>" value="<?php echo esc_attr($instance['sticky']) ?>">
 				<option value="" <?php selected($instance['sticky'], '') ?>><?php esc_html_e('Default', 'siteorigin') ?></option>
 				<option value="ignore" <?php selected($instance['sticky'], 'ignore') ?>><?php esc_html_e('Ignore Sticky', 'siteorigin') ?></option>
@@ -891,7 +891,7 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 		</p>
 
 		<p>
-			<label <?php $this->get_field_id('additional') ?>><?php _e('Additional ') ?></label>
+			<label <?php $this->get_field_id('additional') ?>><?php _e('Additional ', 'siteorigin') ?></label>
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'additional' ) ?>" name="<?php echo $this->get_field_name( 'additional' ) ?>" value="<?php echo esc_attr($instance['additional']) ?>" />
 			<small><?php printf(__('Additional query arguments. See <a href="%s" target="_blank">query_posts</a>.', 'siteorigin'), 'http://codex.wordpress.org/Function_Reference/query_posts') ?></small>
 		</p>
