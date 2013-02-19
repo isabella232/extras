@@ -37,7 +37,7 @@ jQuery( function ( $ ) {
         // If the media frame already exists, reopen it.
         if ( frame ) {
             frame.open();
-            return;
+            return false;
         }
 
         // Create the media frame.
@@ -59,6 +59,9 @@ jQuery( function ( $ ) {
                 close: false
             }
         });
+        
+        // Store the frame
+        $$.data('frame', frame);
 
         // When an image is selected, run a callback.
         frame.on( 'select', function() {
