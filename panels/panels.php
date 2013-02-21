@@ -503,7 +503,7 @@ function siteorigin_panels_render( $post_id = false ) {
 	}
 	$html = ob_get_clean();
 
-	return apply_filters( 'panels_render', $html, $post_id, !empty($post) ? $post : null );
+	return apply_filters( 'siteorigin_panels_render', $html, $post_id, !empty($post) ? $post : null );
 }
 
 /**
