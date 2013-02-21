@@ -28,7 +28,7 @@ function siteorigin_widgets_enqueue_widget_scripts() {
 	$active_widgets = array_unique( $active_widgets );
 
 	foreach ( $active_widgets as $widget ) {
-		do_action( 'enqueue_widget_scripts_' . $widget );
+		do_action( 'siteorigin_enqueue_widget_scripts_' . $widget );
 	}
 }
 
