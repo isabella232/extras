@@ -171,7 +171,7 @@ function siteorigin_premium_page_render() {
 				<p class="submit">
 					<?php
 					$update_url = wp_nonce_url( admin_url( 'update.php?action=upgrade-theme&amp;theme=' . urlencode( $theme ) ), 'upgrade-theme_' . $theme );
-					$update_onclick = 'onclick="if ( confirm(\'' . esc_js( __( "Updating this theme will lose any customizations you have made. 'Cancel' to stop, 'OK' to update.", 'siteorigin' ) ) . '\') ) {return true;}return false;"';
+					$update_onclick = 'onclick="if ( confirm(\'' . esc_js( __( "Updating this theme will lose any code customizations (CSS, PHP, Javascript, etc) you have made to the free version. 'Cancel' to stop, 'OK' to update.", 'siteorigin' ) ) . '\') ) {return true;}return false;"';
 					?>
 					<a href="<?php echo esc_url( $update_url ) ?>" <?php echo $update_onclick ?> class="button-primary">
 						<?php _e( 'Update Theme', 'siteorigin' ) ?>
