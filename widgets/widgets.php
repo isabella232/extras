@@ -7,14 +7,18 @@ function siteorigin_widgets_enqueue_widget_scripts() {
 	global $wp_registered_widgets, $post;
 	$active_widgets = array();
 
+	$panel_widget_classes = array();
+	
 	if ( is_page() ) {
-		$panel_widget_classes = array();
-		$data = get_post_meta( $post->ID, 'panels_data', true );
+		$panels_data = get_post_meta( $post->ID, 'panels_data', true );
+	}
+	elseif ( function_exists('siteorigin_panels_is_home') && siteorigin_panels_is_home() ) {
+		$panels_data = get_theme_mod('panels_home_page', null);
+	}
 
-		if ( !empty( $data['widgets'] ) ) {
-			foreach ( $data['widgets'] as $widget ) {
-				$panel_widget_classes[ ] = $widget['info']['class'];
-			}
+	if ( !empty( $panels_data['widgets'] ) ) {
+		foreach ( $panels_data['widgets'] as $widget ) {
+			$panel_widget_classes[ ] = $widget['info']['class'];
 		}
 	}
 
@@ -26,7 +30,7 @@ function siteorigin_widgets_enqueue_widget_scripts() {
 	}
 
 	$active_widgets = array_unique( $active_widgets );
-
+	
 	foreach ( $active_widgets as $widget ) {
 		do_action( 'siteorigin_enqueue_widget_scripts_' . $widget );
 	}
