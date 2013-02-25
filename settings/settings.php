@@ -328,13 +328,24 @@ function siteorigin_settings_validate( $values ) {
 	foreach ( $wp_settings_fields['theme_settings'] as $section_id => $fields ) {
 		foreach ( $fields as $field_id => $field ) {
 			$name = $section_id . '_' . $field_id;
-
-			if ( $field['args']['type'] == 'checkbox' ) {
-				$values[ $name ] = !empty( $values[ $name ] );
-			} elseif ( $field['args']['type'] == 'number' ) {
-				$values[ $name ] = isset( $values[ $name ] ) ? intval( $values[ $name ] ) : $GLOBALS['siteorigin_settings_defaults'][ $name ];
+			
+			switch($field['args']['type']){
+				case 'checkbox' :
+					// Only allow true or false values
+					$values[ $name ] = !empty( $values[ $name ] );
+					break;
+				
+				case 'number' :
+					// Only allow integers
+					$values[ $name ] = isset( $values[ $name ] ) ? intval( $values[ $name ] ) : $GLOBALS['siteorigin_settings_defaults'][ $name ];
+					break;
+				
+				case 'media' :
+					// Only allow valid media files
+					$attachment = get_post( $values[ $name ] );
+					if($attchment->post_type != 'attachment') $values[ $name ] = '';
 			}
-
+			
 			if ( !isset( $current[ $name ] ) || ( isset( $values[ $name ] ) && isset( $current[ $name ] ) && $values[ $name ] != $current[ $name ] ) ) $changed = true;
 
 			// See if this needs any special validation

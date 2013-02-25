@@ -122,6 +122,7 @@ jQuery( function ( $ ) {
     // We're going to use jQuery to transform the settings page into a tabbed interface
     var $$ = $( 'form[action="options.php"]' );
     var tabs = $( '<h2></h2>' ).attr('id', 'siteorigin-settings-tab-wrapper').addClass( 'nav-tab-wrapper' ).prependTo( $$ );
+    
     $$.find( 'h3' ).each( function ( i, el ) {
         var h = $( el ).hide();
         var a = $( '<a href="#"></a>' ).addClass( 'nav-tab' ).html( h.html() ).appendTo( tabs );
@@ -142,7 +143,7 @@ jQuery( function ( $ ) {
             return false;
         } );
 
-        if ( i == getUserSetting('siteorigin_settings_tab', 0) ) a.click();
+        if ( i == getUserSetting('siteorigin_settings_tab', 0) || (i == 0 && getUserSetting('siteorigin_settings_tab', 0) > $$.find( 'h3' ).length) ) a.click();
     } );
     
     // Autofill
