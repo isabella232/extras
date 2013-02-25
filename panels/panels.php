@@ -498,8 +498,7 @@ function siteorigin_panels_render( $post_id = false ) {
 			if ( empty( $widgets ) ) echo '&nbsp;';
 			?></div><?php
 		}
-		?>
-	<div class="clear"></div></div><?php
+		?></div><?php
 	}
 	$html = ob_get_clean();
 
