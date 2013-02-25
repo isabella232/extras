@@ -341,9 +341,9 @@ function siteorigin_settings_validate( $values ) {
 					break;
 				
 				case 'media' :
-					// Only allow valid media files
+					// Only allow valid attachment post ids
 					$attachment = get_post( $values[ $name ] );
-					if($attchment->post_type != 'attachment') $values[ $name ] = '';
+					if($attachment->post_type != 'attachment') $values[ $name ] = '';
 			}
 			
 			if ( !isset( $current[ $name ] ) || ( isset( $values[ $name ] ) && isset( $current[ $name ] ) && $values[ $name ] != $current[ $name ] ) ) $changed = true;
