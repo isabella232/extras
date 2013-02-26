@@ -391,6 +391,14 @@ function siteorigin_panels_css() {
 			}
 		}
 	}
+	
+	// Add CSS to prevent overflow on mobile resolution.
+	$panel_grid_css = 'margin: 0 0 ' . $panels_margin_bottom . 'px 0 !important;';
+	$panel_grid_cell_css = 'padding: 0 !important;';
+	if(empty($css[ $panels_mobile_width ][ $panel_grid_css ])) $css[ $panels_mobile_width ][ $panel_grid_css ] = array();
+	if(empty($css[ $panels_mobile_width ][ $panel_grid_cell_css ])) $css[ $panels_mobile_width ][ $panel_grid_cell_css ] = array();
+	$css[ $panels_mobile_width ][ $panel_grid_css ][] = '.panel-grid';
+	$css[ $panels_mobile_width ][ $panel_grid_cell_css ][] = '.panel-grid-cell';
 
 	/**
 	 * Filter the unprocessed CSS array
