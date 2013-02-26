@@ -150,3 +150,10 @@
     color: #999;
 	font-style: italic;
 }
+
+.siteorigin-premium-teaser-customizer-wrapper{
+    padding: 25px 0;
+    text-align:center;
+    background: #FCFCFC;
+    border-bottom: 1px solid #EEE;
+}

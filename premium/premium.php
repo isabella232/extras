@@ -285,3 +285,35 @@ function siteorigin_premium_teaser($text, $args = null){
 	<?php
 	endif;
 }
+
+function siteorigin_premium_teaser_customizer_enqueue(){
+	if(get_theme_support( 'siteorigin-teaser-customizer' ) === false) return;
+	if(defined('SITEORIGIN_IS_PREMIUM')) return;
+	
+	wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/css/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
+	wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/js/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+}
+add_action('customize_controls_enqueue_scripts', 'siteorigin_premium_teaser_customizer_enqueue');
+
+function siteorigin_premium_teaser_customizer(){
+	if(get_theme_support( 'siteorigin-teaser-customizer' ) === false) return;
+	if(defined('SITEORIGIN_IS_PREMIUM')) return;
+	
+	/**
+	 * @var WP_Customize_Manager
+	 */
+	global $wp_customize;
+	$teaser_customizer = new SiteOrigin_Premium_Teaser_Customizer($wp_customize, 'siteorigin-premium-teaser');
+	$wp_customize->add_section($teaser_customizer);
+}
+add_action('customize_controls_init', 'siteorigin_premium_teaser_customizer', 100);
+
+if(class_exists('WP_Customize_Section')) :
+class SiteOrigin_Premium_Teaser_Customizer extends WP_Customize_Section{
+	function render() {
+		?><div class="siteorigin-premium-teaser-customizer-wrapper"><?php
+		siteorigin_premium_teaser(__('Get Additional Customizations'));
+		?></div><?php
+	}
+}
+endif;
