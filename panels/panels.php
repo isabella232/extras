@@ -355,12 +355,13 @@ function siteorigin_panels_css() {
 	
 	// Exit if we don't have panels data
 	if ( empty( $panels_data ) ) return;
-
+	
+	$panels_mobile_width = empty($panels_support['mobile-width']) ? 767 : $panels_support['mobile-width']; 
 	$panels_margin_bottom = empty($panels_support['margin-bottom']) ? 30 : $panels_support['margin-bottom'];
 
 	$css = array();
 	$css[1920] = array();
-	$css[767] = array(); // This is a mobile resolution
+	$css[ $panels_mobile_width ] = array(); // This is a mobile resolution
 
 	// Add the grid sizing
 	$ci = 0;
@@ -385,8 +386,8 @@ function siteorigin_panels_css() {
 			// Mobile Responsive
 			$mobile_css = array( 'float:none', 'width:auto', 'margin-bottom:' . $panels_margin_bottom . 'px' );
 			foreach ( $mobile_css as $c ) {
-				if ( empty( $css[767][$c] ) ) $css[767][$c] = array();
-				$css[767][$c][] = '#pg-' . $gi . ' .panel-grid-cell';
+				if ( empty( $css[ $panels_mobile_width ][ $c ] ) ) $css[ $panels_mobile_width ][ $c ] = array();
+				$css[ $panels_mobile_width ][ $c ][] = '#pg-' . $gi . ' .panel-grid-cell';
 			}
 		}
 	}
