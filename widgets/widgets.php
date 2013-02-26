@@ -783,6 +783,10 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 				$query_args['post__not_in'] = get_option( 'sticky_posts' );
 				break;
 		}
+
+		if ( !empty( $instance['title'] ) ) {
+			echo $args['before_title'] . esc_html( $instance['title'] ) . $args['after_title'];
+		}
 		
 		// Create the query
 		query_posts($query_args);
@@ -817,6 +821,7 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 
 	function form( $instance ) {
 		$instance = wp_parse_args($instance, array(
+			'title' => '',
 			'template' => 'loop.php',
 			
 			// Query args
@@ -830,19 +835,23 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 			
 			'additional' => '',
 		));
-		
+
+		$templates = $this->get_loop_templates();
 		if(empty($templates)) {
 			?><p><?php _e("Unfortunately your theme doesn't have any post loops.", 'siteorigin') ?></p><?php
 			return;
 		}
 		
 		// Get all the loop template files
-		$templates = $this->get_loop_templates();
 		$post_types = get_post_types(array('public' => true));
 		$post_types = array_values($post_types);
 		$post_types = array_diff($post_types, array('attachment', 'revision', 'nav_menu_item'));
 		
 		?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'title' ) ?>"><?php _e( 'Title', 'siteorigin' ) ?></label>
+			<input class="widefat" name="<?php echo $this->get_field_name( 'title' ) ?>" id="<?php echo $this->get_field_id( 'title' ) ?>" value="<?php echo esc_attr( $instance['title'] ) ?>">
+		</p>
 		<p>
 			<label <?php $this->get_field_id('template') ?>><?php _e('Template', 'siteorigin') ?></label>
 			<select id="<?php echo $this->get_field_id( 'template' ) ?>" name="<?php echo $this->get_field_name( 'template' ) ?>">
