@@ -417,10 +417,6 @@ function siteorigin_settings_media_view_strings($strings, $post){
 	
 	$strings['insertIntoPost'] = __('Set Media File', 'siteorigin');
 	
-	//var_dump($strings);
-	//die();
-	
-	
 	return $strings;
 }
 add_filter('media_view_strings', 'siteorigin_settings_media_view_strings', 10, 2);
