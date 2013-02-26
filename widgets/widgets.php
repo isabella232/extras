@@ -759,6 +759,8 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 	}
 
 	function widget( $args, $instance ) {
+		if(empty($instance['template'])) return;
+		
 		$template = $instance['template'];
 		$query_args = $instance;
 		unset($query_args['template']);
@@ -828,6 +830,11 @@ class SiteOrigin_Widgets_PostLoop extends WP_Widget{
 			
 			'additional' => '',
 		));
+		
+		if(empty($templates)) {
+			?><p><?php _e("Unfortunately your theme doesn't have any post loops.", 'siteorigin') ?></p><?php
+			return;
+		}
 		
 		// Get all the loop template files
 		$templates = $this->get_loop_templates();
