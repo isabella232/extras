@@ -164,7 +164,13 @@
                     e.preventDefault();
                     return false;
                 }
+                else if (e.keyCode === $.ui.keyCode.ESCAPE) {
+                    console.log('here');
+                    $(this ).closest('.ui-dialog' ).dialog('close');
+                }
             });
+        
+        panel.data('dialog', dialog);
 
         dialog.find( 'label' ).each( function () {
             // Make labels work as expected
@@ -217,6 +223,7 @@
 
         // This is to refresh the dialog positions
         $( window ).resize();
+        
         return panel;
     }
 
@@ -236,7 +243,9 @@
 
         container.sortable( "refresh" ).trigger( 'refreshcells' );
         container.closest( '.grid-container' ).panelsResizeCells();
-        if(animate) $( '#panels-container .panel.new-panel' ).hide().slideDown( 1000 ).removeClass( 'new-panel' );
+        if(animate) {
+            $( '#panels-container .panel.new-panel' ).hide().slideDown( 500 , function(){ panel.data('dialog' ).dialog('open') } ).removeClass( 'new-panel' );
+        }
     }
 
     /**

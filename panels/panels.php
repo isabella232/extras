@@ -352,7 +352,7 @@ function siteorigin_panels_css() {
 	$css = array();
 	$css[1920] = array();
 	$css[ $panels_mobile_width ] = array(); // This is a mobile resolution
-
+	
 	// Add the grid sizing
 	$ci = 0;
 	foreach ( $panels_data['grids'] as $gi => $grid ) {
@@ -366,6 +366,11 @@ function siteorigin_panels_css() {
 				$css[1920][$css_new][] = '#pgc-' . $gi . '-' . $i;
 			}
 		}
+		
+		// Add the bottom margin to any grids that aren't the last
+		if($gi != count($panels_data['grids'])-1){
+			$css[1920]['margin-bottom: '.$panels_margin_bottom.'px'][] = '#pg-' . $gi;
+		}
 
 		if ( $cell_count > 1 ) {
 			if ( empty( $css[1920]['float:left'] ) ) $css[1920]['float:left'] = array();
@@ -374,21 +379,37 @@ function siteorigin_panels_css() {
 
 		if ( $panels_support['responsive'] ) {
 			// Mobile Responsive
-			$mobile_css = array( 'float:none', 'width:auto', 'margin-bottom:' . $panels_margin_bottom . 'px' );
+			$mobile_css = array( 'float:none', 'width:auto' );
 			foreach ( $mobile_css as $c ) {
 				if ( empty( $css[ $panels_mobile_width ][ $c ] ) ) $css[ $panels_mobile_width ][ $c ] = array();
 				$css[ $panels_mobile_width ][ $c ][] = '#pg-' . $gi . ' .panel-grid-cell';
+			}
+
+			for ( $i = 0; $i < $cell_count; $i++ ) {
+				if ( $i != $cell_count - 1 ) {
+					$css_new = 'margin-bottom:' . $panels_margin_bottom . 'px';
+					if ( empty( $css[$panels_mobile_width][$css_new] ) ) $css[$panels_mobile_width][$css_new] = array();
+					$css[$panels_mobile_width][$css_new][] = '#pgc-' . $gi . '-' . $i;
+				}
 			}
 		}
 	}
 	
 	// Add CSS to prevent overflow on mobile resolution.
-	$panel_grid_css = 'margin: 0 0 ' . $panels_margin_bottom . 'px 0 !important;';
+	$panel_grid_css = 'margin-left: 0 !important; margin-right: 0 !important;';
 	$panel_grid_cell_css = 'padding: 0 !important;';
 	if(empty($css[ $panels_mobile_width ][ $panel_grid_css ])) $css[ $panels_mobile_width ][ $panel_grid_css ] = array();
 	if(empty($css[ $panels_mobile_width ][ $panel_grid_cell_css ])) $css[ $panels_mobile_width ][ $panel_grid_cell_css ] = array();
 	$css[ $panels_mobile_width ][ $panel_grid_css ][] = '.panel-grid';
 	$css[ $panels_mobile_width ][ $panel_grid_cell_css ][] = '.panel-grid-cell';
+	
+	// Add the bottom margin
+	$bottom_margin = 'margin-bottom: '.$panels_margin_bottom.'px';
+	$bottom_margin_last = 'margin-bottom: 0 !important';
+	if(empty($css[ 1920 ][ $bottom_margin ])) $css[ 1920 ][ $bottom_margin ] = array();
+	if(empty($css[ 1920 ][ $bottom_margin_last ])) $css[ 1920 ][ $bottom_margin_last ] = array();
+	$css[ 1920 ][ $bottom_margin ][] = '.panel-grid-cell .panel';
+	$css[ 1920 ][ $bottom_margin_last ][] = '.panel-grid-cell .panel:last-child';
 
 	/**
 	 * Filter the unprocessed CSS array
@@ -433,7 +454,7 @@ function siteorigin_panels_filter_content( $content ) {
 	global $post;
 	if ( in_array( $post->post_type, siteorigin_panels_get_post_types() ) ) {
 		$panel_content = siteorigin_panels_render( $post->ID );
-		if ( !empty( $panel_content ) ) $content = $panel_content;
+		if ( !empty( $panel_content ) ) $content = $panel_content . $content;
 	}
 
 	return $content;
@@ -596,3 +617,11 @@ function siteorigin_panels_get_post_types(){
 	$post_types = empty($panels_support[0]['post-types']) ? array('page') : (array) $panels_support[0]['post-types'];
 	return $post_types;
 }
+
+function siteorigin_panels_body_class($classes){
+	if(siteorigin_panels_is_panel()) $classes[] = 'siteorigin-panels';
+	if(siteorigin_panels_is_home()) $classes[] = 'siteorigin-panels-home';
+	
+	return $classes;
+}
+add_filter('body_class', 'siteorigin_panels_body_class');

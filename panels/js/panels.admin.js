@@ -60,34 +60,44 @@ jQuery( function ( $ ) {
             },
             buttons: gridAddDialogButtons
         })
-        .keypress(function(e) {
+        .on('keydown', function(e) {
             if (e.keyCode == $.ui.keyCode.ENTER) {
                 // This is the same as clicking the add button
                 $(this ).closest('.ui-dialog').find('.ui-button:eq(0)').click();
             }
+            else if (e.keyCode === $.ui.keyCode.ESCAPE) {
+                $(this ).dialog('close');
+            }
         });
     ;
 
+    // Create the main add widgets dialog
+    $( '#panels-dialog' ).show()
+        .dialog( {
+            dialogClass: 'panels-admin-dialog',
+            autoOpen:    false,
+            resizable:   false,
+            draggable:   false,
+            modal:       true,
+            title:       $( '#panels-dialog' ).attr( 'data-title' ),
+            minWidth:    960,
+            close:       function () {
+                $( '#panels-container .panel.new-panel' ).hide().slideDown( 1000 ).removeClass( 'new-panel' );
+            }
+        } )
+        .on('keydown', function(e) {
+            if (e.keyCode === $.ui.keyCode.ESCAPE) {
+                $(this ).dialog('close');
+            }
+        })
+        .find( '.panel-type' ).disableSelection();
+    
     $( '#so-panels-panels .handlediv' ).click( function () {
         // Trigger the resize to reorganise the columns
         setTimeout( function () {
             $( window ).resize();
         }, 150 );
     } )
-    
-    // Create the main add widgets dialog
-    $( '#panels-dialog' ).show().dialog( {
-        dialogClass: 'panels-admin-dialog',
-        autoOpen:    false,
-        resizable:   false,
-        draggable:   false,
-        modal:       true,
-        title:       $( '#panels-dialog' ).attr( 'data-title' ),
-        minWidth:    960,
-        close:       function () {
-            $( '#panels-container .panel.new-panel' ).hide().slideDown( 1000 ).removeClass( 'new-panel' );
-        }
-    } ).find( '.panel-type' ).disableSelection();
 
     // The button for adding a panel
     $( '#panels .panels-add' )

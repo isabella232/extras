@@ -176,13 +176,17 @@ function siteorigin_settings_add_teaser( $section, $id, $name, $args = array() )
  * @return mixed
  */
 function siteorigin_setting( $name , $default = null) {
-	if ( !is_null( $default ) && empty( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) return $default;
-
+	$value = null;
+	
+	if ( !is_null( $default ) && empty( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) $value = $default;
+	
 	if ( !isset( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) {
 		trigger_error( sprintf( __( 'Calling undefined setting [%s]', 'siteorigin' ), $name ) );
-		return null;
+		$value = null;
 	}
-	else return $GLOBALS['siteorigin_settings'][ $name ];
+	else $value = $GLOBALS['siteorigin_settings'][ $name ];
+	
+	return apply_filters('siteorigin_setting_'.$name, $value);
 }
 
 /**
