@@ -29,25 +29,29 @@ function siteorigin_panels_lite_enqueue_admin($prefix){
 }
 add_action('admin_enqueue_scripts', 'siteorigin_panels_lite_enqueue_admin');
 
-function siteorigin_panels_lite_install_url(){
-	return wp_nonce_url(self_admin_url('plugins.php?action=activate&plugin='.$plugin_file), 'activate-plugin_'.$plugin_file);
+/**
+ * Add the Edit Home Page item to the admin bar.
+ *
+ * @param WP_Admin_Bar $admin_bar
+ * @return WP_Admin_Bar
+ */
+function siteorigin_panels_lite_admin_bar_menu($admin_bar){
+	/**
+	 * @var WP_Query $wp_query
+	 */
+	global $wp_query;
+
+	if( $wp_query->is_home() && $wp_query->is_main_query() ){
+		// Check that we support the home page
+		if ( !current_user_can('edit_theme_options') ) return $admin_bar;
+
+		$admin_bar->add_node(array(
+			'id' => 'edit-home-page',
+			'title' => __('Edit Home Page', 'siteorigin'),
+			'href' => admin_url('themes.php?page=so_panels_home_page')
+		));
+	}
+
+	return $admin_bar;
 }
-
-// gives a link to activate the plugin
-function activate_link() {
-	$plugin_file = $this->get_plugin_file();
-	if ($plugin_file) return wp_nonce_url(self_admin_url('plugins.php?action=activate&plugin='.$plugin_file), 'activate-plugin_'.$plugin_file);
-	return false;
-}
-
-// return a nonced installation link for the plugin. checks wordpress.org to make sure it's there first.
-function install_link() {
-	include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
-
-	$info = plugins_api('plugin_information', array('slug' => $this->slug ));
-
-	if ( is_wp_error( $info ) )
-		return false; // plugin not available from wordpress.org
-
-	return wp_nonce_url(self_admin_url('update.php?action=install-plugin&plugin=' . $this->slug), 'install-plugin_' . $this->slug);
-}
+add_action('admin_bar_menu', 'siteorigin_panels_lite_admin_bar_menu', 100);
