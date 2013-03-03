@@ -24,7 +24,7 @@ $install_url = siteorigin_plugin_activation_install_url(
 	</p>
 	
 	<p class="install-container">
-		<a href="<?php echo esc_url($install_url) ?>" class="install"><?php _e('Install Page Builder', 'siteorigin') ?></a>
+		<a href="<?php echo esc_url($install_url) ?>" class="install"><?php _e('Install SiteOrigin Page Builder', 'siteorigin') ?></a>
 	</p>
 	
 	<p>

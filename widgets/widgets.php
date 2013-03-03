@@ -221,12 +221,12 @@ class SiteOrigin_Widgets_IconText extends WP_Widget {
 	 */
 	function widget( $args, $instance ) {
 		echo $args['before_widget'];
-		if ( !empty( $instance['headline'] ) ) {
-			echo $args['before_title'] . $instance['headline'] . $args['after_title'];
-		}
-
 		if ( !empty( $instance['icon'] ) ) {
 			?><div class="feature-icon"><?php echo wp_get_attachment_image($instance['icon'], 'thumbnail') ?></div><?php
+		}
+		
+		if ( !empty( $instance['headline'] ) ) {
+			echo $args['before_title'] . $instance['headline'] . $args['after_title'];
 		}
 
 		if ( !empty( $instance['text'] ) ) {
