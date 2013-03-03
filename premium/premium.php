@@ -321,7 +321,7 @@ if(class_exists('WP_Customize_Section')) :
 class SiteOrigin_Premium_Teaser_Customizer extends WP_Customize_Section{
 	function render() {
 		?><div class="siteorigin-premium-teaser-customizer-wrapper"><?php
-		siteorigin_premium_teaser(__('Get Additional Customizations'));
+		siteorigin_premium_teaser(__('Get Additional Customizations', 'siteorigin'));
 		?></div><?php
 	}
 }
