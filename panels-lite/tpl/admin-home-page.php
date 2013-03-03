@@ -28,7 +28,7 @@ $install_url = siteorigin_plugin_activation_install_url(
 	</p>
 	
 	<p>
-		<a href="https://vimeo.com/user3187291/review/59561067/35cb26b775">
+		<a href="http://player.vimeo.com/video/59561067?autoplay=1" target="_blank">
 			<img src="<?php echo get_template_directory_uri() ?>/extras/panels-lite/images/video.png" width="680" height="383" />
 		</a>
 	</p>
