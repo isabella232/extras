@@ -5,8 +5,8 @@
  */
 function siteorigin_panels_lite_admin_menu(){
 	add_theme_page(
-		__('Custom Home Page Builder', 'so-panels'),
-		__('Home Page', 'so-panels'),
+		__('Custom Home Page Builder', 'siteorigin'),
+		__('Home Page', 'siteorigin'),
 		'edit_theme_options',
 		'so_panels_home_page',
 		'siteorigin_panels_lite_render_admin_home_page'
@@ -18,7 +18,7 @@ add_action('admin_menu', 'siteorigin_panels_lite_admin_menu');
  * Render the page used to build the custom home page.
  */
 function siteorigin_panels_lite_render_admin_home_page(){
-	add_meta_box( 'so-panels-panels', __( 'Page Builder', 'so-panels' ), 'siteorigin_panels_metabox_render', 'appearance_page_so_panels_home_page', 'advanced', 'high' );
+	add_meta_box( 'so-panels-panels', __( 'Page Builder', 'siteorigin' ), 'siteorigin_panels_metabox_render', 'appearance_page_so_panels_home_page', 'advanced', 'high' );
 	get_template_part('extras/panels-lite/tpl/admin', 'home-page');
 }
 

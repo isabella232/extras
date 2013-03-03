@@ -4,8 +4,8 @@ function siteorigin_plugin_activation_page(){
 	if(!isset( $_GET[sanitize_key( 'siteorigin-pa-install' )])) return;
 	
 	add_theme_page(
-		'Install Theme Plugin',
-		'Install Theme Plugin',
+		__('Install Theme Plugin', 'siteorigin'),
+		__('Install Theme Plugin', 'siteorigin'),
 		'install_plugins',
 		'siteorigin_plugin_activation',
 		'siteorigin_plugin_activation_render_page'
