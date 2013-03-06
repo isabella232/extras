@@ -9,7 +9,7 @@ function siteorigin_widgets_enqueue_widget_scripts() {
 
 	$panel_widget_classes = array();
 
-	if ( is_page() ) {
+	if ( is_singular() ) {
 		$panels_data = get_post_meta( $post->ID, 'panels_data', true );
 	}
 	elseif ( function_exists('siteorigin_panels_is_home') && siteorigin_panels_is_home() ) {
