@@ -1,6 +1,45 @@
 <?php
 
 /**
+ * This function just gives active widgets a chance to enqueue their scripts
+ */
+function siteorigin_widgets_enqueue_widget_scripts() {
+	global $wp_registered_widgets, $post;
+	$active_widgets = array();
+
+	$panel_widget_classes = array();
+
+	if ( is_page() ) {
+		$panels_data = get_post_meta( $post->ID, 'panels_data', true );
+	}
+	elseif ( function_exists('siteorigin_panels_is_home') && siteorigin_panels_is_home() ) {
+		$panels_data = get_option('siteorigin_panels_home_page', null);
+	}
+
+	if ( !empty( $panels_data['widgets'] ) ) {
+		foreach ( $panels_data['widgets'] as $widget ) {
+			$panel_widget_classes[ ] = $widget['info']['class'];
+		}
+	}
+
+	foreach ( $wp_registered_widgets as $widget ) {
+		if ( !empty( $widget['callback'][ 0 ] ) && is_object( $widget['callback'][ 0 ] ) ) {
+			if ( is_active_widget( false, false, $widget['callback'][ 0 ]->id_base ) ) $active_widgets[ ] = $widget['callback'][ 0 ]->id_base;
+			if ( !empty( $panel_widget_classes ) && in_array( get_class( $widget['callback'][ 0 ] ), $panel_widget_classes ) ) $active_widgets[ ] = $widget['callback'][ 0 ]->id_base;
+		}
+	}
+
+	$active_widgets = array_unique( $active_widgets );
+
+	foreach ( $active_widgets as $widget ) {
+		do_action( 'siteorigin_enqueue_widget_scripts_' . $widget );
+	}
+}
+
+add_action( 'wp_enqueue_scripts', 'siteorigin_widgets_enqueue_widget_scripts' );
+
+
+/**
  * A call to action widget. Designed to be used on a home page panel
  */
 class SiteOrigin_Widgets_CTA extends WP_Widget {
