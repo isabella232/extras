@@ -4,7 +4,7 @@ jQuery(function($){
         .html(siteoriginAdminTab.text)
         .attr('href', siteoriginAdminTab.url);
 
-    $('.nav-tab-wrapper' ).append(link);
+    $('.nav-tab-wrapper a' ).last().after(link);
 
     if($('#typeselector' ).val() == 'author' && $('#s' ).val() == 'gpriday'){
         $('.nav-tab-wrapper a' ).removeClass('nav-tab-active');
