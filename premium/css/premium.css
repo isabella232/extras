@@ -465,5 +465,9 @@
     padding: 19px 0;
 }
 
+#support-choice abbr{
+    border-bottom: 1px dashed #999;
+    cursor: help;
+}
 
 /* @end */

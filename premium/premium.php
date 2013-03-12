@@ -133,9 +133,9 @@ function siteorigin_premium_page_render() {
 
 								<div class="feature"><strong><?php _e('Premium theme features', 'siteorigin') ?></strong></div>
 								<div class="feature"><?php _e('Forum only support', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('Variable response times', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('No response time guarantee', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('No customization support', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('Help from support staff and the community', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('Help from SiteOrigin support staff', 'siteorigin') ?></div>
 
 								<div class="buy-wrapper">
 									<a href="<?php echo esc_url($premium['buy_url']) ?>" class="buy-button"><?php _e('Continue', 'siteorigin') ?></a>
@@ -153,18 +153,18 @@ function siteorigin_premium_page_render() {
 
 								<div class="feature"><strong><?php _e('Premium theme features', 'siteorigin') ?></strong></div>
 								<div class="feature"><?php _e('Fast <strong>email</strong> support', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('<strong>Guaranteed</strong> response times', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('Simple <strong>customization</strong> guideance', 'siteorigin') ?></div>
-								<div class="feature"><?php printf(__('Help directly from <strong>%s\'s developer</strong>', 'siteorigin'), ucfirst($theme)) ?></div>
+								<div class="feature"><?php _e('<strong>4hr response</strong> during <abbr title="9am - 6pm GMT 2+">office hours</a>', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('Basic <strong>customization</strong> support', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('Help directly from a <strong>SiteOrigin developer</strong>', 'siteorigin') ?></div>
 
 								<div class="buy-wrapper">
-									<a href="<?php echo esc_url($premium['buy_url_supported']) ?>" class="buy-button"><?php _e('Add Email Support', 'siteorigin') ?></a>
+									<a href="<?php echo esc_url($premium['buy_url_supported']) ?>" class="buy-button"><?php _e('Include Email Support', 'siteorigin') ?></a>
 								</div>
 							</div>
 						</div>
 
 						<p class="extra-info">
-							<?php printf(__('In addition to the extra features, upgrading to %s Premium also gets you prioritized support on our forums. For an extra $20 you can get fast email support direct from the theme developer.', 'siteorigin'), ucfirst($theme)) ?>
+							<?php printf(__('Upgrading to %1$s Premium also gets you prioritized support on our forums, but for an extra $20 you can get fast email support direct from %1$s\'s developer.', 'siteorigin'), ucfirst($theme)) ?>
 						</p>
 
 					</div>
