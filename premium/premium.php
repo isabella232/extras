@@ -69,8 +69,8 @@ function siteorigin_premium_page_render() {
 				<?php if ( isset( $premium['buy_url'] ) ) : ?>
 				<p class="download">
 					<span class="buy-button-wrapper">
-						<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
-							<span><?php _e('Buy Upgrade', 'siteorigin') ?></span><em><?php echo $premium['buy_price'] ?></em>
+						<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button <?php echo !empty($premium['buy_url_supported']) ? 'has-support-choices' : '' ?>">
+							<span><?php _e('Buy Upgrade', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
 						</a>
 					</span>
 					<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
@@ -90,12 +90,12 @@ function siteorigin_premium_page_render() {
 						<div class="clear"></div>
 					<?php endforeach; endif; ?>
 				</div>
-
+				
 				<?php if ( isset( $premium['buy_url'] ) ) : ?>
 				<p class="download">
 					<span class="buy-button-wrapper">
-						<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
-							<span><?php _e('Buy Upgrade', 'siteorigin') ?></span><em><?php echo $premium['buy_price'] ?></em>
+						<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button <?php echo !empty($premium['buy_url_supported']) ? 'has-support-choices' : '' ?>">
+							<span><?php _e('Buy Upgrade', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
 						</a>
 					</span>
 					<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
@@ -117,10 +117,64 @@ function siteorigin_premium_page_render() {
 						<?php endforeach; ?>
 					</ul>
 				<?php endif; ?>
+
+				<?php if(!empty($premium['buy_url_supported'])) : ?>
+					<div id="support-choice">
+						<h2><?php _e('Do You Also Need Fast Email Support?', 'siteorigin') ?></h2>
+
+						<div class="support-price-table">
+							<div class="column column-standard">
+								<div class="title-wrapper">
+									<div class="title">
+										<h3><?php echo '$'.$premium['buy_price']; ?></h3>
+										<p><?php _e('Once Off', 'siteorigin') ?></p>
+									</div>
+								</div>
+
+								<div class="feature"><strong><?php _e('Premium theme features', 'siteorigin') ?></strong></div>
+								<div class="feature"><?php _e('Forum only support', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('Variable response times', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('No customization support', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('Help from support staff and the community', 'siteorigin') ?></div>
+
+								<div class="buy-wrapper">
+									<a href="<?php echo esc_url($premium['buy_url']) ?>" class="buy-button"><?php _e('Continue', 'siteorigin') ?></a>
+								</div>
+							</div>
+
+							<div class="column column-recommended">
+								<div class="recommended"><?php _e('Recommended', 'siteorigin') ?></div>
+								<div class="title-wrapper">
+									<div class="title">
+										<h3><?php echo '$'.($premium['buy_price'] + 20); ?></h3>
+										<p><?php _e('Once Off', 'siteorigin') ?></p>
+									</div>
+								</div>
+
+								<div class="feature"><strong><?php _e('Premium theme features', 'siteorigin') ?></strong></div>
+								<div class="feature"><?php _e('Fast <strong>email</strong> support', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('<strong>Guaranteed</strong> response times', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('Simple <strong>customization</strong> guideance', 'siteorigin') ?></div>
+								<div class="feature"><?php printf(__('Help directly from <strong>%s\'s developer</strong>', 'siteorigin'), ucfirst($theme)) ?></div>
+
+								<div class="buy-wrapper">
+									<a href="<?php echo esc_url($premium['buy_url_supported']) ?>" class="buy-button"><?php _e('Add Email Support', 'siteorigin') ?></a>
+								</div>
+							</div>
+						</div>
+
+						<p class="extra-info">
+							<?php printf(__('In addition to the extra features, upgrading to %s Premium also gets you prioritized support on our forums. For an extra $20 you can get fast email support direct from the theme developer.', 'siteorigin'), ucfirst($theme)) ?>
+						</p>
+
+					</div>
+					<div id="support-choice-overlay"></div>
+				<?php endif; ?>
 			</div>
 			<div id="magnifier">
 				<div class="image"></div>
 			</div>
+			
 			<?php
 			break;
 

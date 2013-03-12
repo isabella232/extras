@@ -1,14 +1,24 @@
 jQuery( function ( $ ) {
     var paymentWindow;
-    $( '#theme-upgrade .buy-button' ).click( function () {
+    $( '#theme-upgrade .buy-button' ).not('.has-support-choices').click( function () {
         var $$ = $( this );
 
         paymentWindow = window.open( $$.attr( 'href' ), 'payment', 'height=800,width=1024' );
         $( '#theme-upgrade-info' ).slideDown();
         $( 'html, body' ).animate( {'scrollTop':0} );
+        $('#support-choice, #support-choice-overlay' ).fadeOut();
 
         return false;
     } );
+
+    $( '#theme-upgrade .buy-button.has-support-choices' ).click(function(){
+        $('#support-choice, #support-choice-overlay' ).fadeIn();
+        return false;
+    });
+
+    $('#support-choice-overlay' ).click(function(){
+        $('#support-choice, #support-choice-overlay' ).fadeOut();
+    });
 
     // Toggle the key entry data
     $( '#theme-upgrade-already-paid' ).click( function () {
