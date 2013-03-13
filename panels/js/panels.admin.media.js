@@ -18,7 +18,7 @@ jQuery(function($){
             var ids = attachments.models.map(function(e){ return e.id });
             
             // Create a new gallery panel
-            var panel = $('#panels-dialog').panelsCreatePanel('SiteOrigin_Widgets_Gallery', {
+            var panel = $('#panels-dialog').panelsCreatePanel('SiteOrigin_Panels_Widgets_Gallery', {
                 'ids' : ids.join(',') 
             });
             
@@ -35,14 +35,14 @@ jQuery(function($){
             var panel;
             if($el.prop("tagName") == 'A' && $el.children().eq(0 ).prop('tagName') == 'IMG'){
                 // This is an image with a link
-                panel = $('#panels-dialog').panelsCreatePanel('SiteOrigin_Widgets_Image', {
+                panel = $('#panels-dialog').panelsCreatePanel('SiteOrigin_Panels_Widgets_Image', {
                     'href' : $el.attr('href'),
                     'src' : $el.children().eq(0 ).attr('src')
                 });
             }
             else if($el.prop("tagName") == 'IMG'){
                 // This is just an image tag
-                panel = $('#panels-dialog').panelsCreatePanel('SiteOrigin_Widgets_Image', {
+                panel = $('#panels-dialog').panelsCreatePanel('SiteOrigin_Panels_Widgets_Image', {
                     'src' : $el.children().eq(0 ).attr('src')
                 });
             }

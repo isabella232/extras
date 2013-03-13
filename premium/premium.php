@@ -132,10 +132,11 @@ function siteorigin_premium_page_render() {
 								</div>
 
 								<div class="feature"><strong><?php _e('Premium theme features', 'siteorigin') ?></strong></div>
-								<div class="feature"><?php _e('Forum only support', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('No response time guarantee', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('No customization support', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('Forum support', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('Best effort response time', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('Theme setup support', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('Help from SiteOrigin support staff', 'siteorigin') ?></div>
+								
 
 								<div class="buy-wrapper">
 									<a href="<?php echo esc_url($premium['buy_url']) ?>" class="buy-button"><?php _e('Continue', 'siteorigin') ?></a>
@@ -152,9 +153,9 @@ function siteorigin_premium_page_render() {
 								</div>
 
 								<div class="feature"><strong><?php _e('Premium theme features', 'siteorigin') ?></strong></div>
-								<div class="feature"><?php _e('Fast <strong>email</strong> support', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('<strong>4hr response</strong> during <abbr title="9am - 6pm GMT 2+">office hours</a>', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('Basic <strong>customization</strong> support', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('<strong>Fast</strong> email support', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('<strong>4hr response</strong> during <abbr title="9am-6pm, Monday-Friday GMT 2+">office hours</a>', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('<strong>Customization</strong> and setup support', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('Help directly from a <strong>SiteOrigin developer</strong>', 'siteorigin') ?></div>
 
 								<div class="buy-wrapper">
