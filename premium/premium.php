@@ -132,7 +132,7 @@ function siteorigin_premium_page_render() {
 								</div>
 
 								<div class="feature"><strong><?php _e('Premium theme features', 'siteorigin') ?></strong></div>
-								<div class="feature"><?php _e('Forum support', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('Standard email support', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('Best effort response time', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('Theme setup support', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('Help from SiteOrigin support staff', 'siteorigin') ?></div>
