@@ -398,7 +398,7 @@ function siteorigin_settings_theme_help(){
 	$text = sprintf(
 		__( "Read %s's <a href='%s'>theme documentation</a> for help with these settings.", 'siteorigin' ),
 		ucfirst($theme_name),
-		'http://support.siteorigin.com/'.$theme_name.'/'
+		'http://siteorigin.com/theme/'.$theme_name.'/?action=docs'
 	); 
 	
 	$screen->add_help_tab( array(

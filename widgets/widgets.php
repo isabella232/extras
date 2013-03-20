@@ -340,10 +340,9 @@ class SiteOrigin_Widgets_IconText extends WP_Widget {
 		<p class="description">
 			<?php
 			printf(
-			//__('Upload icon images to your <a href="%$2s" onclick="return confirm(\'%$1s\')">media library</a>. Find <a href="%$3s" onclick="return confirm(\'%$1s\')">free icon packs.', 'siteorigin'),
 				__('Upload icon images to your <a href="%s" target="_blank">media library</a>. Find <a href="%s" target="_blank">free icon packs</a>.', 'siteorigin'),
 				admin_url('upload.php'),
-				'http://support.siteorigin.com/icon-sets/'
+				'http://siteorigin.com/icon-sets/'
 			);
 			?>
 		</p>

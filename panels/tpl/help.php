@@ -4,5 +4,5 @@
 	<?php _e('The page layouts are responsive and completely customizable.', 'siteorigin') ?>
 </p>
 <p>
-	<?php printf( __( "Read the <a href='%s' target='_blank'>full documentation</a> on SiteOrigin's support site.", 'siteorigin' ), 'http://support.siteorigin.com/page-builder/' ) ?>
+	<?php printf( __( "Read the <a href='%s' target='_blank'>full documentation</a> on SiteOrigin.", 'siteorigin' ), 'http://siteorigin.com/page-builder-docs/' ) ?>
 </p>
