@@ -299,9 +299,9 @@
 
     display:none;
 
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 
 #support-choice h2{
@@ -409,17 +409,12 @@
 }
 
 #support-choice .title h3{
-    margin: 0 0 10px 0;
+    margin: 0;
     
     font-weight: 100;
     color: #5d5d5d;
     font-size: 2.5em;
-}
-
-#support-choice .title p{
-    margin: 0;
-    font-weight: 100;
-    color: #999;
+    line-height: 1;
 }
 
 #support-choice .column-recommended .title{
