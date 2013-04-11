@@ -19,7 +19,7 @@ add_action( 'admin_menu', 'siteorigin_premium_admin_menu' );
  */
 function siteorigin_premium_page_render() {
 	$theme = basename( get_template_directory() );
-	define('SITEORIGIN_PREMIUM_SUPPORTED_COST', 15);
+	define('SITEORIGIN_PREMIUM_SUPPORTED_COST', 10);
 
 	if ( isset( $_GET['action'] ) ) $action = $_GET['action'];
 	else $action = 'view';
@@ -121,16 +121,17 @@ function siteorigin_premium_page_render() {
 
 				<?php if(!empty($premium['buy_url_supported'])) : ?>
 					<div id="support-choice">
-						<h2><?php _e('Do You Need Faster, Priority Support?', 'siteorigin') ?></h2>
+						<h2><?php _e('What Level of Support Do You Need?', 'siteorigin') ?></h2>
 
 						<div class="support-price-table">
 							<div class="column column-standard">
 								<div class="title-wrapper">
 									<div class="title">
-										<h3><?php _e('Included', 'siteorigin') ?></h3>
+										<h3><?php echo '$' . ( $premium['buy_price'] ) ?></h3>
 									</div>
 								</div>
 
+								<div class="feature"><strong><?php _e('All premium theme features', 'siteorigin') ?></strong></div>
 								<div class="feature"><?php _e('Standard email support', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('1-2 day response time', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('Theme setup support', 'siteorigin') ?></div>
@@ -148,26 +149,27 @@ function siteorigin_premium_page_render() {
 								<div class="recommended"><?php _e('Recommended', 'siteorigin') ?></div>
 								<div class="title-wrapper">
 									<div class="title">
-										<h3><?php printf(__('%s Extra', 'siteorigin'), '$'.SITEORIGIN_PREMIUM_SUPPORTED_COST) ?></h3>
+										<h3><?php echo '$' . ( SITEORIGIN_PREMIUM_SUPPORTED_COST + $premium['buy_price'] ) ?></h3>
 									</div>
 								</div>
 
+								<div class="feature"><strong><?php _e('All premium theme features', 'siteorigin') ?></strong></div>
 								<div class="feature"><?php _e('<strong>Fast</strong> email support', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('<strong>4hr response</strong> during <abbr title="9am-6pm, Monday-Friday GMT 2+">office hours</a>', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('<strong>Basic customization</strong> and setup support', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('Help directly from a <strong>SiteOrigin developer</strong>', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('A <strong>full year</strong> of premium support', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('Help from our <strong>WordPress developers</strong>', 'siteorigin') ?></div>
+								<div class="feature"><?php _e('A <strong>full year</strong> of theme support', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('<strong>Lifetime</strong> theme updates', 'siteorigin') ?></div>
 
 								<div class="buy-wrapper">
-									<a href="<?php echo esc_url($premium['buy_url_supported']) ?>" class="buy-button"><?php _e('Include Priority Support', 'siteorigin') ?></a>
+									<a href="<?php echo esc_url($premium['buy_url_supported']) ?>" class="buy-button"><?php _e('Priority Support', 'siteorigin') ?></a>
 								</div>
 							</div>
 						</div>
 
 						<p class="extra-info">
-							<?php printf(__('Upgrading to %1$s Premium gives you enough support to get your site up and running.', 'siteorigin'), ucfirst($theme)) ?>
-							<?php printf(__("Including priority support means you're still only paying <strong>%s</strong>, but you'll get more detailed support and faster replies. Perfect if you're on a deadline or working for a client.", 'siteorigin'), '$'.($premium['buy_price']+SITEORIGIN_PREMIUM_SUPPORTED_COST)) ?>
+							<?php printf(__('Upgrading to %1$s Premium gives you support from SiteOrigin support staff.', 'siteorigin'), ucfirst($theme)) ?>
+							<?php printf(__("Choosing priority support only costs <strong>%s</strong> more, and it gives you more detailed support and faster replies. Perfect if you're on a deadline or working for a client.", 'siteorigin'), '$'.(SITEORIGIN_PREMIUM_SUPPORTED_COST)) ?>
 						</p>
 
 					</div>
