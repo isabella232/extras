@@ -131,13 +131,12 @@ function siteorigin_premium_page_render() {
 									</div>
 								</div>
 
-								<div class="feature"><strong><?php _e('All premium theme features', 'siteorigin') ?></strong></div>
+								<div class="feature"><strong><?php _e('Premium theme with lifetime updates', 'siteorigin') ?></strong></div>
 								<div class="feature"><?php _e('Standard email support', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('1-2 day response time', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('Theme setup support', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('Help from SiteOrigin support staff', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('90 days of support', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('<strong>Lifetime</strong> theme updates', 'siteorigin') ?></div>
 
 
 								<div class="buy-wrapper">
@@ -153,13 +152,12 @@ function siteorigin_premium_page_render() {
 									</div>
 								</div>
 
-								<div class="feature"><strong><?php _e('All premium theme features', 'siteorigin') ?></strong></div>
+								<div class="feature"><strong><?php _e('Premium theme with lifetime updates', 'siteorigin') ?></strong></div>
 								<div class="feature"><?php _e('<strong>Fast</strong> email support', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('<strong>4hr response</strong> during <abbr title="9am-6pm, Monday-Friday GMT 2+">office hours</a>', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('<strong>Basic customization</strong> and setup support', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('Help from our <strong>WordPress developers</strong>', 'siteorigin') ?></div>
 								<div class="feature"><?php _e('A <strong>full year</strong> of theme support', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('<strong>Lifetime</strong> theme updates', 'siteorigin') ?></div>
 
 								<div class="buy-wrapper">
 									<a href="<?php echo esc_url($premium['buy_url_supported']) ?>" class="buy-button"><?php _e('Priority Support', 'siteorigin') ?></a>
@@ -168,8 +166,9 @@ function siteorigin_premium_page_render() {
 						</div>
 
 						<p class="extra-info">
-							<?php printf(__('Upgrading to %1$s Premium gives you support from SiteOrigin support staff.', 'siteorigin'), ucfirst($theme)) ?>
-							<?php printf(__("Choosing priority support only costs <strong>%s</strong> more, and it gives you more detailed support and faster replies. Perfect if you're on a deadline or working for a client.", 'siteorigin'), '$'.(SITEORIGIN_PREMIUM_SUPPORTED_COST)) ?>
+							<?php printf(__('%1$s Premium includes email support.', 'siteorigin'), ucfirst($theme)) ?>
+							<?php printf(__("For an extra <strong>%s</strong>, you get faster replies and more detailed answers. Perfect if you're on a deadline.", 'siteorigin'), '$'.(SITEORIGIN_PREMIUM_SUPPORTED_COST)) ?>
+							<?php _e("You're free to use our premium themes on as many sites as you like.", 'siteorigin') ?>
 						</p>
 
 					</div>
