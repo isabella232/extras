@@ -27,6 +27,7 @@ function siteorigin_theme_update_filter( $current ) {
 
 	if ( !is_wp_error( $request ) && $request['response']['code'] == 200 && !empty( $request['body'] ) ) {
 		$data = unserialize( $request['body'] );
+		if ( empty( $current ) )  $current = new stdClass();
 		if ( empty( $current->response ) ) $current->response = array();
 		if ( !empty( $data ) ) $current->response[ $theme ] = $data;
 	}
