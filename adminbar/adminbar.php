@@ -115,3 +115,40 @@ function siteorigin_adminbar_dismiss_bar() {
 	exit();
 }
 add_action( 'wp_ajax_siteorigin_admin_dismiss_bar', 'siteorigin_adminbar_dismiss_bar' );
+
+/**
+ * Add the SiteOrigin news dashboard widget.
+ */
+function siteorigin_adminbar_dashboard_widgets_setup() {
+	// add a custom dashboard widget
+	wp_add_dashboard_widget( 'dashboard_siteorigin_feed', __('SiteOrigin News', 'siteorigin'), 'siteorigin_adminbar_dashboard_widgets_output' ); //add new RSS feed output
+
+	// We don't want the widget showing up in the core column
+	global $wp_meta_boxes;
+
+	// Save the widget
+	$my_widget = $wp_meta_boxes['dashboard']['normal']['core']['dashboard_siteorigin_feed'];
+	unset($wp_meta_boxes['dashboard']['normal']['core']['dashboard_siteorigin_feed']);
+
+	$wp_meta_boxes['dashboard']['side']['core'] = array_merge(
+		array('dashboard_siteorigin_feed' => $my_widget),
+		$wp_meta_boxes['dashboard']['side']['core']
+	);
+}
+add_action('wp_dashboard_setup', 'siteorigin_adminbar_dashboard_widgets_setup');
+
+/**
+ * Render the SiteOrigin news dashboard widget
+ */
+function siteorigin_adminbar_dashboard_widgets_output() {
+	echo '<div class="rss-widget">';
+	wp_widget_rss_output(array(
+		'url' => 'http://siteorigin.com/feed/',
+		'title' => __('SiteOrigin News', 'siteorigin'),
+		'items' => 4,
+		'show_summary' => 1,
+		'show_author' => 0,
+		'show_date' => 1
+	));
+	echo "</div>";
+}
