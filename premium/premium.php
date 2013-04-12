@@ -205,7 +205,6 @@ function siteorigin_premium_page_render() {
 				}
 			}
 
-
 			?>
 			<div class="wrap" id="theme-upgrade">
 				<h2><?php printf(__('Your Order Number Is [%s]', 'siteorigin'), get_option( $option_name )) ?></h2>
