@@ -121,7 +121,7 @@ add_action( 'wp_ajax_siteorigin_admin_dismiss_bar', 'siteorigin_adminbar_dismiss
  */
 function siteorigin_adminbar_dashboard_widgets_setup() {
 	// add a custom dashboard widget
-	wp_add_dashboard_widget( 'dashboard_siteorigin_feed', __('SiteOrigin News', 'siteorigin'), 'siteorigin_adminbar_dashboard_widgets_output' ); //add new RSS feed output
+	wp_add_dashboard_widget( 'dashboard_siteorigin_feed', __('SiteOrigin Theme News', 'siteorigin'), 'siteorigin_adminbar_dashboard_widgets_output' ); //add new RSS feed output
 
 	// We don't want the widget showing up in the core column
 	global $wp_meta_boxes;
@@ -144,7 +144,7 @@ function siteorigin_adminbar_dashboard_widgets_output() {
 	echo '<div class="rss-widget">';
 	wp_widget_rss_output(array(
 		'url' => 'http://siteorigin.com/feed/',
-		'title' => __('SiteOrigin News', 'siteorigin'),
+		'title' => __('SiteOrigin Theme News', 'siteorigin'),
 		'items' => 4,
 		'show_summary' => 1,
 		'show_author' => 0,
