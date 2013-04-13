@@ -2,7 +2,7 @@
 $install_url = siteorigin_plugin_activation_install_url(
 	'siteorigin-panels',
 	'SiteOrigin Page Builder',
-	'http://gpriday.s3.amazonaws.com/plugins/siteorigin-panels.zip'
+	'http://downloads.wordpress.org/plugin/siteorigin-panels.zip'
 );
 ?>
 <div class="wrap" id="panels-home-page">
