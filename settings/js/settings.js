@@ -153,7 +153,26 @@ jQuery( function ( $ ) {
             c.val($(this ).val());
             $(this ).val('')
         });
-    
+
+    // Highlight the correct setting
+    if(window.location.hash != ''){
+        // Through a simple twist of fate, has is hash == the ID
+        $(window.location.hash).each(function(){
+            var $$ = $(this);
+
+            var tr = $$.closest('tr');
+            var table = $$.closest('table');
+            if(!table.hasClass('form-table')) return;
+
+            $('#siteorigin-settings-tab-wrapper > a').eq($('table.form-table').index(table)).click();
+            tr.addClass('highlight');
+            setTimeout(function(){
+                tr.find('input,select').focus();
+            }, 250);
+        })
+
+    }
+
     setTimeout( function () {
         $( '#setting-updated' ).slideUp();
     }, 5000 );

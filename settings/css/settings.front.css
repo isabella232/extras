@@ -1,0 +1,14 @@
+.siteorigin-edit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 14px;
+    height: 14px;
+    display: block;
+
+    background: url(../images/settings.png) no-repeat center center;
+}
+
+.siteorigin-edit:hover {
+    background-color: #e4f1fd;
+}

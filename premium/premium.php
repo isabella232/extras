@@ -278,7 +278,7 @@ function siteorigin_premium_admin_enqueue( $prefix ) {
 		wp_enqueue_style( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/css/premium-teaser.css', array(), SITEORIGIN_THEME_VERSION );
 		wp_enqueue_script( 'siteorigin-premium-teaser', get_template_directory_uri() . '/extras/premium/js/premium-teaser.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	}
-	
+
 	// Enqueue the page templates teaser, which works slightly differently
 	if( siteorigin_premium_teaser_get_support('page-templates') ){
 		wp_enqueue_script( 'siteorigin-premium-teaser-templates', get_template_directory_uri() . '/extras/premium/js/premium-teaser-templates.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
@@ -286,7 +286,9 @@ function siteorigin_premium_admin_enqueue( $prefix ) {
 		wp_localize_script( 'siteorigin-premium-teaser-templates', 'siteoriginTeaserTemplates' , array(
 			'code' => '<p>'.siteorigin_premium_teaser(
 				__('Get Additional Templates', 'siteorigin'),
-				array('description' => __('The premium version of this theme includes additional templates', 'siteorigin')),
+				array(
+					'description' => sprintf(__('%s Premium includes additional templates', 'siteorigin'), ucfirst(get_option('stylesheet')))
+				),
 				true
 			).'</p>'
 		) );

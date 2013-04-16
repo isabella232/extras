@@ -4,4 +4,6 @@ Extras are SiteOrigin specific extras. For the sake of consistency, we'll call i
 License:
 -----------------------------------------------
 
-SiteOrigin Extras is licensed under GPL version 2.0
+SiteOrigin Extras is licensed under GPL version 2.0.
+
+Includes several icons from jQuery UI. Licenced under MIT license.

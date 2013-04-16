@@ -27,6 +27,7 @@ function siteorigin_settings_init( $theme_name = null ) {
 	add_action( 'siteorigin_adminbar', 'siteorigin_settings_adminbar' );
 
 	add_action( 'admin_enqueue_scripts', 'siteorigin_settings_enqueue_scripts' );
+	add_action( 'wp_enqueue_scripts', 'siteorigin_settings_enqueue_front_scripts' );
 }
 
 /**
@@ -64,8 +65,8 @@ function siteorigin_settings_render() {
 function siteorigin_settings_enqueue_scripts( $prefix ) {
 	if ( $prefix != 'appearance_page_theme_settings_page' ) return;
 
-	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/settings.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
-	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/settings.css', array(), SITEORIGIN_THEME_VERSION );
+	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/js/settings.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/css/settings.css', array(), SITEORIGIN_THEME_VERSION );
 
 	if(wp_script_is('wp-color-picker', 'registered')){
 		wp_enqueue_style( 'wp-color-picker' );
@@ -78,6 +79,16 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 	
 	// This is for the media uploader
 	if ( function_exists( 'wp_enqueue_media' ) ) wp_enqueue_media();
+}
+
+function siteorigin_settings_enqueue_front_scripts(){
+	if( current_user_can('manage_options') && siteorigin_setting('general_hover_edit', true) ) {
+		wp_enqueue_style('siteorigin-settings-front', get_template_directory_uri().'/extras/settings/css/settings.front.css', array(), SITEORIGIN_THEME_VERSION);
+		wp_enqueue_script('siteorigin-settings-front', get_template_directory_uri().'/extras/settings/js/settings.front.js', array('jquery'), SITEORIGIN_THEME_VERSION);
+		wp_localize_script('siteorigin-settings-front', 'siteoriginSettings', array(
+			'edit' => admin_url('themes.php?page=theme_settings_page'),
+		));
+	}
 }
 
 /**
@@ -178,7 +189,7 @@ function siteorigin_settings_add_teaser( $section, $id, $name, $args = array() )
 function siteorigin_setting( $name , $default = null) {
 	$value = null;
 	
-	if ( !is_null( $default ) && empty( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) {
+	if ( !is_null( $default ) && ( !is_bool( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) && empty( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) ) {
 		return apply_filters('siteorigin_setting_'.$name, $default);
 	}
 	
@@ -187,9 +198,31 @@ function siteorigin_setting( $name , $default = null) {
 		$value = null;
 	}
 	else $value = $GLOBALS['siteorigin_settings'][ $name ];
-	
+
 	return apply_filters('siteorigin_setting_'.$name, $value);
 }
+
+/**
+ * Adds the necessary classes to make a field editable
+ */
+function siteorigin_setting_editable($field){
+	if( current_user_can('manage_options') && siteorigin_setting('general_hover_edit', true) ) {
+		echo 'data-so-edit="'.$field.'"';
+	}
+}
+
+function siteorigin_setting_editable_option_field(){
+	siteorigin_settings_add_field('general', 'hover_edit', 'checkbox', __('Display Hover Edit Icon', 'portal'), array(
+		'description' => __('Display a small icon that makes quickly editing fields easy. This is only shown to admin users.', 'siteorigin'),
+	));
+}
+add_action('admin_init', 'siteorigin_setting_editable_option_field', 100);
+
+function siteorigin_setting_editable_option_default($defaults){
+	$defaults['general_hover_edit'] = true;
+	return $defaults;
+}
+add_filter('siteorigin_theme_default_settings', 'siteorigin_setting_editable_option_default');
 
 /**
  * Render a settings field.
