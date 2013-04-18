@@ -1,6 +1,12 @@
 <?php $theme = basename( get_template_directory() ); ?>
-<?php printf( __( "Check out the <a href='%s'>documentation</a> for %s. ", 'siteorigin' ), 'http://siteorigin.com/theme/' . $theme . '/?action=docs', ucfirst( $theme ) ) ?>
-<?php _e('Please like and follow SiteOrigin to hear about my new WordPress freebies.', 'siteorigin') ?>
+<?php printf( __( "Check out the <a href='%s'>documentation</a> for %s if you're lost. ", 'siteorigin' ), 'http://siteorigin.com/theme/' . $theme . '/?action=docs', ucfirst( $theme ) ) ?>
+<?php
+printf(
+	__( "Feel free to <a href='%s'>contact support</a> or post on the <a href='%s'>WordPress forums</a> if you need help. ", 'siteorigin' ),
+	'http://siteorigin.com/#support', ucfirst( $theme ),
+	'http://wordpress.org/support/'
+)
+?>
 
 <div class="social">
 	<div class="follow twitter">

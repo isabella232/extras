@@ -106,22 +106,22 @@ class SiteOrigin_Widgets_CTA extends WP_Widget {
 		?>
 		<p>
 			<label for="<?php echo $this->get_field_id( 'headline' ) ?>"><?php _e( 'Headline', 'siteorigin' ) ?></label>
-			<input class="widefat" name="<?php echo $this->get_field_name( 'headline' ) ?>" for="<?php echo $this->get_field_id( 'headline' ) ?>" value="<?php echo esc_attr( $instance['headline'] ) ?>">
+			<input type="text" class="widefat" name="<?php echo $this->get_field_name( 'headline' ) ?>" for="<?php echo $this->get_field_id( 'headline' ) ?>" value="<?php echo esc_attr( $instance['headline'] ) ?>">
 		</p>
 	
 		<p>
 			<label for="<?php echo $this->get_field_id( 'text' ) ?>"><?php _e( 'Text', 'siteorigin' ) ?></label>
-			<input class="widefat" name="<?php echo $this->get_field_name( 'text' ) ?>" id="<?php echo $this->get_field_id( 'text' ) ?>" value="<?php echo esc_attr( $instance['text'] ) ?>">
+			<input type="text" class="widefat" name="<?php echo $this->get_field_name( 'text' ) ?>" id="<?php echo $this->get_field_id( 'text' ) ?>" value="<?php echo esc_attr( $instance['text'] ) ?>">
 		</p>
 	
 		<p>
 			<label for="<?php echo $this->get_field_id( 'button' ) ?>"><?php _e( 'Button Text', 'siteorigin' ) ?></label>
-			<input class="widefat" name="<?php echo $this->get_field_name( 'button' ) ?>" for="<?php echo $this->get_field_id( 'button' ) ?>" value="<?php echo esc_attr( $instance['button'] ) ?>">
+			<input type="text" class="widefat" name="<?php echo $this->get_field_name( 'button' ) ?>" for="<?php echo $this->get_field_id( 'button' ) ?>" value="<?php echo esc_attr( $instance['button'] ) ?>">
 		</p>
 	
 		<p>
 			<label for="<?php echo $this->get_field_id( 'url' ) ?>"><?php _e( 'Button URL', 'siteorigin' ) ?></label>
-			<input class="widefat" name="<?php echo $this->get_field_name( 'url' ) ?>" for="<?php echo $this->get_field_id( 'url' ) ?>" value="<?php echo esc_attr( $instance['url'] ) ?>">
+			<input type="text" class="widefat" name="<?php echo $this->get_field_name( 'url' ) ?>" for="<?php echo $this->get_field_id( 'url' ) ?>" value="<?php echo esc_attr( $instance['url'] ) ?>">
 		</p>
 	
 		<?php if ( !empty( $button_styles ) ) : ?>

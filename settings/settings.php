@@ -329,7 +329,7 @@ function siteorigin_settings_field( $args ) {
 			break;
 		
 		case 'teaser' :
-			$theme = basename( get_template_directory() );
+			$theme = get_option( 'template' );
 			?>
 			<a class="premium-teaser siteorigin-premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>" target="_blank">
 				<em></em>

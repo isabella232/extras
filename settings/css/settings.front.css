@@ -7,6 +7,7 @@
     display: block;
 
     background: url(../images/settings.png) no-repeat center center;
+    z-index: 9999;
 }
 
 .siteorigin-edit:hover {

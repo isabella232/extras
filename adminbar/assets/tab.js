@@ -12,5 +12,8 @@ jQuery(function($){
 
         // hide the parts of the UI that aren't required
         $('.subsubsub, .tablenav.top.themes' ).hide();
+
+        // Remove themes that don't support the page builder very well
+        $('h3:contains(Pitch)' ).closest('.available-theme' ).remove();
     }
 });
