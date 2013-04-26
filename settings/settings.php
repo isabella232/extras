@@ -212,7 +212,7 @@ function siteorigin_setting_editable($field){
 }
 
 function siteorigin_setting_editable_option_field(){
-	siteorigin_settings_add_field('general', 'hover_edit', 'checkbox', __('Display Hover Edit Icon', 'estate'), array(
+	siteorigin_settings_add_field('general', 'hover_edit', 'checkbox', __('Display Hover Edit Icon', 'siteorigin'), array(
 		'description' => __('Display a small icon that makes quickly editing fields easy. This is only shown to admin users.', 'siteorigin'),
 	));
 }
