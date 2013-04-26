@@ -76,14 +76,9 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 			</ul>
 			
 			<?php
-			if ( function_exists( 'siteorigin_premium_teaser' ) ) {
-				siteorigin_premium_teaser(
-					sprintf( __( 'Additional widgets are available in %s Premium', 'siteorigin' ), ucfirst( get_option( 'stylesheet' ) ) ),
-					array(
-						'teaser-image' => get_template_directory_uri().'/extras/panels/images/teaser.png'
-					)
-				);
-			}
+			siteorigin_premium_teaser(
+				sprintf( __( 'Additional widgets are available in %s Premium', 'siteorigin' ), ucfirst( get_option( 'stylesheet' ) ) )
+			);
 			?>
 		</div>
 		
@@ -112,7 +107,7 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 	
 	<?php wp_nonce_field('save', '_sopanels_nonce') ?>
 	
-	<?php if(defined('WP_DEBUG') && WP_DEBUG) : ?>
+	<?php if(defined('WP_DEBUG') && WP_DEBUG && !empty($GLOBALS['post'])) : ?>
 		<!--
 		// <?php echo esc_html($GLOBALS['post']->post_title) ?> Panels Data Array
 		<?php var_export( get_post_meta($GLOBALS['post']->ID, 'panels_data', true)) ?>
