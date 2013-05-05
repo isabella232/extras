@@ -1,6 +1,13 @@
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"><br></div>
-	<h2><?php printf(__( '%s Theme Settings', 'siteorigin' ), ucfirst(basename(get_template()))) ?></h2>
+	<?php $theme = wp_get_theme(); ?>
+	<h2><?php printf(__( '%s Settings', 'siteorigin' ), $theme->get('Name')) ?></h2>
+
+	<?php if( function_exists('siteorigin_recommended_menu') && current_user_can('activate_plugins') ) : ?>
+		<p class="description">
+			<?php printf( __('Need more from %1$s? Enhance its functionality with these <a href="%2$s">recommended addons</a>. Created by the same people who created %1$s.'), $theme->get('Name'), admin_url('themes.php?page=siteorigin_recommended_page') ) ?>
+		</p>
+	<?php endif; ?>
 	
 	<?php siteorigin_settings_change_message(); ?>
 	

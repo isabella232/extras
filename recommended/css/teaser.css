@@ -26,7 +26,7 @@
     box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5);
 
     border: 1px solid #83a44d;
-    
+
     position: relative;
 
     -moz-transition: background 0.5s, color 0.5s, -moz-box-shadow 0.5;
@@ -53,7 +53,7 @@
 }
 
 .siteorigin-premium-teaser:active{
-	color: #476118;
+    color: #476118;
 
     background: #b3d46c;
     background: -moz-linear-gradient(top,  #b3d46c 0%, #bbd975 100%);
@@ -93,62 +93,11 @@
     color: #425c13;
 }
 
-.siteorigin-premium-teaser .teaser-image{
-	display: none;
-	background: #303030;
-
-	position: absolute;
-	
-	right: -251px;
-	top: 50%;
-	margin-top: -68px;
-	line-height: 0;
-	padding: 8px;
-	border-radius: 3px;
-	
-	box-shadow: 0 1px 2px rgba(0,0,0,0.25), inset 0 0 1px rgba(255,255,255,0.25);
-}
-
-.siteorigin-premium-teaser:active .teaser-image{
-	margin-top: -69px;
-}
-
-.siteorigin-premium-teaser .teaser-image .pointer{
-	position: absolute;
-	width: 10px;
-	height: 13px;
-	left: -9px;
-	top: 50%;
-	margin-top: -6px;
-	background: url('../img/pointer.png') no-repeat left top;
-}
-
-.siteorigin-premium-teaser .teaser-image .loading{
-	line-height: 1em;
-	width: 100%;
-	height: 1em;
-	position: absolute;
-	top: 50%;
-	margin-top: -0.5em;
-	left: 0;
-	text-align: center;
-	
-	color: #1c1c1c;
-	text-shadow: 0 1px 0 rgba(255,255,255,0.1);
-	font-weight: bold;
-	font-size: 18px;
-	z-index: 1;
-}
-
-.siteorigin-premium-teaser .teaser-image img{
-	z-index: 2;
-}
-
 .siteorigin-premium-teaser-description{
     font-size: 12px;
     margin-top: 8px;
     color: #999;
-	font-style: italic;
+    font-style: italic;
 }
 
 .siteorigin-premium-teaser-customizer-wrapper{

@@ -45,7 +45,14 @@ function siteorigin_settings_admin_init() {
  * @action admin_menu
  */
 function siteorigin_settings_admin_menu() {
-	$page = add_theme_page( __( 'Theme Settings', 'siteorigin' ), __( 'Theme Settings', 'siteorigin' ), 'edit_theme_options', 'theme_settings_page', 'siteorigin_settings_render' );
+	$theme = wp_get_theme();
+	$page = add_theme_page(
+		sprintf(__( '%s Settings', 'siteorigin' ), $theme->get('Name')),
+		sprintf(__( '%s Settings', 'siteorigin' ), $theme->get('Name')),
+		'edit_theme_options',
+		'theme_settings_page',
+		'siteorigin_settings_render'
+	);
 
 	add_action( 'load-' . $page, 'siteorigin_settings_theme_help' );
 }
