@@ -160,6 +160,8 @@ function siteorigin_panels_admin_enqueue_scripts($prefix) {
 		wp_enqueue_script( 'so-panels-admin-tooltip', get_template_directory_uri() . '/extras/panels/js/panels.admin.tooltip.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		wp_enqueue_script( 'so-panels-admin-media', get_template_directory_uri() . '/extras/panels/js/panels.admin.media.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 
+		wp_enqueue_script( 'so-panels-chosen', get_template_directory_uri() . '/extras/panels/js/chosen/chosen.jquery.min.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+
 		wp_localize_script( 'so-panels-admin', 'panels', array(
 			'previewUrl' => wp_nonce_url(add_query_arg('siteorigin_panels_preview', 'true', get_home_url()), 'siteorigin-panels-preview'),
 			'i10n' => array(
@@ -234,6 +236,7 @@ function siteorigin_panels_admin_enqueue_styles() {
 	if ( $screen->id == 'page' || $screen->base == 'appearance_page_so_panels_home_page') {
 		wp_enqueue_style( 'so-panels-jquery-ui', get_template_directory_uri() . '/extras/panels/css/jquery-ui-theme.css' );
 		wp_enqueue_style( 'so-panels-admin', get_template_directory_uri() . '/extras/panels/css/panels-admin.css' );
+		wp_enqueue_style( 'so-panels-chosen', get_template_directory_uri() . '/extras/panels/js/chosen/chosen.css' );
 	
 		do_action( 'siteorigin_panel_enqueue_admin_styles' );
 	}

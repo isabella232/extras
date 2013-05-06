@@ -6,13 +6,15 @@
  */
 
 jQuery( function ( $ ) {
-    $( '[data-tooltip]' )
-        .live( 'mouseenter', function () {
+
+    $('body').on({
+        mouseenter: function(){
             $( this ).showTooltip();
-        } )
-        .live( 'mouseleave', function () {
+        },
+        mouseleave : function(){
             $( this ).removeTooltip();
-        } );
+        }
+    }, '*[data-tooltip]');
 
     $.fn.showTooltip = function () {
         this.each( function () {

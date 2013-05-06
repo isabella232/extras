@@ -26,6 +26,23 @@ function siteorigin_panels_lite_enqueue_admin($prefix){
 	if($prefix == 'appearance_page_so_panels_home_page'){
 		wp_enqueue_style('siteorigin-panels-lite-teaser', get_template_directory_uri().'/extras/panels-lite/css/panels-admin.css');
 	}
+
+	if($prefix == 'post.php' || $prefix == 'post-new.php' ) {
+
+		$install_url = siteorigin_plugin_activation_install_url(
+			'siteorigin-panels',
+			__('Page Builder', 'siteorigin'),
+			'http://downloads.wordpress.org/plugin/siteorigin-panels.zip'
+		);
+
+		wp_enqueue_script('siteorigin-panels-lite-teaser', get_template_directory_uri().'/extras/panels-lite/js/tab.js', array('jquery'));
+		wp_localize_script('siteorigin-panels-lite-teaser', 'panelsLiteTeaser', array(
+			'tab' => __('Page Builder', 'siteorigin'),
+			'message' => __("Refresh this page after you've installed the page builder plugin.", 'siteorigin'),
+			'confirm' => __('Your theme has page builder support. Would you like to install it?'),
+			'installUrl' => $install_url
+		));
+	}
 }
 add_action('admin_enqueue_scripts', 'siteorigin_panels_lite_enqueue_admin');
 
@@ -55,3 +72,9 @@ function siteorigin_panels_lite_admin_bar_menu($admin_bar){
 	return $admin_bar;
 }
 add_action('admin_bar_menu', 'siteorigin_panels_lite_admin_bar_menu', 100);
+
+function siteorigin_panels_lite_metaboxes(){
+	add_meta_box('siteorigin_panels_teaser', __('Page Builder', 'siteorigin'), 'siteorigin_panels_lite_metabox_render', 'page');
+}
+add_action('add_meta_boxes', 'siteorigin_panels_lite_metaboxes');
+

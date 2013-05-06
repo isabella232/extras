@@ -1,5 +1,5 @@
 #panels{
-    position: relative;
+	position: relative;
 }
 
 html {
@@ -9,7 +9,8 @@ html {
 /* @group Panel List */
 
 .panel-type-list {
-    margin: 0 -5px;
+    margin: 0 -5px 10px -5px;
+    min-height: 10px;
 }
 
 #panels-dialog-tabs{
@@ -23,7 +24,7 @@ html {
     width: 25%;
     padding: 0 5px;
     margin-bottom: 10px;
-
+    
     float: left;
 }
 
@@ -42,9 +43,9 @@ html {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-
+    
     cursor: pointer;
-
+    
     box-shadow: 0 1px 1px rgba(0,0,0,0.05);
 }
 
@@ -73,13 +74,13 @@ html {
 /* @group Grid */
 
 #panels-container .grid-wrapper h4{
-    margin: 5px 1px;
+	margin: 5px 1px;
 }
 
 #panels-container .grid {
-    margin-bottom: 20px;
-    position: relative;
-    background: #edf8fe url("images/cell-selected.png") repeat;
+	margin-bottom: 20px;
+	position: relative;
+	background: #edf8fe url("images/cell-selected.png") repeat;
 }
 
 #panels-container .grid .cell {
@@ -91,81 +92,78 @@ html {
 }
 
 #panels-container .grid .cell.cell-selected{
-    /* background: #fff8bd url("images/cell-selected.png") repeat;
-    border-color: #ecd800;*/
-
     background: #d0eaf5 url("images/cell-selected.png") repeat;
     border-color: #a5c4ce;
-
+    
     box-shadow: 0 0 4px rgba(80, 109, 118, 0.3);
 }
 
 #panels-container .grid .cell .cell-wrapper{
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-
-    padding: 10px 10px 4px 10px; /* 6px bottom to remove bottom margin from panels */
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	
+	padding: 10px 10px 4px 10px; /* 6px bottom to remove bottom margin from panels */
 }
 
 #panels-container .grid .cell.first{
-    margin-left: 0;
+	margin-left: 0;
 }
 
 #panels-container .grid .cell.last{
-    margin-right: 0;
+	margin-right: 0;
 }
 
 #panels-container .grid .cell .cell-width{
-    height: 11px;
-    position: absolute;
-    bottom: -13px;
-    overflow: hidden;
-    font-size: 9px;
-    width: 100%;
+	height: 11px;
+	position: absolute;
+	bottom: -13px;
+	overflow: hidden;
+	font-size: 9px;
+	width: 100%;
 }
 
 #panels-container .grid .cell .cell-width-left{
-    float: left;
-    height: 11px;
-    width: 5px;
-    background: url(images/cell-width.png) no-repeat left top;
+	float: left;
+	height: 11px;
+	width: 5px;
+	background: url(images/cell-width.png) no-repeat left top;
 }
 
 #panels-container .grid .cell .cell-width-right{
-    float: right;
-    height: 11px;
-    width: 5px;
-    background: url(images/cell-width.png) no-repeat left bottom;
+	float: right;
+	height: 11px;
+	width: 5px;
+	background: url(images/cell-width.png) no-repeat left bottom;
 }
 
 #panels-container .grid .cell .cell-width-line{
-    background: url(images/cell-width.png) repeat-x left -11px;
-    margin: 0 5px;
-    height: 11px;
+	background: url(images/cell-width.png) repeat-x left -11px;
+	margin: 0 5px;
+	height: 11px;
 }
 
 #panels-container .grid .cell .cell-width-value{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    text-align: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	text-align: center;
 }
 
 #panels-container .grid .cell .cell-width-value span{
-    display: inline-block;
-    background: #f6f6f6;
-    font-size: 9px;
-    color: #848484;
-    padding: 0 5px;
-    line-height: 1;
+	display: inline-block;
+	background: #f6f6f6;
+	font-size: 9px;
+	color: #848484;
+	padding: 0 5px;
+	line-height: 1;
 }
 
 #panels-container .grid .ui-resizable-handle.ui-resizable-w{
     width: 10px;
     left: -11px;
-    cursor: move;
+	cursor: move;
     background: rgba(0,150,211, 0);
 
     -webkit-transition: background 0.25s ease-in-out;
@@ -189,21 +187,21 @@ html {
 }
 
 #panels-container .grid-container .controls{
-    line-height: 1;
-    margin-bottom: 2px;
-    text-align: right;
+	line-height: 1;
+	margin-bottom: 2px;
+	text-align: right;
 }
 
 #panels-container .grid-container .controls .ui-button{
-    margin-left: 5px;
+	margin-left: 5px;
 }
 
 #panels-container .grid-container .controls .grid-handle{
-    cursor: move;
+	cursor: move;
 }
 
 #add-to-panels{
-
+    
 }
 
 /* @end */
@@ -213,14 +211,14 @@ html {
 /* @group The Resizable Helper */
 
 .ui-resizable-helper{
-    -moz-box-sizing:border-box;
-    -webkit-box-sizing:border-box;
-    box-sizing:border-box;
-
-    background: #fff8bd;
-    border: 1px solid #ecd800;
-    min-height: 100px;
-    position: absolute;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+	box-sizing:border-box;
+	
+	background: #fff8bd;
+	border: 1px solid #ecd800;
+	min-height: 100px;
+	position: absolute;
 }
 
 /* @end */
@@ -236,35 +234,50 @@ html {
     background-image:    -moz-linear-gradient(bottom, #e9ebeb, #f8f8f8);
     background-image:      -o-linear-gradient(bottom, #e9ebeb, #f8f8f8);
     background-image: linear-gradient(to top, #e9ebeb, #f8f8f8);
-
+    
     border: 1px solid;
     border-color: #c9c9c9 #c2c2c3 #babbbf #c1c2c3;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-
+    
     cursor: move;
-
+    
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.08), inset 0 0 2px #FFF;
     -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.08), inset 0 0 2px #FFF;
     box-shadow: 0 1px 1px rgba(0,0,0,0.08), inset 0 0 2px #FFF;
 }
 
 .panels-container .panel .panel-wrapper{
-    padding: 7px 9px;
+	padding: 7px 9px;
+    overflow: hidden;
+    position: relative;
 }
 
 .panels-container .panel h4{
-    display: inline-block;
-    cursor: pointer;
+	display: inline-block;
+	cursor: pointer;
     margin: 0 0 3px 0;
     font-weight: 600;
     height: 1em;
-    line-height: 1;
+    line-height: 1em;
     overflow: hidden;
     margin-right: 15px;
     color: #474747;
     text-shadow: 0 1px 0 #FFF;
+    white-space: nowrap;
+
+
+}
+
+.panels-container .panel h4 span {
+    font-weight: normal;
+    display: inline-block;
+    color: #999;
+    text-shadow: 0 1px 0 #FFF;
+    margin-left: 12px;
+    margin-right: 5px;
+    font-style: italic;
 }
 
 .panels-container .panel .title a{
@@ -282,9 +295,20 @@ html {
 }
 
 .panels-container .panel .title .actions {
-    float: right;
+    position: absolute;
+    top: 5px;
+    right: 7px;
     cursor: pointer;
-    padding: 0 0 0 15px;
+    padding: 2px 2px 2px 15px;
+    z-index: 10;
+
+
+    background: #f3f3f3;
+    background-image: -webkit-gradient(linear, left bottom, left top, from(#f1f2f2), to(#f5f6f6));
+    background-image: -webkit-linear-gradient(bottom, #f1f2f2, #f5f6f6);
+    background-image:    -moz-linear-gradient(bottom, #f1f2f2, #f5f6f6);
+    background-image:      -o-linear-gradient(bottom, #f1f2f2, #f5f6f6);
+    background-image: linear-gradient(to top, #f1f2f2, #f5f6f6);
 }
 
 .panels-container .panel .title .actions:hover a{
@@ -301,37 +325,37 @@ html {
 }
 
 .panels-container .panel.ui-sortable-helper h4{
-    cursor: move;
+	cursor: move;
 }
 
 .panels-container .panel small{
-    display: block;
+	display: block;
     height: 16px;
     overflow: hidden;
 }
 
 .panels-container .panel .form{
-    display: none;
+	display: none;
 }
 
 /* Acts as a placeholder for dragging */
 .panels-container .ui-state-highlight{
-    border: 1px solid;
+	border: 1px solid;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-
+    
     height: 47px;
 
     background: #ddebef;
     border-color: #bcccd2;
-
+    
     margin-bottom: 5px;
-
+    
     -moz-box-shadow: 0 1px 0 rgba(255,255,255,0.7), inset 0 1px 2px rgba(0,0,0,0.06);
     -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.7), inset 0 1px 2px rgba(0,0,0,0.06);
     box-shadow: 0 1px 0 rgba(255,255,255,0.7), inset 0 1px 2px rgba(0,0,0,0.06);
-
+    
     position: relative;
 }
 
@@ -348,7 +372,7 @@ html {
 #grid-setting-dialog,
 #grid-add-dialog,
 #grid-prebuilt-dialog{
-    display: none;
+	display: none;
 }
 
 #panels-dialog .panels-text-filter{
@@ -360,30 +384,30 @@ html {
 /* @group Tooltips */
 
 .panels-tooltip{
-    position: absolute;
-    padding: 4px 8px;
-    color: white;
-    background: #1c1c1c;
-    background: rgba(0,0,0,0.8);
-    z-index: 9999;
-
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    font-size: 11px;
-
+	position: absolute;
+	padding: 4px 8px;
+	color: white;
+	background: #1c1c1c;
+	background: rgba(0,0,0,0.8);
+	z-index: 9999;
+	
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	font-size: 11px;
+    
     /* Higher than the admin bar */
     z-index: 999999;
 }
 
 .panels-tooltip .pointer{
-    position: absolute;
-    width: 8px;
-    height: 4px;
-    bottom: -4px;
-    left: 50%;
-    margin-left: -4px;
-    background-image: url(images/tooltip-pointer.png);
+	position: absolute;
+	width: 8px;
+	height: 4px;
+	bottom: -4px;
+	left: 50%;
+	margin-left: -4px;
+	background-image: url(images/tooltip-pointer.png);
 }
 
 /* @end */
@@ -423,7 +447,7 @@ html {
     background-image: linear-gradient(to top, #e3e3e3, #fff);
     float: left;
     margin-right: 2px;
-
+    
     -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.06);
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.06);
     box-shadow: 0 1px 1px rgba(0,0,0,0.06);
@@ -455,11 +479,11 @@ html {
     position: fixed;
     top: 23px;
     left: 50%;
-
+    
     width: 250px;
     margin-left: -125px;
     text-align: center;
-
+    
     border-top: none;
 
     -webkit-border-top-left-radius: 0px;
@@ -468,7 +492,7 @@ html {
     -moz-border-radius-topright: 0px;
     border-top-left-radius: 0px;
     border-top-right-radius: 0px;
-
+    
     z-index: 100;
 }
 
@@ -500,18 +524,18 @@ html {
     display: inline-block;
     width: 75px;
     height: 28px;
-
+    
     background: #67afd8;
-
+    
     -webkit-border-radius: 15px;
     -moz-border-radius: 15px;
     border-radius: 15px;
     margin-left: 35px;
     margin-bottom: -6px;
-
+    
     box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
     cursor: pointer;
-
+    
     overflow: hidden;
 }
 
@@ -616,4 +640,82 @@ html {
 #grid-prebuilt-dialog .chzn-results {
     height: 150px !important;
     overflow-y: auto;
+}
+
+/* The SiteOrigin link */
+
+#siteorigin-widgets-link-wrapper {
+    text-align: center;
+}
+
+#siteorigin-widgets-link{
+    font-weight: bold;
+    text-decoration: none;
+    color: #4f6920;
+    display: inline-block;
+    position: relative;
+
+    padding: 10px 15px;
+    font-size: 13px;
+    line-height: 16px;
+
+    background: #cbe385;
+    background: -moz-linear-gradient(top,  #cbe385 0%, #9ccc54 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#cbe385), color-stop(100%,#9ccc54));
+    background: -webkit-linear-gradient(top,  #cbe385 0%,#9ccc54 100%);
+    background: -o-linear-gradient(top,  #cbe385 0%,#9ccc54 100%);
+    background: -ms-linear-gradient(top,  #cbe385 0%,#9ccc54 100%);
+    background: linear-gradient(to bottom,  #cbe385 0%,#9ccc54 100%);
+
+    border-radius: 3px;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5);
+    -o-box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5);
+
+    border: 1px solid #83a44d;
+
+    position: relative;
+
+    -moz-transition: background 0.5s, color 0.5s, -moz-box-shadow 0.5;
+    -webkit-transition: background 0.5s, color 0.5s, -webkit-box-shadow 0.5;
+    -o-transition: background 0.5s, color 0.5s, -o-box-shadow 0.5;
+    transition: background 0.5s, color 0.5s, box-shadow 0.5;
+}
+
+#siteorigin-widgets-link:hover{
+    color: #4a641b;
+
+    background: #d4ec8d;
+    background: -moz-linear-gradient(top,  #d4ec8d 0%, #a8d85f 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d4ec8d), color-stop(100%,#a8d85f));
+    background: -webkit-linear-gradient(top,  #d4ec8d 0%,#a8d85f 100%);
+    background: -o-linear-gradient(top,  #d4ec8d 0%,#a8d85f 100%);
+    background: -ms-linear-gradient(top,  #d4ec8d 0%,#a8d85f 100%);
+    background: linear-gradient(to bottom,  #d4ec8d 0%,#a8d85f 100%);
+
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.25);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.25);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.25);
+    -o-box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.25);
+}
+
+#siteorigin-widgets-link:active{
+    color: #476118;
+
+    background: #b3d46c;
+    background: -moz-linear-gradient(top,  #b3d46c 0%, #bbd975 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b3d46c), color-stop(100%,#bbd975));
+    background: -webkit-linear-gradient(top,  #b3d46c 0%,#bbd975 100%);
+    background: -o-linear-gradient(top,  #b3d46c 0%,#bbd975 100%);
+    background: -ms-linear-gradient(top,  #b3d46c 0%,#bbd975 100%);
+    background: linear-gradient(to bottom,  #b3d46c 0%,#bbd975 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3d46c', endColorstr='#bbd975',GradientType=0 );
+
+    margin-top: 1px;
+    margin-bottom: -1px;
+    outline: none;
+    box-shadow: 0 0 1px rgba(0,0,0,0.25);
 }

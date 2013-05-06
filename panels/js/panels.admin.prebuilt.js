@@ -14,6 +14,7 @@ jQuery(function($){
         modal:       true,
         title:       $( '#grid-prebuilt-dialog' ).attr( 'data-title' ),
         minWidth:    600,
+        height: 350,
         create:      function(event, ui){
             $(this ).closest('.ui-dialog' ).find('.ui-dialog-buttonset button' ).eq(0 ).addClass('button-delete');
         },
@@ -48,6 +49,12 @@ jQuery(function($){
         ]
         
     } );
+    
+    // Turn the dropdown into a chosen selector
+    $( '#grid-prebuilt-dialog' ).find('select' ).chosen({
+        search_contains: true,
+        placeholder_text: $( '#grid-prebuilt-dialog' ).find('select' ).attr('placeholder') 
+    });
 
     // Button for adding prebuilt layouts
     $( '#add-to-panels .prebuilt-set' )

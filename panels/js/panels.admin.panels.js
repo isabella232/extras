@@ -58,7 +58,7 @@
                 'title-field': $$.attr( 'data-title-field' ),
                 'title':       $$.attr( 'data-title' )
             } )
-            .find( 'h4' ).click( function () {
+            .find( 'h4, h5' ).click( function () {
                 dialog.dialog( 'open' );
                 return false;
             } )
@@ -133,6 +133,7 @@
                 modal:       true,
                 title:       panels.i10n.messages.editWidget.replace( '%s', $$.attr( 'data-title' ) ),
                 minWidth:    700,
+                maxHeight:   Math.round($(window).height() * 0.925),
                 create:      function(event, ui){
                     $(this ).closest('.ui-dialog' ).find('.show-in-panels' ).show();
                 },
@@ -160,11 +161,17 @@
                     if($(this ).closest('.ui-dialog' ).find('textarea:focus' ).length > 0) return;
 
                     // This is the same as clicking the add button
-                    $(this ).closest('.ui-dialog').find('.ui-button:eq(0)').click();
+                    $(this ).closest('.ui-dialog').find('.ui-dialog-buttonpane .ui-button:eq(0)').click();
                     e.preventDefault();
                     return false;
                 }
+                else if (e.keyCode === $.ui.keyCode.ESCAPE) {
+                    console.log('here');
+                    $(this ).closest('.ui-dialog' ).dialog('close');
+                }
             });
+        
+        panel.data('dialog', dialog);
 
         dialog.find( 'label' ).each( function () {
             // Make labels work as expected
@@ -217,6 +224,7 @@
 
         // This is to refresh the dialog positions
         $( window ).resize();
+        
         return panel;
     }
 
@@ -236,7 +244,9 @@
 
         container.sortable( "refresh" ).trigger( 'refreshcells' );
         container.closest( '.grid-container' ).panelsResizeCells();
-        if(animate) $( '#panels-container .panel.new-panel' ).hide().slideDown( 1000 ).removeClass( 'new-panel' );
+        if(animate) {
+            $( '#panels-container .panel.new-panel' ).hide().slideDown( 500 , function(){ panel.data('dialog' ).dialog('open') } ).removeClass( 'new-panel' );
+        }
     }
 
     /**
@@ -244,19 +254,9 @@
      */
     $.fn.panelsSetPanelTitle = function ( ) {
         return $(this ).each(function(){
-            var titleField = $(this ).data( 'title-field' );
-            var titleValue;
-
-            if ( titleField != undefined ) {
-                titleValue = $(this ).find( '*[name$="[' + titleField + ']"]' ).val();
-            }
-
-            if ( titleValue == '' || titleValue == undefined ) {
-                $(this ).find( 'h4' ).html( $(this ).data( 'title' ) );
-            }
-            else {
-                $(this ).find( 'h4' ).html( $(this ).data( 'title' ) + ': ' + titleValue );
-            }
+            // var titleField = $(this ).data( 'title-field' );
+            var titleValue = $(this ).find( 'input[type="text"]').eq(0).val();
+            $(this ).find( 'h4' ).html( $(this ).data( 'title' ) + '<span>' + titleValue + '</span>' );
         });
     }
 

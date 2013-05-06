@@ -33,6 +33,7 @@ jQuery( function ( $ ) {
     // Create the add grid dialog
     var gridAddDialogButtons = {};
     gridAddDialogButtons[panels.i10n.buttons.add] = function () {
+        console.log('add');
         var num = Number( $( '#grid-add-dialog' ).find( 'input' ).val() );
 
         if ( num == NaN ) {
@@ -60,43 +61,54 @@ jQuery( function ( $ ) {
             },
             buttons: gridAddDialogButtons
         })
-        .keypress(function(e) {
+        .on('keydown', function(e) {
             if (e.keyCode == $.ui.keyCode.ENTER) {
                 // This is the same as clicking the add button
-                $(this ).closest('.ui-dialog').find('.ui-button:eq(0)').click();
+                $(this ).closest('.ui-dialog').find('.ui-dialog-buttonpane .ui-button:eq(0)').click();
+            }
+            else if (e.keyCode === $.ui.keyCode.ESCAPE) {
+                $(this ).dialog('close');
             }
         });
     ;
 
+    // Create the main add widgets dialog
+    $( '#panels-dialog' ).show()
+        .dialog( {
+            dialogClass: 'panels-admin-dialog',
+            autoOpen:    false,
+            resizable:   false,
+            draggable:   false,
+            modal:       true,
+            title:       $( '#panels-dialog' ).attr( 'data-title' ),
+            minWidth:    960,
+            maxHeight:   Math.round($(window).height() * 0.925),
+            close:       function () {
+                $( '#panels-container .panel.new-panel' ).hide().slideDown( 1000 ).removeClass( 'new-panel' );
+            }
+        } )
+        .on('keydown', function(e) {
+            if (e.keyCode === $.ui.keyCode.ESCAPE) {
+                $(this ).dialog('close');
+            }
+        })
+        .find( '.panel-type' ).disableSelection();
+    
     $( '#so-panels-panels .handlediv' ).click( function () {
         // Trigger the resize to reorganise the columns
         setTimeout( function () {
             $( window ).resize();
         }, 150 );
     } )
-    
-    // Create the main add widgets dialog
-    $( '#panels-dialog' ).show().dialog( {
-        dialogClass: 'panels-admin-dialog',
-        autoOpen:    false,
-        resizable:   false,
-        draggable:   false,
-        modal:       true,
-        title:       $( '#panels-dialog' ).attr( 'data-title' ),
-        minWidth:    960,
-        close:       function () {
-            $( '#panels-container .panel.new-panel' ).hide().slideDown( 1000 ).removeClass( 'new-panel' );
-        }
-    } ).find( '.panel-type' ).disableSelection();
 
     // The button for adding a panel
-    $( '#panels .panels-add' )
+    $( '#panels .panels-add')
         .button( {
             icons: {primary: 'ui-icon-add'},
             text:  false
         } )
         .click( function () {
-            $('#panels-text-filter-input' ).val('' ).keyup();
+            $('#panels-text-filter-input' ).val('').keyup();
             $( '#panels-dialog' ).dialog( 'open' );
             return false;
         } );
@@ -112,6 +124,9 @@ jQuery( function ( $ ) {
             return false;
         } );
 
+    // Set the default text of the SiteOrigin link
+    $('#siteorigin-widgets-link').data('text', $('#siteorigin-widgets-link').html() );
+
     // Handle filtering in the panels dialog
     $( '#panels-text-filter-input' )
         .keyup( function (e) {
@@ -123,6 +138,22 @@ jQuery( function ( $ ) {
             }
 
             var value = $( this ).val();
+
+            if(value != '') {
+                // Change the text
+                $('#siteorigin-widgets-link')
+                    .html(
+                        $('#siteorigin-widgets-link').data('text').replace('More', '"'+value+'"')
+                    )
+                    .attr('href', $('#siteorigin-widgets-link').data('search').replace('{search}', encodeURIComponent(value)));
+            }
+            else {
+                // Change the text
+                $('#siteorigin-widgets-link')
+                    .html($('#siteorigin-widgets-link').data('text'))
+                    .attr('href',$('#siteorigin-widgets-link').data('original'));
+            }
+
             // Filter the panels
             $( '#panels-dialog .panel-type-list .panel-type' )
                 .show()
