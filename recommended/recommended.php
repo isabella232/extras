@@ -38,8 +38,8 @@ class SiteOrigin_Recommended_Customizer {
 		self::$customizer_url = $customizer_url;
 
 		// Enqueue if the customizer plugin isn't already active
+		add_action('customize_controls_init', array($this, 'customizer_init'));
 		add_action('customize_controls_enqueue_scripts', array($this, 'customizer_enqueue'));
-		add_action('customize_controls_init', array($this, 'customizer_init'), 100);
 	}
 
 	function customizer_enqueue(){
@@ -49,28 +49,26 @@ class SiteOrigin_Recommended_Customizer {
 	}
 
 	function customizer_init(){
-		// Only activate if the customizer plugin isn't already active
-		if(is_plugin_active(get_option('template').'-customizer')) return;
+		// Ignore this if the user already has the customizer
+		if(is_dir(WP_PLUGIN_DIR.'/'.get_option('template').'-customizer')) return;
 
 		/**
-		 * @var WP_Customize_Manager
+		 * @var WP_Customize_Manager $wp_customize
 		 */
 		global $wp_customize;
-		$teaser_customizer = new SiteOrigin_Premium_Teaser_Customizer($wp_customize, 'siteorigin-premium-teaser');
+		$teaser_customizer = new SiteOrigin_Premium_Teaser_Customizer_Section($wp_customize, 'siteorigin-customizer-teaser');
 		$wp_customize->add_section($teaser_customizer);
 	}
 }
 
 if(class_exists('WP_Customize_Section')) :
-	class SiteOrigin_Premium_Teaser_Customizer extends WP_Customize_Section{
+	class SiteOrigin_Premium_Teaser_Customizer_Section extends WP_Customize_Section{
 		function render() {
-			$theme = get_option('template');
-
 			?>
 			<div class="siteorigin-premium-teaser-customizer-wrapper">
 				<a class="siteorigin-premium-teaser" href="<?php echo esc_url(SiteOrigin_Recommended_Customizer::$customizer_url) ?>" target="_blank">
 					<em></em>
-					<?php echo sprintf(__('Get More Options', 'siteorigin'), $theme) ?>
+					<?php _e('Get More Options', 'siteorigin') ?>
 				</a>
 			</div>
 			<?php
