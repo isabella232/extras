@@ -1,7 +1,7 @@
 <div class="wrap">
 	<div id="icon-options-general" class="icon32"><br></div>
 	<?php $theme = wp_get_theme(); ?>
-	<h2><?php printf(__( '%s Settings', 'siteorigin' ), $theme->get('Name')) ?></h2>
+	<h2><?php printf(__( '%s Theme Settings', 'siteorigin' ), $theme->get('Name')) ?></h2>
 
 	<?php if( function_exists('siteorigin_recommended_menu') && current_user_can('activate_plugins') ) : ?>
 		<p class="description">

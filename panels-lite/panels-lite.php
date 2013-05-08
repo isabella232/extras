@@ -38,8 +38,8 @@ function siteorigin_panels_lite_enqueue_admin($prefix){
 		wp_enqueue_script('siteorigin-panels-lite-teaser', get_template_directory_uri().'/extras/panels-lite/js/tab.js', array('jquery'));
 		wp_localize_script('siteorigin-panels-lite-teaser', 'panelsLiteTeaser', array(
 			'tab' => __('Page Builder', 'siteorigin'),
-			'message' => __("Refresh this page after you've installed the page builder plugin.", 'siteorigin'),
-			'confirm' => __('Your theme has page builder support. Would you like to install it?'),
+			'message' => __("Refresh this page after you've installed Page Builder.", 'siteorigin'),
+			'confirm' => __("Your theme has Page Builder support. Would you like to install it? It's free."),
 			'installUrl' => $install_url
 		));
 	}

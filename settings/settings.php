@@ -47,8 +47,8 @@ function siteorigin_settings_admin_init() {
 function siteorigin_settings_admin_menu() {
 	$theme = wp_get_theme();
 	$page = add_theme_page(
-		sprintf(__( '%s Settings', 'siteorigin' ), $theme->get('Name')),
-		sprintf(__( '%s Settings', 'siteorigin' ), $theme->get('Name')),
+		sprintf(__( '%s Theme Settings', 'siteorigin' ), $theme->get('Name')),
+		sprintf(__( 'Theme Settings', 'siteorigin' ), $theme->get('Name')),
 		'edit_theme_options',
 		'theme_settings_page',
 		'siteorigin_settings_render'
