@@ -37,6 +37,8 @@ function siteorigin_settings_init( $theme_name = null ) {
  */
 function siteorigin_settings_admin_init() {
 	register_setting( 'theme_settings', $GLOBALS['siteorigin_settings_name'], 'siteorigin_settings_validate' );
+	if(get_theme_mod('version_activated', false) === false)
+		set_theme_mod('version_activated', SITEORIGIN_THEME_VERSION);
 }
 
 /**
