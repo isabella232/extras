@@ -56,7 +56,7 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 		<button class="panels-add tooltip" data-tooltip="<?php esc_attr_e('Add Widget','siteorigin') ?>"><?php _e('Add Widget', 'siteorigin') ?></button>
 		<button class="grid-add tooltip" data-tooltip="<?php esc_attr_e('Add Columns','siteorigin') ?>"><?php _e('Add Columns', 'siteorigin') ?></button>
 		<?php if(!empty($layouts)) : ?>
-			<button class="prebuilt-set tooltip" data-tooltip="<?php esc_attr_e('Prebuilt Layouts','siteorigin') ?>"><?php _e('Prebuilt Layouts', 'so-panels') ?></button>
+			<button class="prebuilt-set tooltip" data-tooltip="<?php esc_attr_e('Prebuilt Layouts','siteorigin') ?>"><?php _e('Prebuilt Layouts', 'siteorigin') ?></button>
 		<?php endif; ?>
 		<div class="clear"></div>
 	</div>
@@ -93,7 +93,7 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 			<div id="siteorigin-widgets-link-wrapper">
 				<?php $siteorigin_url = 'http://siteorigin.com/product-tag/widget/'; ?>
 				<a href="<?php echo esc_url($siteorigin_url) ?>" data-original="<?php echo esc_url($siteorigin_url) ?>" data-search="<?php echo add_query_arg('search', '{search}', $siteorigin_url) ?>" id="siteorigin-widgets-link" target="_blank">
-					<?php _e('Find More Page Builder Widgets', 'so-panels') ?>
+					<?php _e('Find More Page Builder Widgets', 'siteorigin') ?>
 				</a>
 			</div>
 		</div>
@@ -109,7 +109,7 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 		<div id="grid-prebuilt-dialog" data-title="<?php esc_attr_e('Insert Prebuilt Page Layout','siteorigin') ?>" class="panels-admin-dialog">
 			<p><label><strong><?php _e('Page Layout', 'siteorigin') ?></strong></label></p>
 			<p>
-				<select type="text" id="grid-prebuilt-input" name="prebuilt_layout" style="width:580px;" placeholder="<?php esc_attr_e('Select Layout', 'so-panels') ?>" >
+				<select type="text" id="grid-prebuilt-input" name="prebuilt_layout" style="width:580px;" placeholder="<?php esc_attr_e('Select Layout', 'siteorigin') ?>" >
 					<option class="empty" <?php selected(true) ?> value=""></option>
 					<?php foreach($layouts as $id => $data) : ?>
 						<option id="panel-prebuilt-<?php echo esc_attr($id) ?>" data-layout-id="<?php echo esc_attr($id) ?>" class="prebuilt-layout">
