@@ -113,6 +113,10 @@
 	margin-top: -69px;
 }
 
+.siteorigin-premium-teaser:hover .teaser-image{
+    display: block;
+}
+
 .siteorigin-premium-teaser .teaser-image .pointer{
 	position: absolute;
 	width: 10px;
