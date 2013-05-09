@@ -120,6 +120,7 @@
 
 #theme-upgrade .feature-image{
     cursor: pointer;
+    display: block;
 }
 
 /* @group Buy Button */
