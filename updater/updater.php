@@ -12,7 +12,12 @@ if( !class_exists('SiteOrigin_WPUpdatesThemeUpdater') ) {
 			$this->theme_id = $theme_id;
 			$this->theme_slug = $theme_slug;
 
-			add_filter( 'pre_set_site_transient_update_themes', array(&$this, 'check_for_update') );
+			// Only run this if we don't have an order number set
+			$theme = basename( get_template_directory() );
+			if(get_option( 'siteorigin_order_number_' . $theme, false ) === false) {
+				//
+				add_filter( 'pre_set_site_transient_update_themes', array(&$this, 'check_for_update') );
+			}
 
 			// This is for testing only!
 			//set_site_transient('update_themes', null);
