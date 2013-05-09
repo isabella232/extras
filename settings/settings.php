@@ -203,7 +203,6 @@ function siteorigin_setting( $name , $default = null) {
 	}
 	
 	if ( !isset( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) {
-		trigger_error( sprintf( __( 'Calling undefined setting [%s]', 'siteorigin' ), $name ) );
 		$value = null;
 	}
 	else $value = $GLOBALS['siteorigin_settings'][ $name ];
