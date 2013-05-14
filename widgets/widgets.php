@@ -46,7 +46,7 @@ class SiteOrigin_Widgets_CTA extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'call-to-action',
-			__( 'Call To Action', 'siteorigin' ),
+			__( 'SiteOrigin Call To Action', 'siteorigin' ),
 			array(
 				'description' => __( 'A call to action block, generally for your home page.', 'siteorigin' ),
 			)
@@ -145,7 +145,7 @@ class SiteOrigin_Widgets_Button extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'button',
-			__( 'Button', 'siteorigin' ),
+			__( 'SiteOrigin Button', 'siteorigin' ),
 			array(
 				'description' => __( 'Display a button.', 'siteorigin' ),
 			)
@@ -247,7 +247,7 @@ class SiteOrigin_Widgets_IconText extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'icon-text',
-			__( 'Icon and Text', 'siteorigin' ),
+			__( 'SiteOrigin Icon and Text', 'siteorigin' ),
 			array(
 				'description' => __( 'A block of text with an icon.', 'siteorigin' ),
 			)
@@ -358,7 +358,7 @@ class SiteOrigin_Widgets_Headline extends WP_Widget {
 	function __construct() {
 		parent::__construct(
 			'headline',
-			__( 'Headline', 'siteorigin' ),
+			__( 'SiteOrigin Headline', 'siteorigin' ),
 			array(
 				'description' => __( 'Displays a simple headline.', 'siteorigin' ),
 			)
