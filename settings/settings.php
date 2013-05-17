@@ -85,6 +85,9 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 		wp_enqueue_style( 'farbtastic' );
 		wp_enqueue_script( 'farbtastic' );
 	}
+
+	// We need the media editors
+	wp_enqueue_media();
 	
 	// This is for the media uploader
 	if ( function_exists( 'wp_enqueue_media' ) ) wp_enqueue_media();
@@ -346,6 +349,19 @@ function siteorigin_settings_field( $args ) {
 					<div class="teaser-image"><img src="<?php echo esc_url($args['teaser-image']) ?>" width="220" height="120" /><div class="pointer"></div></div>
 				<?php endif; ?>
 			</a>
+			<?php
+			break;
+
+		case 'gallery' :
+			?>
+			<input
+				id="<?php echo esc_attr( $field_id ) ?>"
+				name="<?php echo esc_attr( $field_name ) ?>"
+				class="regular-text gallery-ids"
+				size="25"
+				type="text"
+				value="<?php echo esc_attr( $current ) ?>" />
+			<a href="#" class="so-settings-gallery-edit"><?php _e('Edit Gallery', 'siteorigin') ?></a>
 			<?php
 			break;
 

@@ -173,6 +173,32 @@ jQuery( function ( $ ) {
 
     }
 
+    // When the user clicks on the select button, we need to display the gallery editing
+    $('.so-settings-gallery-edit').on({
+        click: function(){
+            // Make sure the media gallery API exists
+            if ( typeof wp === 'undefined' || ! wp.media || ! wp.media.gallery ) return false;
+            event.preventDefault();
+
+            var $$ = $(this);
+
+            var val = $$.siblings('input[type="text"]').val();
+            if(val.indexOf('{demo') === 0 || val.indexOf('{default') === 0) val = '-'; // This removes the demo or default content
+            if(val == '' && $('#post_ID' ).val() == null) val = '-';
+
+            var frame = wp.media.gallery.edit('[gallery ids="' + val + '"]');
+
+            // When the gallery-edit state is updated, copy the attachment ids across
+            frame.state('gallery-edit').on( 'update', function( selection ) {
+                var ids = selection.models.map(function(e){ return e.id });
+                var val = $$.siblings('input[type="text"]').val(ids.join(','));
+            });
+
+            return false;
+        }
+    });
+
+    // Hide the updated message
     setTimeout( function () {
         $( '#setting-updated' ).slideUp();
     }, 5000 );
