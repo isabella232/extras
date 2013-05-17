@@ -361,7 +361,7 @@ function siteorigin_settings_field( $args ) {
 				size="25"
 				type="text"
 				value="<?php echo esc_attr( $current ) ?>" />
-			<a href="#" class="so-settings-gallery-edit"><?php _e('Edit Gallery', 'siteorigin') ?></a>
+			<a href="#" class="so-settings-gallery-edit"><?php _e('Select Images', 'siteorigin') ?></a>
 			<?php
 			break;
 
