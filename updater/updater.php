@@ -60,6 +60,6 @@ if( !class_exists('SiteOrigin_WPUpdatesThemeUpdater') ) {
 	}
 }
 
-if(defined('SITEORIGIN_THEME_UPDATE_ID')) {
+if( defined('SITEORIGIN_THEME_UPDATE_ID') && SITEORIGIN_THEME_UPDATE_ID ) {
 	new SiteOrigin_WPUpdatesThemeUpdater( 'http://wp-updates.com/api/1/theme', SITEORIGIN_THEME_UPDATE_ID, basename(get_template_directory()) );
 }
