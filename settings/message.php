@@ -3,7 +3,7 @@
 <?php
 printf(
 	__( "Feel free to <a href='%s'>contact support</a> or post on the <a href='%s'>WordPress forums</a> if you need help. ", 'siteorigin' ),
-	'http://siteorigin.com/#support', ucfirst( $theme ),
+	'http://siteorigin.com/#support',
 	'http://wordpress.org/support/'
 )
 ?>

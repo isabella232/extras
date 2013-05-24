@@ -72,9 +72,3 @@ function siteorigin_panels_lite_admin_bar_menu($admin_bar){
 	return $admin_bar;
 }
 add_action('admin_bar_menu', 'siteorigin_panels_lite_admin_bar_menu', 100);
-
-function siteorigin_panels_lite_metaboxes(){
-	add_meta_box('siteorigin_panels_teaser', __('Page Builder', 'siteorigin'), 'siteorigin_panels_lite_metabox_render', 'page');
-}
-add_action('add_meta_boxes', 'siteorigin_panels_lite_metaboxes');
-

@@ -1,7 +1,7 @@
 <?php
 $install_url = siteorigin_plugin_activation_install_url(
 	'siteorigin-panels',
-	'SiteOrigin Page Builder',
+	'Page Builder',
 	'http://downloads.wordpress.org/plugin/siteorigin-panels.zip'
 );
 ?>
@@ -20,11 +20,11 @@ $install_url = siteorigin_plugin_activation_install_url(
 	<p>
 		<?php _e("This theme is compatible with SiteOrigin's powerful drag and drop page builder.", 'siteorigin') ?>
 		<?php _e('It allows you to build responsive columnized pages, populated with the widgets you know and love.', 'siteorigin') ?>
-		<?php _e("Best of all it's a <strong>free plugin</strong> that works well with most SiteOrigin themes.", 'siteorigin') ?>
+		<?php _e("It's a <strong>free plugin</strong> that works well with most WordPress themes.", 'siteorigin') ?>
 	</p>
 	
 	<p class="install-container">
-		<a href="<?php echo esc_url($install_url) ?>" class="install"><?php _e('Install SiteOrigin Page Builder', 'siteorigin') ?></a>
+		<a href="<?php echo esc_url($install_url) ?>" class="install"><?php _e('Install Page Builder', 'siteorigin') ?></a>
 	</p>
 	
 	<p>
