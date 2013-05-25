@@ -1,14 +1,13 @@
 <?php $theme = basename( get_template_directory() ); ?>
 <?php
 printf(
-	__( "<a href='%s'>Contact support</a> if you need help with %s. ", 'siteorigin' ),
-	'http://siteorigin.com/#support',
-	ucfirst($theme)
+	__( "<a href='%s'>Contact</a> SiteOrigin support if you need help. ", 'siteorigin' ),
+	'http://siteorigin.com/#support'
 );
 printf(
-	__( "Please <a href='%s' target='_blank'>rate %s</a> if you enjoyed it. It helps a lot! ", 'siteorigin' ),
-	'http://wordpress.org/support/view/theme-reviews/'.$theme,
-	ucfirst($theme)
+	__( "If you like %s, please <a href='%s' target='_blank'>rate it</a>. Your rating helps a lot! ", 'siteorigin' ),
+	ucfirst($theme),
+	'http://wordpress.org/support/view/theme-reviews/'.$theme
 );
 ?>
 
