@@ -1,11 +1,15 @@
 <?php $theme = basename( get_template_directory() ); ?>
-<?php printf( __( "Check out the <a href='%s'>documentation</a> for %s if you're lost. ", 'siteorigin' ), 'http://siteorigin.com/theme/' . $theme . '/?action=docs', ucfirst( $theme ) ) ?>
 <?php
 printf(
-	__( "Feel free to <a href='%s'>contact support</a> or post on the <a href='%s'>WordPress forums</a> if you need help. ", 'siteorigin' ),
+	__( "<a href='%s'>Contact support</a> if you need help with %s. ", 'siteorigin' ),
 	'http://siteorigin.com/#support',
-	'http://wordpress.org/support/'
-)
+	ucfirst($theme)
+);
+printf(
+	__( "Please <a href='%s' target='_blank'>rate %s</a> if you enjoyed it. ", 'siteorigin' ),
+	'http://wordpress.org/support/view/theme-reviews/'.$theme,
+	ucfirst($theme)
+);
 ?>
 
 <div class="social">
