@@ -1,7 +1,7 @@
 <?php
 $install_url = siteorigin_plugin_activation_install_url(
 	'siteorigin-panels',
-	'Page Builder',
+	__('Page Builder', 'siteorigin'),
 	'http://downloads.wordpress.org/plugin/siteorigin-panels.zip'
 );
 ?>
