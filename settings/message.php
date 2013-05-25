@@ -6,7 +6,7 @@ printf(
 	ucfirst($theme)
 );
 printf(
-	__( "Please <a href='%s' target='_blank'>rate %s</a> if you enjoyed it. ", 'siteorigin' ),
+	__( "Please <a href='%s' target='_blank'>rate %s</a> if you enjoyed it. It helps a lot! ", 'siteorigin' ),
 	'http://wordpress.org/support/view/theme-reviews/'.$theme,
 	ucfirst($theme)
 );
