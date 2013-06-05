@@ -86,7 +86,7 @@ $premium = $siteorigin_premium_info;
 						<?php foreach($premium['variable_pricing'] as $price) : ?>
 							<label><input type="radio" name="variable_pricing_option" value="<?php echo floatval($price[0]) ?>" <?php checked($price[0], $premium['buy_price']) ?>> <strong>$<?php echo floatval($price[0]) ?></strong> <?php echo esc_html($price[1]) ?></label>
 						<?php endforeach ?>
-						<label><input type="radio" name="variable_pricing_option" value="custom"> <strong>Custom</strong> <input type="text" name="variable_pricing_custom"> </label>
+						<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price"> <strong>Custom</strong> <input type="text" name="variable_pricing_custom" value=""> </label>
 					</div>
 					<div class="options hide-if-js">
 						<p><?php _e('Please enable Javascript to change pricing', 'siteorigin') ?></p>

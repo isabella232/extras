@@ -19,7 +19,11 @@ jQuery( function ( $ ) {
 
     $('#theme-upgrade #variable-pricing-form .options input[type=radio]').change(function(){
         var val = $(this).val();
-        if(val == 'custom') return;
+        if($(this).hasClass('custom-price')) {
+            val = $('#theme-upgrade #variable-pricing-form .options input[name=variable_pricing_custom]').val();
+            val = parseFloat(val).toFixed(2);
+            if(isNaN(val)) val = 0;
+        }
 
         $('#theme-upgrade #variable-pricing-form input[name=amount]').val(val);
         $('#theme-upgrade #variable-pricing-form .variable-pricing-submit em').html('$'+val);
@@ -29,6 +33,8 @@ jQuery( function ( $ ) {
         var val = $(this).val().replace(/[^0-9.]/g, '');
         val = parseFloat(val).toFixed(2);
         if(isNaN(val)) val = 0;
+
+        $(this).closest('form').find('.custom-price').click();
 
         $('#theme-upgrade #variable-pricing-form input[name=amount]').val(val);
         $('#theme-upgrade #variable-pricing-form .variable-pricing-submit em').html('$'+val);
