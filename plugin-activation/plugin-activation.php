@@ -120,3 +120,14 @@ function siteorigin_plugin_activation_install_url($plugin, $plugin_name, $source
 		);
 	}
 }
+
+function siteorigin_plugin_activation_is_activating($plugin){
+	if(!is_admin()) return false;
+	return (
+		basename($_SERVER['PHP_SELF']) == 'plugins.php'
+		&& isset($_GET['action'])
+		&& $_GET['action'] == 'activate'
+		&& isset($_GET['plugin'])
+		&& $_GET['plugin'] == $plugin.'/'.$plugin.'.php'
+	);
+}
