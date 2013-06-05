@@ -1,6 +1,7 @@
 <?php
 global $siteorigin_premium_info;
 $premium = $siteorigin_premium_info;
+$theme = basename( get_template_directory() );
 ?>
 
 <div class="wrap" id="theme-upgrade">

@@ -6,7 +6,6 @@ jQuery( function ( $ ) {
         paymentWindow = window.open( $$.attr( 'href' ), 'payment', 'height=800,width=1024' );
         $( '#theme-upgrade-info' ).slideDown();
         $( 'html, body' ).animate( {'scrollTop':0} );
-        $('#support-choice, #support-choice-overlay' ).fadeOut();
 
         return false;
     } );
@@ -14,6 +13,8 @@ jQuery( function ( $ ) {
     $( '#theme-upgrade .buy-button.variable-pricing-submit').click(function(e){
         e.preventDefault();
         $(this).closest('form').submit();
+        $( '#theme-upgrade-info' ).slideDown();
+        $( 'html, body' ).animate( {'scrollTop':0} );
         return false;
     })
 
