@@ -26,9 +26,10 @@ function siteorigin_premium_page_render() {
 
 	switch ( $action ) {
 		case 'view':
-			$premium = apply_filters( 'siteorigin_premium_content', array() );
+			global $siteorigin_premium_info;
+			$siteorigin_premium_info = apply_filters( 'siteorigin_premium_content', array() );
 
-			if ( empty( $premium ) ) {
+			if ( empty( $siteorigin_premium_info ) ) {
 				?>
 				<div class="wrap" id="theme-upgrade">
 					<h2><?php _e( 'Premium Upgrade', 'siteorigin' ) ?></h2>
@@ -39,147 +40,7 @@ function siteorigin_premium_page_render() {
 				<?php
 				return;
 			}
-
-			?>
-			<div class="wrap" id="theme-upgrade">
-				<form id="theme-upgrade-info" method="post" action="<?php echo esc_url( add_query_arg( 'action', 'enter-order' ) ) ?>">
-					<p>
-						<?php
-						printf(
-							__( "After you pay for %s Premium, we'll email you a download link and an order number to your <strong>PayPal email address</strong>. ", 'siteorigin' ) ,
-							ucfirst( $theme )
-						);
-						printf(
-							__( "Use <a href='%s' target='_blank'>this form</a> if you don't receive your order number in the next 15 minutes. ", 'siteorigin' ) ,
-							'http://siteorigin.com/orders/'
-						);
-						_e( 'Be sure to check your spam folder.', 'siteorigin' );
-						?>
-					</p>
-
-					<label><strong><?php _e( 'Order Number', 'siteorigin' ) ?></strong></label>
-					<input type="text" class="regular-text" name="order_number" />
-					<input type="submit" value="<?php esc_attr_e( 'Enable Upgrade', 'siteorigin' ) ?>" />
-					<?php wp_nonce_field( 'save_order_number', '_upgrade_nonce' ) ?>
-				</form>
-				
-				<a href="#" id="theme-upgrade-already-paid" class="button"><?php _e( 'Already Paid?', 'siteorigin' ) ?></a>
-				<?php if ( isset( $premium['premium_title'] ) ) : ?><h2><?php echo $premium['premium_title'] ?></h2><?php endif; ?>
-				<?php if ( isset( $premium['premium_summary'] ) ) : ?><p><?php echo $premium['premium_summary'] ?></p><?php endif; ?>
-
-				<?php if ( isset( $premium['buy_url'] ) ) : ?>
-				<p class="download">
-					<span class="buy-button-wrapper">
-						<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button <?php echo !empty($premium['buy_url_supported']) ? 'has-support-choices' : '' ?>">
-							<span><?php _e('Upgrade Now', 'siteorigin') ?></span><em><?php echo (!empty($premium['buy_price']) ? '$'.$premium['buy_price'] : __('Any Price', 'siteorigin')) ?></em>
-						</a>
-					</span>
-					<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
-				</p>
-				<?php endif; ?>
-
-				<?php if ( !empty( $premium['featured'] ) ) : ?>
-					<p id="promo-image">
-						<img src="<?php echo esc_url( $premium['featured'][ 0 ] ) ?>" width="<?php echo intval( $premium['featured'][ 1 ] ) ?>" height="<?php echo intval( $premium['featured'][ 2 ] ) ?>" class="magnify" />
-					</p>
-				<?php endif; ?>
-				<div class="content">
-					<?php if ( !empty( $premium['features'] ) ) : foreach ( $premium['features'] as $feature ) : ?>
-						<?php if(!empty($feature['image'])) echo '<div class="feature-image-wrapper"><img src="'.esc_url($feature['image']).'" width="220" height="120" class="feature-image" /></div>' ?>
-						<h3><?php echo $feature['heading'] ?></h3>
-						<p><?php echo $feature['content'] ?></p>
-						<div class="clear"></div>
-					<?php endforeach; endif; ?>
-				</div>
-				
-				<?php if ( isset( $premium['buy_url'] ) ) : ?>
-				<p class="download">
-					<span class="buy-button-wrapper">
-						<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button <?php echo !empty($premium['buy_url_supported']) ? 'has-support-choices' : '' ?>">
-							<span><?php _e('Upgrade Now', 'siteorigin') ?></span><em><?php echo (!empty($premium['buy_price']) ? '$'.$premium['buy_price'] : __('Any Price', 'siteorigin')) ?></em>
-						</a>
-					</span>
-					<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
-				</p>
-				<?php endif; ?>
-				
-				<?php if(!empty($premium['testimonials'])): ?>
-					<h3 class="testimonials-heading"><?php _e('Some of our User Comments', 'siteorigin') ?></h3>
-					<ul class="testimonials">
-						<?php foreach($premium['testimonials'] as $testimonial) : ?>
-							<li>
-								<div class="avatar" style="background-image: url(http://www.gravatar.com/avatar/<?php echo esc_attr($testimonial['gravatar']) ?>?d=identicon&s=55)"></div>
-								<div class="text">
-									<div class="content"><?php echo $testimonial['content'] ?></div>
-									<div class="name"><?php echo $testimonial['name'] ?></div>
-								</div>
-								<div class="clear"></div>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-				<?php endif; ?>
-
-				<?php if(!empty($premium['buy_url_supported'])) : ?>
-					<div id="support-choice">
-						<h2><?php _e('What Level of Support Do You Need?', 'siteorigin') ?></h2>
-
-						<div class="support-price-table">
-							<div class="column column-standard">
-								<div class="title-wrapper">
-									<div class="title">
-										<h3><?php echo '$' . ( $premium['buy_price'] ) ?></h3>
-									</div>
-								</div>
-
-								<div class="feature"><strong><?php _e('Premium theme with lifetime updates', 'siteorigin') ?></strong></div>
-								<div class="feature"><?php _e('Standard email support', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('1-2 day response time', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('Theme setup support', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('Help from SiteOrigin support staff', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('90 days of support', 'siteorigin') ?></div>
-
-
-								<div class="buy-wrapper">
-									<a href="<?php echo esc_url($premium['buy_url']) ?>" class="buy-button"><?php _e('Standard Support', 'siteorigin') ?></a>
-								</div>
-							</div>
-
-							<div class="column column-recommended">
-								<div class="recommended"><?php _e('Recommended', 'siteorigin') ?></div>
-								<div class="title-wrapper">
-									<div class="title">
-										<h3><?php echo '$' . ( SITEORIGIN_PREMIUM_SUPPORTED_COST + $premium['buy_price'] ) ?></h3>
-									</div>
-								</div>
-
-								<div class="feature"><strong><?php _e('Premium theme with lifetime updates', 'siteorigin') ?></strong></div>
-								<div class="feature"><?php _e('<strong>Fast</strong> email support', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('<strong>4hr response</strong> during <abbr title="9am-6pm, Monday-Friday GMT 2+">office hours</a>', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('<strong>Basic customization</strong> and setup support', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('Help from our <strong>WordPress developers</strong>', 'siteorigin') ?></div>
-								<div class="feature"><?php _e('A <strong>full year</strong> of theme support', 'siteorigin') ?></div>
-
-								<div class="buy-wrapper">
-									<a href="<?php echo esc_url($premium['buy_url_supported']) ?>" class="buy-button"><?php _e('Priority Support', 'siteorigin') ?></a>
-								</div>
-							</div>
-						</div>
-
-						<p class="extra-info">
-							<?php printf(__('%1$s Premium includes email support.', 'siteorigin'), ucfirst($theme)) ?>
-							<?php printf(__("For an extra <strong>%s</strong>, you get faster replies and more detailed answers. Perfect if you're on a deadline.", 'siteorigin'), '$'.(SITEORIGIN_PREMIUM_SUPPORTED_COST)) ?>
-							<?php _e("You're free to use our premium themes on as many sites as you like.", 'siteorigin') ?>
-						</p>
-
-					</div>
-					<div id="support-choice-overlay"></div>
-				<?php endif; ?>
-			</div>
-			<div id="magnifier">
-				<div class="image"></div>
-			</div>
-			
-			<?php
+			get_template_part('extras/premium/tpl/upgrade-page');
 			break;
 
 		case 'enter-order' :

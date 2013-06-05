@@ -1,6 +1,6 @@
 jQuery( function ( $ ) {
     var paymentWindow;
-    $( '#theme-upgrade .buy-button' ).not('.has-support-choices').click( function () {
+    $( '#theme-upgrade .buy-button' ).not('.variable-pricing, .variable-pricing-submit').click( function () {
         var $$ = $( this );
 
         paymentWindow = window.open( $$.attr( 'href' ), 'payment', 'height=800,width=1024' );
@@ -11,10 +11,30 @@ jQuery( function ( $ ) {
         return false;
     } );
 
-    $( '#theme-upgrade .buy-button.has-support-choices' ).click(function(){
-        $('#support-choice, #support-choice-overlay' ).fadeIn();
+    $( '#theme-upgrade .buy-button.variable-pricing-submit').click(function(e){
+        e.preventDefault();
+        $(this).closest('form').submit();
         return false;
+    })
+
+    $('#theme-upgrade #variable-pricing-form .options input[type=radio]').change(function(){
+        var val = $(this).val();
+        if(val == 'custom') return;
+
+        $('#theme-upgrade #variable-pricing-form input[name=amount]').val(val);
+        $('#theme-upgrade #variable-pricing-form .variable-pricing-submit em').html('$'+val);
     });
+
+    $('#theme-upgrade #variable-pricing-form .options input[name=variable_pricing_custom]').keyup(function(){
+        var val = $(this).val().replace(/[^0-9.]/g, '');
+        val = parseFloat(val).toFixed(2);
+        if(isNaN(val)) val = 0;
+
+        $('#theme-upgrade #variable-pricing-form input[name=amount]').val(val);
+        $('#theme-upgrade #variable-pricing-form .variable-pricing-submit em').html('$'+val);
+    });
+
+
 
     $('#support-choice-overlay' ).click(function(){
         $('#support-choice, #support-choice-overlay' ).fadeOut();
