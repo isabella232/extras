@@ -96,7 +96,7 @@ function siteorigin_premium_page_render() {
 				<p class="download">
 					<span class="buy-button-wrapper">
 						<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button <?php echo !empty($premium['buy_url_supported']) ? 'has-support-choices' : '' ?>">
-							<span><?php _e('Buy Upgrade', 'siteorigin') ?></span><em><?php echo (!empty($premium['buy_price']) ? '$'.$premium['buy_price'] : __('Name Your Price', 'siteorigin')) ?></em>
+							<span><?php _e('Buy Upgrade', 'siteorigin') ?></span><em><?php echo (!empty($premium['buy_price']) ? '$'.$premium['buy_price'] : __('Any Price', 'siteorigin')) ?></em>
 						</a>
 					</span>
 					<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
