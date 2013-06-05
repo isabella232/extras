@@ -23,7 +23,8 @@ jQuery( function ( $ ) {
         if($(this).hasClass('custom-price')) {
             val = $('#theme-upgrade #variable-pricing-form .options input[name=variable_pricing_custom]').val();
             val = parseFloat(val).toFixed(2);
-            if(isNaN(val)) val = 0;
+            if(isNaN(val)) val = 3;
+            val = Math.max(val,3);
         }
 
         $('#theme-upgrade #variable-pricing-form input[name=amount]').val(val);
@@ -33,7 +34,8 @@ jQuery( function ( $ ) {
     $('#theme-upgrade #variable-pricing-form .options input[name=variable_pricing_custom]').keyup(function(){
         var val = $(this).val().replace(/[^0-9.]/g, '');
         val = parseFloat(val).toFixed(2);
-        if(isNaN(val)) val = 0;
+        if(isNaN(val)) val = 3;
+        val = Math.max(val,3);
 
         $(this).closest('form').find('.custom-price').click();
 
