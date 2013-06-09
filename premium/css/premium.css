@@ -264,6 +264,7 @@
 
 #variable-pricing-form {
     padding: 15px;
+    margin: 20px 0;
     background: #F9F9F9;
     -moz-transition:background 2s;
     -webkit-transition:background 2s;

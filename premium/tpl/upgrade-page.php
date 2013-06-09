@@ -30,40 +30,6 @@ $theme = basename( get_template_directory() );
 	<h2><?php echo $premium['premium_title'] ?></h2>
 	<p><?php echo $premium['premium_summary'] ?></p>
 
-	<?php if( empty( $premium['variable_pricing'] ) ) : ?>
-		<p class="download">
-			<span class="buy-button-wrapper">
-				<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
-					<span><?php _e('Upgrade Now', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
-				</a>
-			</span>
-			<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
-		</p>
-	<?php else : ?>
-		<p class="download">
-			<span class="buy-button-wrapper">
-				<a href="#buy_information" class="buy-button variable-pricing">
-					<span><?php _e('Purchase', 'siteorigin') ?></span>
-				</a>
-			</span>
-			<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
-		</p>
-	<?php endif; ?>
-
-	<?php if ( !empty( $premium['featured'] ) ) : ?>
-		<p id="promo-image">
-			<img src="<?php echo esc_url( $premium['featured'][ 0 ] ) ?>" width="<?php echo intval( $premium['featured'][ 1 ] ) ?>" height="<?php echo intval( $premium['featured'][ 2 ] ) ?>" class="magnify" />
-		</p>
-	<?php endif; ?>
-	<div class="content">
-		<?php if ( !empty( $premium['features'] ) ) : foreach ( $premium['features'] as $feature ) : ?>
-			<?php if(!empty($feature['image'])) echo '<div class="feature-image-wrapper"><img src="'.esc_url($feature['image']).'" width="220" height="120" class="feature-image" /></div>' ?>
-			<h3><?php echo $feature['heading'] ?></h3>
-			<p><?php echo $feature['content'] ?></p>
-			<div class="clear"></div>
-		<?php endforeach; endif; ?>
-	</div>
-
 	<a name="buy_information"></a>
 	<?php if( empty( $premium['variable_pricing'] ) ) : ?>
 		<p class="download">
@@ -72,7 +38,7 @@ $theme = basename( get_template_directory() );
 					<span><?php _e('Upgrade Now', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
 				</a>
 			</span>
-			<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
+			<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
 		</p>
 	<?php else : ?>
 		<form method="get" action="<?php echo esc_url( $premium['buy_url'] ) ?>" id="variable-pricing-form" target="_blank">
@@ -97,11 +63,45 @@ $theme = basename( get_template_directory() );
 						<span><?php _e('Upgrade Now', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
 					</a>
 				</span>
-				<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
+				<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
 			</p>
 
 			<input type="hidden" name="amount" value="<?php echo esc_attr($premium['buy_price']) ?>" >
 		</form>
+	<?php endif; ?>
+
+	<?php if ( !empty( $premium['featured'] ) ) : ?>
+		<p id="promo-image">
+			<img src="<?php echo esc_url( $premium['featured'][ 0 ] ) ?>" width="<?php echo intval( $premium['featured'][ 1 ] ) ?>" height="<?php echo intval( $premium['featured'][ 2 ] ) ?>" class="magnify" />
+		</p>
+	<?php endif; ?>
+	<div class="content">
+		<?php if ( !empty( $premium['features'] ) ) : foreach ( $premium['features'] as $feature ) : ?>
+			<?php if(!empty($feature['image'])) echo '<div class="feature-image-wrapper"><img src="'.esc_url($feature['image']).'" width="220" height="120" class="feature-image" /></div>' ?>
+			<h3><?php echo $feature['heading'] ?></h3>
+			<p><?php echo $feature['content'] ?></p>
+			<div class="clear"></div>
+		<?php endforeach; endif; ?>
+	</div>
+
+	<?php if( empty( $premium['variable_pricing'] ) ) : ?>
+		<p class="download">
+			<span class="buy-button-wrapper">
+				<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
+					<span><?php _e('Upgrade Now', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
+				</a>
+			</span>
+			<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
+		</p>
+	<?php else : ?>
+		<p class="download">
+			<span class="buy-button-wrapper">
+				<a href="#buy_information" class="buy-button variable-pricing">
+					<span><?php _e('Purchase', 'siteorigin') ?></span>
+				</a>
+			</span>
+			<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
+		</p>
 	<?php endif; ?>
 
 	<?php if(!empty($premium['testimonials'])): ?>
