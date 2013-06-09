@@ -27,29 +27,27 @@ $theme = basename( get_template_directory() );
 	</form>
 
 	<a href="#" id="theme-upgrade-already-paid" class="button"><?php _e( 'Already Paid?', 'siteorigin' ) ?></a>
-	<?php if ( isset( $premium['premium_title'] ) ) : ?><h2><?php echo $premium['premium_title'] ?></h2><?php endif; ?>
-	<?php if ( isset( $premium['premium_summary'] ) ) : ?><p><?php echo $premium['premium_summary'] ?></p><?php endif; ?>
+	<h2><?php echo $premium['premium_title'] ?></h2>
+	<p><?php echo $premium['premium_summary'] ?></p>
 
-	<?php if ( isset( $premium['buy_url'] ) ) : ?>
-		<?php if( empty( $premium['variable_pricing'] ) ) : ?>
-			<p class="download">
-				<span class="buy-button-wrapper">
-					<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
-						<span><?php _e('Upgrade Now', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
-					</a>
-				</span>
-				<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
-			</p>
-		<?php else : ?>
-			<p class="download">
-				<span class="buy-button-wrapper">
-					<a href="#buy_information" class="buy-button variable-pricing">
-						<span><?php _e('Purchase', 'siteorigin') ?></span>
-					</a>
-				</span>
-				<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
-			</p>
-		<?php endif; ?>
+	<?php if( empty( $premium['variable_pricing'] ) ) : ?>
+		<p class="download">
+			<span class="buy-button-wrapper">
+				<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
+					<span><?php _e('Upgrade Now', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
+				</a>
+			</span>
+			<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
+		</p>
+	<?php else : ?>
+		<p class="download">
+			<span class="buy-button-wrapper">
+				<a href="#buy_information" class="buy-button variable-pricing">
+					<span><?php _e('Purchase', 'siteorigin') ?></span>
+				</a>
+			</span>
+			<?php if ( isset( $premium['buy_message_1'] ) ) : ?><span class="info"><?php echo $premium['buy_message_1'] ?></span><?php endif; ?>
+		</p>
 	<?php endif; ?>
 
 	<?php if ( !empty( $premium['featured'] ) ) : ?>
@@ -67,45 +65,43 @@ $theme = basename( get_template_directory() );
 	</div>
 
 	<a name="buy_information"></a>
-	<?php if ( isset( $premium['buy_url'] ) ) : ?>
-		<?php if( empty( $premium['variable_pricing'] ) ) : ?>
+	<?php if( empty( $premium['variable_pricing'] ) ) : ?>
+		<p class="download">
+			<span class="buy-button-wrapper">
+				<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
+					<span><?php _e('Upgrade Now', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
+				</a>
+			</span>
+			<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
+		</p>
+	<?php else : ?>
+		<form method="get" action="<?php echo esc_url( $premium['buy_url'] ) ?>" id="variable-pricing-form" target="_blank">
+
+			<h3><?php _e('You Choose The Price', 'origami') ?></h3>
+
+			<?php if(is_array($premium['variable_pricing'])): ?>
+				<div class="options hide-if-no-js">
+					<?php foreach($premium['variable_pricing'] as $price) : ?>
+						<label><input type="radio" name="variable_pricing_option" value="<?php echo floatval($price[0]) ?>" <?php checked($price[0], $premium['buy_price']) ?>> <strong>$<?php echo floatval($price[0]) ?></strong> <?php echo esc_html($price[1]) ?></label>
+					<?php endforeach ?>
+					<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price"> <strong>Custom</strong> <input type="text" name="variable_pricing_custom" value=""> </label>
+				</div>
+				<div class="options hide-if-js">
+					<p><?php _e('Please enable Javascript to change pricing', 'siteorigin') ?></p>
+				</div>
+			<?php endif; ?>
+
 			<p class="download">
 				<span class="buy-button-wrapper">
-					<a href="<?php echo esc_url( $premium['buy_url'] ) ?>" class="buy-button">
+					<a href="#buy_information" class="buy-button variable-pricing-submit">
 						<span><?php _e('Upgrade Now', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
 					</a>
 				</span>
 				<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
 			</p>
-		<?php else : ?>
-			<form method="get" action="<?php echo esc_url( $premium['buy_url'] ) ?>" id="variable-pricing-form" target="_blank">
 
-				<h3><?php _e('Choose Your Price', 'origami') ?></h3>
-
-				<?php if(is_array($premium['variable_pricing'])): ?>
-					<div class="options hide-if-no-js">
-						<?php foreach($premium['variable_pricing'] as $price) : ?>
-							<label><input type="radio" name="variable_pricing_option" value="<?php echo floatval($price[0]) ?>" <?php checked($price[0], $premium['buy_price']) ?>> <strong>$<?php echo floatval($price[0]) ?></strong> <?php echo esc_html($price[1]) ?></label>
-						<?php endforeach ?>
-						<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price"> <strong>Custom</strong> <input type="text" name="variable_pricing_custom" value=""> </label>
-					</div>
-					<div class="options hide-if-js">
-						<p><?php _e('Please enable Javascript to change pricing', 'siteorigin') ?></p>
-					</div>
-				<?php endif; ?>
-
-				<p class="download">
-					<span class="buy-button-wrapper">
-						<a href="#buy_information" class="buy-button variable-pricing-submit">
-							<span><?php _e('Upgrade Now', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
-						</a>
-					</span>
-					<?php if ( isset( $premium['buy_message_2'] ) ) : ?><span class="info"><?php echo $premium['buy_message_2'] ?></span><?php endif; ?>
-				</p>
-
-				<input type="hidden" name="amount" value="<?php echo esc_attr($premium['buy_price']) ?>" >
-			</form>
-		<?php endif; ?>
+			<input type="hidden" name="amount" value="<?php echo esc_attr($premium['buy_price']) ?>" >
+		</form>
 	<?php endif; ?>
 
 	<?php if(!empty($premium['testimonials'])): ?>

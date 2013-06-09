@@ -10,6 +10,13 @@ jQuery( function ( $ ) {
         return false;
     } );
 
+    $( '#theme-upgrade .buy-button.variable-pricing').click( function(){
+        $('#theme-upgrade #variable-pricing-form').addClass('highlight-form');
+        setTimeout(function(){
+            $('#theme-upgrade #variable-pricing-form').removeClass('highlight-form');
+        }, 2000);
+    } );
+
     $( '#theme-upgrade .buy-button.variable-pricing-submit').click(function(e){
         e.preventDefault();
         $(this).closest('form').submit();
@@ -23,8 +30,8 @@ jQuery( function ( $ ) {
         if($(this).hasClass('custom-price')) {
             val = $('#theme-upgrade #variable-pricing-form .options input[name=variable_pricing_custom]').val();
             val = parseFloat(val).toFixed(2);
-            if(isNaN(val)) val = 3;
-            val = Math.max(val,3);
+            if(isNaN(val)) val = 5;
+            val = Math.max(val,5);
         }
 
         $('#theme-upgrade #variable-pricing-form input[name=amount]').val(val);
@@ -34,8 +41,8 @@ jQuery( function ( $ ) {
     $('#theme-upgrade #variable-pricing-form .options input[name=variable_pricing_custom]').keyup(function(){
         var val = $(this).val().replace(/[^0-9.]/g, '');
         val = parseFloat(val).toFixed(2);
-        if(isNaN(val)) val = 3;
-        val = Math.max(val,3);
+        if(isNaN(val)) val = 5;
+        val = Math.max(val,5);
 
         $(this).closest('form').find('.custom-price').click();
 
