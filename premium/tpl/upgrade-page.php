@@ -43,7 +43,7 @@ $theme = basename( get_template_directory() );
 	<?php else : ?>
 		<form method="get" action="<?php echo esc_url( $premium['buy_url'] ) ?>" id="variable-pricing-form" target="_blank">
 
-			<h3><?php _e('You Choose The Price', 'origami') ?></h3>
+			<h3><?php _e('You Choose The Price', 'siteorigin') ?></h3>
 
 			<?php if(is_array($premium['variable_pricing'])): ?>
 				<div class="options hide-if-no-js">
