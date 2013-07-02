@@ -61,6 +61,7 @@ $theme = basename( get_template_directory() );
 			<p class="download">
 				<a href="#buy_information" class="buy-button variable-pricing-submit">
 					<span><?php _e('Buy Now', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
+					<input type="hidden" name="amount" value="<?php echo esc_attr($premium['buy_price']) ?>" >
 				</a>
 			</p>
 
@@ -77,8 +78,6 @@ $theme = basename( get_template_directory() );
 			<div class="options hide-if-js">
 				<p><?php _e('Please enable Javascript to change pricing', 'siteorigin') ?></p>
 			</div>
-
-			<input type="hidden" name="amount" value="<?php echo esc_attr($premium['buy_price']) ?>" >
 
 		</form>
 
