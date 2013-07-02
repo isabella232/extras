@@ -121,10 +121,7 @@ function siteorigin_premium_admin_enqueue( $prefix ) {
 	if(defined( 'SITEORIGIN_IS_PREMIUM' )) return;
 	
 	if ( $prefix == 'appearance_page_premium_upgrade' ) {
-		wp_enqueue_script( 'siteorigin-magnifier', get_template_directory_uri() . '/extras/premium/js/magnifier.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
-		wp_enqueue_script( 'siteorigin-cycle', get_template_directory_uri() . '/extras/premium/js/cycle.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		wp_enqueue_script( 'siteorigin-premium-upgrade', get_template_directory_uri() . '/extras/premium/js/premium.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
-		
 		wp_enqueue_style( 'siteorigin-premium-upgrade', get_template_directory_uri() . '/extras/premium/css/premium.css', array(), SITEORIGIN_THEME_VERSION );
 	}
 
