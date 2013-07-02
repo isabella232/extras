@@ -2,12 +2,9 @@ jQuery( function ( $ ) {
     var minPrice = 5;
 
     // Handle clicking the play button
-    var videoFrame;
     $('#theme-upgrade #click-to-play').click(function(){
-        if(videoFrame == undefined || videoFrame.closed){
-            videoFrame = window.open('http://player.vimeo.com/video/' + $(this).data('video-id') + '?title=0&byline=0&portrait=0&autoplay=1','','width=640,height=362,location=no,menubar=no,status=no');
-        }
-        else { $(videoFrame).focus(); }
+        // Only load the video from Vimeo when the user clicks play
+        $(this).replaceWith('<iframe src="http://player.vimeo.com/video/' + $(this).data('video-id') + '?title=0&byline=0&portrait=0&autoplay=1" width="640" height="362" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>');
         return false;
     })
 
