@@ -80,7 +80,7 @@ $theme = basename( get_template_directory() );
 			</div>
 
 			<p class="description choose-description">
-				<?php _e("You choose the price. Be fair and pay what you think the upgrade is worth.", 'siteorigin') ?>
+				<?php printf( __("You choose the price, so you can pay what you think %s is worth.", 'siteorigin'), ucfirst($theme) ) ?>
 			</p>
 
 		</form>
