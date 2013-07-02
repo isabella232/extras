@@ -194,6 +194,7 @@
 
 #purchase-form .options {
     margin-top: 20px;
+    margin-bottom: 20px;
     text-align: left;
 }
 
@@ -208,6 +209,10 @@
 
 #purchase-form .options label:last-child {
     margin-bottom: 0px;
+}
+
+#purchase-form .choose-description {
+    margin-bottom: 0;
 }
 
 #theme-upgrade .testimonials-heading {

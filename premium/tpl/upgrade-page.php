@@ -79,6 +79,10 @@ $theme = basename( get_template_directory() );
 				<p><?php _e('Please enable Javascript to change pricing', 'siteorigin') ?></p>
 			</div>
 
+			<p class="description choose-description">
+				<?php _e("You choose the price. Be fair and pay what you think the upgrade is worth.", 'siteorigin') ?>
+			</p>
+
 		</form>
 
 		<?php if(!empty($premium['testimonials'])): ?>
