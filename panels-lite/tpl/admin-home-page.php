@@ -28,8 +28,8 @@ $install_url = siteorigin_plugin_activation_install_url(
 	</p>
 	
 	<p>
-		<a href="http://player.vimeo.com/video/59561067?autoplay=1" target="_blank">
-			<img src="<?php echo get_template_directory_uri() ?>/extras/panels-lite/images/video.png" width="680" height="383" />
-		</a>
+
+	<p>
+		<iframe src="http://player.vimeo.com/video/59561067?title=0&amp;byline=0&amp;portrait=0" width="680" height="383" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 	</p>
 </div> 
