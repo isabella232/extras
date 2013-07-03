@@ -86,7 +86,7 @@ $theme = basename( get_template_directory() );
 		</form>
 
 		<?php if(!empty($premium['testimonials'])): ?>
-			<h3 class="testimonials-heading"><?php _e('Our User Comments', 'siteorigin') ?></h3>
+			<h3 class="testimonials-heading"><?php _e('Our User Feedback', 'siteorigin') ?></h3>
 			<ul class="testimonials">
 				<?php foreach($premium['testimonials'] as $testimonial) : ?>
 					<li class="testimonial clearfix">
