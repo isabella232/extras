@@ -73,7 +73,7 @@ $theme = basename( get_template_directory() );
 				<?php foreach($premium['variable_pricing'] as $price) : ?>
 					<label><input type="radio" name="variable_pricing_option" value="<?php echo floatval($price[0]) ?>" <?php checked($price[0], $premium['buy_price']) ?>> <strong>$<?php echo floatval($price[0]) ?></strong> <?php echo esc_html($price[1]) ?></label>
 				<?php endforeach ?>
-				<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price" > <strong><?php _e('Custom', 'siteorigin') ?></strong> <input type="number" name="variable_pricing_custom" value="" placeholder="$2+" min="2"> </label>
+				<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price" > <strong><?php _e('Custom', 'siteorigin') ?></strong> <input type="number" name="variable_pricing_custom" value="" placeholder="$4+" min="4"> </label>
 			</div>
 			<div class="options hide-if-js">
 				<p><?php _e('Please enable Javascript to change pricing', 'siteorigin') ?></p>
