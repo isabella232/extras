@@ -71,6 +71,7 @@ function siteorigin_panels_filter_home_template($template){
 	$panels_support = $panels_support[0];
 	
 	if(empty($panels_support['home-page'])) return $template;
+	if(empty($panels_support['home-page-default'])) $panels_support['home-page-default'] = false;
 	if(!get_theme_mod('panels_home_page_enabled', $panels_support['home-page-default'])) return $template;
 	
 	$GLOBALS['siteorigin_panels_is_panels_home'] = true;
