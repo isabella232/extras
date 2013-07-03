@@ -19,7 +19,6 @@ function siteorigin_slider_init() {
 			'not_found_in_trash' => __( 'No sliders found in Trash', 'siteorigin' ),
 			'parent_item_colon' => '',
 			'menu_name' => __( 'Sliders', 'siteorigin' )
-
 		),
 		'public' => false,
 		'publicly_queryable' => false,
