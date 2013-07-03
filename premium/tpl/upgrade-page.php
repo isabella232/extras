@@ -66,7 +66,7 @@ $theme = basename( get_template_directory() );
 			</p>
 
 			<p class="description">
-				<?php _e("We offer a full refund if you're not happy with your purchase", 'siteorigin') ?>
+				<?php _e("We offer a 30 day full refund if you're not happy with your purchase", 'siteorigin') ?>
 			</p>
 
 			<div class="options hide-if-no-js">
