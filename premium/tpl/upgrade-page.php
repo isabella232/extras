@@ -60,8 +60,8 @@ $theme = basename( get_template_directory() );
 
 			<p class="download">
 				<a href="#buy_information" class="buy-button variable-pricing-submit">
-					<span><?php _e('Buy Now', 'siteorigin') ?></span><em><?php echo '$'.$premium['buy_price'] ?></em>
-					<input type="hidden" name="amount" value="<?php echo esc_attr($premium['buy_price']) ?>" >
+					<span><?php _e('Buy Now', 'siteorigin') ?></span><em>$10</em>
+					<input type="hidden" name="amount" value="10" >
 				</a>
 			</p>
 
@@ -70,9 +70,9 @@ $theme = basename( get_template_directory() );
 			</p>
 
 			<div class="options hide-if-no-js">
-				<?php foreach($premium['variable_pricing'] as $price) : ?>
-					<label><input type="radio" name="variable_pricing_option" value="<?php echo floatval($price[0]) ?>" <?php checked($price[0], $premium['buy_price']) ?>> <strong>$<?php echo floatval($price[0]) ?></strong> <?php echo esc_html($price[1]) ?></label>
-				<?php endforeach ?>
+				<label><input type="radio" name="variable_pricing_option" value="10" <?php checked(true) ?>> <strong>$10</strong> <?php _e('Building your site on a budget', 'siteorigin') ?></label>
+				<label><input type="radio" name="variable_pricing_option" value="15"> <strong>$15</strong> <?php _e("This will make us happy", 'siteorigin') ?></label>
+				<label><input type="radio" name="variable_pricing_option" value="20"> <strong>$20</strong> <?php _e("We'll love and support you forever", 'siteorigin') ?></label>
 				<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price" > <strong><?php _e('Custom', 'siteorigin') ?></strong> <input type="number" name="variable_pricing_custom" value="" placeholder="$5+" min="5"> </label>
 			</div>
 			<div class="options hide-if-js">
