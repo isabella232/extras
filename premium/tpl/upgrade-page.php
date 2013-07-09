@@ -35,7 +35,11 @@ $theme = basename( get_template_directory() );
 
 		<?php if( !empty($siteorigin_premium_info['premium_video_poster']) ) : // Only load the video iFrame after the video is clicked ?>
 			<div id="video-wrapper" style="background-image: url(<?php echo esc_url($siteorigin_premium_info['premium_video_poster']) ?>)">
-				<a href="#" id="click-to-play" data-video-id="<?php echo esc_attr($siteorigin_premium_info['premium_video_id']) ?>"></a>
+				<?php if(!empty($siteorigin_premium_info['premium_video_id'])) : ?>
+					<a href="#" id="click-to-play" data-video-id="<?php echo esc_attr($siteorigin_premium_info['premium_video_id']) ?>"></a>
+				<?php else : ?>
+					<div class="placeholder"></div>
+				<?php endif; ?>
 			</div>
 		<?php endif; ?>
 

@@ -39,13 +39,11 @@
 #theme-upgrade #video-wrapper{
     background: #000000;
     margin-bottom: 20px;
-}
-
-#theme-upgrade #video-wrapper {
     background-position: top left;
 }
 
 #theme-upgrade #video-wrapper a,
+#theme-upgrade #video-wrapper .placeholder,
 #theme-upgrade #video-wrapper iframe{
     width: 640px;
     height: 362px;
