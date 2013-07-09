@@ -16,7 +16,7 @@ $theme = basename( get_template_directory() );
 				__( "Use <a href='%s' target='_blank'>this form</a> if you don't receive your order number in the next 15 minutes. ", 'siteorigin' ) ,
 				'http://siteorigin.com/orders/'
 			);
-			_e( 'Be sure to check your spam folder.', 'siteorigin' );
+			_e( 'To be sure, check your spam folder.', 'siteorigin' );
 			?>
 		</p>
 
@@ -80,7 +80,7 @@ $theme = basename( get_template_directory() );
 			</div>
 
 			<p class="description choose-description">
-				<?php printf( __("You choose the price, so you can pay what you think %s is worth.", 'siteorigin'), ucfirst($theme) ) ?>
+				<?php printf( __("You choose the price, so you can pay what %s is worth to you.", 'siteorigin'), ucfirst($theme) ) ?>
 			</p>
 
 		</form>

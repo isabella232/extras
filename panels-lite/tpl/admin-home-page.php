@@ -27,9 +27,4 @@ $install_url = siteorigin_plugin_activation_install_url(
 		<a href="<?php echo esc_url($install_url) ?>" class="install"><?php _e('Install Page Builder', 'siteorigin') ?></a>
 	</p>
 	
-	<p>
-
-	<p>
-		<iframe src="http://player.vimeo.com/video/59561067?title=0&amp;byline=0&amp;portrait=0" width="680" height="383" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-	</p>
-</div> 
+</div>
