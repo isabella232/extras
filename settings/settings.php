@@ -10,6 +10,7 @@
  * Intialize the theme settings page
  *
  * @param $theme_name
+ * @action after_setup_theme
  */
 function siteorigin_settings_init( $theme_name = null ) {
 	// Ensure this is only run once
