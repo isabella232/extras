@@ -63,21 +63,25 @@ $theme = basename( get_template_directory() );
 		<form method="get" action="<?php echo esc_url( $premium['buy_url'] ) ?>" id="purchase-form" target="_blank">
 
 			<p class="download">
-				<a href="#buy_information" class="buy-button variable-pricing-submit">
-					<span><?php _e('Buy Now', 'siteorigin') ?></span><em>$10</em>
-					<input type="hidden" name="amount" value="10" >
+				<a href="<?php echo esc_url( $premium['buy_url'] ) ?>?amount=15" class="buy-button variable-pricing-submit">
+					<span><?php _e('Buy Now', 'siteorigin') ?></span><em>$15</em>
+					<input type="hidden" name="amount" value="15" >
 				</a>
 			</p>
+
+			<div class="support-message">
+				<p><?php _e("Although we support all premium users, we can't guarantee same-day support email replies for orders under $15.",'siteorigin') ?></p>
+			</div>
 
 			<p class="description">
 				<?php _e("We offer a 30 day full refund if you're not happy with your purchase", 'siteorigin') ?>
 			</p>
 
 			<div class="options hide-if-no-js">
-				<label><input type="radio" name="variable_pricing_option" value="10" <?php checked(true) ?>> <strong>$10</strong> <?php _e('Building your site on a budget', 'siteorigin') ?></label>
-				<label><input type="radio" name="variable_pricing_option" value="15"> <strong>$15</strong> <?php _e("This will make us happy", 'siteorigin') ?></label>
+				<label><input type="radio" name="variable_pricing_option" value="10"> <strong>$10</strong> <?php _e('Building your site on a budget', 'siteorigin') ?></label>
+				<label><input type="radio" name="variable_pricing_option" value="15" <?php checked(true) ?>> <strong>$15</strong> <?php _e("A good, fair price", 'siteorigin') ?></label>
 				<label><input type="radio" name="variable_pricing_option" value="20"> <strong>$20</strong> <?php _e("We'll love and support you forever", 'siteorigin') ?></label>
-				<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price" > <strong><?php _e('Custom', 'siteorigin') ?></strong> <input type="number" name="variable_pricing_custom" value="" placeholder="$5+" min="5"> </label>
+				<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price" > <strong><?php _e('Custom', 'siteorigin') ?></strong> <input type="number" name="variable_pricing_custom" value="15" placeholder="$5+" min="5"> </label>
 			</div>
 			<div class="options hide-if-js">
 				<p><?php _e('Please enable Javascript to change pricing', 'siteorigin') ?></p>

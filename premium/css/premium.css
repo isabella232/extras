@@ -122,7 +122,6 @@
     background: -ms-linear-gradient(top,  #cbe385 0%,#9ccc54 100%);
     background: linear-gradient(to bottom,  #cbe385 0%,#9ccc54 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cbe385', endColorstr='#9ccc54',GradientType=0 );
-
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 0 3px rgba(0,0,0,0.2);
 
 	font: 20px "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
@@ -161,7 +160,6 @@
 
 #theme-upgrade .buy-button span{
 	padding: 12px 20px 12px 20px;
-	color: inherit;
 	display: inline-block;
 	color: #4f6920;
 	border-right: 1px solid #98b55b;
@@ -246,6 +244,20 @@
     font-weight: bold;
     display: block;
     margin-bottom: 5px;
+}
+
+#theme-upgrade .support-message {
+    background: #cbe385;
+    padding: 10px;
+    margin-bottom: 10px;
+
+    border-radius: 4px;
+    color: #344e02;
+    display: none;
+}
+
+#theme-upgrade .support-message p {
+    margin: 0;
 }
 
 html[xmlns] #theme-upgrade .clearfix {
