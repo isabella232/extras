@@ -12,6 +12,11 @@
  * @param $theme_name
  */
 function siteorigin_settings_init( $theme_name = null ) {
+	// Ensure this is only run once
+	static $run;
+	if(!empty($run)) return;
+	$run = true;
+
 	if ( empty( $theme_name ) ) {
 		$theme_name = basename( get_template_directory() );
 	}
@@ -29,6 +34,7 @@ function siteorigin_settings_init( $theme_name = null ) {
 	add_action( 'admin_enqueue_scripts', 'siteorigin_settings_enqueue_scripts' );
 	add_action( 'wp_enqueue_scripts', 'siteorigin_settings_enqueue_front_scripts' );
 }
+add_action('after_setup_theme', 'siteorigin_settings_init', 5);
 
 /**
  * Initialize admin settings in the admin
