@@ -70,7 +70,7 @@ $theme = basename( get_template_directory() );
 			</p>
 
 			<div class="support-message">
-				<p><?php _e("Although we appreciate and support all our premium users, we only <em>guarantee</em> 24hr support replies for orders <strong>$15</strong> and over.",'siteorigin') ?></p>
+				<p><?php _e("Although we appreciate and support all our premium users, we only guarantee <strong>24 hour</strong> support replies purchases over <strong>$15</strong>. Support on this order might take longer.",'siteorigin') ?></p>
 			</div>
 
 			<p class="description">
@@ -80,7 +80,7 @@ $theme = basename( get_template_directory() );
 			<div class="options hide-if-no-js">
 				<label><input type="radio" name="variable_pricing_option" value="10"> <strong>$10</strong> <?php _e('Building your site on a budget', 'siteorigin') ?></label>
 				<label><input type="radio" name="variable_pricing_option" value="15" <?php checked(true) ?>> <strong>$15</strong> <?php _e("A good, fair price", 'siteorigin') ?></label>
-				<label><input type="radio" name="variable_pricing_option" value="25"> <strong>$25</strong> <?php _e("We'll love and support you forever", 'siteorigin') ?></label>
+				<label><input type="radio" name="variable_pricing_option" value="20"> <strong>$20</strong> <?php _e("We'll love and support you forever", 'siteorigin') ?></label>
 				<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price" > <strong><?php _e('Custom', 'siteorigin') ?></strong> <input type="number" name="variable_pricing_custom" value="15" placeholder="$4+" min="4"> </label>
 			</div>
 			<div class="options hide-if-js">
