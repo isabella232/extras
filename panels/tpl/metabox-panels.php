@@ -42,7 +42,7 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 			$install_url = siteorigin_plugin_activation_install_url(
 				'siteorigin-panels',
 				__('Page Builder', 'siteorigin'),
-				'http://downloads.wordpress.org/plugin/siteorigin-panels.zip'
+				'downloads.wordpress.org/plugin/siteorigin-panels.zip'
 			);
 			printf(__('Please <a href="%s">update</a> to the latest version of Page Builder.', 'siteorigin'), $install_url);
 			?>
