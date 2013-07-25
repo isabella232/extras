@@ -74,13 +74,14 @@ $theme = basename( get_template_directory() );
 			</div>
 
 			<p class="description">
-				<?php _e("We offer a 30 day full refund if you're not happy with your purchase", 'siteorigin') ?>
+				<?php printf( __("You choose the price, so you can pay what %s is worth to you.", 'siteorigin'), ucfirst($theme) ) ?>
 			</p>
 
 			<div class="options hide-if-no-js">
 				<label><input type="radio" name="variable_pricing_option" value="10"> <strong>$10</strong> <?php _e('Building your site on a budget', 'siteorigin') ?></label>
 				<label><input type="radio" name="variable_pricing_option" value="15" <?php checked(true) ?>> <strong>$15</strong> <?php _e("A good, fair price", 'siteorigin') ?></label>
-				<label><input type="radio" name="variable_pricing_option" value="20"> <strong>$20</strong> <?php _e("We'll love and support you forever", 'siteorigin') ?></label>
+				<label><input type="radio" name="variable_pricing_option" value="20"> <strong>$20</strong> <?php _e("Our sincere thanks", 'siteorigin') ?></label>
+				<label><input type="radio" name="variable_pricing_option" value="30"> <strong>$30</strong> <?php _e("We'll love and support you forever", 'siteorigin') ?></label>
 				<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price" > <strong><?php _e('Custom', 'siteorigin') ?></strong> <input type="number" name="variable_pricing_custom" value="15" placeholder="$4+" min="4"> </label>
 			</div>
 			<div class="options hide-if-js">
@@ -88,7 +89,7 @@ $theme = basename( get_template_directory() );
 			</div>
 
 			<p class="description choose-description">
-				<?php printf( __("You choose the price, so you can pay what %s is worth to you.", 'siteorigin'), ucfirst($theme) ) ?>
+				<?php _e("We offer a 60 day full refund if you're not happy with your purchase", 'siteorigin') ?>
 			</p>
 
 		</form>

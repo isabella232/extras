@@ -17,7 +17,7 @@ else {
 printf(
 	__( "If you like %s, please <a href='%s' target='_blank'>rate it</a>. Your rating helps a lot! ", 'siteorigin' ),
 	ucfirst($theme),
-	'http://wordpress.org/support/view/theme-reviews/'.$theme
+	'http://wordpress.org/support/view/theme-reviews/'.$theme.'#postform'
 );
 ?>
 

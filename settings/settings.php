@@ -446,7 +446,9 @@ function siteorigin_settings_change_message() {
 
 		?>
 		<div id="setting-updated" class="updated">
-			<p><strong><?php _e( 'Settings saved.', 'siteorigin' ) ?></strong></p>
+			<p>
+				<strong><?php _e( 'Settings saved.', 'siteorigin' ) ?></strong>
+			</p>
 		</div>
 		<?php
 
