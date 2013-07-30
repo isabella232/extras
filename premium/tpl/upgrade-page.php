@@ -70,7 +70,7 @@ $theme = basename( get_template_directory() );
 			</p>
 
 			<div class="support-message">
-				<p><?php _e("Although we appreciate and support all our premium users, we only guarantee <strong>24 hour</strong> support replies purchases over <strong>$15</strong>. Support on this order might take longer.", 'siteorigin') ?></p>
+				<p><?php _e("Although we appreciate and support all our premium users, we only guarantee <strong>24 hour</strong> support replies purchases <strong>$15</strong> or more. Support on this order might take longer.", 'siteorigin') ?></p>
 			</div>
 
 			<p class="description">
