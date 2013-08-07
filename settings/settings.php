@@ -479,7 +479,7 @@ function siteorigin_settings_theme_help(){
 function siteorigin_settings_media_view_strings($strings, $post){
 	if(!empty($post)) return $strings;
 	$screen = get_current_screen();
-	if($screen->id != 'appearance_page_theme_settings_page') return $strings;
+	if(empty($screen->id) || $screen->id != 'appearance_page_theme_settings_page') return $strings;
 	
 	// Remove these strings, to remove the tabs
 	// Luckily the JS gracefully handles these being unset
