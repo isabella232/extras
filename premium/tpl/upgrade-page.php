@@ -81,7 +81,7 @@ $theme = basename( get_template_directory() );
 				<label><input type="radio" name="variable_pricing_option" value="10"> <strong>$10</strong> <?php _e('Building your site on a budget', 'siteorigin') ?></label>
 				<label><input type="radio" name="variable_pricing_option" value="15" <?php checked(true) ?>> <strong>$15</strong> <?php _e("A good, fair price", 'siteorigin') ?></label>
 				<label><input type="radio" name="variable_pricing_option" value="20"> <strong>$20</strong> <?php _e("Our sincere thanks", 'siteorigin') ?></label>
-				<label><input type="radio" name="variable_pricing_option" value="30"> <strong>$30</strong> <?php _e("We'll love and support you forever", 'siteorigin') ?></label>
+				<label><input type="radio" name="variable_pricing_option" value="30"> <strong>$30</strong> <?php _e("We'll go that extra mile", 'siteorigin') ?></label>
 				<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price" > <strong><?php _e('Custom', 'siteorigin') ?></strong> <input type="number" name="variable_pricing_custom" value="15" placeholder="$4+" min="4"> </label>
 			</div>
 			<div class="options hide-if-js">
