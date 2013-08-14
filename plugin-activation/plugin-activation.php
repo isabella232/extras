@@ -111,7 +111,7 @@ function siteorigin_plugin_activation_install_url($plugin, $plugin_name, $source
 					'page'          => 'siteorigin_plugin_activation',
 					'plugin'        => $plugin,
 					'plugin_name'   => $plugin_name,
-					'plugin_source' => $source,
+					'plugin_source' => urlencode($source),
 					'siteorigin-pa-install' => 'install-plugin',
 				),
 				admin_url( 'themes.php' )
