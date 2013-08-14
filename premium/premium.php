@@ -28,18 +28,6 @@ function siteorigin_premium_page_render() {
 		case 'view':
 			global $siteorigin_premium_info;
 			$siteorigin_premium_info = apply_filters( 'siteorigin_premium_content', array() );
-
-			if ( empty( $siteorigin_premium_info ) ) {
-				?>
-				<div class="wrap" id="theme-upgrade">
-					<h2><?php _e( 'Premium Upgrade', 'siteorigin' ) ?></h2>
-					<p>
-						<?php printf(__( "There's a premium version of %s coming soon.", 'siteorigin' ),ucfirst( $theme )); ?>
-					</p>
-				</div>
-				<?php
-				return;
-			}
 			get_template_part('extras/premium/tpl/upgrade-page');
 			break;
 
