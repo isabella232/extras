@@ -109,7 +109,7 @@ function siteorigin_panels_lite_setting($key = false){
  * @param $template
  * @return string
  */
-function siteorigin_panels_filter_home_template($template){
+function siteorigin_panels_lite_filter_home_template($template){
 	if(!get_theme_mod('siteorigin_panels_home_page_enabled', siteorigin_panels_lite_setting('home-page-default'))) return $template;
 
 	$GLOBALS['siteorigin_panels_is_panels_home'] = true;
@@ -118,7 +118,7 @@ function siteorigin_panels_filter_home_template($template){
 		$template
 	));
 }
-add_filter('home_template', 'siteorigin_panels_filter_home_template');
+add_filter('home_template', 'siteorigin_panels_lite_filter_home_template');
 
 /**
  * @return mixed|void Are we currently viewing the home page
@@ -299,11 +299,10 @@ function siteorigin_panels_lite_css() {
 }
 add_action( 'wp_head', 'siteorigin_panels_lite_css', 15 );
 
-if(!function_exists('siteorigin_panels_render')):
 /**
  * Renders the home page if we need it.
  */
-function siteorigin_panels_render(){
+function siteorigin_panels_lite_home_render(){
 	$layouts = apply_filters( 'siteorigin_panels_prebuilt_layouts', array() );
 	if(empty($layouts[ siteorigin_panels_lite_setting('home-page-default') ])) return;
 	$panels_data = $layouts[siteorigin_panels_lite_setting('home-page-default')];
@@ -343,4 +342,3 @@ function siteorigin_panels_render(){
 
 	return apply_filters( 'siteorigin_panels_render', $html, 'home', null );
 }
-endif;
