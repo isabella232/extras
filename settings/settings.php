@@ -25,7 +25,15 @@ function siteorigin_settings_init( $theme_name = null ) {
 	$GLOBALS['siteorigin_settings_theme_name'] = $theme_name;
 	$GLOBALS['siteorigin_settings_name'] = $theme_name . '_theme_settings';
 	$GLOBALS['siteorigin_settings_defaults'] = apply_filters( 'siteorigin_theme_default_settings', array() );
-	$GLOBALS['siteorigin_settings'] = wp_parse_args( get_option( $theme_name . '_theme_settings', array() ), $GLOBALS['siteorigin_settings_defaults'] );
+
+	$settings = get_option( $theme_name . '_theme_settings', array() );
+	// Remove any settings with a -1 value
+	foreach($settings as $name => $value) {
+		if ($value == -1) {
+			unset($settings[$name]);
+		}
+	}
+	$GLOBALS['siteorigin_settings'] = wp_parse_args( $settings, $GLOBALS['siteorigin_settings_defaults'] );
 
 	// Register all the actions for the settings page
 	add_action( 'admin_menu', 'siteorigin_settings_admin_menu' );
@@ -70,6 +78,11 @@ function siteorigin_settings_admin_menu() {
  * Render the theme settings page
  */
 function siteorigin_settings_render() {
+	if( version_compare( get_bloginfo('version'), '3.4', '<' ) ) {
+		?><div class="wrap"><div id="setting-error-settings_updated" class="updated settings-error"> <p><strong><?php _e('Please update to the latest version of WordPress to use theme settings.', 'siteorigin') ?></strong></p></div></div><?php
+		return;
+	}
+
 	locate_template( 'extras/settings/page.php', true, false );
 }
 
@@ -314,11 +327,16 @@ function siteorigin_settings_field( $args ) {
 				printf(__('You need to <a href="%s">upgrade</a> to WordPress 3.5 to use media fields', 'siteorigin'), admin_url('update-core.php'));
 				break;
 			}
-			
+
 			if(!empty($current)) {
-				$post = get_post($current);
-				$src = wp_get_attachment_image_src($current, 'thumbnail');
-				if(empty($src)) $src = wp_get_attachment_image_src($current, 'thumbnail', true);
+				if(is_array($current)) {
+					$src = $current;
+				}
+				else {
+					$post = get_post($current);
+					$src = wp_get_attachment_image_src($current, 'thumbnail');
+					if(empty($src)) $src = wp_get_attachment_image_src($current, 'thumbnail', true);
+				}
 			}
 			else{
 				$src = array('', 0, 0);
@@ -331,7 +349,7 @@ function siteorigin_settings_field( $args ) {
 				<div class="media-field-wrapper">
 					<div class="current">
 						<div class="thumbnail-wrapper">
-							<img src="<?php echo esc_url($src[0]) ?>" class="thumbnail" <?php if(empty($post)) echo "style='display:none'" ?> />
+							<img src="<?php echo esc_url($src[0]) ?>" class="thumbnail" <?php if(empty($src[0])) echo "style='display:none'" ?> />
 						</div>
 						<div class="title"><?php if(!empty($post)) echo esc_attr($post->post_title) ?></div>
 					</div>
@@ -342,7 +360,7 @@ function siteorigin_settings_field( $args ) {
 					<a href="#" class="media-remove-button"><?php _e('Remove', 'siteorigin') ?></a>
 				</div>
 
-				<input type="hidden" id="<?php echo esc_attr( $field_id ) ?>" value="<?php echo esc_attr( $current ) ?>" name="<?php echo esc_attr( $field_name ) ?>" />
+				<input type="hidden" id="<?php echo esc_attr( $field_id ) ?>" value="<?php echo esc_attr( is_array( $current ) ? '-1' : $current ) ?>" name="<?php echo esc_attr( $field_name ) ?>" />
 			<?php
 			break;
 		
@@ -412,8 +430,10 @@ function siteorigin_settings_validate( $values ) {
 				
 				case 'media' :
 					// Only allow valid attachment post ids
-					$attachment = get_post( $values[ $name ] );
-					if(empty($attachment) || $attachment->post_type != 'attachment') $values[ $name ] = '';
+					if( $values[ $name ] != -1 ) {
+						$attachment = get_post( $values[ $name ] );
+						if(empty($attachment) || $attachment->post_type != 'attachment') $values[ $name ] = '';
+					}
 			}
 			
 			if ( !isset( $current[ $name ] ) || ( isset( $values[ $name ] ) && isset( $current[ $name ] ) && $values[ $name ] != $current[ $name ] ) ) $changed = true;
@@ -427,10 +447,6 @@ function siteorigin_settings_validate( $values ) {
 
 	if ( $changed ) {
 		do_action( 'siteorigin_settings_changed' );
-
-		/**
-		 * An action triggered when the theme settings have changed.
-		 */
 		set_theme_mod( 'siteorigin_settings_changed', true );
 	}
 
