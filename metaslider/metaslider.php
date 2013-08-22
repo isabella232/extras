@@ -63,3 +63,33 @@ function siteorigin_metaslider_prebuilt_layouts(){
 
 	return $layouts;
 }
+
+function siteorigin_metaslider_get_options(){
+	$options = array('' => __('None', 'siteorigin'));
+
+	if(class_exists('MetaSliderPlugin')){
+		$sliders = get_posts(array(
+			'post_type' => 'ml-slider',
+		));
+
+		foreach($sliders as $slider) {
+			$options['meta:'.$slider->ID] = __('Slider: ', 'siteorigin').$slider->post_title;
+		}
+	}
+
+	return $options;
+}
+
+function siteorigin_metaslider_install_link(){
+	if(function_exists('siteorigin_plugin_activation_install_url')) {
+		return siteorigin_plugin_activation_install_url('ml-slider', __('MetaSlider', 'vantage'), 'http://downloads.wordpress.org/plugin/ml-slider.zip');
+	}
+	else {
+		return 'http://downloads.wordpress.org/plugin/ml-slider.zip';
+	}
+}
+
+function siteorigin_metaslider_affiliate(){
+	return 'http://sorig.in/metaslider';
+}
+add_filter('metaslider_hoplink', 'siteorigin_panels_metaslider_hoplink');
