@@ -64,8 +64,10 @@ function siteorigin_metaslider_prebuilt_layouts(){
 	return $layouts;
 }
 
-function siteorigin_metaslider_get_options(){
-	$options = array('' => __('None', 'siteorigin'));
+function siteorigin_metaslider_get_options($has_demo = true){
+	$options = array( '' => __('None', 'siteorigin') );
+
+	if($has_demo) $options['demo'] = __('Demo Slider', 'siteorigin');
 
 	if(class_exists('MetaSliderPlugin')){
 		$sliders = get_posts(array(
