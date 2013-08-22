@@ -20,6 +20,9 @@ function siteorigin_metaslider_register_admin_scripts(){
 }
 add_action('metaslider_register_admin_scripts', 'siteorigin_metaslider_register_admin_scripts');
 
+/**
+ *
+ */
 function siteorigin_metaslider_prebuilt_window(){
 	if(isset($_GET['page']) && $_GET['page'] == 'metaslider') {
 		$layouts = siteorigin_metaslider_prebuilt_layouts();
@@ -44,6 +47,9 @@ function siteorigin_metaslider_prebuilt_window(){
 }
 add_action('admin_footer', 'siteorigin_metaslider_prebuilt_window');
 
+/**
+ * @return mixed|void
+ */
 function siteorigin_metaslider_prebuilt_layouts(){
 	static $layouts = null;
 	if(is_null($layouts)){

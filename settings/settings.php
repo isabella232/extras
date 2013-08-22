@@ -29,7 +29,7 @@ function siteorigin_settings_init( $theme_name = null ) {
 	$settings = get_option( $theme_name . '_theme_settings', array() );
 	// Remove any settings with a -1 value
 	foreach($settings as $name => $value) {
-		if ($value == -1) {
+		if (intval($value) === -1) {
 			unset($settings[$name]);
 		}
 	}
@@ -225,9 +225,7 @@ function siteorigin_setting( $name , $default = null) {
 		return apply_filters('siteorigin_setting_'.$name, $default);
 	}
 	
-	if ( !isset( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) {
-		$value = null;
-	}
+	if ( !isset( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) $value = null;
 	else $value = $GLOBALS['siteorigin_settings'][ $name ];
 
 	return apply_filters('siteorigin_setting_'.$name, $value);
