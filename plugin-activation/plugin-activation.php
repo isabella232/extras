@@ -126,7 +126,7 @@ function siteorigin_plugin_activation_is_activating($plugin){
 	return (
 		(basename($_SERVER['PHP_SELF']) == 'plugins.php' || basename($_SERVER['PHP_SELF']) == 'update.php')
 		&& isset($_GET['action'])
-		&& ($_GET['action'] == 'activate' || $_GET['action'] == 'upgrade-plugin')
+		&& ($_GET['action'] == 'activate' || $_GET['action'] == 'upgrade-plugin' || $_GET['action'] == 'activate-plugin')
 		&& isset($_GET['plugin'])
 		&& $_GET['plugin'] == $plugin.'/'.$plugin.'.php'
 	);
