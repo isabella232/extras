@@ -124,9 +124,9 @@ function siteorigin_plugin_activation_install_url($plugin, $plugin_name, $source
 function siteorigin_plugin_activation_is_activating($plugin){
 	if(!is_admin()) return false;
 	return (
-		basename($_SERVER['PHP_SELF']) == 'plugins.php'
+		(basename($_SERVER['PHP_SELF']) == 'plugins.php' || basename($_SERVER['PHP_SELF']) == 'update.php')
 		&& isset($_GET['action'])
-		&& $_GET['action'] == 'activate'
+		&& ($_GET['action'] == 'activate' || $_GET['action'] == 'upgrade-plugin')
 		&& isset($_GET['plugin'])
 		&& $_GET['plugin'] == $plugin.'/'.$plugin.'.php'
 	);
