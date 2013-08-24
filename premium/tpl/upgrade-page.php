@@ -69,13 +69,13 @@ $theme = basename( get_template_directory() );
 
 				<p class="download">
 					<a href="<?php echo esc_url( $siteorigin_premium_info['buy_url'] ) ?>?amount=15" class="buy-button variable-pricing-submit">
-						<span><?php _e('Buy Now', 'siteorigin') ?></span><em>$15</em>
-						<input type="hidden" name="amount" value="15" >
+						<span><?php _e('Buy Now', 'siteorigin') ?></span><em>$20</em>
+						<input type="hidden" name="amount" value="20" >
 					</a>
 				</p>
 
 				<div class="support-message">
-					<p><?php _e("Although we appreciate and support all our premium users, we only guarantee <strong>24 hour</strong> support replies purchases <strong>$15</strong> or more. Support on this order might take longer.", 'siteorigin') ?></p>
+					<p><?php _e("Although we appreciate and support all our premium users, our support staff prioritize orders of <strong>$15</strong> or more. Support on this order might take longer.", 'siteorigin') ?></p>
 				</div>
 
 				<p class="description">
@@ -84,9 +84,12 @@ $theme = basename( get_template_directory() );
 
 				<div class="options hide-if-no-js">
 					<label><input type="radio" name="variable_pricing_option" value="10"> <strong>$10</strong> <?php _e('Building your site on a budget', 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="15" <?php checked(true) ?>> <strong>$15</strong> <?php _e("A good, fair price", 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="20"> <strong>$20</strong> <?php _e("Our sincere thanks", 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="30"> <strong>$30</strong> <?php _e("We'll go that extra mile for you", 'siteorigin') ?></label>
+					<label><input type="radio" name="variable_pricing_option" value="15"> <strong>$15</strong> <?php _e("A fair price for a great theme", 'siteorigin') ?></label>
+					<label><input type="radio" name="variable_pricing_option" value="20" <?php checked(true) ?>> <strong>$20</strong> <?php _e("Our sincere thanks", 'siteorigin') ?></label>
+					<label><input type="radio" name="variable_pricing_option" value="35"> <strong>$35</strong> <?php _e("We'll go that extra mile for you", 'siteorigin') ?></label>
+					<?php if($siteorigin_premium_info['roadmap']) : ?>
+						<label><input type="radio" name="variable_pricing_option" value="50"> <strong>$50</strong> <?php _e("A huge contribution to its development", 'siteorigin') ?></label>
+					<?php endif; ?>
 					<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price" > <strong><?php _e('Custom', 'siteorigin') ?></strong> <input type="number" name="variable_pricing_custom" value="15" placeholder="$3+" min="3"> </label>
 				</div>
 				<div class="options hide-if-js">
@@ -98,6 +101,13 @@ $theme = basename( get_template_directory() );
 				</p>
 
 			</form>
+
+			<?php if(!empty($siteorigin_premium_info['roadmap'])) : ?>
+				<div class="contribute">
+					<?php printf( __('Your contribution will help fund new features in %s.', 'siteorigin'), ucfirst($theme) ); ?>
+					<?php printf( __('Find out more on our <a href="%s" target="_blank">roadmap</a>.', 'siteorigin'), $siteorigin_premium_info['roadmap'] ); ?>
+				</div>
+			<?php endif; ?>
 
 			<?php if(!empty($siteorigin_premium_info['testimonials'])): ?>
 				<h3 class="testimonials-heading"><?php _e('Our User Feedback', 'siteorigin') ?></h3>

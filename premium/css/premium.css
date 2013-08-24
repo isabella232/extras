@@ -211,6 +211,19 @@
     margin-bottom: 0;
 }
 
+#theme-upgrade .contribute {
+    background: #FBFBFB;
+    border: 1px solid #E0E0E0;
+    padding: 20px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+    margin-top: 20px;
+}
+
+#theme-upgrade .contribute a{
+    text-decoration: none;
+    font-weight: bold;
+}
+
 #theme-upgrade .testimonials-heading {
     margin-top: 40px;
 }
