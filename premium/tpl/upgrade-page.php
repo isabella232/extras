@@ -69,8 +69,8 @@ $theme = basename( get_template_directory() );
 
 				<p class="download">
 					<a href="<?php echo esc_url( $siteorigin_premium_info['buy_url'] ) ?>?amount=15" class="buy-button variable-pricing-submit">
-						<span><?php _e('Buy Now', 'siteorigin') ?></span><em>$20</em>
-						<input type="hidden" name="amount" value="20" >
+						<span><?php _e('Buy Now', 'siteorigin') ?></span><em>$15</em>
+						<input type="hidden" name="amount" value="15" >
 					</a>
 				</p>
 
@@ -84,8 +84,8 @@ $theme = basename( get_template_directory() );
 
 				<div class="options hide-if-no-js">
 					<label><input type="radio" name="variable_pricing_option" value="10"> <strong>$10</strong> <?php _e('Building your site on a budget', 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="15"> <strong>$15</strong> <?php _e("A fair price for a great theme", 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="20" <?php checked(true) ?>> <strong>$20</strong> <?php _e("Our sincere thanks", 'siteorigin') ?></label>
+					<label><input type="radio" name="variable_pricing_option" value="15" <?php checked(true) ?>> <strong>$15</strong> <?php _e("A fair price for a powerful theme", 'siteorigin') ?></label>
+					<label><input type="radio" name="variable_pricing_option" value="20"> <strong>$20</strong> <?php _e("Our sincere thanks", 'siteorigin') ?></label>
 					<label><input type="radio" name="variable_pricing_option" value="35"> <strong>$35</strong> <?php _e("We'll go that extra mile for you", 'siteorigin') ?></label>
 					<?php if($siteorigin_premium_info['roadmap']) : ?>
 						<label><input type="radio" name="variable_pricing_option" value="50"> <strong>$50</strong> <?php _e("A huge contribution to its development", 'siteorigin') ?></label>
