@@ -65,12 +65,12 @@ $theme = basename( get_template_directory() );
 		</div>
 
 		<div class="right-column">
+			<p>
+				<?php printf( __("We're working on more features for %s Premium, but we need your help.", 'siteorigin'), ucfirst($theme) ) ?>
+				<?php printf( __("Every premium purchase will fund new features, helping you get the most out of %s.", 'siteorigin'), ucfirst($theme) ) ?>
+			</p>
 
 			<?php if(!empty($siteorigin_premium_info['roadmap'])) : ?>
-				<p>
-					<?php printf( __("We're working on more features for %s Premium, but we need your help.", 'siteorigin'), ucfirst($theme) ) ?>
-					<?php printf( __("Every premium version purchase will help fund new features, so you get the most out of %s.", 'siteorigin'), ucfirst($theme) ) ?>
-				</p>
 				<p><?php printf( __("Visit the <a href='%s' target='_blank' class='roadmap'>%s roadmap</a> for progress updates.", 'siteorigin'), esc_url($siteorigin_premium_info['roadmap']), ucfirst($theme) ) ?></p>
 			<?php endif; ?>
 
