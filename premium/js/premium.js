@@ -1,5 +1,6 @@
 jQuery( function ( $ ) {
-    var minPrice = Number( $('#theme-upgrade input[name=variable_pricing_custom]').attr('min') );
+
+    var minPrice = Number( $('#theme-upgrade input[name=amount]').attr('min') );
 
     // Handle clicking the play button
     $('#theme-upgrade #click-to-play').click(function(){
@@ -8,49 +9,36 @@ jQuery( function ( $ ) {
         return false;
     })
 
-    $( '#theme-upgrade .buy-button').click(function(e){
-        e.preventDefault();
-        $(this).closest('form').submit();
+    $('#theme-upgrade #custom-price-form').submit(function(){
         $( '#theme-upgrade-info' ).slideDown();
-        $( 'html, body' ).animate( {'scrollTop':0} );
-        return false;
-    });
 
-    $('#theme-upgrade #purchase-form').submit(function(){
+        // Make sure the amount is OK
+        $input = $(this).find('input[name=amount]');
+        var val = $input.val().replace(/[^0-9.]/g, '');
+        val = parseFloat(val).toFixed(2);
+        if(isNaN(val)) val = minPrice;
+        $input.val(val);
+
         window.open('', 'paymentwindow', 'width=960,height=800,resizeable,scrollbars');
         this.target = 'paymentwindow';
     });
 
-    $('#theme-upgrade #purchase-form .options input[type=radio]').change(function(){
-        var val = $(this).val();
-        if($(this).hasClass('custom-price')) {
-            val = $('#theme-upgrade #purchase-form .options input[name=variable_pricing_custom]').val();
-            val = parseFloat(val).toFixed(2);
-            if(isNaN(val)) val = minPrice;
-            val = Math.max(val,minPrice);
-        }
+    $('#theme-upgrade #custom-price-form input[name=amount]').keyup(function(){
+        var $$ = $(this);
+        $($('#purchase-form a').removeClass('selected').get().reverse()).each(function(){
+            var $l = $(this);
+            if(parseFloat($$.val()) >= parseFloat($l.data('amount')) ) {
+                $l.addClass('selected');
+                return false;
+            }
+        });
+    }).change( function(){ $(this).keyup() } );
 
-        $('#theme-upgrade #purchase-form input[name=amount]').val(val);
-        $('#theme-upgrade #purchase-form .variable-pricing-submit em').html('$'+val);
-
-        if(val >= 15) $('#theme-upgrade .support-message').slideUp();
-        else $('#theme-upgrade .support-message').slideDown();
-    });
-
-    $('#theme-upgrade #purchase-form .options input[name=variable_pricing_custom]').keyup(function(){
-        var val = $(this).val().replace(/[^0-9.]/g, '');
-        val = parseFloat(val).toFixed(2);
-        if(isNaN(val)) val = minPrice;
-        val = Math.max(val,minPrice);
-
-        $(this).closest('form').find('.custom-price').click();
-
-        $('#theme-upgrade #purchase-form input[name=amount]').val(val);
-        $('#theme-upgrade #purchase-form .variable-pricing-submit em').html('$'+val);
-
-        if(val >= 15) $('#theme-upgrade .support-message').slideUp();
-        else $('#theme-upgrade .support-message').slideDown();
-    }).change(function(){ $(this).keyup(); });
+    $('#purchase-form a').click(function(){
+        window.open($(this).attr('href'), 'paymentwindow', 'width=960,height=800,resizeable,scrollbars');
+        $( '#theme-upgrade-info' ).slideToggle();
+        return false;
+    })
 
 
     // Display the form

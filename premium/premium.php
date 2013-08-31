@@ -263,3 +263,34 @@ class SiteOrigin_Premium_Teaser_Customizer extends WP_Customize_Section{
 	}
 }
 endif;
+
+function siteorigin_premium_default_content($content){
+	$theme = basename( get_template_directory() );
+
+	$content['rewards'][] = array(
+		'amount' => 10,
+		'title' => sprintf(__('A Copy of %s Premium', 'siteorigin'), ucfirst($theme)),
+		'text' => sprintf(__('You get a copy of %s Premium, delivered instantly to your PayPal email address. This includes the same basic support we offer users of our free themes.', 'siteorigin'), ucfirst($theme)),
+	);
+
+	$content['rewards'][] = array(
+		'amount' => 20,
+		'title' => __('Premium Support', 'siteorigin'),
+		'text' => sprintf(__("This includes Premium email support from our support team for a single site. We'll help you as quickly as possible with all your setup and configuration questions.", 'siteorigin'), ucfirst($theme)),
+	);
+
+	$content['rewards'][] = array(
+		'amount' => 40,
+		'title' => __('Advanced Premium Support', 'siteorigin'),
+		'text' => sprintf(__("We'll go the extra mile and help you with minor CSS customizations, plugin conflicts and anything else that falls outside standard %s Premium support.", 'siteorigin'), ucfirst($theme)),
+	);
+
+	$content['rewards'][] = array(
+		'amount' => 60,
+		'title' => __('A Special Thank You', 'siteorigin'),
+		'text' => sprintf(__("Our highest level of support. If you need it, you'll get support directly from the developer of %s. We'll also include your name on our contributors list.", 'siteorigin'), ucfirst($theme)),
+	);
+
+	return $content;
+}
+add_filter('siteorigin_premium_content', 'siteorigin_premium_default_content', 8);

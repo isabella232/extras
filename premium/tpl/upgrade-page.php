@@ -65,49 +65,34 @@ $theme = basename( get_template_directory() );
 		</div>
 
 		<div class="right-column">
-			<form method="get" action="<?php echo esc_url( $siteorigin_premium_info['buy_url'] ) ?>" id="purchase-form" target="_blank">
-
-				<p class="download">
-					<a href="<?php echo esc_url( $siteorigin_premium_info['buy_url'] ) ?>?amount=15" class="buy-button variable-pricing-submit">
-						<span><?php _e('Buy Now', 'siteorigin') ?></span><em>$15</em>
-						<input type="hidden" name="amount" value="15" >
-					</a>
-				</p>
-
-				<div class="support-message">
-					<p><?php _e("Although we appreciate and support all our premium users, our support staff prioritize orders of <strong>$15</strong> or more. Support on this order might take longer.", 'siteorigin') ?></p>
-				</div>
-
-				<p class="description">
-					<?php printf( __("You choose the price, so you can pay what %s is worth to you.", 'siteorigin'), ucfirst($theme) ) ?>
-				</p>
-
-				<div class="options hide-if-no-js">
-					<label><input type="radio" name="variable_pricing_option" value="10"> <strong>$10</strong> <?php _e('Building your site on a budget', 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="15" <?php checked(true) ?>> <strong>$15</strong> <?php _e("A fair price for a powerful theme", 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="20"> <strong>$20</strong> <?php _e("Our sincere thanks", 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="35"> <strong>$35</strong> <?php _e("We'll go that extra mile for you", 'siteorigin') ?></label>
-					<?php if($siteorigin_premium_info['roadmap']) : ?>
-						<label><input type="radio" name="variable_pricing_option" value="50"> <strong>$50</strong> <?php _e("A huge contribution to its development", 'siteorigin') ?></label>
-					<?php endif; ?>
-					<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price" > <strong><?php _e('Custom', 'siteorigin') ?></strong> <input type="number" name="variable_pricing_custom" value="15" placeholder="$3+" min="3"> </label>
-				</div>
-				<div class="options hide-if-js">
-					<p><?php _e('Please enable Javascript to change pricing', 'siteorigin') ?></p>
-				</div>
-
-				<p class="description choose-description">
-					<?php _e("We offer a 60 day full refund if you're not happy with your purchase", 'siteorigin') ?>
-				</p>
-
-			</form>
 
 			<?php if(!empty($siteorigin_premium_info['roadmap'])) : ?>
-				<div class="contribute">
-					<?php printf( __('Your contribution will help fund new features in %s.', 'siteorigin'), ucfirst($theme) ); ?>
-					<?php printf( __('Find out more on our <a href="%s" target="_blank">roadmap</a>.', 'siteorigin'), $siteorigin_premium_info['roadmap'] ); ?>
-				</div>
+				<p>
+					<?php printf( __("We're working on more features for %s Premium, but we need your help.", 'siteorigin'), ucfirst($theme) ) ?>
+					<?php printf( __("Every premium version purchase will help fund new features, so you get the most out of %s.", 'siteorigin'), ucfirst($theme) ) ?>
+				</p>
+				<p><?php printf( __("Visit the <a href='%s' target='_blank' class='roadmap'>%s roadmap</a> for progress updates.", 'siteorigin'), esc_url($siteorigin_premium_info['roadmap']), ucfirst($theme) ) ?></p>
 			<?php endif; ?>
+
+			<h3>Choose Your Perk</h3>
+			<div id="purchase-form">
+				<?php foreach($siteorigin_premium_info['rewards'] as $reward) : ?>
+					<a class="purchase-option" href="<?php echo esc_url( $siteorigin_premium_info['buy_url'] ) ?>?amount=<?php echo floatval($reward['amount']) ?>" data-amount="<?php echo intval($reward['amount']) ?>">
+						<h4><?php printf(__('Pay %s or more', 'siteorigin'), '$'.$reward['amount']) ?></h4>
+						<h3><?php echo esc_html($reward['title']) ?></h3>
+						<p><?php echo $reward['text'] ?></p>
+						<div class="buy-now"><?php _e('Buy', 'siteorigin') ?></div>
+					</a>
+				<?php endforeach ?>
+
+				<div class="more">
+					<p><strong><?php _e('Pay a custom amount.', 'siteorigin') ?></strong> <?php _e("You'll receive a the highest level reward you qualify for.", 'siteorigin') ?></p>
+					<form id="custom-price-form" action="<?php echo esc_url( $siteorigin_premium_info['buy_url'] ) ?>" method="get">
+						$<input type="number" name="amount" placeholder="5+" min="5" />
+						<input type="submit" value="<?php esc_attr_e('Buy Now', 'siteorigin') ?>" />
+					</form>
+				</div>
+			</div>
 
 			<?php if(!empty($siteorigin_premium_info['testimonials'])): ?>
 				<h3 class="testimonials-heading"><?php _e('Our User Feedback', 'siteorigin') ?></h3>
