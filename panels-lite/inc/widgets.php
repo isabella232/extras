@@ -156,10 +156,17 @@ class SiteOrigin_Panels_Widgets_PostLoop extends WP_Widget{
 			<input type="text" class="widefat" name="<?php echo $this->get_field_name( 'title' ) ?>" id="<?php echo $this->get_field_id( 'title' ) ?>" value="<?php echo esc_attr( $instance['title'] ) ?>">
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id('template') ?>"><?php _e('Template', 'siteorigin') ?></label>
+			<label for="<?php echo $this->get_field_id('template') ?>"><?php _e('Template', 'so-panels') ?></label>
 			<select id="<?php echo $this->get_field_id( 'template' ) ?>" name="<?php echo $this->get_field_name( 'template' ) ?>">
 				<?php foreach($templates as $template) : ?>
-					<option value="<?php echo esc_attr($template) ?>" <?php selected($instance['template'], $template) ?>><?php echo esc_html($template) ?></option>
+					<option value="<?php echo esc_attr($template) ?>" <?php selected($instance['template'], $template) ?>>
+						<?php
+						$headers = get_file_data( locate_template($template), array(
+							'loop_name' => 'Loop Name',
+						) );
+						echo esc_html(!empty($headers['loop_name']) ? $headers['loop_name'] : $template);
+						?>
+					</option>
 				<?php endforeach; ?>
 			</select>
 		</p>
