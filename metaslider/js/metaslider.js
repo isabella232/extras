@@ -31,7 +31,21 @@ jQuery( function($){
         var $$ = $(this);
         var html = $$.data('html');
 
-        if(confirm('Are you sure you want to replace your current slide content with this prebuilt layout?')){
+        var slideWidth = $('input[name="settings[width]"]').val();
+        var slideHeight = $('input[name="settings[height]"]').val();
+
+        // Replace the width and height attributes based on the slider size.
+        html = html.replace(/\{[a-z]*\:[0-9]*\%\}/gm, function(m){
+            var arr = /\{([a-z]*)\:([0-9]*)\%\}/gm.exec(m);
+            console.log(arr);
+            if(arr[1] == 'width') m = slideWidth/100*parseFloat(arr[2]);
+            else if(arr[1] == 'height') m = slideHeight/100*parseFloat(arr[2]);
+
+            return Math.round(m);
+        });
+        html = html.replace(/\{rand\}/gm, function(){ return Math.floor((Math.random()*10000000)); });
+
+        if(confirm(siteoriginMetaslider.replace)){
             currentSlide.find('textarea.wysiwyg').val(html);
             $('#siteorigin-metaslider-prebuilt-layouts-overlay').fadeOut('fast');
             $('#siteorigin-metaslider-prebuilt-layouts').fadeOut('fast');

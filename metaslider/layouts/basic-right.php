@@ -3,29 +3,29 @@
 function siteorigin_metaslider_layout_basic_right($layouts){
 	$layouts['basic-right'] = array(
 		'title' => __('Basic Right', 'siteorigin'),
+		'html' =>
+			siteorigin_metaslider_layer(
+				'<h2><span style="font-size: 2.75em; color: #FFFFFF">'.__('This Is The First Line', 'siteorigin').'<br/><span style="font-weight:300">'.__('This is The Second', 'siteorigin').'</span></span></h2>',
+				array(),
+				array('top' => '{height:25%}', 'right' => 25),
+				array('height' => 90, 'width' => '{width:50%}'),
+				array('type' => 'fadeInRightBig', 'delay' => 0.5)
+			).
+			siteorigin_metaslider_layer(
+				'<p class="siteorigin-slider-action-button"><a href="#"><span>'.__('An Action Button', 'siteorigin').'</span></a></p>',
+				array(),
+				array('bottom' => '{height:35%}', 'right' => 25),
+				array('height' => 50, 'width' => '{width:50%}'),
+				array('type' => 'fadeInRightBig', 'delay' => 0.75)
+			).
+			siteorigin_metaslider_layer(
+				'<img src="'.get_template_directory_uri().'/extras/metaslider/img/portrait.jpg" style="max-width: 100%; height: auto;" width="320" height="380" />',
+				array(),
+				array('top' => '{height:10%}', 'left' => 25),
+				array('height' => '{height:90%}', 'width' => 320),
+				array('type' => 'fadeInUpBig', 'delay' => 1.5)
+			)
 	);
-	ob_start();
-
-	// The slide HTML
-	?>
-	<div class="layer" data-width="475" data-height="90" style="width: 475px; height: 90px; top: 120px; left: 10px; position: absolute;" data-top="120" data-left="10">
-		<div class="animation_in animated disabled" data-animation="disabled" data-animation-delay="0" style="width: 100%; height: 100%;">
-			<div class="animation_out animated disabled" data-animation="disabled" data-animation-delay="0" style="height: 100%; width: 100%;">
-				<div class="content_wrap" style="height: 100%;">
-					<div class="content" id="layer_content_447077974" data-padding="5" style="color: white; padding: 5px; position: relative;">
-						<h2>
-							This Theme Is Responsive<br/>
-							<strong>To The Very Last Pixel</strong>
-						</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<?php
-
-	$layouts['basic-right']['html'] = ob_get_clean();
-
 	return $layouts;
 }
 add_filter('siteorigin_metaslider_layouts', 'siteorigin_metaslider_layout_basic_right');
