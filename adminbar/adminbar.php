@@ -64,7 +64,7 @@ function siteorigin_adminbar_enqueue( $suffix ) {
 
 	// This adds an extra tab to the theme pages
 	if($suffix == 'theme-install.php' || $suffix == 'themes.php' && !wp_script_is('siteorigin-admin-tab')){
-		wp_enqueue_script('siteorigin-admin-tab', get_template_directory_uri().'/extras/adminbar/assets/tab.js', array('jquery'), SITEORIGIN_THEME_VERSION);
+		wp_enqueue_script('siteorigin-admin-tab', get_template_directory_uri().'/extras/adminbar/assets/tab.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION);
 		wp_localize_script('siteorigin-admin-tab', 'siteoriginAdminTab', array(
 			'text' => __('SiteOrigin Themes', 'siteorigin'),
 			'url' => admin_url('theme-install.php?tab=search&type=author&s=gpriday')

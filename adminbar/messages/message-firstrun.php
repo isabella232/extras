@@ -1,13 +1,3 @@
-<?php _e("Hi! I'm Greg Priday from SiteOrigin.", 'siteorigin') ?> 
-<?php _e("I hope you enjoy my WordPress theme.", 'siteorigin') ?> 
-<?php _e("Please follow me on Twitter and Facebook for updates.", 'siteorigin') ?>
-
-<div class="social">
-	<div class="follow twitter">
-		<iframe allowtransparency="true" frameborder="0" scrolling="no" src="https://platform.twitter.com/widgets/follow_button.html?screen_name=siteorigin&show_count=false&show_screen_name=true" style="width:122px; height:20px;"></iframe>
-	</div>
-
-	<div class="follow facebook">
-		<iframe src="//www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.facebook.com%2FSiteOrigin&amp;send=false&amp;layout=button_count&amp;width=450&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21&amp;appId=222225781217824" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe>
-	</div>
-</div>
+<?php
+$theme = basename( get_template_directory() );
+printf( __("Hi! I'm Greg from SiteOrigin. I hope you enjoy using %s. Sign up to <a href='%s' target='_blank'>our newsletter</a> if you'd like more free themes and exclusive offers.", 'siteorigin'), ucfirst($theme), 'http://eepurl.com/hbvhM');
