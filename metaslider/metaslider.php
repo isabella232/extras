@@ -85,7 +85,7 @@ function siteorigin_metaslider_get_options($has_demo = true){
 
 function siteorigin_metaslider_install_link(){
 	if(function_exists('siteorigin_plugin_activation_install_url')) {
-		return siteorigin_plugin_activation_install_url('ml-slider', __('MetaSlider', 'vantage'), 'http://downloads.wordpress.org/plugin/ml-slider.zip');
+		return siteorigin_plugin_activation_install_url('ml-slider', __('MetaSlider', 'vantage'));
 	}
 	else {
 		return 'http://downloads.wordpress.org/plugin/ml-slider.zip';

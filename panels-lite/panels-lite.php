@@ -37,8 +37,7 @@ function siteorigin_panels_lite_enqueue_admin($prefix){
 
 		$install_url = siteorigin_plugin_activation_install_url(
 			'siteorigin-panels',
-			__('Page Builder', 'siteorigin'),
-			'http://downloads.wordpress.org/plugin/siteorigin-panels.zip'
+			__('Page Builder', 'siteorigin')
 		);
 
 		wp_enqueue_script('siteorigin-panels-lite-teaser', get_template_directory_uri().'/extras/panels-lite/js/tab.js', array('jquery'));

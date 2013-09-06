@@ -32,9 +32,15 @@ function siteorigin_plugin_activation_do_plugin_install(){
 	if ( isset( $_GET[sanitize_key( 'plugin' )] ) && ( isset( $_GET[sanitize_key( 'siteorigin-pa-install' )] ) && 'install-plugin' == $_GET[sanitize_key( 'siteorigin-pa-install' )] ) && current_user_can('install_plugins') ) {
 		check_admin_referer( 'siteorigin-pa-install' );
 
-		$plugin['name']   = $_GET[sanitize_key( 'plugin_name' )]; // Plugin name
-		$plugin['slug']   = $_GET[sanitize_key( 'plugin' )]; // Plugin slug
-		$plugin['source'] = $_GET[sanitize_key( 'plugin_source' )]; // Plugin source
+		$plugin['name']   = $_GET['plugin_name']; // Plugin name
+		$plugin['slug']   = $_GET['plugin']; // Plugin slug
+
+		if(!empty($_GET['plugin_source'])) {
+			$plugin['source'] = $_GET['plugin_source'];
+		}
+		else {
+			$plugin['source'] = false;
+		}
 
 		/** Pass all necessary information via URL if WP_Filesystem is needed */
 		$url = wp_nonce_url(
@@ -72,8 +78,8 @@ function siteorigin_plugin_activation_do_plugin_install(){
 
 		$nonce = 'install-plugin_' . $plugin['slug'];
 
-		/** Prefix a default path to pre-packaged plugins */
-		$source = $plugin['source'];
+		// Find the source of the plugin
+		$source = !empty( $plugin['source'] ) ? $plugin['source'] : 'http://downloads.wordpress.org/plugin/'.$plugin['slug'].'.zip';
 		
 		/** Create a new instance of Plugin_Upgrader */
 		$upgrader = new Plugin_Upgrader( $skin = new Plugin_Installer_Skin( compact( 'type', 'title', 'url', 'nonce', 'plugin', 'api' ) ) );
@@ -86,7 +92,7 @@ function siteorigin_plugin_activation_do_plugin_install(){
 	}
 }
 
-function siteorigin_plugin_activation_install_url($plugin, $plugin_name, $source){
+function siteorigin_plugin_activation_install_url($plugin, $plugin_name, $source = false){
 	$plugins = get_plugins();
 	$plugins = array_keys($plugins);
 	
@@ -111,7 +117,7 @@ function siteorigin_plugin_activation_install_url($plugin, $plugin_name, $source
 					'page'          => 'siteorigin_plugin_activation',
 					'plugin'        => $plugin,
 					'plugin_name'   => $plugin_name,
-					'plugin_source' => urlencode($source),
+					'plugin_source' => !empty($source) ? urlencode($source) : false,
 					'siteorigin-pa-install' => 'install-plugin',
 				),
 				admin_url( 'themes.php' )
