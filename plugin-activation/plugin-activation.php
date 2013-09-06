@@ -79,7 +79,7 @@ function siteorigin_plugin_activation_do_plugin_install(){
 		$nonce = 'install-plugin_' . $plugin['slug'];
 
 		// Find the source of the plugin
-		$source = !empty( $plugin['source'] ) ? $plugin['source'] : 'http://downloads.wordpress.org/plugin/'.$plugin['slug'].'.zip';
+		$source = !empty( $plugin['source'] ) ? $plugin['source'] : 'http://downloads.wordpress.org/plugin/'.urlencode($plugin['slug']).'.zip';
 		
 		/** Create a new instance of Plugin_Upgrader */
 		$upgrader = new Plugin_Upgrader( $skin = new Plugin_Installer_Skin( compact( 'type', 'title', 'url', 'nonce', 'plugin', 'api' ) ) );
