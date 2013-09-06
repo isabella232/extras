@@ -156,7 +156,7 @@ class SiteOrigin_Panels_Widgets_PostLoop extends WP_Widget{
 			<input type="text" class="widefat" name="<?php echo $this->get_field_name( 'title' ) ?>" id="<?php echo $this->get_field_id( 'title' ) ?>" value="<?php echo esc_attr( $instance['title'] ) ?>">
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id('template') ?>"><?php _e('Template', 'so-panels') ?></label>
+			<label for="<?php echo $this->get_field_id('template') ?>"><?php _e('Template', 'siteorigin') ?></label>
 			<select id="<?php echo $this->get_field_id( 'template' ) ?>" name="<?php echo $this->get_field_name( 'template' ) ?>">
 				<?php foreach($templates as $template) : ?>
 					<option value="<?php echo esc_attr($template) ?>" <?php selected($instance['template'], $template) ?>>
@@ -229,10 +229,115 @@ class SiteOrigin_Panels_Widgets_PostLoop extends WP_Widget{
 	}
 }
 
+class SiteOrigin_Panels_Widgets_Image extends WP_Widget {
+	function __construct() {
+		parent::__construct(
+			'siteorigin-panels-image',
+			__( 'Image (PB)', 'siteorigin' ),
+			array(
+				'description' => __( 'Displays a simple image.', 'siteorigin' ),
+			)
+		);
+	}
+
+	/**
+	 * @param array $args
+	 * @param array $instance
+	 */
+	function widget( $args, $instance ) {
+		echo $args['before_widget'];
+		if(!empty($instance['href'])) echo '<a href="' . $instance['href'] . '">';
+		echo '<img src="'.esc_url($instance['src']).'" />';
+		if(!empty($instance['href'])) echo '</a>';
+		echo $args['after_widget'];
+	}
+
+	function update($new, $old){
+		$new = wp_parse_args($new, array(
+			'src' => '',
+			'href' => '',
+		));
+		return $new;
+	}
+
+	function form( $instance ) {
+		$instance = wp_parse_args($instance, array(
+			'src' => '',
+			'href' => '',
+		));
+
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'src' ) ?>"><?php _e( 'Image URL', 'siteorigin' ) ?></label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'src' ) ?>" name="<?php echo $this->get_field_name( 'src' ) ?>" value="<?php echo esc_attr($instance['src']) ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'href' ) ?>"><?php _e( 'Destination URL', 'siteorigin' ) ?></label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'href' ) ?>" name="<?php echo $this->get_field_name( 'href' ) ?>" value="<?php echo esc_attr($instance['href']) ?>" />
+		</p>
+	<?php
+	}
+}
+
+/**
+ * A panel that lets you embed video.
+ */
+class SiteOrigin_Panels_Widgets_EmbeddedVideo extends WP_Widget {
+	function __construct() {
+		parent::__construct(
+			'siteorigin-panels-embedded-video',
+			__( 'Embedded Video (PB)', 'siteorigin' ),
+			array(
+				'description' => __( 'Embeds a video.', 'siteorigin' ),
+			)
+		);
+	}
+
+	/**
+	 * Display the video using
+	 *
+	 * @param array $args
+	 * @param array $instance
+	 */
+	function widget( $args, $instance ) {
+		$embed = new WP_Embed();
+
+		if(!wp_script_is('fitvids'))
+			wp_enqueue_script('fitvids', plugin_dir_url(SITEORIGIN_PANELS_BASE_FILE).'widgets/js/jquery.fitvids.js', array('jquery'), SITEORIGIN_PANELS_VERSION);
+
+		if(!wp_script_is('siteorigin-panels-embedded-video'))
+			wp_enqueue_script('siteorigin-panels-embedded-video', plugin_dir_url(SITEORIGIN_PANELS_BASE_FILE).'widgets/js/embedded-video.js', array('jquery', 'fitvids'), SITEORIGIN_PANELS_VERSION);
+
+		echo $args['before_widget'];
+		?><div class="siteorigin-fitvids"><?php echo $embed->run_shortcode( '[embed]' . $instance['video'] . '[/embed]' ) ?></div><?php
+		echo $args['after_widget'];
+	}
+
+	function form( $instance ) {
+		$instance = wp_parse_args( $instance, array(
+			'video' => '',
+		) )
+
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id( 'video' ) ?>"><?php _e( 'Video', 'siteorigin' ) ?></label>
+			<input type="text" class="widefat" name="<?php echo $this->get_field_name( 'video' ) ?>" id="<?php echo $this->get_field_id( 'video' ) ?>" <?php echo esc_attr( $instance['video'] ) ?>>
+		</p>
+	<?php
+	}
+
+	function update( $new, $old ) {
+		$new['video'] = str_replace( 'https://', 'http://', $new['video'] );
+		return $new;
+	}
+}
+
 /**
  * Register the widgets.
  */
 function siteorigin_panels_widgets_init(){
 	register_widget('SiteOrigin_Panels_Widgets_PostLoop');
+	register_widget('SiteOrigin_Panels_Widgets_Image');
+	register_widget('SiteOrigin_Panels_Widgets_EmbeddedVideo');
 }
 add_action('widgets_init', 'siteorigin_panels_widgets_init');
