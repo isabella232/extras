@@ -1,5 +1,7 @@
 <?php
 
+include get_template_directory().'/extras/panels-lite/inc/widgets.php';
+
 /**
  * Add the admin menu entries
  */
