@@ -209,18 +209,18 @@ function siteorigin_panels_lite_css() {
 			if ( $cell_count > 1 ) {
 				$css_new = 'width:' . round( $cell['weight'] * 100, 3 ) . '%';
 				if ( empty( $css[1920][$css_new] ) ) $css[1920][$css_new] = array();
-				$css[1920][$css_new][] = '#pgc-' . $gi . '-' . $i;
+				$css[1920][$css_new][] = '#pgc-home-' . $gi . '-' . $i;
 			}
 		}
 
 		// Add the bottom margin to any grids that aren't the last
 		if($gi != count($panels_data['grids'])-1){
-			$css[1920]['margin-bottom: '.$panels_margin_bottom.'px'][] = '#pg-' . $gi;
+			$css[1920]['margin-bottom: '.$panels_margin_bottom.'px'][] = '#pg-home-' . $gi;
 		}
 
 		if ( $cell_count > 1 ) {
 			if ( empty( $css[1920]['float:left'] ) ) $css[1920]['float:left'] = array();
-			$css[1920]['float:left'][] = '#pg-' . $gi . ' .panel-grid-cell';
+			$css[1920]['float:left'][] = '#pg-home-' . $gi . ' .panel-grid-cell';
 		}
 
 		if ( $settings['responsive'] ) {
@@ -228,14 +228,14 @@ function siteorigin_panels_lite_css() {
 			$mobile_css = array( 'float:none', 'width:auto' );
 			foreach ( $mobile_css as $c ) {
 				if ( empty( $css[ $panels_mobile_width ][ $c ] ) ) $css[ $panels_mobile_width ][ $c ] = array();
-				$css[ $panels_mobile_width ][ $c ][] = '#pg-' . $gi . ' .panel-grid-cell';
+				$css[ $panels_mobile_width ][ $c ][] = '#pg-home-' . $gi . ' .panel-grid-cell';
 			}
 
 			for ( $i = 0; $i < $cell_count; $i++ ) {
 				if ( $i != $cell_count - 1 ) {
 					$css_new = 'margin-bottom:' . $panels_margin_bottom . 'px';
 					if ( empty( $css[$panels_mobile_width][$css_new] ) ) $css[$panels_mobile_width][$css_new] = array();
-					$css[$panels_mobile_width][$css_new][] = '#pgc-' . $gi . '-' . $i;
+					$css[$panels_mobile_width][$css_new][] = '#pgc-home-' . $gi . '-' . $i;
 				}
 			}
 		}
@@ -323,19 +323,36 @@ function siteorigin_panels_lite_home_render(){
 
 	ob_start();
 	foreach ( $grids as $gi => $cells ) {
-		?><div class="panel-grid" id="pg-<?php echo $gi ?>"><?php
+
+		$grid_classes = array('panel-grid');
+		$grid_classes = apply_filters( 'siteorigin_panels_row_classes', $grid_classes );
+		$grid_classes = array_map('esc_attr', $grid_classes);
+
+		?><div class="<?php echo implode(' ', $grid_classes) ?>" id="pg-<?php echo 'home-' . $gi ?>"><?php
+
+		if( !empty( $panels_data['grids'][$gi]['style'] ) ) {
+			?><div class="panel-row-style <?php echo esc_attr('panel-row-style-' . $panels_data['grids'][$gi]['style']) ?>"><?php
+		}
+
 		foreach ( $cells as $ci => $widgets ) {
-			?><div class="panel-grid-cell" id="pgc-<?php echo $gi . '-' . $ci ?>"><?php
+			$cell_classes = apply_filters( 'siteorigin_panels_row_cell_classes', array('panel-grid-cell') );
+			$cell_classes = array_map('esc_attr', $cell_classes);
+
+			?><div class="<?php echo implode( ' ', $cell_classes ) ?>" id="pgc-<?php echo 'home-' . $gi  . '-' . $ci ?>"><?php
 			foreach ( $widgets as $pi => $widget_info ) {
 				$data = $widget_info;
 				unset( $data['info'] );
 
-				siteorigin_panels_lite_the_widget( $widget_info['info']['class'], $data, $gi, $ci, $pi, $pi == 0, $pi == count( $widgets ) - 1 );
+				siteorigin_panels_the_widget( $widget_info['info']['class'], $data, $gi, $ci, $pi, $pi == 0, $pi == count( $widgets ) - 1 );
 			}
 			if ( empty( $widgets ) ) echo '&nbsp;';
 			?></div><?php
 		}
 		?></div><?php
+
+		if( !empty( $panels_data['grids'][$gi]['style'] ) ) {
+			?></div><?php
+		}
 	}
 	$html = ob_get_clean();
 
