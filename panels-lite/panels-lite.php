@@ -343,7 +343,7 @@ function siteorigin_panels_lite_home_render(){
 				$data = $widget_info;
 				unset( $data['info'] );
 
-				siteorigin_panels_the_widget( $widget_info['info']['class'], $data, $gi, $ci, $pi, $pi == 0, $pi == count( $widgets ) - 1 );
+				siteorigin_panels_lite_the_widget( $widget_info['info']['class'], $data, $gi, $ci, $pi, $pi == 0, $pi == count( $widgets ) - 1 );
 			}
 			if ( empty( $widgets ) ) echo '&nbsp;';
 			?></div><?php
