@@ -74,7 +74,7 @@ $theme = basename( get_template_directory() );
 				<p><?php printf( __("Visit the <a href='%s' target='_blank' class='roadmap'>%s roadmap</a> for progress updates.", 'siteorigin'), esc_url($siteorigin_premium_info['roadmap']), ucfirst($theme) ) ?></p>
 			<?php endif; ?>
 
-			<h3>Choose Your Perk</h3>
+			<h3><?php _e('Choose Your Perk', 'siteorigin') ?></h3>
 			<div id="purchase-form">
 				<?php foreach($siteorigin_premium_info['rewards'] as $reward) : ?>
 					<a class="purchase-option" href="<?php echo esc_url( $siteorigin_premium_info['buy_url'] ) ?>?amount=<?php echo floatval($reward['amount']) ?>" data-amount="<?php echo intval($reward['amount']) ?>">
