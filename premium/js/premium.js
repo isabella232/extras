@@ -1,3 +1,7 @@
+/**
+ * (c) Greg Priday, freely distributable under the terms of the GPL 2.0 license.
+ */
+
 jQuery( function ( $ ) {
 
     var minPrice = Number( $('#theme-upgrade input[name=amount]').attr('min') );

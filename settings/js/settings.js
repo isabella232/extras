@@ -1,3 +1,7 @@
+/**
+ * Handles settings in the admin - (c) Greg Priday, freely distributable under the terms of the GPL 2.0 license.
+ */
+
 jQuery( function ( $ ) {
     
     if( typeof $.fn.wpColorPicker != 'undefined'){
