@@ -30,6 +30,11 @@ function siteorigin_panels_lite_render_admin_home_page(){
 	get_template_part('extras/panels-lite/tpl/admin', 'home-page');
 }
 
+/**
+ * Enqueue any required admin scripts.
+ *
+ * @param $prefix
+ */
 function siteorigin_panels_lite_enqueue_admin($prefix){
 	if($prefix == 'appearance_page_so_panels_home_page'){
 		wp_enqueue_style('siteorigin-panels-lite-teaser', get_template_directory_uri().'/extras/panels-lite/css/panels-admin.css');
@@ -80,6 +85,12 @@ function siteorigin_panels_lite_admin_bar_menu($admin_bar){
 }
 add_action('admin_bar_menu', 'siteorigin_panels_lite_admin_bar_menu', 100);
 
+/**
+ * Get a setting value
+ *
+ * @param bool $key
+ * @return mixed|null|void
+ */
 function siteorigin_panels_lite_setting($key = false){
 	$settings = array(
 		'home-page' => false,                   // Is the home page supported
@@ -141,6 +152,12 @@ function siteorigin_panels_lite_enqueue_styles(){
 }
 add_action('wp_enqueue_scripts', 'siteorigin_panels_lite_enqueue_styles');
 
+/**
+ * Set the home body class when we're displaying a panels page.
+ *
+ * @param $classes
+ * @return array
+ */
 function siteorigin_panels_lite_body_class($classes){
 	if(siteorigin_panels_lite_is_home()) $classes[] = 'siteorigin-panels-home';
 	return $classes;
