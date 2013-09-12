@@ -111,7 +111,9 @@ function siteorigin_panels_lite_setting($key = false){
  * @return string
  */
 function siteorigin_panels_lite_filter_home_template($template){
-	if(!get_theme_mod('siteorigin_panels_home_page_enabled', siteorigin_panels_lite_setting('home-page-default'))) return $template;
+	if ( !get_theme_mod('siteorigin_panels_home_page_enabled', siteorigin_panels_lite_setting('home-page-default') ) ) return $template;
+	// If the user already has their own custom home page, use that instead
+	if ( get_option( 'show_on_front' ) !== 'posts' ) return $template;
 
 	$GLOBALS['siteorigin_panels_is_panels_home'] = true;
 	return locate_template(array(
