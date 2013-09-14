@@ -14,7 +14,7 @@
 
 			<?php $suggest = apply_filters('siteorigin_settings_suggest_features_url', false); if(!empty($suggest)) : ?>
 				<a id="siteorigin-theme-feature-suggestions" href="<?php echo esc_url($suggest) ?>" target="_blank">
-					<?php _e( 'Suggest features', 'siteorigin' ) ?>
+					<?php _e( 'Suggest a feature', 'siteorigin' ) ?>
 				</a>
 			<?php endif; ?>
 		</p>
