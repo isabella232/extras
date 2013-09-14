@@ -95,7 +95,7 @@ function siteorigin_metaslider_install_link(){
 function siteorigin_metaslider_affiliate(){
 	return 'http://sorig.in/metaslider';
 }
-add_filter('metaslider_hoplink', 'siteorigin_panels_metaslider_hoplink');
+add_filter('metaslider_hoplink', 'siteorigin_metaslider_affiliate');
 
 /**
  * Create the HTML for a slider layer.
