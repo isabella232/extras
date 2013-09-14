@@ -332,9 +332,9 @@ class SiteOrigin_Panels_Widgets_EmbeddedVideo extends WP_Widget {
 /**
  * Register the widgets.
  */
-function siteorigin_panels_widgets_init(){
+function siteorigin_panels_lite_widgets_init(){
 	register_widget('SiteOrigin_Panels_Widgets_PostLoop');
 	register_widget('SiteOrigin_Panels_Widgets_Image');
 	register_widget('SiteOrigin_Panels_Widgets_EmbeddedVideo');
 }
-add_action('widgets_init', 'siteorigin_panels_widgets_init');
+add_action('widgets_init', 'siteorigin_panels_lite_widgets_init');
