@@ -1,6 +1,8 @@
 <?php
 
-include get_template_directory().'/extras/panels-lite/inc/widgets.php';
+if( !defined('SITEORIGIN_PANELS_VERSION') && function_exists('siteorigin_plugin_activation_is_activating') && !siteorigin_plugin_activation_is_activating('siteorigin-panels') ) {
+	include get_template_directory().'/extras/panels-lite/inc/widgets.php';
+}
 
 /**
  * Add the admin menu entries
