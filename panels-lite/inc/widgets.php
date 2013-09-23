@@ -21,7 +21,8 @@ class SiteOrigin_Panels_Widgets_PostLoop extends WP_Widget{
 	 * @param array $instance
 	 */
 	function widget( $args, $instance ) {
-		if(empty($instance['template'])) return;
+		if( empty($instance['template']) ) return;
+		if( is_admin() ) return;
 
 		$template = $instance['template'];
 		$query_args = $instance;
