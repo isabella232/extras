@@ -48,12 +48,15 @@ class SiteOrigin_Panels_Widgets_PostLoop extends WP_Widget{
 				break;
 		}
 
-		// Exclude the current post to prevent possible infinite loop
-		if(!empty($query_args['post__not_in'])){
-			$query_args['post__not_in'][] = get_the_ID();
-		}
-		else {
-			$query_args['post__not_in'] = array( get_the_ID() );
+		global $post;
+		if(!empty($post) && !siteorigin_panels_lite_is_home()){
+			// Exclude the current post to prevent possible infinite loop
+			if(!empty($query_args['post__not_in'])){
+				$query_args['post__not_in'][] = $post->ID;
+			}
+			else {
+				$query_args['post__not_in'] = array( $post->ID );
+			}
 		}
 
 		// Create the query
