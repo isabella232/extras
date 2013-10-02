@@ -73,6 +73,8 @@ function siteorigin_metaslider_get_options($has_demo = true){
 	if(class_exists('MetaSliderPlugin')){
 		$sliders = get_posts(array(
 			'post_type' => 'ml-slider',
+			'numberposts' => 200,
+
 		));
 
 		foreach($sliders as $slider) {
