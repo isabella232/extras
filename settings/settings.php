@@ -388,6 +388,22 @@ function siteorigin_settings_field( $args ) {
 			<?php
 			break;
 
+		case 'pages' :
+			$pages = get_posts( array(
+				'post_type' => 'page',
+				'numberposts' => 200,
+				'post_status' => empty($args['unpublished']) ? 'publish' : 'any',
+			) );
+			?>
+			<select id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>">
+				<option value="0"><?php _e('None', 'siteorigin') ?></option>
+				<?php foreach ( $pages as $page ) : ?>
+					<option value="<?php echo $page->ID ?>" <?php selected($page->ID, $current) ?>><?php echo esc_attr($page->post_title) ?></option>
+				<?php endforeach ?>
+			</select>
+			<?php
+			break;
+
 		default :
 			_e( 'Unknown Field Type', 'siteorigin' );
 			break;
