@@ -10,6 +10,10 @@
  * @return mixed
  */
 function siteorigin_theme_update_filter( $current ) {
+	// Prevent this from running more than once in a single request.
+	static $done = false;
+	if($done) return $current;
+
 	$theme = basename( get_template_directory() );
 	$order_number = get_option( 'siteorigin_order_number_' . $theme, false );
 	if ( empty( $order_number ) ) return $current;
@@ -17,16 +21,20 @@ function siteorigin_theme_update_filter( $current ) {
 	// Updates are not compatible with the old child theme system
 	if ( basename( get_stylesheet_directory() ) == basename( get_template_directory() ) . '-premium' ) return $current;
 
-	$request = wp_remote_post(
-		SITEORIGIN_THEME_ENDPOINT . '/premium/' . $theme . '/?rand=' . rand( 0, getrandmax() ),
-		array(
-			'body' => array(
-				'action' => 'update_info',
-				'version' => SITEORIGIN_THEME_VERSION,
-				'order_number' => $order_number
+	static $request = false;
+	if(empty($request)){
+		// Only keep a single instance of this request. Stops double requests.
+		$request = wp_remote_post(
+			SITEORIGIN_THEME_ENDPOINT . '/premium/' . $theme . '/?rand=' . rand( 0, getrandmax() ),
+			array(
+				'body' => array(
+					'action' => 'update_info',
+					'version' => SITEORIGIN_THEME_VERSION,
+					'order_number' => $order_number
+				)
 			)
-		)
-	);
+		);
+	}
 
 	if ( !is_wp_error( $request ) && $request['response']['code'] == 200 && !empty( $request['body'] ) ) {
 		$data = unserialize( $request['body'] );
@@ -35,6 +43,7 @@ function siteorigin_theme_update_filter( $current ) {
 		if ( !empty( $data ) ) $current->response[ $theme ] = $data;
 	}
 
+	$done = true;
 	return $current;
 }
 
