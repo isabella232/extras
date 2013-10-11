@@ -25,7 +25,7 @@ function siteorigin_theme_update_filter( $current ) {
 	if(empty($request)){
 		// Only keep a single instance of this request. Stops double requests.
 		$request = wp_remote_post(
-			SITEORIGIN_THEME_ENDPOINT . '/premium/' . $theme . '/?rand=' . rand( 0, getrandmax() ),
+			SITEORIGIN_THEME_ENDPOINT . '/premium/' . $theme . '/?timestamp=' . time(),
 			array(
 				'body' => array(
 					'action' => 'update_info',
