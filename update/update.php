@@ -10,13 +10,9 @@
  * @return mixed
  */
 function siteorigin_theme_update_filter( $current ) {
-	// Prevent this from running more than once in a single request.
-	static $done = false;
-	if($done) return $current;
-
 	$theme = basename( get_template_directory() );
 	$order_number = get_option( 'siteorigin_order_number_' . $theme, false );
-	if ( empty( $order_number ) ) return $current;
+	if ( empty( $order_number ) ) return $current; // Skip if the user has not entered an order number.
 
 	// Updates are not compatible with the old child theme system
 	if ( basename( get_stylesheet_directory() ) == basename( get_template_directory() ) . '-premium' ) return $current;
@@ -43,7 +39,6 @@ function siteorigin_theme_update_filter( $current ) {
 		if ( !empty( $data ) ) $current->response[ $theme ] = $data;
 	}
 
-	$done = true;
 	return $current;
 }
 
