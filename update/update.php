@@ -20,14 +20,15 @@ function siteorigin_theme_update_filter( $current ) {
 	static $request = false;
 	if(empty($request)){
 		// Only keep a single instance of this request. Stops double requests.
-		$request = wp_remote_post(
-			SITEORIGIN_THEME_ENDPOINT . '/premium/' . $theme . '/?timestamp=' . time(),
+		$request = wp_remote_get(
+			add_query_arg( SITEORIGIN_THEME_ENDPOINT . '/premium/' . $theme . '/', array(
+				'timestamp' => time(),
+				'action' => 'update_info',
+				'version' => SITEORIGIN_THEME_VERSION,
+				'order_number' => $order_number
+			) ),
 			array(
-				'body' => array(
-					'action' => 'update_info',
-					'version' => SITEORIGIN_THEME_VERSION,
-					'order_number' => $order_number
-				)
+				'timeout'     => 10,
 			)
 		);
 	}
