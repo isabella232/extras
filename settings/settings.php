@@ -359,6 +359,7 @@ function siteorigin_settings_field( $args ) {
 				</div>
 
 				<input type="hidden" id="<?php echo esc_attr( $field_id ) ?>" value="<?php echo esc_attr( is_array( $current ) ? '-1' : $current ) ?>" name="<?php echo esc_attr( $field_name ) ?>" />
+				<div class="clear"></div>
 			<?php
 			break;
 		
