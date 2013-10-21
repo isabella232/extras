@@ -21,12 +21,12 @@ function siteorigin_theme_update_filter( $current ) {
 	if(empty($request)){
 		// Only keep a single instance of this request. Stops double requests.
 		$request = wp_remote_get(
-			add_query_arg( SITEORIGIN_THEME_ENDPOINT . '/premium/' . $theme . '/', array(
+			add_query_arg( array(
 				'timestamp' => time(),
 				'action' => 'update_info',
 				'version' => SITEORIGIN_THEME_VERSION,
 				'order_number' => $order_number
-			) ),
+			), SITEORIGIN_THEME_ENDPOINT . '/premium/' . $theme . '/' ),
 			array(
 				'timeout'     => 10,
 			)
