@@ -43,9 +43,6 @@ add_action( 'current_screen', 'siteorigin_adminbar_init' );
 function siteorigin_adminbar_defaults( $bar ) {
 	$screen = get_current_screen();
 
-	if ( $screen->id == 'themes' && defined( 'SITEORIGIN_FIRST_RUN_ACTIVE' ) )
-		$bar = (object)array( 'id' => 'firstrun', 'message' => array( 'extras/adminbar/messages/message', 'firstrun' ) );
-	
 	if($screen->id == 'appearance_page_custom-background')
 		$bar = (object)array( 'id' => 'custom-background', 'message' => array( 'extras/adminbar/messages/message', 'background' ) );
 	
