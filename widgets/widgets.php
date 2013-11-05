@@ -265,7 +265,11 @@ class SiteOrigin_Widgets_IconText extends WP_Widget {
 		}
 		
 		if ( !empty( $instance['headline'] ) ) {
-			echo $args['before_title'] . $instance['headline'] . $args['after_title'];
+			echo $args['before_title'];
+			if(!empty($instance['url'])) echo '<a href="'.esc_url($instance['url']).'">';
+			echo $instance['headline'];
+			if(!empty($instance['url'])) echo '</a>';
+			echo $args['after_title'];
 		}
 
 		if ( !empty( $instance['text'] ) ) {
