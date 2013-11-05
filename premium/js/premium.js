@@ -7,7 +7,7 @@ jQuery( function ( $ ) {
 
     // Handle clicking the play button
     $('#theme-upgrade #click-to-play').click(function(){
-        // Open the Vimeo video as a popup
+        // Open the Vimeo video in a new window
         window.open($(this).attr('href'), 'videowindow', 'width=640,height=362,resizeable,scrollbars');
         return false;
     })
