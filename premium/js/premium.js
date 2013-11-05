@@ -5,6 +5,13 @@
 jQuery( function ( $ ) {
     var minPrice = Number( $('#theme-upgrade input[name=variable_pricing_custom]').attr('min') );
 
+    // Handle clicking the play button
+    $('#theme-upgrade #click-to-play').click(function(){
+        // Open the Vimeo video as a popup
+        window.open($(this).attr('href'), 'videowindow', 'width=640,height=362,resizeable,scrollbars');
+        return false;
+    })
+
     $( '#theme-upgrade .buy-button').click(function(e){
         e.preventDefault();
         $(this).closest('form').submit();
