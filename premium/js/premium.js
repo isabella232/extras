@@ -8,7 +8,7 @@ jQuery( function ( $ ) {
     // Handle clicking the play button
     $('#theme-upgrade #click-to-play').click(function(e){
         // Open the Vimeo video in a new window
-        // var videoWindow = window.open($(this).attr('href'), 'videowindow', 'width=640,height=362,resizeable,scrollbars');
+        var videoWindow = window.open($(this).attr('href'), 'videowindow', 'width=640,height=362,resizeable,scrollbars');
 
         // If the window has been opened, stop the click event.
         if (typeof videoWindow == 'undefined') return true;
