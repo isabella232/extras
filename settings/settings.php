@@ -64,8 +64,8 @@ function siteorigin_settings_admin_init() {
 function siteorigin_settings_admin_menu() {
 	$theme = wp_get_theme();
 	$page = add_theme_page(
-		sprintf(__( '%s Theme Settings', 'siteorigin' ), $theme->get('Name')),
-		sprintf(__( 'Theme Settings', 'siteorigin' ), $theme->get('Name')),
+		sprintf(__( '%s Theme Settings', 'siteorigin' ), $theme->get('Name') ),
+		sprintf(__( 'Theme Settings', 'siteorigin' ), $theme->get('Name') ),
 		'edit_theme_options',
 		'theme_settings_page',
 		'siteorigin_settings_render'
@@ -79,7 +79,7 @@ function siteorigin_settings_admin_menu() {
  */
 function siteorigin_settings_render() {
 	if( version_compare( get_bloginfo('version'), '3.4', '<' ) ) {
-		?><div class="wrap"><div id="setting-error-settings_updated" class="updated settings-error"> <p><strong><?php _e('Please update to the latest version of WordPress to use theme settings.', 'siteorigin') ?></strong></p></div></div><?php
+		?><div class="wrap"><div id="setting-error-settings_updated" class="updated settings-error"><p><strong><?php _e('Please update to the latest version of WordPress to use theme settings.', 'siteorigin') ?></strong></p></div></div><?php
 		return;
 	}
 
@@ -97,7 +97,7 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/js/settings.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/css/settings.css', array(), SITEORIGIN_THEME_VERSION );
 
-	if(wp_script_is('wp-color-picker', 'registered')){
+	if( wp_script_is( 'wp-color-picker', 'registered' ) ){
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );
 	}
@@ -113,6 +113,9 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 	if ( function_exists( 'wp_enqueue_media' ) ) wp_enqueue_media();
 }
 
+/**
+ * Enqueue the frontend settings scripts and CSS.
+ */
 function siteorigin_settings_enqueue_front_scripts(){
 	if( current_user_can('manage_options') && siteorigin_setting('general_hover_edit', true) ) {
 		wp_enqueue_style('siteorigin-settings-front', get_template_directory_uri().'/extras/settings/css/settings.front.css', array(), SITEORIGIN_THEME_VERSION);
@@ -240,10 +243,13 @@ function siteorigin_setting_editable($field){
 	}
 }
 
+/**
+ * Add a settings field to enable frontend settings editing.
+ */
 function siteorigin_setting_editable_option_field(){
-	siteorigin_settings_add_field('general', 'hover_edit', 'checkbox', __('Display Hover Edit Icon', 'siteorigin'), array(
-		'description' => __('Display a small icon that makes quickly editing fields easy. This is only shown to admin users.', 'siteorigin'),
-	));
+	siteorigin_settings_add_field( 'general', 'hover_edit', 'checkbox', __( 'Display Hover Edit Icon', 'siteorigin' ), array(
+		'description' => __( 'Display a small icon that makes quickly editing fields easy. This is only shown to admin users.', 'siteorigin' ),
+	) );
 }
 add_action('admin_init', 'siteorigin_setting_editable_option_field', 100);
 
