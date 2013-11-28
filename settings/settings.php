@@ -513,6 +513,33 @@ function siteorigin_settings_theme_help(){
 	) );
 }
 
+/**
+ * Gets all template layouts
+ */
+function siteorigin_settings_template_part_names($parts, $part_name){
+	$return = array();
+
+	$files = array_unique( array_merge(
+		glob(get_template_directory().'/'.$parts.'*.php'),
+		glob(get_stylesheet_directory().'/'.$parts.'*.php')
+	) );
+
+	foreach( $files as $file) {
+		$p = pathinfo($file);
+		$filename = explode('-', $p['filename'], 2);
+		$name = isset($filename[1]) ? $filename[1] : '';
+
+		$info = get_file_data($file, array(
+			'name' => $part_name,
+		) );
+
+		$return[$name] = $info['name'];
+	}
+
+	ksort($return);
+	return $return;
+}
+
 function siteorigin_settings_media_view_strings($strings, $post){
 	if(!empty($post)) return $strings;
 	$screen = get_current_screen();
