@@ -519,21 +519,26 @@ function siteorigin_settings_theme_help(){
 function siteorigin_settings_template_part_names($parts, $part_name){
 	$return = array();
 
+	$parent_parts = glob( get_template_directory().'/'.$parts.'*.php' );
+	$child_parts = glob( get_stylesheet_directory().'/'.$parts.'*.php' );
+
 	$files = array_unique( array_merge(
-		glob(get_template_directory().'/'.$parts.'*.php'),
-		glob(get_stylesheet_directory().'/'.$parts.'*.php')
+		!empty($parent_parts) ? $parent_parts : array(),
+		!empty($child_parts) ? $child_parts : array()
 	) );
 
-	foreach( $files as $file) {
-		$p = pathinfo($file);
-		$filename = explode('-', $p['filename'], 2);
-		$name = isset($filename[1]) ? $filename[1] : '';
+	if( !empty($files) ) {
+		foreach( $files as $file ) {
+			$p = pathinfo($file);
+			$filename = explode('-', $p['filename'], 2);
+			$name = isset($filename[1]) ? $filename[1] : '';
 
-		$info = get_file_data($file, array(
-			'name' => $part_name,
-		) );
+			$info = get_file_data($file, array(
+				'name' => $part_name,
+			) );
 
-		$return[$name] = $info['name'];
+			$return[$name] = $info['name'];
+		}
 	}
 
 	ksort($return);
