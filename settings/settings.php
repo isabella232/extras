@@ -547,7 +547,7 @@ function siteorigin_settings_template_part_names($parts, $part_name){
 
 function siteorigin_settings_media_view_strings($strings, $post){
 	if( !empty($post) ) return $strings;
-	if( !function_exists( 'get_current_screen' ) ) return $strings; // Skip this on front end usage
+	if( !is_admin() || !function_exists('get_current_screen') ) return $strings; // Skip this on front end usage
 
 	$screen = get_current_screen();
 	if(empty($screen->id) || $screen->id != 'appearance_page_theme_settings_page') return $strings;
