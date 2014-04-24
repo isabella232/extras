@@ -415,11 +415,13 @@ function siteorigin_settings_field( $args ) {
 			if(empty($args['widget_class'])) break;
 
 			if( !class_exists($args['widget_class']) ) {
+				?><div class="so-settings-widget-form"><?php
 				printf( __('This field requires the %s plugin. ', 'effortless'), $args['plugin_name']);
 				if( function_exists('siteorigin_plugin_activation_install_url') ) {
 					$install_url = siteorigin_plugin_activation_install_url($args['plugin'], $args['plugin_name']);
-					printf( __('<a href="%s">Install %s</a> now. ', 'effortless'), $install_url, $args['plugin_name']);
+					printf( __('<a href="%s" target="_blank">Install %s</a> now. ', 'effortless'), $install_url, $args['plugin_name']);
 				}
+				?></div><?php
 			}
 			else {
 				global $siteorigin_settings_widget_forms;
@@ -444,7 +446,6 @@ function siteorigin_settings_field( $args ) {
 				echo '<div class="so-settings-widget-form"><a href="#" class="so-settings-widget-edit" data-is-setup="0" data-form="'.esc_attr($form).'">' . __('Edit', 'siteorigin') . '</a></div>';
 				?><input type="hidden" id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>" value="<?php echo esc_attr( serialize( $current ) ) ?>" /><?php
 			}
-
 			break;
 
 		default :

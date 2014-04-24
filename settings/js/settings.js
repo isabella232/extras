@@ -213,7 +213,7 @@ jQuery( function ( $ ) {
         widget_form.html( $$.data('form') );
 
         return false;
-    });
+    }).click();
 
     // Hide the updated message
     setTimeout( function () {
