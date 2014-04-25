@@ -9,7 +9,8 @@ function siteorigin_premium_admin_menu() {
 	// Don't display this page if the user has already upgraded to premium
 	if ( defined( 'SITEORIGIN_IS_PREMIUM' ) ) return;
 
-	add_theme_page( __( 'Theme Upgrade', 'siteorigin' ), __( 'Theme Upgrade', 'siteorigin' ), 'switch_themes', 'premium_upgrade', 'siteorigin_premium_page_render' );
+	$premium_name = apply_filters('siteorigin_premium_theme_name', ucfirst( get_option( 'template' ) ) . ' ' . __( 'Premium', 'siteorigin' ) );
+	add_theme_page( $premium_name, $premium_name, 'switch_themes', 'premium_upgrade', 'siteorigin_premium_page_render' );
 }
 
 add_action( 'admin_menu', 'siteorigin_premium_admin_menu' );
