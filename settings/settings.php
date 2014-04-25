@@ -487,9 +487,9 @@ function siteorigin_settings_validate( $values ) {
 				case 'widget' :
 					if(!class_exists($field['args']['widget_class'])) break;
 					else if( !empty( $_POST['siteorigin_settings_widget'] ) && !empty($_POST['siteorigin_settings_widget'][$name]) ) {
-						$values = stripslashes_deep($_POST['siteorigin_settings_widget'][$name]);
+						$widget_values = stripslashes_deep($_POST['siteorigin_settings_widget'][$name]);
 						$the_widget = new $field['args']['widget_class']();
-						$values[ $name ] = $the_widget->update( $values, !empty($current[$name]) ? $current[$name] : array() );
+						$values[ $name ] = $the_widget->update( $widget_values, !empty($current[$name]) ? $current[$name] : array() );
 					}
 					else {
 						$values[ $name ] = unserialize( $values[ $name ] );
@@ -504,6 +504,7 @@ function siteorigin_settings_validate( $values ) {
 			if ( !empty( $field['args']['validator'] ) && method_exists( 'SiteOrigin_Settings_Validator', $field['args']['validator'] ) ) {
 				$values[ $name ] = call_user_func( array( 'SiteOrigin_Settings_Validator', $field['args']['validator'] ), $values[ $name ] );
 			}
+
 		}
 	}
 
