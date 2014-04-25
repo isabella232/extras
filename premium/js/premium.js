@@ -25,6 +25,11 @@ jQuery( function ( $ ) {
         this.target = 'paymentwindow';
     });
 
+    $('#theme-upgrade #purchase-form.supporters-pack .download a').click(function(e){
+        e.preventDefault();
+        window.open($(this).attr('href'), 'paymentwindow', 'width=960,height=800,resizeable,scrollbars');
+    });
+
     $('#theme-upgrade #purchase-form .options input[type=radio]').change(function(){
         var val = $(this).val();
         if($(this).hasClass('custom-price')) {

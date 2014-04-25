@@ -1,47 +1,53 @@
 <?php
 global $siteorigin_premium_info;
+$premium_info = $siteorigin_premium_info;
 $theme = basename( get_template_directory() );
 ?>
 
 <div class="wrap" id="theme-upgrade">
-	<form id="theme-upgrade-info" method="post" action="<?php echo esc_url( add_query_arg( 'action', 'enter-order' ) ) ?>" target="_blank">
-		<p>
-			<?php
-			printf(
-				__( "After you pay for %s Premium, we'll email you an order number to your <strong>PayPal email address</strong>. ", 'siteorigin' ) ,
-				ucfirst( $theme )
-			);
-			printf(
-				__( "Use <a href='%s' target='_blank'>this form</a> if you don't receive your order number in the next 15 minutes. ", 'siteorigin' ) ,
-				'http://siteorigin.com/orders/'
-			);
-			_e( 'To be sure, check your spam folder.', 'siteorigin' );
-			?>
-		</p>
 
-		<label><strong><?php _e( 'Order Number', 'siteorigin' ) ?></strong></label>
-		<input type="text" class="regular-text" name="order_number" />
-		<input type="submit" value="<?php esc_attr_e( 'Enable Upgrade', 'siteorigin' ) ?>" />
-		<?php wp_nonce_field( 'save_order_number', '_upgrade_nonce' ) ?>
-	</form>
+	<?php if( empty($premium_info['free_download']) ) : ?>
 
-	<a href="#" id="theme-upgrade-already-paid" class="button"><?php _e( 'Already Paid?', 'siteorigin' ) ?></a>
+		<form id="theme-upgrade-info" method="post" action="<?php echo esc_url( add_query_arg( 'action', 'enter-order' ) ) ?>" target="_blank">
+			<p>
+				<?php
+				printf(
+					__( "After you pay for %s, we'll email you an order number to your <strong>PayPal email address</strong>. ", 'siteorigin' ) ,
+					apply_filters('siteorigin_premium_theme_name', ucfirst($theme) . ' ' . __( 'Premium', 'siteorigin' ) )
+				);
+				printf(
+					__( "Use <a href='%s' target='_blank'>this form</a> if you don't receive your order number in the next 15 minutes. ", 'siteorigin' ) ,
+					'http://siteorigin.com/orders/'
+				);
+				_e( 'To be sure, check your spam folder.', 'siteorigin' );
+				?>
+			</p>
+
+			<label><strong><?php _e( 'Order Number', 'siteorigin' ) ?></strong></label>
+			<input type="text" class="regular-text" name="order_number" />
+			<input type="submit" value="<?php esc_attr_e( 'Enable Upgrade', 'siteorigin' ) ?>" />
+			<?php wp_nonce_field( 'save_order_number', '_upgrade_nonce' ) ?>
+		</form>
+
+		<a href="#" id="theme-upgrade-already-paid" class="button"><?php _e( 'Already Paid?', 'siteorigin' ) ?></a>
+
+	<?php endif; ?>
 
 	<div id="icon-themes" class="icon32"><br></div>
-	<h2><?php echo !empty($siteorigin_premium_info['premium_title']) ? $siteorigin_premium_info['premium_title'] : __('Premium Upgrade', 'siteorigin') ?></h2>
+	<h2><?php echo !empty($premium_info['premium_title']) ? $premium_info['premium_title'] : __('Premium Upgrade', 'siteorigin') ?></h2>
 
-	<?php if( empty($siteorigin_premium_info) ) : ?>
+	<?php if( empty($premium_info) ) : ?>
 
-		<p><?php printf(__( "The premium version of this theme is no longer available. If you need any help, please contact <a href='http://siteorigin.com/#support'>SiteOrigin support</a>.", 'siteorigin' ),ucfirst( $theme )); ?></p>
+		<p><?php printf(__( "The premium version of this theme is no longer available. If you need any help, please contact <a href='http://siteorigin.com//thread/'>SiteOrigin support</a>.", 'siteorigin' ),ucfirst( $theme )); ?></p>
 
 	<?php else:  ?>
 
 		<div class="left-column">
 
-			<?php if( !empty($siteorigin_premium_info['premium_video_poster']) ) : // Only load the video iFrame after the video is clicked ?>
-				<div id="video-wrapper" style="background-image: url(<?php echo esc_url($siteorigin_premium_info['premium_video_poster']) ?>)">
-					<?php if(!empty($siteorigin_premium_info['premium_video_id'])) : ?>
-						<a href="http://player.vimeo.com/video/<?php echo intval($siteorigin_premium_info['premium_video_id']) ?>?title=0&byline=0&portrait=0&autoplay=1" target="_blank" id="click-to-play" data-video-id="<?php echo intval($siteorigin_premium_info['premium_video_id']) ?>" target="_blank"></a>
+			<?php if( !empty($premium_info['premium_video_poster']) ) : // Only load the video iFrame after the video is clicked ?>
+				<div id="video-wrapper" style="background-image: url(<?php echo esc_url($premium_info['premium_video_poster']) ?>)">
+					<?php if(!empty($premium_info['premium_video_id'])) : ?>
+						<a href="http://player.vimeo.com/video/<?php echo intval($premium_info['premium_video_id']) ?>?title=0&byline=0&portrait=0&autoplay=1" target="_blank" id="click-to-play" data-video-id="<?php echo intval($premium_info['premium_video_id']) ?>" target="_blank"></a>
 					<?php else : ?>
 						<div class="placeholder"></div>
 					<?php endif; ?>
@@ -49,11 +55,11 @@ $theme = basename( get_template_directory() );
 			<?php endif; ?>
 
 			<p class="premium-summary">
-				<?php echo $siteorigin_premium_info['premium_summary'] ?>
+				<?php echo $premium_info['premium_summary'] ?>
 			</p>
 
 			<div id="features">
-				<?php foreach ( $siteorigin_premium_info['features'] as $feature ) : ?>
+				<?php foreach ( $premium_info['features'] as $feature ) : ?>
 					<div class="feature clearfix">
 						<?php if(!empty($feature['image'])) : ?><img src="<?php echo $feature['image'] ?>" /><?php endif; ?>
 						<h3><?php echo $feature['heading'] ?></h3>
@@ -65,52 +71,73 @@ $theme = basename( get_template_directory() );
 		</div>
 
 		<div class="right-column">
-			<form method="get" action="<?php echo esc_url( $siteorigin_premium_info['buy_url'] ) ?>" id="purchase-form" target="_blank">
 
-				<p class="download">
-					<a href="<?php echo esc_url( $siteorigin_premium_info['buy_url'] ) ?>?amount=15" class="buy-button variable-pricing-submit">
-						<span><?php _e('Buy Now', 'siteorigin') ?></span><em>$15</em>
-						<input type="hidden" name="amount" value="15" >
-					</a>
-				</p>
+			<?php if( empty($premium_info['free_download']) && function_exists( 'siteorigin_theme_update_settings' ) ) : ?>
 
-				<div class="support-message">
-					<p><?php _e("Although we appreciate and support all our premium users, our support staff prioritize orders of <strong>$15</strong> or more. Support on this order might take longer.", 'siteorigin') ?></p>
+				<form method="get" action="<?php echo esc_url( $premium_info['buy_url'] ) ?>" id="purchase-form" target="_blank">
+
+					<p class="download">
+						<a href="<?php echo esc_url( $premium_info['buy_url'] ) ?>?amount=15" class="buy-button variable-pricing-submit">
+							<span><?php _e('Buy Now', 'siteorigin') ?></span><em>$15</em>
+							<input type="hidden" name="amount" value="15" >
+						</a>
+					</p>
+
+					<div class="support-message">
+						<p><?php _e("Although we appreciate and support all our users, our support staff prioritize orders of <strong>$15</strong> or more. Support on this order will take longer.", 'siteorigin') ?></p>
+					</div>
+
+					<p class="description">
+						<?php printf( __("You choose the price, so you can pay what %s is worth to you.", 'siteorigin'), ucfirst($theme) ) ?>
+					</p>
+
+					<div class="options hide-if-no-js">
+						<label><input type="radio" name="variable_pricing_option" value="10"> <strong>$10</strong> <?php _e('Building your site on a budget', 'siteorigin') ?></label>
+						<label><input type="radio" name="variable_pricing_option" value="15" <?php checked(true) ?>> <strong>$15</strong> <?php _e("A fair price for a powerful theme", 'siteorigin') ?></label>
+						<label><input type="radio" name="variable_pricing_option" value="20"> <strong>$20</strong> <?php _e("Our sincere thanks", 'siteorigin') ?></label>
+						<label><input type="radio" name="variable_pricing_option" value="35"> <strong>$35</strong> <?php _e("We'll go that extra mile for you", 'siteorigin') ?></label>
+						<label><input type="radio" name="variable_pricing_option" value="50"> <strong>$50</strong> <?php _e("A huge contribution to its development", 'siteorigin') ?></label>
+						<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price" > <strong><?php _e('Custom', 'siteorigin') ?></strong> <input type="number" name="variable_pricing_custom" value="15" placeholder="$5+" min="5"> </label>
+					</div>
+					<div class="options hide-if-js">
+						<p><?php _e('Please enable Javascript to change pricing', 'siteorigin') ?></p>
+					</div>
+
+					<p class="description choose-description">
+						<?php _e("We offer a 60 day full refund if you're not happy with your purchase", 'siteorigin') ?>
+					</p>
+
+				</form>
+
+			<?php else : ?>
+
+				<div id="purchase-form" class="supporters-pack">
+
+					<p class="download">
+						<a href="<?php echo esc_url( $premium_info['buy_url'] ) ?>" class="buy-button">
+							<span><?php _e('Download', 'siteorigin') ?></span><em>Free</em>
+						</a>
+					</p>
+
+					<p class="description">
+						<?php printf( __("Sign up to our newsletter and download %s for free.", 'siteorigin'), apply_filters('siteorigin_premium_theme_name', ucfirst($theme) . ' ' . __( 'Premium', 'siteorigin' ) ) ) ?>
+					</p>
+
 				</div>
 
-				<p class="description">
-					<?php printf( __("You choose the price, so you can pay what %s is worth to you.", 'siteorigin'), ucfirst($theme) ) ?>
-				</p>
+			<?php endif; ?>
 
-				<div class="options hide-if-no-js">
-					<label><input type="radio" name="variable_pricing_option" value="10"> <strong>$10</strong> <?php _e('Building your site on a budget', 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="15" <?php checked(true) ?>> <strong>$15</strong> <?php _e("A fair price for a powerful theme", 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="20"> <strong>$20</strong> <?php _e("Our sincere thanks", 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="35"> <strong>$35</strong> <?php _e("We'll go that extra mile for you", 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="50"> <strong>$50</strong> <?php _e("A huge contribution to its development", 'siteorigin') ?></label>
-					<label><input type="radio" name="variable_pricing_option" value="custom" class="custom-price" > <strong><?php _e('Custom', 'siteorigin') ?></strong> <input type="number" name="variable_pricing_custom" value="15" placeholder="$5+" min="5"> </label>
-				</div>
-				<div class="options hide-if-js">
-					<p><?php _e('Please enable Javascript to change pricing', 'siteorigin') ?></p>
-				</div>
-
-				<p class="description choose-description">
-					<?php _e("We offer a 60 day full refund if you're not happy with your purchase", 'siteorigin') ?>
-				</p>
-
-			</form>
-
-			<?php if(!empty($siteorigin_premium_info['roadmap'])) : ?>
+			<?php if(!empty($premium_info['roadmap'])) : ?>
 				<div class="contribute">
 					<?php printf( __('Your contribution will help fund new features in %s.', 'siteorigin'), ucfirst($theme) ); ?>
-					<?php printf( __('Find out more on our <a href="%s" target="_blank">roadmap</a>.', 'siteorigin'), $siteorigin_premium_info['roadmap'] ); ?>
+					<?php printf( __('Find out more on our <a href="%s" target="_blank">roadmap</a>.', 'siteorigin'), $premium_info['roadmap'] ); ?>
 				</div>
 			<?php endif; ?>
 
-			<?php if(!empty($siteorigin_premium_info['testimonials'])): ?>
+			<?php if(!empty($premium_info['testimonials'])): ?>
 				<h3 class="testimonials-heading"><?php _e('Our User Feedback', 'siteorigin') ?></h3>
 				<ul class="testimonials">
-					<?php foreach($siteorigin_premium_info['testimonials'] as $testimonial) : ?>
+					<?php foreach($premium_info['testimonials'] as $testimonial) : ?>
 						<li class="testimonial clearfix">
 							<div class="avatar" style="background-image: url(http://www.gravatar.com/avatar/<?php echo esc_attr($testimonial['gravatar']) ?>?d=identicon&s=40)"></div>
 

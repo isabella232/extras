@@ -243,16 +243,6 @@ function siteorigin_setting_editable($field){
 	}
 }
 
-/**
- * Add a settings field to enable frontend settings editing.
- */
-function siteorigin_setting_editable_option_field(){
-	siteorigin_settings_add_field( 'general', 'hover_edit', 'checkbox', __( 'Display Hover Edit Icon', 'siteorigin' ), array(
-		'description' => __( 'Display a small icon that makes quickly editing fields easy. This is only shown to admin users.', 'siteorigin' ),
-	) );
-}
-add_action('admin_init', 'siteorigin_setting_editable_option_field', 100);
-
 function siteorigin_setting_editable_option_default($defaults){
 	$defaults['general_hover_edit'] = true;
 	return $defaults;
@@ -374,7 +364,7 @@ function siteorigin_settings_field( $args ) {
 			?>
 			<a class="premium-teaser siteorigin-premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>" target="_blank">
 				<em></em>
-				<?php printf( __( 'Only available in <strong>%s Premium</strong> - <strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ), ucfirst($theme) ) ?>
+				<?php printf( __( 'Only available in <strong>%s</strong> - <strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ), apply_filters('siteorigin_premium_theme_name', ucfirst($theme) . ' ' . __( 'Premium', 'siteorigin' ) ) ) ?>
 				<?php if(!empty($args['teaser-image'])) : ?>
 					<div class="teaser-image"><img src="<?php echo esc_url($args['teaser-image']) ?>" width="220" height="120" /><div class="pointer"></div></div>
 				<?php endif; ?>
@@ -416,10 +406,10 @@ function siteorigin_settings_field( $args ) {
 
 			if( !class_exists($args['widget_class']) ) {
 				?><div class="so-settings-widget-form"><?php
-				printf( __('This field requires the %s plugin. ', 'effortless'), $args['plugin_name']);
+				printf( __('This field requires the %s plugin. ', 'influence'), $args['plugin_name']);
 				if( function_exists('siteorigin_plugin_activation_install_url') ) {
 					$install_url = siteorigin_plugin_activation_install_url($args['plugin'], $args['plugin_name']);
-					printf( __('<a href="%s" target="_blank">Install %s</a> now. ', 'effortless'), $install_url, $args['plugin_name']);
+					printf( __('<a href="%s" target="_blank">Install %s</a> now. ', 'influence'), $install_url, $args['plugin_name']);
 				}
 				?></div><?php
 			}

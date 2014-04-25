@@ -9,7 +9,7 @@ function siteorigin_premium_admin_menu() {
 	// Don't display this page if the user has already upgraded to premium
 	if ( defined( 'SITEORIGIN_IS_PREMIUM' ) ) return;
 
-	add_theme_page( __( 'Premium Upgrade', 'siteorigin' ), __( 'Premium Upgrade', 'siteorigin' ), 'switch_themes', 'premium_upgrade', 'siteorigin_premium_page_render' );
+	add_theme_page( __( 'Theme Upgrade', 'siteorigin' ), __( 'Theme Upgrade', 'siteorigin' ), 'switch_themes', 'premium_upgrade', 'siteorigin_premium_page_render' );
 }
 
 add_action( 'admin_menu', 'siteorigin_premium_admin_menu' );
@@ -169,7 +169,7 @@ function siteorigin_premium_call_function($callback, $param_array, $args = array
 		?>
 		<a class="siteorigin-premium-teaser" href="<?php echo admin_url( 'themes.php?page=premium_upgrade' ) ?>" target="_blank">
 			<em></em>
-			<?php printf( __( 'Available in <strong>%s Premium</strong> - <strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ), ucfirst($theme) ) ?>
+			<?php printf( __( 'Only available in <strong>%s</strong> - <strong class="upgrade">Upgrade Now</strong>', 'siteorigin' ), apply_filters('siteorigin_premium_theme_name', ucfirst($theme) . ' ' . __( 'Premium', 'siteorigin' ) ) ) ?>
 			<?php if(!empty($args['teaser-image'])) : ?>
 				<div class="teaser-image"><img src="<?php echo esc_url($args['teaser-image']) ?>" width="220" height="120" /><div class="pointer"></div></div>
 			<?php endif; ?>
@@ -267,10 +267,14 @@ endif;
 function siteorigin_premium_default_content($content){
 	$theme = basename( get_template_directory() );
 
+
+
+	$premium_name =  apply_filters('siteorigin_premium_theme_name', ucfirst($theme) . ' ' . __( 'Premium', 'siteorigin' ) );
+
 	$content['rewards'][] = array(
 		'amount' => 10,
 		'title' => sprintf(__('A Copy of %s Premium', 'siteorigin'), ucfirst($theme)),
-		'text' => sprintf(__('You get a copy of %s Premium, delivered instantly to your PayPal email address. This includes the same basic support we offer users of our free themes.', 'siteorigin'), ucfirst($theme)),
+		'text' => sprintf(__('You get a copy of %s, delivered instantly to your PayPal email address. This includes the same basic support we offer users of our free themes.', 'siteorigin'), $premium_name ),
 	);
 
 	$content['rewards'][] = array(
@@ -282,7 +286,7 @@ function siteorigin_premium_default_content($content){
 	$content['rewards'][] = array(
 		'amount' => 40,
 		'title' => __('Advanced Premium Support', 'siteorigin'),
-		'text' => sprintf(__("We'll go the extra mile and help you with minor CSS customizations, plugin conflicts and anything else that falls outside standard %s Premium support.", 'siteorigin'), ucfirst($theme)),
+		'text' => sprintf(__("We'll go the extra mile and help you with minor CSS customizations, plugin conflicts and anything else that falls outside standard %s support.", 'siteorigin'), $premium_name ),
 	);
 
 	$content['rewards'][] = array(
