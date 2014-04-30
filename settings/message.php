@@ -1,3 +1,3 @@
 <?php
 $theme = basename( get_template_directory() );
-printf( __("I hope %s is working well for you! Sign up to <a href='%s' target='_blank'>our newsletter</a> if you'd like more free themes and goodies.", 'siteorigin'), ucfirst($theme), 'http://siteorigin.com/#newsletter');
+printf( __("Hi! I'm Greg from SiteOrigin. I hope %s is working well for you! Sign up to <a href='%s' target='_blank'>our newsletter</a> if you'd like more free themes and goodies.", 'siteorigin'), ucfirst($theme), 'http://siteorigin.com/#newsletter');
