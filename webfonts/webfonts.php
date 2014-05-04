@@ -1,6 +1,12 @@
 <?php
 
-function siteorigin_webfonts_add_font($name, $weights = array()){
+/**
+ * Add a font to the font register.
+ *
+ * @param $name
+ * @param array $weights
+ */
+function siteorigin_webfonts_add_font( $name, $weights = array() ){
 	global $siteorigin_webfonts_fonts;
 	if( empty( $siteorigin_webfonts_fonts ) ) $siteorigin_webfonts_fonts = array();
 
@@ -13,11 +19,19 @@ function siteorigin_webfonts_add_font($name, $weights = array()){
 	}
 }
 
-function siteorigin_webfonts_remove_font($name) {
+/**
+ * Remove a webfont from the font register.
+ *
+ * @param $name
+ */
+function siteorigin_webfonts_remove_font( $name ) {
 	global $siteorigin_webfonts_fonts;
 	unset( $siteorigin_webfonts_fonts[$name] );
 }
 
+/**
+ * Enqueue the Google web fonts.
+ */
 function siteorigin_webfonts_enqueue(){
 	global $siteorigin_webfonts_fonts;
 	if( empty( $siteorigin_webfonts_fonts ) ) return;
