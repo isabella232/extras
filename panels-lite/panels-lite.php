@@ -178,22 +178,34 @@ add_filter('body_class', 'siteorigin_panels_lite_body_class');
  * @param $is_last
  */
 function siteorigin_panels_lite_the_widget( $widget, $instance, $grid, $cell, $panel, $is_first, $is_last ) {
-	if ( !class_exists( $widget ) ) return;
+	if ( class_exists( $widget ) ) {
+		$the_widget = new $widget;
+	}
 
-	$the_widget = new $widget;
+	if( empty($post_id) ) $post_id = get_the_ID();
 
 	$classes = array( 'panel', 'widget' );
-	if ( !empty( $the_widget->id_base ) ) $classes[] = 'widget_' . $the_widget->id_base;
+	if ( !empty( $the_widget ) && !empty( $the_widget->id_base ) ) $classes[] = 'widget_' . $the_widget->id_base;
 	if ( $is_first ) $classes[] = 'panel-first-child';
 	if ( $is_last ) $classes[] = 'panel-last-child';
+	$id = 'panel-' . $post_id . '-' . $grid . '-' . $cell . '-' . $panel;
 
-	$the_widget->widget( array(
-		'before_widget' => '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" id="panel-' . $grid . '-' . $cell . '-' . $panel . '">',
+
+	$args = array(
+		'before_widget' => '<div class="' . esc_attr( implode( ' ', $classes ) ) . '" id="' . $id . '">',
 		'after_widget' => '</div>',
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 		'widget_id' => 'widget-' . $grid . '-' . $cell . '-' . $panel
-	), $instance );
+	);
+
+	if ( class_exists( $widget ) ) {
+		$the_widget->widget($args , $instance );
+	}
+	else {
+		// This gives themes a chance to display some sort of placeholder for missing widgets
+		do_action('siteorigin_panels_missing_widget', $widget, $instance, $args);
+	}
 }
 
 /**

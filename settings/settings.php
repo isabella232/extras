@@ -120,9 +120,9 @@ function siteorigin_settings_enqueue_front_scripts(){
 	if( current_user_can('manage_options') && siteorigin_setting('general_hover_edit', true) ) {
 		wp_enqueue_style('siteorigin-settings-front', get_template_directory_uri().'/extras/settings/css/settings.front.css', array(), SITEORIGIN_THEME_VERSION);
 		wp_enqueue_script('siteorigin-settings-front', get_template_directory_uri().'/extras/settings/js/settings.front.js', array('jquery'), SITEORIGIN_THEME_VERSION);
-		wp_localize_script('siteorigin-settings-front', 'siteoriginSettings', array(
+		wp_localize_script( 'siteorigin-settings-front', 'siteoriginSettings', array(
 			'edit' => admin_url('themes.php?page=theme_settings_page'),
-		));
+		) );
 	}
 }
 
@@ -411,7 +411,8 @@ function siteorigin_settings_field( $args ) {
 					$install_url = siteorigin_plugin_activation_install_url($args['plugin'], $args['plugin_name']);
 					printf( __('<a href="%s" target="_blank">Install %s</a> now. ', 'influence'), $install_url, $args['plugin_name']);
 				}
-				?></div><?php
+				?></div>
+				<input type="hidden" id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>" value="<?php echo esc_attr( serialize( $current ) ) ?>" /><?php
 			}
 			else {
 				global $siteorigin_settings_widget_forms;
@@ -485,7 +486,9 @@ function siteorigin_settings_validate( $values ) {
 					break;
 
 				case 'widget' :
-					if(!class_exists($field['args']['widget_class'])) break;
+					if( !class_exists($field['args']['widget_class']) ) {
+						$values[ $name ] = !empty($values[ $name ]) ? unserialize( $values[ $name ] ) : false;
+					}
 					else if( !empty( $_POST['siteorigin_settings_widget'] ) && !empty($_POST['siteorigin_settings_widget'][$name]) ) {
 						$widget_values = stripslashes_deep($_POST['siteorigin_settings_widget'][$name]);
 						$the_widget = new $field['args']['widget_class']();

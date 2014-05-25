@@ -1,7 +1,7 @@
 <?php
 
 function siteorigin_plugin_activation_page(){
-	if(!isset( $_GET[sanitize_key( 'siteorigin-pa-install' )])) return;
+	if(!isset( $_GET[sanitize_key( 'siteorigin-pa-install' )] ) ) return;
 	
 	add_theme_page(
 		__('Install Theme Plugin', 'siteorigin'),
@@ -105,7 +105,7 @@ function siteorigin_plugin_activation_install_url($plugin, $plugin_name, $source
 	}
 	
 	if($installed && !is_plugin_active($plugin)){
-		return wp_nonce_url(self_admin_url('plugins.php?action=activate&plugin='.$plugin_path), 'activate-plugin_'.$plugin_path);
+		return wp_nonce_url( self_admin_url('plugins.php?action=activate&plugin='.$plugin_path), 'activate-plugin_'.$plugin_path);
 	}
 	elseif($installed && is_plugin_active($plugin)){
 		return '#';
@@ -127,8 +127,8 @@ function siteorigin_plugin_activation_install_url($plugin, $plugin_name, $source
 	}
 }
 
-function siteorigin_plugin_activation_is_activating($plugin){
-	if(!is_admin()) return false;
+function siteorigin_plugin_activation_is_activating( $plugin ){
+	if( !is_admin() ) return false;
 	return (
 		(basename($_SERVER['PHP_SELF']) == 'plugins.php' || basename($_SERVER['PHP_SELF']) == 'update.php')
 		&& isset($_GET['action'])
