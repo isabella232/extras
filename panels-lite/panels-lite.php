@@ -140,7 +140,7 @@ add_filter('home_template', 'siteorigin_panels_lite_filter_home_template');
  * @return mixed|void Are we currently viewing the home page
  */
 function siteorigin_panels_lite_is_home(){
-	$home = (is_home() && get_theme_mod('siteorigin_panels_home_page_enabled', siteorigin_panels_lite_setting('home-page-default')) );
+	$home = ( is_home() && get_theme_mod('siteorigin_panels_home_page_enabled', siteorigin_panels_lite_setting('home-page-default') ) );
 	return apply_filters('siteorigin_panels_is_home', $home);
 }
 
@@ -204,7 +204,7 @@ function siteorigin_panels_lite_the_widget( $widget, $instance, $grid, $cell, $p
 	}
 	else {
 		// This gives themes a chance to display some sort of placeholder for missing widgets
-		do_action('siteorigin_panels_missing_widget', $widget, $instance, $args);
+		echo apply_filters('siteorigin_panels_missing_widget', '', $widget, $args , $instance);
 	}
 }
 
@@ -214,9 +214,7 @@ function siteorigin_panels_lite_the_widget( $widget, $instance, $grid, $cell, $p
  * @action wp_print_styles
  */
 function siteorigin_panels_lite_css() {
-	global $post;
-
-	if(!siteorigin_panels_lite_is_home()) return;
+	if( !siteorigin_panels_lite_is_home() ) return;
 	$layouts = apply_filters( 'siteorigin_panels_prebuilt_layouts', array() );
 	if(empty($layouts[ siteorigin_panels_lite_setting('home-page-default') ])) return;
 	$panels_data = $layouts[siteorigin_panels_lite_setting('home-page-default')];
@@ -338,7 +336,7 @@ add_action( 'wp_head', 'siteorigin_panels_lite_css', 15 );
  */
 function siteorigin_panels_lite_home_render(){
 	$layouts = apply_filters( 'siteorigin_panels_prebuilt_layouts', array() );
-	if(empty($layouts[ siteorigin_panels_lite_setting('home-page-default') ])) return;
+	if( empty( $layouts[ siteorigin_panels_lite_setting('home-page-default') ] ) ) return;
 	$panels_data = $layouts[siteorigin_panels_lite_setting('home-page-default')];
 	$panels_data = apply_filters( 'siteorigin_panels_data', $panels_data, 'home' );
 
