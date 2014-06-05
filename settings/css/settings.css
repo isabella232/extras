@@ -138,6 +138,12 @@
 .so-settings-widget-form .siteorigin-widget-form-main {
   margin-bottom: 0;
 }
+.so-settings-widget-form .siteorigin-widget-preview {
+  display: none !important;
+}
+.so-settings-widget-form .siteorigin-widget-help-link {
+  margin-bottom: 0 !important;
+}
 #siteorigin-theme-feature-suggestions {
   font-size: 0.85em;
   display: inline-block;
