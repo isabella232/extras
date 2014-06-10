@@ -404,7 +404,7 @@ function siteorigin_settings_field( $args ) {
 		case 'widget' :
 			if(empty($args['widget_class'])) break;
 
-			if( !class_exists($args['widget_class']) && !empty($args['bundle_widget']) ) {
+			if( !class_exists($args['widget_class']) && !empty($args['bundle_widget']) && class_exists('SiteOrigin_Widgets_Bundle') ) {
 				// If this is a widget bundle widget, and the class isn't available, then try activate it.
 				SiteOrigin_Widgets_Bundle::single()->activate_widget($args['bundle_widget']);
 			}
