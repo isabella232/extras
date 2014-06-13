@@ -547,6 +547,8 @@ function siteorigin_settings_change_message() {
 }
 
 function siteorigin_settings_theme_help(){
+	if( !is_admin() || !function_exists('get_current_screen') ) return;
+
 	$screen = get_current_screen();
 	$theme_name = basename( get_template_directory() );
 	
