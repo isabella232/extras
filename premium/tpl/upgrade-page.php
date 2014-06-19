@@ -84,7 +84,7 @@ $theme = basename( get_template_directory() );
 					</p>
 
 					<div class="support-message">
-						<p><?php _e("Although we appreciate and support all our users, our support staff prioritize orders of <strong>$15</strong> or more. Support on this order will take longer.", 'siteorigin') ?></p>
+						<p><?php _e("Although we appreciate and support all our users, we only offer prioritized support for orders of <strong>$15</strong> or more.", 'siteorigin') ?></p>
 					</div>
 
 					<p class="description">
