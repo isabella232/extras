@@ -11,7 +11,9 @@
 
 		<p class="submit">
 			<input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save Settings', 'siteorigin'); ?>" />
+			<a href="http://siteorigin.com/thread/" target="_blank" id="siteorigin-theme-support"><?php printf(__( '%s Support Forum', 'siteorigin' ), $theme->get('Name')) ?></a>
 		</p>
+
 		<input type="hidden" id="current-tab-field" name="theme_settings_current_tab" value="<?php echo intval(get_theme_mod('_theme_settings_current_tab', 0)) ?>" />
 	</form>
 </div> 
