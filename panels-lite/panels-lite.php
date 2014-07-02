@@ -67,15 +67,7 @@ add_action('admin_enqueue_scripts', 'siteorigin_panels_lite_enqueue_admin');
  * @return WP_Admin_Bar
  */
 function siteorigin_panels_lite_admin_bar_menu($admin_bar){
-	/**
-	 * @var WP_Query $wp_query
-	 */
-	global $wp_query;
-
-	if( $wp_query->is_home() && $wp_query->is_main_query() ){
-		// Check that we support the home page
-		if ( !current_user_can('edit_theme_options') ) return $admin_bar;
-
+	if( ( is_home() || is_front_page() ) && current_user_can('edit_theme_options') ){
 		$admin_bar->add_node(array(
 			'id' => 'edit-home-page',
 			'title' => __('Edit Home Page', 'siteorigin'),
@@ -98,7 +90,7 @@ function siteorigin_panels_lite_setting($key = false){
 		'home-page' => false,                   // Is the home page supported
 		'home-page-default' => false,           // What's the default layout for the home page?
 		'home-template' => 'home-panels.php',   // The file used to render a home page.
-		'post-types' => get_option('siteorigin_panels_post_types', array('page')),	// Post types that can be edited using panels.
+		'post-types' => array('page'),	// Post types that can be edited using panels.
 
 		'responsive' => !isset( $display_settings['responsive'] ) ? false : $display_settings['responsive'],					// Should we use a responsive layout
 		'mobile-width' => !isset( $display_settings['mobile-width'] ) ? 780 : $display_settings['mobile-width'],				// What is considered a mobile width?
@@ -125,7 +117,8 @@ function siteorigin_panels_lite_setting($key = false){
  */
 function siteorigin_panels_lite_filter_home_template($template){
 	if ( !get_theme_mod('siteorigin_panels_home_page_enabled', siteorigin_panels_lite_setting('home-page-default') ) ) return $template;
-	// If the user already has their own custom home page, use that instead
+
+	// If the user already has their own custom home page
 	if ( get_option( 'show_on_front' ) !== 'posts' ) return $template;
 
 	$GLOBALS['siteorigin_panels_is_panels_home'] = true;
@@ -140,7 +133,7 @@ add_filter('home_template', 'siteorigin_panels_lite_filter_home_template');
  * @return mixed|void Are we currently viewing the home page
  */
 function siteorigin_panels_lite_is_home(){
-	$home = ( is_home() && get_theme_mod('siteorigin_panels_home_page_enabled', siteorigin_panels_lite_setting('home-page-default') ) );
+	$home = ( is_home() && get_theme_mod('siteorigin_panels_home_page_enabled', siteorigin_panels_lite_setting('home-page-default') ) && !is_page() );
 	return apply_filters('siteorigin_panels_is_home', $home);
 }
 
@@ -148,8 +141,8 @@ function siteorigin_panels_lite_is_home(){
  * Enqueue the required styles
  */
 function siteorigin_panels_lite_enqueue_styles(){
-	if(siteorigin_panels_lite_is_home()){
-		wp_enqueue_style('siteorigin-panels', get_template_directory_uri() . '/extras/panels-lite/css/front.css', array(), SITEORIGIN_THEME_VERSION );
+	if( siteorigin_panels_lite_is_home() ){
+		wp_enqueue_style( 'siteorigin-panels', get_template_directory_uri() . '/extras/panels-lite/css/front.css', array(), SITEORIGIN_THEME_VERSION );
 	}
 }
 add_action('wp_enqueue_scripts', 'siteorigin_panels_lite_enqueue_styles');
@@ -215,6 +208,7 @@ function siteorigin_panels_lite_the_widget( $widget, $instance, $grid, $cell, $p
  */
 function siteorigin_panels_lite_css() {
 	if( !siteorigin_panels_lite_is_home() ) return;
+
 	$layouts = apply_filters( 'siteorigin_panels_prebuilt_layouts', array() );
 	if(empty($layouts[ siteorigin_panels_lite_setting('home-page-default') ])) return;
 	$panels_data = $layouts[siteorigin_panels_lite_setting('home-page-default')];
