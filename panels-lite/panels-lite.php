@@ -67,7 +67,7 @@ add_action('admin_enqueue_scripts', 'siteorigin_panels_lite_enqueue_admin');
  * @return WP_Admin_Bar
  */
 function siteorigin_panels_lite_admin_bar_menu($admin_bar){
-	if( ( is_home() || is_front_page() ) && current_user_can('edit_theme_options') ){
+	if( is_front_page() && current_user_can('edit_theme_options') ){
 		$admin_bar->add_node(array(
 			'id' => 'edit-home-page',
 			'title' => __('Edit Home Page', 'siteorigin'),
