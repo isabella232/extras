@@ -41,7 +41,6 @@ function siteorigin_settings_init( $theme_name = null ) {
 	add_action( 'siteorigin_adminbar', 'siteorigin_settings_adminbar' );
 
 	add_action( 'admin_enqueue_scripts', 'siteorigin_settings_enqueue_scripts' );
-	add_action( 'wp_enqueue_scripts', 'siteorigin_settings_enqueue_front_scripts' );
 }
 add_action('after_setup_theme', 'siteorigin_settings_init', 5);
 
