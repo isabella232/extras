@@ -94,9 +94,9 @@ function siteorigin_panels_lite_setting($key = false){
 
 	$settings = wp_parse_args( $settings, array(
 		'home-page' => false,																								// Is the home page supported
-		'home-page-default' => false,																						// What's the default layout for the home page?
+		'home-page-default' => false,																						// What's the default prebuilt layout for the home page?
 		'home-template' => 'home-panels.php',																				// The file used to render a home page.
-		'home-demo' => false,																				                // The file used to render the home page demo.
+		'home-demo-template' => false,																				        // The file used to render the home page demo.
 		'post-types' => get_option('siteorigin_panels_post_types', array('page', 'post') ),									// Post types that can be edited.
 
 		'bundled-widgets' => !isset( $display_settings['bundled-widgets'] ) ? true : $display_settings['bundled-widgets'],	// Include bundled widgets.
@@ -126,14 +126,15 @@ function siteorigin_panels_lite_setting($key = false){
  * @return string
  */
 function siteorigin_panels_lite_filter_home_template($template){
-	if ( !get_theme_mod('siteorigin_panels_home_page_enabled', siteorigin_panels_lite_setting('home-page-default') ) ) return $template;
-	if ( !siteorigin_panels_lite_setting('home-page-default') ) return $template;
-
-	// If the user already has their own custom home page
+	// The user has already selected their own page as the home template
 	if ( get_option( 'show_on_front' ) !== 'posts' ) return $template;
 
+	// Do we even support the home template
+	if ( !get_theme_mod('siteorigin_panels_home_page_enabled', siteorigin_panels_lite_setting('home-page-default') ) ) return $template;
+	if ( !siteorigin_panels_lite_setting('home-page-default') || !siteorigin_panels_lite_setting('home-demo-template') ) return $template;
+
 	return locate_template( array(
-		siteorigin_panels_lite_setting( 'home-demo' ),
+		siteorigin_panels_lite_setting( 'home-demo-template' ),
 		$template
 	) );
 }
