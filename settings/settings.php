@@ -114,19 +114,6 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 }
 
 /**
- * Enqueue the frontend settings scripts and CSS.
- */
-function siteorigin_settings_enqueue_front_scripts(){
-	if( current_user_can('manage_options') && siteorigin_setting('general_hover_edit', true) ) {
-		wp_enqueue_style('siteorigin-settings-front', get_template_directory_uri().'/extras/settings/css/settings.front.css', array(), SITEORIGIN_THEME_VERSION);
-		wp_enqueue_script('siteorigin-settings-front', get_template_directory_uri().'/extras/settings/js/settings.front.js', array('jquery'), SITEORIGIN_THEME_VERSION);
-		wp_localize_script( 'siteorigin-settings-front', 'siteoriginSettings', array(
-			'edit' => admin_url('themes.php?page=theme_settings_page'),
-		) );
-	}
-}
-
-/**
  * Add the admin bar to the settings page
  *
  * @param $bar
@@ -233,21 +220,6 @@ function siteorigin_setting( $name , $default = null) {
 
 	return apply_filters('siteorigin_setting_'.$name, $value);
 }
-
-/**
- * Adds the necessary classes to make a field editable
- */
-function siteorigin_setting_editable($field){
-	if( current_user_can('manage_options') && siteorigin_setting('general_hover_edit', true) ) {
-		echo 'data-so-edit="'.$field.'"';
-	}
-}
-
-function siteorigin_setting_editable_option_default($defaults){
-	$defaults['general_hover_edit'] = true;
-	return $defaults;
-}
-add_filter('siteorigin_theme_default_settings', 'siteorigin_setting_editable_option_default');
 
 /**
  * Render a settings field.
