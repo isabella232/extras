@@ -150,11 +150,11 @@ function siteorigin_settings_add_field( $section, $id, $type, $title = null, $ar
 	global $wp_settings_fields;
 	if ( isset( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ] ) ) {
 		if ( isset( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'args' ][ 'type' ] ) && $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'args' ][ 'type' ] == 'teaser' ) {
-			if ( empty( $args[ 'description' ] ) && !empty( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'args' ][ 'description' ] ) ) {
-				// Copy across the description field from the teaser
-				$args[ 'description' ] = $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'args' ][ 'description' ];
-			}
-			if ( empty( $name ) && !empty( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'title' ] ) ) {
+			// Copy the args from the teaser field, then make sure we have the proper type set.
+			$args = wp_parse_args( $args,  $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'args' ]);
+			$args['type'] = $type;
+
+			if ( empty( $title ) && !empty( $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'title' ] ) ) {
 				// Copy across the title field
 				$title = $wp_settings_fields[ 'theme_settings' ][ $section ][ $id ][ 'title' ];
 			}
@@ -306,7 +306,7 @@ function siteorigin_settings_field( $args ) {
 			else{
 				$src = array('', 0, 0);
 			}
-			
+
 			$choose_title = empty($args['choose']) ? __('Choose Media', 'siteorigin') : $args['choose'];
 			$update_button = empty($args['update']) ? __('Set Media', 'siteorigin') : $args['update'];
 			
