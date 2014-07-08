@@ -91,7 +91,7 @@ class SiteOrigin_Panels_Widgets_PostLoop extends WP_Widget{
 	 */
 	function form( $instance ) {
 		?>
-		<p><?php printf( __('Please install Page Builder to use this widget.') ) ?></p>
+		<p><?php printf( __('Please install Page Builder to use this widget.', 'siteorigin') ) ?></p>
 		<?php
 	}
 }
