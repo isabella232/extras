@@ -382,10 +382,10 @@ function siteorigin_settings_field( $args ) {
 
 			if( !class_exists($args['widget_class']) ) {
 				?><div class="so-settings-widget-form"><?php
-				printf( __('This field requires the %s plugin. ', 'influence'), $args['plugin_name']);
+				printf( __('This field requires the %s plugin. ', 'siteorigin'), $args['plugin_name']);
 				if( function_exists('siteorigin_plugin_activation_install_url') ) {
 					$install_url = siteorigin_plugin_activation_install_url($args['plugin'], $args['plugin_name']);
-					printf( __('<a href="%s" target="_blank">Install %s</a> now. ', 'influence'), $install_url, $args['plugin_name']);
+					printf( __('<a href="%s" target="_blank">Install %s</a> now. ', 'siteorigin'), $install_url, $args['plugin_name']);
 				}
 				?></div>
 				<input type="hidden" id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>" value="<?php echo esc_attr( serialize( $current ) ) ?>" /><?php
