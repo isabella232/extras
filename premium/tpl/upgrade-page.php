@@ -38,7 +38,7 @@ $theme = basename( get_template_directory() );
 
 	<?php if( empty($premium_info) ) : ?>
 
-		<p><?php printf(__( "The premium version of this theme is no longer available. If you need any help, please contact <a href='http://siteorigin.com//thread/'>SiteOrigin support</a>.", 'siteorigin' ),ucfirst( $theme )); ?></p>
+		<p><?php printf(__( "The premium version of this theme is no longer available. If you need any help, please contact <a href='http://siteorigin.com/thread/'>SiteOrigin support</a>.", 'siteorigin' ),ucfirst( $theme )); ?></p>
 
 	<?php else:  ?>
 

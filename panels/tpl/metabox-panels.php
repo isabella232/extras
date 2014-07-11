@@ -88,13 +88,6 @@ $layouts = apply_filters('siteorigin_panels_prebuilt_layouts', array());
 			</ul>
 
 			<?php do_action('siteorigin_panels_after_widgets'); ?>
-
-			<div id="siteorigin-widgets-link-wrapper">
-				<?php $siteorigin_url = 'http://siteorigin.com/product-tag/widget/'; ?>
-				<a href="<?php echo esc_url($siteorigin_url) ?>" data-original="<?php echo esc_url($siteorigin_url) ?>" data-search="<?php echo add_query_arg('search', '{search}', $siteorigin_url) ?>" id="siteorigin-widgets-link" target="_blank">
-					<?php _e('Find More Page Builder Widgets', 'siteorigin') ?>
-				</a>
-			</div>
 		</div>
 
 	</div>
