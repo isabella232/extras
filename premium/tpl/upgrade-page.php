@@ -44,7 +44,7 @@ $theme = basename( get_template_directory() );
 
 		<div class="left-column">
 
-			<?php if( !empty($premium_info['premium_video_poster']) ) : // Only load the video iFrame after the video is clicked ?>
+			<?php if( !empty($premium_info['premium_video_poster']) ) : ?>
 				<div id="video-wrapper" style="background-image: url(<?php echo esc_url($premium_info['premium_video_poster']) ?>)">
 					<?php if(!empty($premium_info['premium_video_id'])) : ?>
 						<a href="http://player.vimeo.com/video/<?php echo intval($premium_info['premium_video_id']) ?>?title=0&byline=0&portrait=0&autoplay=1" target="_blank" id="click-to-play" data-video-id="<?php echo intval($premium_info['premium_video_id']) ?>" target="_blank"></a>
