@@ -372,6 +372,14 @@ function siteorigin_settings_field( $args ) {
 			<?php
 			break;
 
+		case 'editor' :
+			$editor_settings = wp_parse_args( !empty($args['settings']) ? $args['settings'] : array(), array(
+				'textarea_name' => $field_name,
+				'textarea_rows' => 8,
+			) );
+			wp_editor( $current, $field_id, $editor_settings );
+			break;
+
 		case 'widget' :
 			if(empty($args['widget_class'])) break;
 
