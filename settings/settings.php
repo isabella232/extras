@@ -450,7 +450,11 @@ function siteorigin_settings_validate( $values ) {
 	foreach ( $wp_settings_fields['theme_settings'] as $section_id => $fields ) {
 		foreach ( $fields as $field_id => $field ) {
 			$name = $section_id . '_' . $field_id;
-			
+
+			if( !empty($field['args']['options']) ){
+				$field['args']['options'] = apply_filters('siteorigin_setting_options_'.$name, $field['args']['options']);
+			}
+
 			switch($field['args']['type']){
 				case 'checkbox' :
 					// Only allow true or false values
@@ -467,6 +471,13 @@ function siteorigin_settings_validate( $values ) {
 					if( $values[ $name ] != -1 ) {
 						$attachment = get_post( $values[ $name ] );
 						if(empty($attachment) || $attachment->post_type != 'attachment') $values[ $name ] = '';
+					}
+					break;
+
+				case 'select':
+					if( !empty($field['args']['options']) && is_array($field['args']['options']) ) {
+						// Make sure the value is in the options.
+						if( !isset($field['args']['options'][ $values[$name] ]) ) $values[$name] = '';
 					}
 					break;
 
