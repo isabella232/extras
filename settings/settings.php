@@ -96,6 +96,15 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/js/settings.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/css/settings.css', array(), SITEORIGIN_THEME_VERSION );
 
+	wp_localize_script( 'siteorigin-settings', 'siteoriginSettings', array(
+		'premium' => array(
+			'hasPremium' => has_filter('siteorigin_premium_content'),
+			'premiumUrl' => admin_url('themes.php?page=premium_upgrade'),
+			'isPremium' => defined('SITEORIGIN_IS_PREMIUM'),
+			'name' => apply_filters('siteorigin_premium_theme_name', ucfirst( get_option( 'template' ) ) . ' ' . __( 'Premium', 'siteorigin' ) ),
+		)
+	) );
+
 	if( wp_script_is( 'wp-color-picker', 'registered' ) ){
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'wp-color-picker' );

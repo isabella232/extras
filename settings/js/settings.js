@@ -124,20 +124,25 @@ jQuery( function ( $ ) {
         });
     
     // We're going to use jQuery to transform the settings page into a tabbed interface
-    var $$ = $( 'form[action="options.php"]' );
-    var tabs = $( '<h2></h2>' ).attr('id', 'siteorigin-settings-tab-wrapper').addClass( 'nav-tab-wrapper' ).prependTo( $$ );
-    
-    $$.find( 'h3' ).each( function ( i, el ) {
+    var $optionsForm = $( 'form[action="options.php"]' );
+    var tabs = $( '<h2></h2>' ).attr('id', 'siteorigin-settings-tab-wrapper').addClass( 'nav-tab-wrapper' ).prependTo( $optionsForm );
+
+    $optionsForm.find( 'h3' ).each( function ( i, el ) {
         var h = $( el ).hide();
         var a = $( '<a href="#"></a>' ).addClass( 'nav-tab' ).html( h.html() ).appendTo( tabs );
         if ( i == 0 ) a.addClass( 'nav-tab-active' );
 
         var table = h.next().hide();
         a.click( function () {
-            $$.find( '> table' ).hide();
-            table.show();
-            tabs.find( 'a' ).removeClass( 'nav-tab-active' );
             a.addClass( 'nav-tab-active' );
+            setTimeout(function(){
+                // We'll remove the active tab with a slight delay to prevent the pixel jump
+                tabs.find( 'a').not(a).removeClass( 'nav-tab-active' );
+            }, 50);
+
+            // Change the tab we're displaying
+            $optionsForm.find( '> table').hide();
+            table.show();
 
             $( '#current-tab-field' ).val( i );
             
@@ -147,7 +152,7 @@ jQuery( function ( $ ) {
             return false;
         } );
 
-        if ( i == getUserSetting('siteorigin_settings_tab', 0) || (i == 0 && getUserSetting('siteorigin_settings_tab', 0) > $$.find( 'h3' ).length) ) a.click();
+        if ( i == getUserSetting('siteorigin_settings_tab', 0) || (i == 0 && getUserSetting('siteorigin_settings_tab', 0) > $optionsForm.find( 'h3' ).length) ) a.click();
     } );
     
     // Autofill
@@ -222,4 +227,10 @@ jQuery( function ( $ ) {
     setTimeout( function () {
         $( '#setting-updated' ).slideUp();
     }, 5000 );
+
+    // Add a Go Premium button
+    if( !siteoriginSettings.premium.isPremium && siteoriginSettings.premium.hasPremium ) {
+        var upgradeLink = $('<div id="upgrade-to-premium" class="screen-meta-toggle"><a href="' + siteoriginSettings.premium.premiumUrl + '" target="_blank">' + siteoriginSettings.premium.name + '</a></div>');
+        $('#screen-meta-links').append(upgradeLink);
+    }
 } );

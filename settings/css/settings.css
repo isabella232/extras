@@ -165,3 +165,25 @@
   color: #444444;
   text-decoration: underline;
 }
+#upgrade-to-premium {
+  float: right;
+  height: 28px;
+  margin: 0 0 0 6px;
+  border: 1px solid #98ba4f;
+  border-top: none;
+  background: #d4ec8d;
+  -webkit-box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.1);
+}
+#upgrade-to-premium a {
+  color: #4f6920;
+  display: block;
+  font-size: 13px;
+  height: 22px;
+  line-height: 22px;
+  text-decoration: none;
+  z-index: 1;
+}
+#upgrade-to-premium a:after {
+  color: #4f6920;
+}
