@@ -654,7 +654,7 @@ function siteorigin_settings_add_editor_styles_button($buttons){
 add_filter('mce_buttons_2', 'siteorigin_settings_add_editor_styles_button');
 
 function siteorigin_settings_add_slider_options($options){
-	// Add any meta sliders
+	// Add all Meta Sliders
 	if( class_exists('MetaSliderPlugin') ){
 		$sliders = get_posts(array(
 			'post_type' => 'ml-slider',
