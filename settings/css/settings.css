@@ -187,3 +187,10 @@
 #upgrade-to-premium a:after {
   color: #4f6920;
 }
+#theme-settings-title img {
+  display: block;
+  width: 30px;
+  height: 30px;
+  float: left;
+  margin: -1px 8px 0 0;
+}
