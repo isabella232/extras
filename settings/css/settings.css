@@ -1,17 +1,17 @@
 #siteorigin-settings-tab-wrapper {
   margin-bottom: 15px;
 }
-.colorpicker-wrapper {
+#siteorigin-settings-form .colorpicker-wrapper {
   position: relative;
 }
-.colorpicker-wrapper .color-indicator {
+#siteorigin-settings-form .colorpicker-wrapper .color-indicator {
   display: block;
   width: 23px;
   height: 23px;
   margin-right: 10px;
   float: left;
 }
-.colorpicker-wrapper .farbtastic-container {
+#siteorigin-settings-form .colorpicker-wrapper .farbtastic-container {
   position: absolute;
   top: 28px;
   left: 0px;
@@ -21,7 +21,14 @@
   border: 1px solid #E0E0E0;
   z-index: 2;
 }
-.media-field-wrapper {
+#siteorigin-settings-form .checkbox-wrapper {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+#siteorigin-settings-form .media-field-wrapper {
   position: relative;
   display: block;
   float: left;
@@ -40,7 +47,7 @@
   border-radius: 3px;
   height: 32px;
 }
-.media-field-wrapper:hover {
+#siteorigin-settings-form .media-field-wrapper:hover {
   background: #ffffff;
   background: -moz-linear-gradient(top, #ffffff 0%, #f7f7f7 100%);
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #f7f7f7));
@@ -51,20 +58,20 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#f7f7f7', GradientType=0);
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
-.media-field-wrapper > div {
+#siteorigin-settings-form .media-field-wrapper > div {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   float: left;
   height: 32px;
 }
-.media-field-wrapper .current {
+#siteorigin-settings-form .media-field-wrapper .current {
   padding: 4px;
   border-right: 1px solid #bbb;
   position: relative;
   box-shadow: 1px 0 0 #FFF;
 }
-.media-field-wrapper .current .title {
+#siteorigin-settings-form .media-field-wrapper .current .title {
   display: none;
   position: absolute;
   bottom: 34px;
@@ -76,7 +83,7 @@
   width: auto;
   white-space: nowrap;
 }
-.media-field-wrapper .thumbnail-wrapper {
+#siteorigin-settings-form .media-field-wrapper .thumbnail-wrapper {
   border: 1px solid #999;
   line-height: 0;
   box-shadow: 0px 1px 1px #FFF;
@@ -92,12 +99,12 @@
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cfcfcf', endColorstr='#cccccc', GradientType=0);
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
-.media-field-wrapper .thumbnail-wrapper img {
+#siteorigin-settings-form .media-field-wrapper .thumbnail-wrapper img {
   height: 100%;
   width: 100%;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 }
-.media-field-wrapper .media-upload-button {
+#siteorigin-settings-form .media-field-wrapper .media-upload-button {
   display: inline-block;
   color: #666;
   text-decoration: none;
@@ -108,10 +115,10 @@
   outline: none;
   cursor: pointer;
 }
-.media-field-wrapper:hover .media-upload-button {
+#siteorigin-settings-form .media-field-wrapper:hover .media-upload-button {
   color: #707070;
 }
-.media-remove-button {
+#siteorigin-settings-form .media-remove-button {
   display: none;
   position: absolute;
   top: 0;
@@ -121,27 +128,27 @@
   font-size: 11px;
   padding: 8px 0 8px 8px;
 }
-.media-remove-button:hover {
+#siteorigin-settings-form .media-remove-button:hover {
   color: #BC0B0B;
 }
-.so-settings-widget-form {
+#siteorigin-settings-form .so-settings-widget-form {
   padding: 25px;
   background: #FDFDFD;
   border: 1px solid #cccccc;
 }
-.so-settings-widget-form > *:first-child {
+#siteorigin-settings-form .so-settings-widget-form > *:first-child {
   margin-top: 0;
 }
-.so-settings-widget-form > *:last-child {
+#siteorigin-settings-form .so-settings-widget-form > *:last-child {
   margin-bottom: 0;
 }
-.so-settings-widget-form .siteorigin-widget-form-main {
+#siteorigin-settings-form .so-settings-widget-form .siteorigin-widget-form-main {
   margin-bottom: 0;
 }
-.so-settings-widget-form .siteorigin-widget-preview {
+#siteorigin-settings-form .so-settings-widget-form .siteorigin-widget-preview {
   display: none !important;
 }
-.so-settings-widget-form .siteorigin-widget-help-link {
+#siteorigin-settings-form .so-settings-widget-form .siteorigin-widget-help-link {
   margin-bottom: 0 !important;
 }
 #siteorigin-settings-submit {

@@ -246,8 +246,10 @@ function siteorigin_settings_field( $args ) {
 	switch ( $args['type'] ) {
 		case 'checkbox' :
 			?>
-			<input id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>" type="checkbox" <?php checked( $current ) ?> />
-			<label for="<?php echo esc_attr( $field_id ) ?>"><?php echo esc_attr( !empty( $args['label'] ) ? $args['label'] : __( 'Enabled', 'siteorigin' ) ) ?></label>
+			<div class="checkbox-wrapper">
+				<input id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>" type="checkbox" <?php checked( $current ) ?> />
+				<label for="<?php echo esc_attr( $field_id ) ?>"><?php echo esc_attr( !empty( $args['label'] ) ? $args['label'] : __( 'Enabled', 'siteorigin' ) ) ?></label>
+			</div>
 			<?php
 			break;
 		case 'text' :
@@ -650,6 +652,43 @@ function siteorigin_settings_add_editor_styles_button($buttons){
 	return $buttons;
 }
 add_filter('mce_buttons_2', 'siteorigin_settings_add_editor_styles_button');
+
+function siteorigin_settings_add_slider_options($options){
+	// Add any meta sliders
+	if( class_exists('MetaSliderPlugin') ){
+		$sliders = get_posts(array(
+			'post_type' => 'ml-slider',
+			'numberposts' => 100,
+
+		));
+
+		foreach($sliders as $slider) {
+			$options['[metaslider id="'.$slider->ID.'"]'] = __('Meta Slider: ', 'siteorigin').$slider->post_title;
+		}
+	}
+
+	// Add all the Revolution sliders
+	if( function_exists('rev_slider_shortcode') ) {
+		global $wpdb;
+		$sliders = $wpdb->get_results("SELECT * FROM {$wpdb->prefix}revslider_sliders ORDER BY title");
+
+		foreach($sliders as $slider) {
+			$options['[rev_slider '.$slider->alias.']'] = __('Revolution Slider: ', 'siteorigin').$slider->title;
+		}
+	}
+
+	// Add any LayerSlider Sliders
+	if( function_exists('layerslider') ) {
+		global $wpdb;
+		$sliders = $wpdb->get_results("SELECT id,name FROM {$wpdb->prefix}layerslider ORDER BY name");
+
+		foreach($sliders as $slider) {
+			$options['[layerslider id="'.$slider->id.'"]'] = __('LayerSlider: ', 'siteorigin').$slider->name;
+		}
+	}
+
+	return $options;
+}
 
 /**
  * Settings validators.

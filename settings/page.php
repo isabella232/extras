@@ -8,7 +8,7 @@
 
 	<?php siteorigin_settings_change_message(); ?>
 	
-	<form action="options.php" method="post">
+	<form action="options.php" method="post" id="siteorigin-settings-form">
 		<?php settings_fields( 'theme_settings' ); ?>
 		<?php do_settings_sections( 'theme_settings' ) ?>
 
