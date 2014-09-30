@@ -247,11 +247,11 @@ function siteorigin_settings_field( $args ) {
 			<input
 				id="<?php echo esc_attr( $field_id ) ?>"
 				name="<?php echo esc_attr( $field_name ) ?>"
-				class="<?php echo esc_attr( $args['type'] == 'number' ? 'small-text' : 'regular-text' ) ?>"
+				class="<?php echo esc_attr( $args['type'] == 'number' ? 'small-text' : 'regular-text' ); if( !empty($args['options']) ) echo ' siteorigin-settings-has-options'; ?>"
 				size="25"
 				type="<?php echo esc_attr( $args['type'] ) ?>"
 				value="<?php echo esc_attr( $current ) ?>" />
-			<?php if(!empty($args['options'])) : ?>
+			<?php if( !empty( $args['options'] ) ) : $args['options'] = apply_filters('siteorigin_setting_options_'.$field_id, $args['options']); ?>
 				<select class="input-field-select">
 					<option></option>
 					<?php foreach($args['options'] as $value => $label) : ?>
@@ -262,6 +262,7 @@ function siteorigin_settings_field( $args ) {
 			break;
 
 		case 'select' :
+			$args['options'] = apply_filters('siteorigin_setting_options_'.$field_id, $args['options']);
 			?>
 			<select id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>">
 				<?php foreach ( $args['options'] as $option_id => $label ) : ?>

@@ -153,10 +153,13 @@ jQuery( function ( $ ) {
     // Autofill
     $('.input-field-select')
         .change(function(){
-            var c = $(this ).closest('td' ).find('input');
-            c.val($(this ).val());
-            $(this ).val('')
+            var c = $(this ).closest('td').find('input');
+            c.val( $(this ).val() );
         });
+
+    $('input.siteorigin-settings-has-options').keyup(function(){
+        $(this ).closest('td').find('.input-field-select').val( $(this).val() );
+    }).keyup();
 
     // Highlight the correct setting
     if(window.location.hash != ''){
