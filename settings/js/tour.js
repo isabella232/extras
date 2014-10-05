@@ -119,7 +119,7 @@ jQuery(function($){
         });
 
         // Close the tour when the background is clicked
-        tourModal.find('#settings-tour-overlay').click(function(){
+        tourModal.find('#settings-tour-overlay, .siteorigin-settings-close').click(function(){
             endTourFrame();
             tourModal.remove();
         });

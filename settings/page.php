@@ -82,6 +82,7 @@
 					<div id="settings-tour-toolbar">
 						<input type="button" class="button-primary siteorigin-settings-save" value="<?php esc_attr_e('Save Settings', 'siteorigin') ?>" />
 						<input type="button" class="button-secondary siteorigin-settings-preview" value="<?php esc_attr_e('Preview', 'siteorigin') ?>" />
+						<input type="button" class="button-secondary siteorigin-settings-close" value="<?php esc_attr_e('Close', 'siteorigin') ?>" />
 					</div>
 
 				</div>
