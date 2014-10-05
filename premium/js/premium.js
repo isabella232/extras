@@ -7,9 +7,9 @@ jQuery( function ( $ ) {
 
     // Handle clicking the play button
     $('#theme-upgrade #click-to-play').click(function(e){
+        e.preventDefault();
         // Open the Vimeo video in a new window
         window.open($(this).attr('href'), 'videowindow', 'width=640,height=362,resizeable,scrollbars');
-        return false;
     })
 
     $( '#theme-upgrade .buy-button').click(function(e){
