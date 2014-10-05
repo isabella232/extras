@@ -2,7 +2,7 @@
 	margin-bottom: 15px;
 }
 
-#siteorigin-settings-form {
+.siteorigin-settings-form {
 
 	.colorpicker-wrapper{
 		position: relative;
@@ -187,9 +187,10 @@
 
 }
 
-#siteorigin-settings-submit {
+#siteorigin-settings-submit, #siteorigin-settings-main-preview {
 	display: block;
 	float: left;
+	margin-right: 10px;
 
 	&:active, &:focus {
 		outline: none;
@@ -211,24 +212,37 @@
 	text-decoration: underline;
 }
 
-#upgrade-to-premium {
+#upgrade-to-premium, #start-theme-tour {
 	float: right;
 	height: 28px;
 	margin: 0 0 0 6px;
-	border: 1px solid #98ba4f;
 	border-top: none;
-	background: #d4ec8d;
+	border: 1px solid #DDDDDD;
+	background: #FFFFFF;
 	-webkit-box-shadow: 0 1px 1px -1px rgba(0,0,0,.1);
 	box-shadow: 0 1px 1px -1px rgba(0,0,0,.1);
 
 	a {
-		color: #4f6920;
+		color: #777;
 		display: block;
 		font-size: 13px;
 		height: 22px;
 		line-height: 22px;
 		text-decoration: none;
 		z-index: 1;
+
+		&:after {
+			color: #777;
+		}
+	}
+}
+
+#upgrade-to-premium {
+	border: 1px solid #98ba4f;
+	background: #d4ec8d;
+
+	a {
+		color: #4f6920;
 
 		&:after {
 			color: #4f6920;
@@ -243,5 +257,54 @@
 		height: 30px;
 		float: left;
 		margin: -1px 8px 0 0;
+	}
+}
+
+#siteorigin-settings-preview-overlay,
+#siteorigin-settings-preview-toolbar,
+#siteorigin-settings-preview-modal {
+	position: fixed;
+	z-index: 150000;
+}
+
+#siteorigin-settings-preview-overlay {
+	background: rgba(0,0,0,0.8);
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#siteorigin-settings-preview-toolbar {
+	background: #FFFFFF;
+	border-bottom: 1px solid #dddddd;
+	top: 20px;
+	left: 20px;
+	right: 20px;
+	height: 54px;
+	overflow: hidden;
+
+	box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+
+	h3 {
+		padding: 20px 0 0 20px;
+		margin: 0;
+		line-height: 14px;
+	}
+
+	.siteorigin-settings-close .media-modal-icon:before {
+	}
+}
+
+#siteorigin-settings-preview-modal {
+	background: #FFFFFF;
+	top: 75px;
+	left: 20px;
+	right: 20px;
+	bottom: 20px;
+
+	iframe {
+		width: 100%;
+		height: 100%;
 	}
 }

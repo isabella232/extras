@@ -8,14 +8,88 @@
 
 	<?php siteorigin_settings_change_message(); ?>
 	
-	<form action="options.php" method="post" id="siteorigin-settings-form">
+	<form action="options.php" method="post" id="siteorigin-settings-form" class="siteorigin-settings-form">
 		<?php settings_fields( 'theme_settings' ); ?>
 		<?php do_settings_sections( 'theme_settings' ) ?>
 
 		<p class="submit">
-			<input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save Settings', 'siteorigin'); ?>" id="siteorigin-settings-submit" />
+			<input name="Submit" type="submit" class="button-primary siteorigin-settings-submit-button" value="<?php esc_attr_e('Save Settings', 'siteorigin'); ?>" id="siteorigin-settings-submit" />
+			<input type="button" class="button-secondary siteorigin-settings-preview-button" value="<?php esc_attr_e('Preview', 'siteorigin'); ?>" id="siteorigin-settings-main-preview" />
+
 			<a href="http://siteorigin.com/threads/theme-<?php echo get_template() ?>/" target="_blank" id="siteorigin-theme-support"><?php _e( 'Theme Support Forum', 'siteorigin' ) ?></a>
 		</p>
 		<input type="hidden" id="current-tab-field" name="theme_settings_current_tab" value="<?php echo intval( get_theme_mod('_theme_settings_current_tab', 0) ) ?>" />
 	</form>
+
+
+	<script id="settings-preview-modal-template" type="text/template">
+
+		<div id="siteorigin-settings-preview-overlay"></div>
+
+		<div id="siteorigin-settings-preview-modal">
+			<iframe id="siteorigin-settings-preview-iframe" name="siteorigin-settings-preview-iframe" src="<?php echo esc_url( site_url('/') ) ?>"></iframe>
+		</div>
+
+		<div id="siteorigin-settings-preview-toolbar">
+			<h3><?php printf(__( '%s Theme Settings Preview', 'siteorigin' ), $theme->get('Name')) ?></h3>
+			<a class="media-modal-close siteorigin-settings-close" href="#"><span class="media-modal-icon"><span class="screen-reader-text">Close media panel</span></span></a>
+		</div>
+
+	</script>
+
+	<?php if(has_filter('siteorigin_settings_tour_content')) : ?>
+		<script id="settings-tour-modal-template" type="text/template">
+
+			<div id="settings-tour-modal-wrapper">
+
+				<div id="settings-tour-overlay"></div>
+
+				<div id="settings-tour-modal">
+
+					<div id="settings-tour-step-content">
+						<div class="left-column">
+							<a href="#" class="play-video"></a>
+							<img src="" width="460" height="320" src="#" class="step-image" />
+						</div>
+
+						<div class="right-column">
+							<div id="siteorigin-settings-tour-navigation">
+								<div class="dashicons dashicons-arrow-left-alt2 tour-previous"></div>
+								<div class="dashicons dashicons-arrow-right-alt2 tour-next"></div>
+							</div>
+
+							<h2 class="step-title"></h2>
+							<p class="step-content"></p>
+
+							<div class="siteorigin-settings-form">
+								<table class="form-table">
+									<tbody>
+
+									</tbody>
+								</table>
+							</div>
+
+							<div class="bottom-navigation tour-next button-secondary">
+								<span>Next</span>
+								<div class="dashicons dashicons-arrow-right-alt2 tour-next"></div>
+							</div>
+						</div>
+
+						<div class="clear"></div>
+
+					</div>
+
+					<div id="settings-tour-toolbar">
+						<input type="button" class="button-primary siteorigin-settings-save" value="<?php esc_attr_e('Save Settings', 'siteorigin') ?>" />
+						<input type="button" class="button-secondary siteorigin-settings-preview" value="<?php esc_attr_e('Preview', 'siteorigin') ?>" />
+					</div>
+
+				</div>
+
+			</div>
+
+
+		</script>
+	<?php endif; ?>
+
 </div> 

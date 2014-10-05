@@ -73,7 +73,7 @@ jQuery( function ( $ ) {
             var attachment = frame.state().get('selection').first().attributes;
 
             $c.find('.current .title' ).html(attachment.title);
-            $c.find('input[type=hidden]' ).val(attachment.id);
+            $c.find('input[type=hidden]' ).val(attachment.id).change();
 
             if(typeof attachment.sizes != 'undefined'){
                 if(typeof attachment.sizes.thumbnail != 'undefined')
@@ -84,7 +84,7 @@ jQuery( function ( $ ) {
             else{
                 $c.find('.current .thumbnail' ).attr('src', attachment.icon).fadeIn();
             }
-            
+
             frame.close();
         });
 
@@ -118,7 +118,7 @@ jQuery( function ( $ ) {
             var $$ = $(this ).closest('td');
             
             $$.find('.current .title' ).html('');
-            $$.find('input[type=hidden]' ).val('');
+            $$.find('input[type=hidden]' ).val('').change();
             $$.find('.current .thumbnail' ).fadeOut('fast');
             $(this ).fadeOut('fast');
         });
@@ -233,4 +233,49 @@ jQuery( function ( $ ) {
         var upgradeLink = $('<div id="upgrade-to-premium" class="screen-meta-toggle"><a href="' + siteoriginSettings.premium.premiumUrl + '" target="_blank">' + siteoriginSettings.premium.name + '</a></div>');
         $('#screen-meta-links').append(upgradeLink);
     }
+
+    // Now, lets handle the preview
+    $('#siteorigin-settings-form .siteorigin-settings-preview-button').click( function(e){
+        e.preventDefault();
+
+        // Lets create the modal
+        var modal = $( $('#settings-preview-modal-template').html()).appendTo('body');
+
+        // Submit the preview to the iframe
+        var submitToIframe = function(){
+            // And now submit the form to this iframe
+            var $f = $('#siteorigin-settings-form');
+            $f
+                .attr({
+                    'target': 'siteorigin-settings-preview-iframe',
+                    'action' : modal.find('iframe').attr('src')
+                });
+            var $hidden = $('<input type="hidden" name="siteorigin_settings_is_preview" value="true" />').appendTo($f);
+            $f.submit();
+            $hidden.remove();
+            $f
+                .attr({
+                    'target': '_self',
+                    'action' : 'options.php'
+                });
+        }
+        submitToIframe();
+
+        // After the iframe has loaded, intercept all link clicks so we can continue the preview.
+        modal.find('iframe').load(function(){
+            var iframe = $(this);
+            $(this).contents().find('a').click(function(e){
+                e.preventDefault();
+                iframe.attr( 'src', $(this).prop('href') );
+                submitToIframe();
+            })
+        });
+
+        // Handle closing the modal
+        modal.find('.siteorigin-settings-close').click(function(){
+            modal.remove();
+        });
+    } );
+
+
 } );

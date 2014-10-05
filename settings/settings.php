@@ -6,6 +6,11 @@
  */
 
 
+function siteorigin_settings_admin_init_action(){
+	do_action('siteorigin_settings_init');
+}
+add_action('admin_init', 'siteorigin_settings_admin_init_action');
+
 /**
  * Intialize the theme settings page
  *
@@ -34,6 +39,7 @@ function siteorigin_settings_init( $theme_name = null ) {
 		}
 	}
 	$GLOBALS['siteorigin_settings'] = wp_parse_args( $settings, $GLOBALS['siteorigin_settings_defaults'] );
+	$GLOBALS['siteorigin_settings'] = apply_filters('siteorigin_settings_values', $GLOBALS['siteorigin_settings']);
 
 	// Register all the actions for the settings page
 	add_action( 'admin_menu', 'siteorigin_settings_admin_menu' );
@@ -74,6 +80,25 @@ function siteorigin_settings_admin_menu() {
 }
 
 /**
+ * Add the Edit Home Page item to the admin bar.
+ *
+ * @param WP_Admin_Bar $admin_bar
+ * @return WP_Admin_Bar
+ */
+function siteorigin_settings_admin_bar_menu($admin_bar){
+	if( current_user_can('edit_theme_options') && has_filter('siteorigin_settings_tour_content') ){
+		$admin_bar->add_node(array(
+			'id' => 'theme-settings-tour',
+			'title' => __('Theme Tour', 'siteorigin'),
+			'href' => admin_url('themes.php?page=theme_settings_page#tour')
+		));
+	}
+
+	return $admin_bar;
+}
+add_action('admin_bar_menu', 'siteorigin_settings_admin_bar_menu', 100);
+
+/**
  * Render the theme settings page
  */
 function siteorigin_settings_render() {
@@ -96,13 +121,22 @@ function siteorigin_settings_enqueue_scripts( $prefix ) {
 	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/js/settings.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/css/settings.css', array(), SITEORIGIN_THEME_VERSION );
 
+	if( has_filter('siteorigin_settings_tour_content') ) {
+		wp_enqueue_script( 'siteorigin-settings-tour', get_template_directory_uri() . '/extras/settings/js/tour.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_style( 'siteorigin-settings-tour', get_template_directory_uri() . '/extras/settings/css/tour.css', array(  ), SITEORIGIN_THEME_VERSION );
+	}
+
 	wp_localize_script( 'siteorigin-settings', 'siteoriginSettings', array(
 		'premium' => array(
 			'hasPremium' => has_filter('siteorigin_premium_content'),
 			'premiumUrl' => admin_url('themes.php?page=premium_upgrade'),
 			'isPremium' => defined('SITEORIGIN_IS_PREMIUM'),
 			'name' => apply_filters('siteorigin_premium_theme_name', ucfirst( get_option( 'template' ) ) . ' ' . __( 'Premium', 'siteorigin' ) ),
-		)
+		),
+		'tour' => array(
+			'buttonText' => __('Theme Tour', 'siteorigin'),
+			'content' => apply_filters( 'siteorigin_settings_tour_content', array() ),
+		),
 	) );
 
 	if( wp_script_is( 'wp-color-picker', 'registered' ) ){
@@ -242,6 +276,8 @@ function siteorigin_settings_field( $args ) {
 	$field_name = $GLOBALS['siteorigin_settings_name'] . '[' . $args['section'] . '_' . $args['field'] . ']';
 	$field_id = $args['section'] . '_' . $args['field'];
 	$current = isset( $GLOBALS['siteorigin_settings'][ $field_id ] ) ? $GLOBALS['siteorigin_settings'][ $field_id ] : null;
+
+	?><div class="siteorigin-settings-field" data-type="<?php echo esc_attr($args['type']) ?>" data-field="<?php echo esc_attr($field_id) ?>"><?php
 
 	switch ( $args['type'] ) {
 		case 'checkbox' :
@@ -440,6 +476,8 @@ function siteorigin_settings_field( $args ) {
 			break;
 	}
 
+	?></div><?php
+
 	if ( !empty( $args['description'] ) ) echo '<p class="description">' . $args['description'] . '</p>';
 }
 
@@ -447,15 +485,17 @@ function siteorigin_settings_field( $args ) {
  * Validate the settings values
  *
  * @param $values
+ * @param $set_tab
+ *
  * @return array
  */
-function siteorigin_settings_validate( $values ) {
+function siteorigin_settings_validate( $values, $set_tab = true ) {
 	global $wp_settings_fields;
 
 	$theme_name = basename( get_template_directory() );
 	$current = get_option( $theme_name . '_theme_settings', array() );
 
-	set_theme_mod( '_theme_settings_current_tab', isset( $_REQUEST['theme_settings_current_tab'] ) ? $_REQUEST['theme_settings_current_tab'] : 0 );
+	if($set_tab) set_theme_mod( '_theme_settings_current_tab', isset( $_REQUEST['theme_settings_current_tab'] ) ? $_REQUEST['theme_settings_current_tab'] : 0 );
 
 	$changed = false;
 	foreach ( $wp_settings_fields['theme_settings'] as $section_id => $fields ) {
@@ -724,4 +764,31 @@ class SiteOrigin_Settings_Validator {
 
 		return false;
 	}
+}
+
+// This is the code for the preview
+
+function siteorigin_settings_preview_init(){
+	if( !is_admin() &&
+	    current_user_can('edit_theme_options') &&
+	    !empty($_POST['siteorigin_settings_is_preview']) &&
+	    !empty($_POST['vantage_theme_settings']) &&
+	    wp_verify_nonce($_POST['_wpnonce'], 'theme_settings-options')
+	) {
+		// We're in a preview mode, so filter the settings and hide the admin bar
+		// Admin bar is only ever hidden during the preview inside the admin
+		add_filter('siteorigin_settings_values', 'siteorigin_settings_preview_values');
+		add_filter('show_admin_bar', '__return_false');
+	}
+}
+add_action('after_setup_theme', 'siteorigin_settings_preview_init', 4); // This must run before we initialize the settings
+
+function siteorigin_settings_preview_values($values){
+	require_once(ABSPATH . 'wp-admin/includes/template.php');
+
+	do_action('siteorigin_settings_init');
+	$post_values = siteorigin_settings_validate($_POST['vantage_theme_settings'], false);
+	$values = wp_parse_args($post_values, $values);
+
+	return $values;
 }
