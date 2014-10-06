@@ -86,12 +86,20 @@ function siteorigin_settings_admin_menu() {
  * @return WP_Admin_Bar
  */
 function siteorigin_settings_admin_bar_menu($admin_bar){
+
+	if( is_admin() ) {
+		// Skip this on the settings page
+		$screen = get_current_screen();
+		if( $screen->base == 'appearance_page_theme_settings_page' ) return $admin_bar;
+	}
+
 	if( current_user_can('edit_theme_options') && has_filter('siteorigin_settings_tour_content') ){
+
 		$admin_bar->add_node(array(
 			'id' => 'theme-settings-tour',
 			'title' => __('Theme Tour', 'siteorigin'),
 			'href' => admin_url('themes.php?page=theme_settings_page#tour')
-		));
+		) );
 	}
 
 	return $admin_bar;
