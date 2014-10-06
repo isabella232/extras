@@ -70,7 +70,7 @@
 							</div>
 
 							<div class="bottom-navigation tour-next button-secondary">
-								<span>Next</span>
+								<span data-text-continue="<?php echo esc_attr('Continue', 'siteorigin') ?>" data-text-done="<?php echo esc_attr('Done', 'siteorigin') ?>"><?php _e('Continue', 'siteorigin') ?></span>
 								<div class="dashicons dashicons-arrow-right-alt2 tour-next"></div>
 							</div>
 						</div>

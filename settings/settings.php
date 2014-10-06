@@ -769,10 +769,11 @@ class SiteOrigin_Settings_Validator {
 // This is the code for the preview
 
 function siteorigin_settings_preview_init(){
+
 	if( !is_admin() &&
 	    current_user_can('edit_theme_options') &&
 	    !empty($_POST['siteorigin_settings_is_preview']) &&
-	    !empty($_POST['vantage_theme_settings']) &&
+	    !empty($_POST[basename( get_template_directory() ) . '_theme_settings']) &&
 	    wp_verify_nonce($_POST['_wpnonce'], 'theme_settings-options')
 	) {
 		// We're in a preview mode, so filter the settings and hide the admin bar
@@ -787,7 +788,7 @@ function siteorigin_settings_preview_values($values){
 	require_once(ABSPATH . 'wp-admin/includes/template.php');
 
 	do_action('siteorigin_settings_init');
-	$post_values = siteorigin_settings_validate($_POST['vantage_theme_settings'], false);
+	$post_values = siteorigin_settings_validate($_POST[basename( get_template_directory() ) . '_theme_settings'], false);
 	$values = wp_parse_args($post_values, $values);
 
 	return $values;

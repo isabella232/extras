@@ -4,17 +4,16 @@ jQuery(function($){
         tourSettingPlaceholder,
         tourVideo,
         tourIndex = 0,
-        tourModal;
+        tourModal = null;
 
     // Add the tour button
     var tourLink = $('<div id="start-theme-tour" class="screen-meta-toggle"><a href="#">' + siteoriginSettings.tour.buttonText + '</a></div>')
         .click(function(){
-            tourIndex = 0;
             startSettingsTour();
         });
     $('#screen-meta-links').append(tourLink);
 
-    // Load a specific tour frame
+    // Refresh the current tour frame
     var refreshTourFrame = function(){
         endTourFrame();
 
@@ -25,7 +24,10 @@ jQuery(function($){
 
         // Lets add an image
         if(typeof stepContent.image != 'undefined') {
-            tourModal.find('.step-image').attr('src', stepContent.image);
+            tourModal.find('.step-image').attr('src', stepContent.image).show();
+        }
+        else {
+            tourModal.find('.step-image').hide();
         }
 
         // Make the image clickable (display a video)
@@ -57,7 +59,7 @@ jQuery(function($){
 
         }
         else {
-            tourModal.find('.siteorigin-settings-form tbody').hide();
+            tourModal.find('.siteorigin-settings-form').hide();
         }
 
         // Hide/show the previous buttons
@@ -67,6 +69,13 @@ jQuery(function($){
         else {
             tourModal.find('.tour-previous').show();
         }
+
+        // Choose the text we're going to display
+        var nextButtonText = tourModal.find('.bottom-navigation span');
+        nextButtonText.html(
+            tourIndex ==  siteoriginSettings.tour.content.length - 1 ? nextButtonText.data('text-done') : nextButtonText.data('text-continue')
+        );
+
     }
 
     // End the current tour frame
@@ -80,6 +89,15 @@ jQuery(function($){
     }
 
     var startSettingsTour = function(){
+        tourIndex = 0;
+
+        if( tourModal != null ) {
+            tourModal.show();
+            refreshTourFrame();
+            return;
+
+        }
+
         var template = $('#settings-tour-modal-template').html();
 
         tourModal = $(template).appendTo('body');
@@ -104,24 +122,32 @@ jQuery(function($){
         tourModal.find('.tour-next').click(function(e){
             e.preventDefault();
             if( tourIndex >= siteoriginSettings.tour.content.length - 1 ) {
+                tourIndex = 0;
                 endTourFrame();
-                tourModal.remove();
-                return;
+                tourModal.hide();
             }
-            tourIndex++;
-            refreshTourFrame();
+            else {
+                tourIndex++;
+                refreshTourFrame();
+            }
+            return false;
+
         });
         tourModal.find('.tour-previous').click(function(e){
             e.preventDefault();
-            if(tourIndex <= 0) return;
-            tourIndex--;
-            refreshTourFrame();
+            if(tourIndex > 0) {
+                tourIndex--;
+                refreshTourFrame();
+            }
+            return false;
         });
 
         // Close the tour when the background is clicked
-        tourModal.find('#settings-tour-overlay, .siteorigin-settings-close').click(function(){
+        tourModal.find('#settings-tour-overlay, .siteorigin-settings-close').click(function(e){
+            e.preventDefault();
             endTourFrame();
-            tourModal.remove();
+            tourModal.hide();
+            tourIndex = 0;
         });
 
         refreshTourFrame();
@@ -129,7 +155,6 @@ jQuery(function($){
 
     // Start the tour if we have a #tour hash
     if( window.location.hash == '#tour' ) {
-        tourIndex = 0;
         startSettingsTour();
     }
 
