@@ -87,6 +87,9 @@ function siteorigin_settings_admin_menu() {
  */
 function siteorigin_settings_admin_bar_menu($admin_bar){
 
+	// Only display this until the theme settings have been saved for the first time
+	if( get_option( get_template() . '_theme_settings', false ) !== false ) return $admin_bar;
+
 	if( is_admin() ) {
 		// Skip this on the settings page
 		$screen = get_current_screen();

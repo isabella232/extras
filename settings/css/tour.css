@@ -46,6 +46,9 @@
   font-size: 1.1em;
   margin: 1em 0;
 }
+#settings-tour-modal #settings-tour-step-content .siteorigin-settings-form {
+  margin-top: 2em;
+}
 #settings-tour-modal #settings-tour-step-content .siteorigin-settings-form .form-table th {
   width: 1%;
   white-space: nowrap;
@@ -95,7 +98,7 @@
   user-select: none;
 }
 #settings-tour-modal .settings-form-buttons {
-  margin-top: 1.5em;
+  margin-top: 2em;
 }
 #settings-tour-modal .settings-form-buttons .tour-next {
   position: relative;

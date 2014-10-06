@@ -48,7 +48,7 @@ jQuery(function($){
             tourSettingPlaceholder.find('select').val( tourSetting.find('select').val() );
 
             // When any input value in the current tour setting changes, copy it back across to the placeholder
-            tourSetting.find('input, select').change( function(){
+            tourSetting.find('input, select, textarea').change( function(){
                 var newTourSettingPlaceholder = tourSetting.clone();
                 tourSettingPlaceholder.after(newTourSettingPlaceholder);
                 tourSettingPlaceholder.remove();
@@ -85,7 +85,7 @@ jQuery(function($){
     // End the current tour frame
     var endTourFrame = function(){
         if( tourSetting != null && tourSettingPlaceholder != null ) {
-            tourSetting.find('input, select').unbind('change');
+            tourSetting.find('input, select, textarea').unbind('change');
             tourSettingPlaceholder.after(tourSetting).remove();
             tourSetting = null;
             tourSettingPlaceholder = null;
