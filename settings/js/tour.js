@@ -45,14 +45,18 @@ jQuery(function($){
 
             tourSettingPlaceholder = tourSetting.clone();
             tourSetting.after( tourSettingPlaceholder );
+            tourSettingPlaceholder.find('select').val( tourSetting.find('select').val() );
 
-            tourSetting.find('input').change( function(){
-                // When any input value in the current tour setting changes, copy it back across to the placeholder
+            // When any input value in the current tour setting changes, copy it back across to the placeholder
+            tourSetting.find('input, select').change( function(){
                 var newTourSettingPlaceholder = tourSetting.clone();
                 tourSettingPlaceholder.after(newTourSettingPlaceholder);
                 tourSettingPlaceholder.remove();
                 tourSettingPlaceholder = newTourSettingPlaceholder;
-            }).change();
+
+                // If there's a select field, copy the value across
+                tourSettingPlaceholder.find('select').val( tourSetting.find('select').val() );
+            });
 
 
             tourModal.find('.siteorigin-settings-form tbody').append( tourSetting );
@@ -71,7 +75,7 @@ jQuery(function($){
         }
 
         // Choose the text we're going to display
-        var nextButtonText = tourModal.find('.bottom-navigation span');
+        var nextButtonText = tourModal.find('.settings-form-buttons .tour-next span');
         nextButtonText.html(
             tourIndex ==  siteoriginSettings.tour.content.length - 1 ? nextButtonText.data('text-done') : nextButtonText.data('text-continue')
         );
@@ -81,7 +85,7 @@ jQuery(function($){
     // End the current tour frame
     var endTourFrame = function(){
         if( tourSetting != null && tourSettingPlaceholder != null ) {
-            tourSetting.find('input').unbind('change');
+            tourSetting.find('input, select').unbind('change');
             tourSettingPlaceholder.after(tourSetting).remove();
             tourSetting = null;
             tourSettingPlaceholder = null;

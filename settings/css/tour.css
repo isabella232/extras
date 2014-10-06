@@ -94,16 +94,22 @@
   -ms-user-select: none;
   user-select: none;
 }
-#settings-tour-modal .bottom-navigation {
+#settings-tour-modal .settings-form-buttons {
   margin-top: 1.5em;
 }
-#settings-tour-modal .bottom-navigation .dashicons {
-  font-size: 12px;
-  display: block;
+#settings-tour-modal .settings-form-buttons .tour-next {
+  position: relative;
+  padding-right: 2.25em;
+}
+#settings-tour-modal .settings-form-buttons .tour-next .dashicons {
+  font-size: 1em;
+  display: inline;
   width: auto;
   height: auto;
-  float: right;
-  margin: 7px 0 0 7px;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  margin-top: -0.475em;
 }
 #settings-tour-overlay {
   background: rgba(0, 0, 0, 0.8);

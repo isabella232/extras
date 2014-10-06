@@ -69,9 +69,12 @@
 								</table>
 							</div>
 
-							<div class="bottom-navigation tour-next button-secondary">
-								<span data-text-continue="<?php echo esc_attr('Continue', 'siteorigin') ?>" data-text-done="<?php echo esc_attr('Done', 'siteorigin') ?>"><?php _e('Continue', 'siteorigin') ?></span>
-								<div class="dashicons dashicons-arrow-right-alt2 tour-next"></div>
+							<div class="settings-form-buttons">
+								<input type="button" class="button-secondary siteorigin-settings-preview" value="<?php esc_attr_e('Preview', 'siteorigin') ?>" />
+								<div class="tour-next button-secondary">
+									<span data-text-continue="<?php echo esc_attr('Continue', 'siteorigin') ?>" data-text-done="<?php echo esc_attr('Done', 'siteorigin') ?>"><?php _e('Continue', 'siteorigin') ?></span>
+									<div class="dashicons dashicons-arrow-right-alt2"></div>
+								</div>
 							</div>
 						</div>
 
@@ -81,7 +84,6 @@
 
 					<div id="settings-tour-toolbar">
 						<input type="button" class="button-primary siteorigin-settings-save" value="<?php esc_attr_e('Save Settings', 'siteorigin') ?>" />
-						<input type="button" class="button-secondary siteorigin-settings-preview" value="<?php esc_attr_e('Preview', 'siteorigin') ?>" />
 						<input type="button" class="button-secondary siteorigin-settings-close" value="<?php esc_attr_e('Close', 'siteorigin') ?>" />
 					</div>
 
