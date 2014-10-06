@@ -93,6 +93,9 @@ function siteorigin_plugin_activation_do_plugin_install(){
 }
 
 function siteorigin_plugin_activation_install_url($plugin, $plugin_name, $source = false){
+	// This is to prevent the issue where this URL is called from outside the admin
+	if( !is_admin() || !function_exists('get_plugins') ) return false;
+
 	$plugins = get_plugins();
 	$plugins = array_keys($plugins);
 	
