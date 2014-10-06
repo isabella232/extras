@@ -55,7 +55,7 @@
   padding: 0;
 }
 #settings-tour-modal #settings-tour-step-content .siteorigin-settings-form .description {
-  display: none;
+  font-size: 0.75em;
 }
 #settings-tour-modal #settings-tour-toolbar {
   background: #FFFFFF;
