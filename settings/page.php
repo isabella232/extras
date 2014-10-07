@@ -84,6 +84,10 @@
 					</div>
 
 					<div id="settings-tour-toolbar">
+						<div class="tour-progress">
+							<?php _e('Step: ', 'siteorigin') ?> <span class="step">5</span>/<span class="step-total">10</span>
+						</div>
+
 						<input type="button" class="button-primary siteorigin-settings-save" value="<?php esc_attr_e('Save Settings', 'siteorigin') ?>" />
 						<input type="button" class="button-secondary siteorigin-settings-close" value="<?php esc_attr_e('Close', 'siteorigin') ?>" />
 					</div>

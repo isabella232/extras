@@ -606,7 +606,7 @@ function siteorigin_settings_theme_help(){
 	$theme_name = basename( get_template_directory() );
 	
 	$text = sprintf(
-		__( "Read %s's <a href='%s'>theme documentation</a> for help with these settings.", 'siteorigin' ),
+		__( "Read %s's <a href='%s' target='_blank'>theme documentation</a> for help with these settings.", 'siteorigin' ),
 		ucfirst($theme_name),
 		'http://siteorigin.com/theme/'.$theme_name.'/?action=docs'
 	); 

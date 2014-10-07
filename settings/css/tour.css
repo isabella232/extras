@@ -82,6 +82,11 @@
 #settings-tour-modal #settings-tour-toolbar .cancel:hover {
   text-decoration: underline;
 }
+#settings-tour-modal #settings-tour-toolbar .tour-progress {
+  float: left;
+  margin-top: 6px;
+  color: #666666;
+}
 #settings-tour-modal #siteorigin-settings-tour-navigation {
   margin-top: 0.75em;
   float: right;
