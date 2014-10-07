@@ -9,8 +9,8 @@ jQuery(function($){
             
         })
         .mouseenter(function(){
-            var $$ = $(this ).find('.teaser-image' );
-            if($$.is(':hover')) return;
+            var $$ = $(this).find('.teaser-image' );
+            if( $$.is(':hover') ) return;
             $$.fadeIn(100);
         })
         .mouseleave(function(){
