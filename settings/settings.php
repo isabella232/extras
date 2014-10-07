@@ -800,7 +800,5 @@ function siteorigin_settings_preview_values($values){
 
 	do_action('siteorigin_settings_init');
 	$post_values = siteorigin_settings_validate($_POST[basename( get_template_directory() ) . '_theme_settings'], false);
-	$values = wp_parse_args($post_values, $values);
-
-	return $values;
+	return $post_values;
 }

@@ -235,11 +235,18 @@ jQuery( function ( $ ) {
     }
 
     // Now, lets handle the preview
+    var previewModal;
     $('#siteorigin-settings-form .siteorigin-settings-preview-button').click( function(e){
         e.preventDefault();
 
         // Lets create the modal
-        var modal = $( $('#settings-preview-modal-template').html()).appendTo('body');
+        if( previewModal == null ) {
+            previewModal = $( $('#settings-preview-modal-template').html()).appendTo('body');
+        }
+        else{
+            previewModal.show();
+        }
+
 
         // Submit the preview to the iframe
         var submitToIframe = function(){
@@ -248,7 +255,7 @@ jQuery( function ( $ ) {
             $f
                 .attr({
                     'target': 'siteorigin-settings-preview-iframe',
-                    'action' : modal.find('iframe').attr('src')
+                    'action' : previewModal.find('iframe').attr('src')
                 });
             var $hidden = $('<input type="hidden" name="siteorigin_settings_is_preview" value="true" />').appendTo($f);
             $f.submit();
@@ -262,18 +269,24 @@ jQuery( function ( $ ) {
         submitToIframe();
 
         // After the iframe has loaded, intercept all link clicks so we can continue the preview.
-        modal.find('iframe').load(function(){
+        previewModal.find('iframe').load(function(){
             var iframe = $(this);
             $(this).contents().find('a').click(function(e){
                 e.preventDefault();
+
+                // Ignore this click if it's going outside the current site.
+                if( $(this).prop('href').indexOf( iframe.data('home') ) != 0) {
+                    return false;
+                }
+
                 iframe.attr( 'src', $(this).prop('href') );
                 submitToIframe();
             })
         });
 
         // Handle closing the modal
-        modal.find('.siteorigin-settings-close').click(function(){
-            modal.remove();
+        previewModal.find('.siteorigin-settings-close').click(function(){
+            previewModal.hide();
         });
     } );
 

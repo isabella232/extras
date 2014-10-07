@@ -39,6 +39,16 @@ jQuery(function($){
             tourModal.find('.play-video').hide();
         }
 
+        if(typeof stepContent.action != 'undefined') {
+            tourModal.find('.siteorigin-settings-tour-action')
+                .attr('href', stepContent.action.href.split('&amp;').join('&') )
+                .html( stepContent.action.text )
+                .show();
+        }
+        else {
+            tourModal.find('.siteorigin-settings-tour-action').hide();
+        }
+
         // Add a setting
         if(typeof stepContent.setting != 'undefined') {
             tourSetting = $('#siteorigin-settings-form div[data-field="' + stepContent.setting + '"]').closest('tr');
@@ -56,14 +66,17 @@ jQuery(function($){
 
                 // If there's a select field, copy the value across
                 tourSettingPlaceholder.find('select').val( tourSetting.find('select').val() );
-            });
+            } );
 
 
             tourModal.find('.siteorigin-settings-form tbody').append( tourSetting );
+            tourModal.find('.siteorigin-settings-form').show();
+            tourModal.find('.siteorigin-settings-preview').show();
 
         }
         else {
             tourModal.find('.siteorigin-settings-form').hide();
+            tourModal.find('.siteorigin-settings-preview').hide();
         }
 
         // Hide/show the previous buttons
@@ -99,7 +112,14 @@ jQuery(function($){
             tourModal.show();
             refreshTourFrame();
             return;
+        }
 
+        // Lets preload all the images to start
+        for(var i = 0; i < siteoriginSettings.tour.content.length; i++) {
+            if( typeof siteoriginSettings.tour.content[i].image != 'undefined' ) {
+                console.log( 'Preload ' + siteoriginSettings.tour.content[i].image );
+                $('<img/>')[0].src = siteoriginSettings.tour.content[i].image;
+            }
         }
 
         var template = $('#settings-tour-modal-template').html();

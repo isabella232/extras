@@ -27,7 +27,7 @@
 		<div id="siteorigin-settings-preview-overlay"></div>
 
 		<div id="siteorigin-settings-preview-modal">
-			<iframe id="siteorigin-settings-preview-iframe" name="siteorigin-settings-preview-iframe" src="<?php echo esc_url( site_url('/') ) ?>"></iframe>
+			<iframe id="siteorigin-settings-preview-iframe" name="siteorigin-settings-preview-iframe" data-home="<?php echo esc_url( home_url() ) ?>" src="<?php echo esc_url( home_url() ) ?>"></iframe>
 		</div>
 
 		<div id="siteorigin-settings-preview-toolbar">
@@ -70,6 +70,7 @@
 							</div>
 
 							<div class="settings-form-buttons">
+								<a href="#" target="_blank" class="button-secondary siteorigin-settings-tour-action"></a>
 								<input type="button" class="button-secondary siteorigin-settings-preview" value="<?php esc_attr_e('Preview', 'siteorigin') ?>" />
 								<div class="tour-next button-secondary">
 									<span data-text-continue="<?php echo esc_attr('Continue', 'siteorigin') ?>" data-text-done="<?php echo esc_attr('Done', 'siteorigin') ?>"><?php _e('Continue', 'siteorigin') ?></span>
