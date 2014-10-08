@@ -93,6 +93,11 @@ jQuery(function($){
             tourIndex ==  siteoriginSettings.tour.content.length - 1 ? nextButtonText.data('text-done') : nextButtonText.data('text-continue')
         );
 
+        // Update the counts
+        var toolbar = tourModal.find('#settings-tour-toolbar');
+        toolbar.find('.step').html( tourIndex + 1 );
+        toolbar.find('.step-total').html( siteoriginSettings.tour.content.length );
+
     }
 
     // End the current tour frame
