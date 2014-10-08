@@ -27,7 +27,7 @@
 		<div id="siteorigin-settings-preview-overlay"></div>
 
 		<div id="siteorigin-settings-preview-modal">
-			<iframe id="siteorigin-settings-preview-iframe" name="siteorigin-settings-preview-iframe" data-home="<?php echo esc_url( home_url() ) ?>" src="<?php echo esc_url( home_url() ) ?>"></iframe>
+			<iframe id="siteorigin-settings-preview-iframe" name="siteorigin-settings-preview-iframe" data-home="<?php echo esc_url( home_url('/') ) ?>" src="<?php echo esc_url( home_url('/') ) ?>"></iframe>
 		</div>
 
 		<div id="siteorigin-settings-preview-toolbar">

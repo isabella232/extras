@@ -275,11 +275,12 @@ jQuery( function ( $ ) {
                 e.preventDefault();
 
                 // Ignore this click if it's going outside the current site.
-                if( $(this).prop('href').indexOf( iframe.data('home') ) != 0) {
+                var linkUrl = $(this).prop('href').split('#')[0];
+                if( linkUrl.indexOf( iframe.data( 'home' ) ) != 0 || linkUrl == iframe.attr( 'src' ) ) {
                     return false;
                 }
 
-                iframe.attr( 'src', $(this).prop('href') );
+                iframe.attr( 'src', linkUrl );
                 submitToIframe();
             })
         });
