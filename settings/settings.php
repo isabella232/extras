@@ -224,6 +224,9 @@ function siteorigin_settings_add_field( $section, $id, $type, $title = null, $ar
 		else return;
 	}
 
+	// Skip fields that don't have a title
+	if( empty($title) ) return;
+
 	$args = wp_parse_args( $args, array(
 		'section' => $section,
 		'field' => $id,
@@ -800,7 +803,7 @@ function siteorigin_settings_preview_init(){
 	) {
 		// We're in a preview mode, so filter the settings and hide the admin bar
 		add_filter('siteorigin_settings_values', 'siteorigin_settings_preview_values');
-		// Hide the admin bar - this is only involved when an administrator is previewing the theme settings (see previous if statement).
+		// Hide the admin bar - this is only involved when an administrator is previewing the theme settings (see previous IF statement).
 		add_filter('show_admin_bar', '__return_false');
 	}
 }
@@ -810,6 +813,6 @@ function siteorigin_settings_preview_values($values){
 	require_once(ABSPATH . 'wp-admin/includes/template.php');
 
 	do_action('siteorigin_settings_init');
-	$post_values = siteorigin_settings_validate($_POST[basename( get_template_directory() ) . '_theme_settings'], false);
+	$post_values = siteorigin_settings_validate( stripslashes_deep( $_POST[basename( get_template_directory() ) . '_theme_settings'] ) , false);
 	return $post_values;
 }
