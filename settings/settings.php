@@ -259,6 +259,17 @@ function siteorigin_settings_add_teaser( $section, $id, $name, $args = array() )
 }
 
 /**
+ * Remove a setting.
+ *
+ * @param $section
+ * @param $id
+ */
+function siteorigin_settings_remove_field( $section, $id ){
+	global $wp_settings_fields;
+	unset( $wp_settings_fields[ 'theme_settings' ][$section][$id] );
+}
+
+/**
  * Get the value of a setting, or the default value.
  *
  * @param string $name The setting name
