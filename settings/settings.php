@@ -788,8 +788,8 @@ function siteorigin_settings_preview_init(){
 	    wp_verify_nonce($_POST['_wpnonce'], 'theme_settings-options')
 	) {
 		// We're in a preview mode, so filter the settings and hide the admin bar
-		// Admin bar is only ever hidden during the preview inside the admin
 		add_filter('siteorigin_settings_values', 'siteorigin_settings_preview_values');
+		// Hide the admin bar - this is only involved when an administrator is previewing the theme settings (see previous if statement).
 		add_filter('show_admin_bar', '__return_false');
 	}
 }
