@@ -156,8 +156,8 @@ jQuery( function ( $ ) {
     } );
     
     // Autofill
-    $('.input-field-select')
-        .change(function(){
+    $('body')
+        .on('change', '.input-field-select', function(){
             var c = $(this ).closest('td').find('input');
             c.val( $(this ).val() );
         });
