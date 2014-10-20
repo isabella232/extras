@@ -692,7 +692,7 @@ function siteorigin_settings_add_editor_formats( $init_array ){
 
 	// Make sure we're on the theme settings page
 	$screen = get_current_screen();
-	if( $screen->base == 'appearance_page_theme_settings_page' ) {
+	if( !empty($screen) && $screen->base == 'appearance_page_theme_settings_page' && !empty($init_array) ) {
 		global $siteorigin_settings_editor_style_formats;
 		if( isset( $siteorigin_settings_editor_style_formats[ $init_array['body_class'] ] ) ) {
 			$init_array['style_formats'] = json_encode( $siteorigin_settings_editor_style_formats[ $init_array['body_class'] ] );
@@ -709,7 +709,7 @@ function siteorigin_settings_add_editor_styles_button($buttons){
 
 	// Make sure we're on the theme settings page
 	$screen = get_current_screen();
-	if( $screen->base == 'appearance_page_theme_settings_page' ) {
+	if( !empty($screen) && $screen->base == 'appearance_page_theme_settings_page' && !is_array($buttons) ) {
 		array_unshift($buttons, 'styleselect');
 	}
 
