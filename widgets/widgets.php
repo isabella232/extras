@@ -18,7 +18,7 @@ function siteorigin_widgets_enqueue_widget_scripts() {
 
 	if ( !empty( $panels_data['widgets'] ) ) {
 		foreach ( $panels_data['widgets'] as $widget ) {
-			$panel_widget_classes[ ] = $widget['info']['class'];
+			$panel_widget_classes[ ] = empty($widget['panels_info']) ? $widget['info']['class'] : $widget['panels_info']['class'];
 		}
 	}
 
