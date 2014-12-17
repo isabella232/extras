@@ -491,8 +491,16 @@ function siteorigin_settings_field( $args ) {
 				$exp = str_replace('____', '(.*?)', $exp);
 				$form = preg_replace( '/'.$exp.'/', 'siteorigin_settings_widget['.preg_quote($field_id).'][$1]', $form );
 
-				echo '<div class="so-settings-widget-form"><a href="#" class="so-settings-widget-edit" data-is-setup="0" data-form="'.esc_attr($form).'">' . __('Edit', 'siteorigin') . '</a></div>';
-				?><input type="hidden" id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>" value="<?php echo esc_attr( serialize( $current ) ) ?>" /><?php
+
+				?>
+				<div class="so-settings-widget-form">
+					<script type="text/template" class="so-settings-widget-form-template">
+						<?php echo $form ?>
+					</script>
+					<a href="#" class="so-settings-widget-edit" data-is-setup="0"><?php _e('Edit', 'siteorgin') ?></a>
+				</div>
+				<input type="hidden" id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>" value="<?php echo esc_attr( serialize( $current ) ) ?>" />
+				<?php
 			}
 			break;
 

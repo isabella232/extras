@@ -218,7 +218,7 @@ jQuery( function ( $ ) {
 
         var $$ = $(this);
         var widget_form = $$.closest('td').find('.so-settings-widget-form');
-        widget_form.html( $$.data('form') );
+        widget_form.html( widget_form.find('.so-settings-widget-form-template').html() );
 
         return false;
     }).click();
