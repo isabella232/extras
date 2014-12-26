@@ -57,8 +57,9 @@ add_action('after_setup_theme', 'siteorigin_settings_init', 5);
  */
 function siteorigin_settings_admin_init() {
 	register_setting( 'theme_settings', $GLOBALS['siteorigin_settings_name'], 'siteorigin_settings_validate' );
-	if(get_theme_mod('version_activated', false) === false)
+	if(get_theme_mod('version_activated', false) === false) {
 		set_theme_mod('version_activated', SITEORIGIN_THEME_VERSION);
+	}
 }
 
 /**
@@ -275,21 +276,56 @@ function siteorigin_settings_remove_field( $section, $id ){
 /**
  * Get the value of a setting, or the default value.
  *
- * @param string $name The setting name
- * @param mixed $default The default setting
+ * @param string $name The setting name.
+ * @param mixed $default The default setting.
+ *
  * @return mixed
  */
 function siteorigin_setting( $name , $default = null) {
 	$value = null;
 	
 	if ( !is_null( $default ) && ( !is_bool( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) && empty( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) ) {
-		return apply_filters('siteorigin_setting_'.$name, $default);
+		return apply_filters( 'siteorigin_setting_'.$name, $default );
 	}
 	
 	if ( !isset( $GLOBALS[ 'siteorigin_settings' ][ $name ] ) ) $value = null;
-	else $value = $GLOBALS['siteorigin_settings'][ $name ];
+	else $value = $GLOBALS[ 'siteorigin_settings' ][ $name ];
 
 	return apply_filters('siteorigin_setting_'.$name, $value);
+}
+
+/**
+ *
+ *
+ * @param $name
+ * @param null $default
+ *
+ * @return mixed
+ */
+function siteorigin_settings_get($name, $default = null){
+	return siteorigin_setting($name, $default);
+}
+
+/**
+ * Sets and a theme setting. Will attempt to validate if in the admin.
+ *
+ * @param $name
+ * @param $value
+ */
+function siteorigin_settings_set($name, $value) {
+	global $siteorigin_settings;
+	$theme_name = basename( get_template_directory() );
+
+	// Update settings in the database
+	$settings = get_option( $theme_name . '_theme_settings', array() );
+	$settings[$name] = $value;
+	update_option( $theme_name . '_theme_settings', $settings );
+
+	// Update the temporary value
+	if( empty( $siteorigin_settings ) ) {
+		$siteorigin_settings = array();
+	}
+	$siteorigin_settings[$name] = $value;
 }
 
 /**
@@ -535,6 +571,8 @@ function siteorigin_settings_validate( $values, $set_tab = true ) {
 		foreach ( $fields as $field_id => $field ) {
 			$name = $section_id . '_' . $field_id;
 
+			if( !isset($values[$name]) ) continue;
+
 			if( !empty($field['args']['options']) ){
 				$field['args']['options'] = apply_filters('siteorigin_setting_options_'.$name, $field['args']['options']);
 			}
@@ -584,11 +622,11 @@ function siteorigin_settings_validate( $values, $set_tab = true ) {
 
 					break;
 			}
-			
+
 			if ( !isset( $current[ $name ] ) || ( isset( $values[ $name ] ) && isset( $current[ $name ] ) && $values[ $name ] != $current[ $name ] ) ) {
 				// Trigger an action that a field has changed
-				do_action('siteorigin_settings_changed_field_changed', $name, $values[$name], $current[$name]);
-				do_action('siteorigin_settings_changed_field_changed_'.$name, $values[$name], $current[$name]);
+				do_action('siteorigin_settings_changed_field_changed', $name, isset($values[$name]) ? $values[$name] : null, isset($current[$name]) ? $current[$name] : null);
+				do_action('siteorigin_settings_changed_field_changed_'.$name, isset($values[$name]) ? $values[$name] : null, isset($current[$name]) ? $current[$name] : null);
 				$changed = true;
 			}
 
