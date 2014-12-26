@@ -540,6 +540,10 @@ function siteorigin_settings_validate( $values, $set_tab = true ) {
 			}
 
 			switch($field['args']['type']){
+				case 'text' :
+					$values[ $name ] = sanitize_text_field($values[$name]);
+					break;
+
 				case 'checkbox' :
 					// Only allow true or false values
 					$values[ $name ] = !empty( $values[ $name ] );
@@ -581,7 +585,12 @@ function siteorigin_settings_validate( $values, $set_tab = true ) {
 					break;
 			}
 			
-			if ( !isset( $current[ $name ] ) || ( isset( $values[ $name ] ) && isset( $current[ $name ] ) && $values[ $name ] != $current[ $name ] ) ) $changed = true;
+			if ( !isset( $current[ $name ] ) || ( isset( $values[ $name ] ) && isset( $current[ $name ] ) && $values[ $name ] != $current[ $name ] ) ) {
+				// Trigger an action that a field has changed
+				do_action('siteorigin_settings_changed_field_changed', $name, $values[$name], $current[$name]);
+				do_action('siteorigin_settings_changed_field_changed_'.$name, $values[$name], $current[$name]);
+				$changed = true;
+			}
 
 			// See if this needs any special validation
 			if ( !empty( $field['args']['validator'] ) && method_exists( 'SiteOrigin_Settings_Validator', $field['args']['validator'] ) ) {
