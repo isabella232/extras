@@ -26,7 +26,7 @@ function siteorigin_adminbar_init() {
 	}
 
 	if ( !empty( $bar ) ) {
-		if ( empty( $bar->icon ) ) $bar->icon = 'http://www.gravatar.com/avatar/' . md5( 'greg@siteorigin.com' ) . '?s=44';
+		if ( empty( $bar->icon ) ) $bar->icon = 'https://www.gravatar.com/avatar/' . md5( 'greg@siteorigin.com' ) . '?s=44';
 	}
 
 	$GLOBALS['siteorigin_adminbar_active'] = $bar;
