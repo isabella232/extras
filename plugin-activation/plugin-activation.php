@@ -22,7 +22,7 @@ function siteorigin_plugin_activation_render_page(){
 }
 
 /**
- * Install a plugin
+ * Install a plugin.
  */
 function siteorigin_plugin_activation_do_plugin_install(){
 	/** All plugin information will be stored in an array for processing */
@@ -130,6 +130,13 @@ function siteorigin_plugin_activation_install_url($plugin, $plugin_name, $source
 	}
 }
 
+/**
+ * Check if a plugin is currently activating.
+ *
+ * @param $plugin
+ *
+ * @return bool
+ */
 function siteorigin_plugin_activation_is_activating( $plugin ){
 	if( !is_admin() ) return false;
 	return (
@@ -137,6 +144,6 @@ function siteorigin_plugin_activation_is_activating( $plugin ){
 		&& isset($_GET['action'])
 		&& ($_GET['action'] == 'activate' || $_GET['action'] == 'upgrade-plugin' || $_GET['action'] == 'activate-plugin')
 		&& isset($_GET['plugin'])
-		&& $_GET['plugin'] == $plugin.'/'.$plugin.'.php'
+		&& strpos($_GET['plugin'], '/'.$plugin.'.php') !== false
 	);
 }
