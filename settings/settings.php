@@ -12,7 +12,7 @@ function siteorigin_settings_admin_init_action(){
 add_action('admin_init', 'siteorigin_settings_admin_init_action');
 
 /**
- * Intialize the theme settings page
+ * Intialize the theme settings. Load settings from the database etc.
  *
  * @param $theme_name
  * @action after_setup_theme
@@ -189,7 +189,10 @@ function siteorigin_settings_adminbar( $bar ) {
  * @param $name
  */
 function siteorigin_settings_add_section( $id, $name ) {
-	add_settings_section( $id, $name, '__return_false', 'theme_settings' );
+	// This is to prevent issues when adding settings that will only be used in the preview.
+	if( is_admin() ) {
+		add_settings_section( $id, $name, '__return_false', 'theme_settings' );
+	}
 }
 
 /**
@@ -233,7 +236,15 @@ function siteorigin_settings_add_field( $section, $id, $type, $title = null, $ar
 		'field' => $id,
 		'type' => $type,
 	) );
-	add_settings_field( $id, $title, 'siteorigin_settings_field', 'theme_settings', $section, $args );
+
+	if( is_admin() ) {
+		// Add the settings field if it's available (we're in the admin)
+		add_settings_field( $id, $title, 'siteorigin_settings_field', 'theme_settings', $section, $args );
+	}
+	else {
+		global $siteorigin_theme_settings_preview;
+		if( empty($siteorigin_theme_settings_preview) ) $siteorigin_theme_settings_preview = array();
+	}
 
 	if ( is_admin() && $type == 'editor' && !empty($args['editor_style_formats']) ) {
 		global $siteorigin_settings_editor_style_formats;
@@ -259,7 +270,9 @@ function siteorigin_settings_add_teaser( $section, $id, $name, $args = array() )
 		'type' => 'teaser',
 	) );
 
-	add_settings_field( $id, $name, 'siteorigin_settings_field', 'theme_settings', $section, $args );
+	if( is_admin() ) {
+		add_settings_field( $id, $name, 'siteorigin_settings_field', 'theme_settings', $section, $args );
+	}
 }
 
 /**
@@ -295,8 +308,6 @@ function siteorigin_setting( $name , $default = null) {
 }
 
 /**
- *
- *
  * @param $name
  * @param null $default
  *
@@ -559,7 +570,15 @@ function siteorigin_settings_field( $args ) {
  * @return array
  */
 function siteorigin_settings_validate( $values, $set_tab = true ) {
-	global $wp_settings_fields;
+	if( is_admin() ) {
+		global $wp_settings_fields;
+		$theme_settings = !empty($wp_settings_fields['theme_settings']) ? $wp_settings_fields['theme_settings'] : array();
+	}
+	else {
+		global $siteorigin_theme_settings_preview;
+		$theme_settings = !empty($siteorigin_theme_settings_preview) ? $siteorigin_theme_settings_preview : array();
+	}
+
 
 	$theme_name = basename( get_template_directory() );
 	$current = get_option( $theme_name . '_theme_settings', array() );
@@ -567,7 +586,7 @@ function siteorigin_settings_validate( $values, $set_tab = true ) {
 	if($set_tab) set_theme_mod( '_theme_settings_current_tab', isset( $_REQUEST['theme_settings_current_tab'] ) ? $_REQUEST['theme_settings_current_tab'] : 0 );
 
 	$changed = false;
-	foreach ( $wp_settings_fields['theme_settings'] as $section_id => $fields ) {
+	foreach ( $theme_settings as $section_id => $fields ) {
 		foreach ( $fields as $field_id => $field ) {
 			$name = $section_id . '_' . $field_id;
 
@@ -619,7 +638,11 @@ function siteorigin_settings_validate( $values, $set_tab = true ) {
 					else {
 						$values[ $name ] = unserialize( $values[ $name ] );
 					}
+					break;
 
+				case 'editor':
+				case 'text':
+					$values[ $name ] = sanitize_text_field( $values[ $name ] );
 					break;
 			}
 
@@ -764,7 +787,7 @@ function siteorigin_settings_add_editor_styles_button($buttons){
 
 	// Make sure we're on the theme settings page
 	$screen = get_current_screen();
-	if( !empty($screen) && $screen->base == 'appearance_page_theme_settings_page' && !is_array($buttons) ) {
+	if( !empty($screen) && $screen->base == 'appearance_page_theme_settings_page' && is_array($buttons) ) {
 		array_unshift($buttons, 'styleselect');
 	}
 
@@ -846,8 +869,9 @@ class SiteOrigin_Settings_Validator {
 	}
 }
 
-// This is the code for the preview
-
+/**
+ * Initialize the theme settings preview.
+ */
 function siteorigin_settings_preview_init(){
 
 	if( !is_admin() &&
@@ -864,10 +888,13 @@ function siteorigin_settings_preview_init(){
 }
 add_action('after_setup_theme', 'siteorigin_settings_preview_init', 4); // This must run before we initialize the settings
 
+/**
+ * Filter SiteOrigin settings for the preview.
+ * @param $values
+ * @return array
+ */
 function siteorigin_settings_preview_values($values){
-	require_once(ABSPATH . 'wp-admin/includes/template.php');
-
 	do_action('siteorigin_settings_init');
-	$post_values = siteorigin_settings_validate( stripslashes_deep( $_POST[basename( get_template_directory() ) . '_theme_settings'] ) , false);
+	$post_values = siteorigin_settings_validate( stripslashes_deep( $_POST[basename( get_template_directory() ) . '_theme_settings'] ) , false );
 	return $post_values;
 }
