@@ -590,7 +590,10 @@ function siteorigin_settings_validate( $values, $set_tab = true ) {
 		foreach ( $fields as $field_id => $field ) {
 			$name = $section_id . '_' . $field_id;
 
-			if( !isset($values[$name]) ) continue;
+			if( !isset($values[$name]) ) {
+				$values[$name] = false;
+				continue;
+			}
 
 			if( !empty($field['args']['options']) ){
 				$field['args']['options'] = apply_filters('siteorigin_setting_options_'.$name, $field['args']['options']);
