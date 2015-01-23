@@ -49,7 +49,8 @@ function siteorigin_panels_lite_enqueue_admin($prefix){
 		);
 
 		if( current_user_can( 'install_plugins' ) ) {
-			wp_enqueue_script( 'siteorigin-panels-lite-teaser', get_template_directory_uri() . '/extras/panels-lite/js/tab.js', array( 'jquery' ) );
+			$js_suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+			wp_enqueue_script( 'siteorigin-panels-lite-teaser', get_template_directory_uri() . '/extras/panels-lite/js/tab' . $js_suffix . '.js', array( 'jquery' ) );
 			wp_localize_script( 'siteorigin-panels-lite-teaser', 'panelsLiteTeaser', array(
 				'tab'        => __( 'Page Builder', 'siteorigin' ),
 				'message'    => __( "Refresh this page after you've installed Page Builder.", 'siteorigin' ),
