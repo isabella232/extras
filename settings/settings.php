@@ -130,11 +130,13 @@ function siteorigin_settings_render() {
 function siteorigin_settings_enqueue_scripts( $prefix ) {
 	if ( $prefix != 'appearance_page_theme_settings_page' ) return;
 
-	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/js/settings.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+	$js_suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
+
+	wp_enqueue_script( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/js/settings' . $js_suffix . '.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 	wp_enqueue_style( 'siteorigin-settings', get_template_directory_uri() . '/extras/settings/css/settings.css', array(), SITEORIGIN_THEME_VERSION );
 
 	if( has_filter('siteorigin_settings_tour_content') ) {
-		wp_enqueue_script( 'siteorigin-settings-tour', get_template_directory_uri() . '/extras/settings/js/tour.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
+		wp_enqueue_script( 'siteorigin-settings-tour', get_template_directory_uri() . '/extras/settings/js/tour' . $js_suffix . '.js', array( 'jquery' ), SITEORIGIN_THEME_VERSION );
 		wp_enqueue_style( 'siteorigin-settings-tour', get_template_directory_uri() . '/extras/settings/css/tour.css', array(  ), SITEORIGIN_THEME_VERSION );
 	}
 
