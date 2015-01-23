@@ -10,7 +10,7 @@ jQuery( function ( $ ) {
         e.preventDefault();
         // Open the Vimeo video in a new window
         window.open($(this).attr('href'), 'videowindow', 'width=640,height=362,resizeable,scrollbars');
-    })
+    });
 
     $( '#theme-upgrade .buy-button').click(function(e){
         e.preventDefault();

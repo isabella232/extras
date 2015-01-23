@@ -12,7 +12,5 @@ jQuery(function($){
         })
         .mouseleave(function(){
             $(this ).find('.teaser-image' ).clearQueue().fadeOut(100);
-        })
-        
-    
-})
+        });
+});
