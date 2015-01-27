@@ -49,7 +49,7 @@ function siteorigin_webfonts_enqueue(){
 
 	wp_enqueue_style(
 		'siteorigin-google-web-fonts',
-		add_query_arg('family', implode( '|', $family ), 'http://fonts.googleapis.com/css')
+		add_query_arg('family', implode( '|', $family ), '//fonts.googleapis.com/css')
 	);
 }
 add_action('wp_enqueue_scripts', 'siteorigin_webfonts_enqueue');
