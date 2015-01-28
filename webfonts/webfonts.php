@@ -40,7 +40,7 @@ function siteorigin_webfonts_enqueue(){
 	foreach($siteorigin_webfonts_fonts as $name => $weights) {
 
 		if( !empty($weights) ) {
-			$family[] = $name . ':' . implode($weights);
+			$family[] = $name . ':' . implode(',', $weights);
 		}
 		else {
 			$family[] = $name;
