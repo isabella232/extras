@@ -603,7 +603,8 @@ function siteorigin_settings_validate( $values, $set_tab = true ) {
 
 			switch($field['args']['type']){
 				case 'text' :
-					$values[ $name ] = sanitize_text_field($values[$name]);
+					$values[ $name ] = wp_kses_post( $values[ $name ] );
+					$values[ $name ] = balanceTags( $values[ $name ] , true );
 					break;
 
 				case 'checkbox' :
