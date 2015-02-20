@@ -58,7 +58,7 @@ add_action( 'siteorigin_settings_init', 'siteorigin_theme_update_settings', 40 )
 /**
  * Add the order number default, this is to take into account the legacy order number.
  */
-function siteorigin_theme_update_settings_defaults(){
+function siteorigin_theme_update_settings_defaults( $defaults ){
 	$theme = basename( get_template_directory() );
 	$name = 'siteorigin_order_number_' . $theme;
 	$defaults['premium_order_number'] = get_option($name, false);
