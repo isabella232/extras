@@ -95,7 +95,7 @@ function siteorigin_metaslider_install_link(){
 }
 
 function siteorigin_metaslider_affiliate(){
-	return 'http://sorig.in/metaslider';
+	return 'https://getdpd.com/cart/hoplink/15318?referrer=2h2i49ktlxic4s4osog';
 }
 add_filter('metaslider_hoplink', 'siteorigin_metaslider_affiliate');
 
