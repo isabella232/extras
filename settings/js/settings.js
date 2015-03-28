@@ -293,10 +293,10 @@ jQuery( function ( $ ) {
 
     // Set up conditionals
     $optionsForm.find('[data-conditional]').each(function(){
-        var $$ = $(this);
-        var $tr = $$.closest('tr');
-
-        var conditional = $$.data('conditional');
+        var
+            $$ = $(this),
+            $tr = $$.closest('tr'),
+            conditional = $$.data('conditional');
 
         if( typeof conditional.show === 'undefined' ) {
             conditional.show = 'else';
@@ -304,8 +304,11 @@ jQuery( function ( $ ) {
         if( typeof conditional.hide === 'undefined' ) {
             conditional.hide = 'else';
         }
-        if( conditional.hide === 'else' && conditional.show === 'else' ) return false;
+        if( conditional.hide === 'else' && conditional.show === 'else' ) {
+            return;
+        }
 
+        // The test that decides if we should show/hide this field
         var runTest = function(type){
             if( typeof conditional[type] === 'undefined' || conditional[type] === 'else' ) {
                 return null;
@@ -326,6 +329,7 @@ jQuery( function ( $ ) {
             return pass;
         };
 
+        // This function shows/hides the given field
         var showHide = function(){
             if( conditional.show === 'else' ) {
                 if( runTest('hide') ) {
@@ -353,6 +357,7 @@ jQuery( function ( $ ) {
             }
         }
 
+        // When a settings field changes, run a show/hide test
         $optionsForm.find('input,select').on('change keyup', showHide);
         showHide();
 
