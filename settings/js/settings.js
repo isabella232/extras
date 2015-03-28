@@ -291,5 +291,71 @@ jQuery( function ( $ ) {
         });
     } );
 
+    // Set up conditionals
+    $optionsForm.find('[data-conditional]').each(function(){
+        var $$ = $(this);
+        var $tr = $$.closest('tr');
+
+        var conditional = $$.data('conditional');
+
+        if( typeof conditional.show === 'undefined' ) {
+            conditional.show = 'else';
+        }
+        if( typeof conditional.hide === 'undefined' ) {
+            conditional.hide = 'else';
+        }
+        if( conditional.hide === 'else' && conditional.show === 'else' ) return false;
+
+        var runTest = function(type){
+            if( typeof conditional[type] === 'undefined' || conditional[type] === 'else' ) {
+                return null;
+            }
+
+            var pass = true;
+            var vals = null, $f = null;
+
+            for( var k in conditional[type] ) {
+                $f = $optionsForm.find("[data-field=" + k + "]").find('input,select,textarea');
+                vals = conditional[type][k].split('|');
+
+                if( vals.indexOf( $f.val() ) === -1 && pass ){
+                    pass = false;
+                }
+            }
+
+            return pass;
+        };
+
+        var showHide = function(){
+            if( conditional.show === 'else' ) {
+                if( runTest('hide') ) {
+                    $tr.hide();
+                }
+                else {
+                    $tr.show();
+                }
+            }
+            else if( conditional.hide === 'else' ) {
+                if( runTest('show') ) {
+                    $tr.show();
+                }
+                else {
+                    $tr.hide();
+                }
+            }
+            else {
+                if( runTest('hide') ) {
+                    $tr.hide();
+                }
+                if( runTest('show') ) {
+                    $tr.show();
+                }
+            }
+        }
+
+        $optionsForm.find('input,select').on('change keyup', showHide);
+        showHide();
+
+    });
 
 } );

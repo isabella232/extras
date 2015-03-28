@@ -354,7 +354,19 @@ function siteorigin_settings_field( $args ) {
 	$field_id = $args['section'] . '_' . $args['field'];
 	$current = isset( $GLOBALS['siteorigin_settings'][ $field_id ] ) ? $GLOBALS['siteorigin_settings'][ $field_id ] : null;
 
-	?><div class="siteorigin-settings-field" data-type="<?php echo esc_attr($args['type']) ?>" data-field="<?php echo esc_attr($field_id) ?>"><?php
+
+	$container_attr = array(
+		'id' => 'siteorigin-settings-field-' . $args['section'] . '_' . $args['field'],
+		'class' => 'siteorigin-settings-field',
+		'data-type' => $args['type'],
+		'data-field' => $field_id,
+		'data-setting' => $args['section'] . '_' . $args['field'],
+	);
+	if( !empty($args['conditional']) ) {
+		$container_attr['data-conditional'] = json_encode($args['conditional']);
+	}
+
+	?><div <?php foreach( $container_attr as $key => $val ) echo $key . '="' . esc_attr($val) . '"'; ?>><?php
 
 	switch ( $args['type'] ) {
 		case 'checkbox' :
