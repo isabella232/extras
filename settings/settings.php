@@ -33,11 +33,14 @@ function siteorigin_settings_init( $theme_name = null ) {
 
 	$settings = get_option( $theme_name . '_theme_settings', array() );
 	// Remove any settings with a -1 value
-	foreach($settings as $name => $value) {
-		if (intval($value) === -1) {
-			unset($settings[$name]);
+	if( !empty($settings) && is_array($settings) ) {
+		foreach($settings as $name => $value) {
+			if (intval($value) === -1) {
+				unset($settings[$name]);
+			}
 		}
 	}
+
 	$GLOBALS['siteorigin_settings'] = wp_parse_args( $settings, $GLOBALS['siteorigin_settings_defaults'] );
 	$GLOBALS['siteorigin_settings'] = apply_filters('siteorigin_settings_values', $GLOBALS['siteorigin_settings']);
 
