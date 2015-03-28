@@ -291,5 +291,76 @@ jQuery( function ( $ ) {
         });
     } );
 
+    // Set up conditionals
+    $optionsForm.find('[data-conditional]').each(function(){
+        var
+            $$ = $(this),
+            $tr = $$.closest('tr'),
+            conditional = $$.data('conditional');
+
+        if( typeof conditional.show === 'undefined' ) {
+            conditional.show = 'else';
+        }
+        if( typeof conditional.hide === 'undefined' ) {
+            conditional.hide = 'else';
+        }
+        if( conditional.hide === 'else' && conditional.show === 'else' ) {
+            return;
+        }
+
+        // The test that decides if we should show/hide this field
+        var runTest = function(type){
+            if( typeof conditional[type] === 'undefined' || conditional[type] === 'else' ) {
+                return null;
+            }
+
+            var pass = true;
+            var vals = null, $f = null;
+
+            for( var k in conditional[type] ) {
+                $f = $optionsForm.find("[data-field=" + k + "]").find('input,select,textarea');
+                vals = conditional[type][k].split('|');
+
+                if( vals.indexOf( $f.val() ) === -1 && pass ){
+                    pass = false;
+                }
+            }
+
+            return pass;
+        };
+
+        // This function shows/hides the given field
+        var showHide = function(){
+            if( conditional.show === 'else' ) {
+                if( runTest('hide') ) {
+                    $tr.hide();
+                }
+                else {
+                    $tr.show();
+                }
+            }
+            else if( conditional.hide === 'else' ) {
+                if( runTest('show') ) {
+                    $tr.show();
+                }
+                else {
+                    $tr.hide();
+                }
+            }
+            else {
+                if( runTest('hide') ) {
+                    $tr.hide();
+                }
+                if( runTest('show') ) {
+                    $tr.show();
+                }
+            }
+        }
+
+        // When a settings field changes, run a show/hide test
+        $optionsForm.find('input,select').on('change keyup', showHide);
+        showHide();
+
+    });
 
 } );
