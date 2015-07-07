@@ -36,7 +36,7 @@ function siteorigin_plugin_activation_do_plugin_install(){
 		$plugin['slug']   = $_GET['plugin']; // Plugin slug
 
 		if(!empty($_GET['plugin_source'])) {
-			$plugin['source'] = $_GET['plugin_source'];
+			$plugin['source'] = urlencode($_GET['plugin_source']);
 		}
 		else {
 			$plugin['source'] = false;
@@ -47,8 +47,8 @@ function siteorigin_plugin_activation_do_plugin_install(){
 			add_query_arg(
 				array(
 					'page'          => 'siteorigin_plugin_activation',
-					'plugin'        => $plugin['slug'],
-					'plugin_name'   => $plugin['name'],
+					'plugin'        => urlencode($plugin['slug']),
+					'plugin_name'   => urlencode($plugin['name']),
 					'plugin_source' => $plugin['source'],
 					'siteorigin-pa-install' => 'install-plugin',
 				),
