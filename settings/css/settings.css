@@ -195,6 +195,7 @@
   line-height: 22px;
   text-decoration: none;
   z-index: 1;
+  padding: 3px 16px 3px 16px;
 }
 #upgrade-to-premium a:after,
 #start-theme-tour a:after {
