@@ -54,7 +54,7 @@ function siteorigin_panels_lite_enqueue_admin($prefix){
 			wp_localize_script( 'siteorigin-panels-lite-teaser', 'panelsLiteTeaser', array(
 				'tab'        => __( 'Page Builder', 'siteorigin' ),
 				'message'    => __( "Refresh this page after you've installed Page Builder.", 'siteorigin' ),
-				'confirm'    => __( "Your theme has Page Builder support. Would you like to install it? It's free." ),
+				'confirm'    => __( "Your theme has Page Builder support. Would you like to install it? It's free.", 'siteorigin' ),
 				'installUrl' => $install_url
 			) );
 		}
