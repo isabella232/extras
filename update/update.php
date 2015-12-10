@@ -48,10 +48,20 @@ add_filter( 'pre_set_site_transient_update_themes', 'siteorigin_theme_update_fil
  * @action admin_init
  */
 function siteorigin_theme_update_settings() {
-	siteorigin_settings_add_section('premium', __('Premium', 'siteorigin'));
-	siteorigin_settings_add_field('premium', 'order_number', 'text', __('Order Number', 'siteorigin'), array(
-		'description' => __('Enter the order number we sent you by email', 'siteorigin')
-	));
+	if( class_exists('SiteOrigin_Settings') ) {
+		SiteOrigin_Settings::single()->add_section( 'premium', __('Premium', 'siteorigin') );
+		SiteOrigin_Settings::single()->add_field('premium', 'order_number', 'text', __('Order Number', 'siteorigin'), array(
+				'description' => __('Enter the order number we sent you by email', 'siteorigin')
+			)
+		);
+	}
+	else if( function_exists('siteorigin_settings_add_section') ) {
+		siteorigin_settings_add_section( 'premium', __('Premium', 'siteorigin') );
+		siteorigin_settings_add_field( 'premium', 'order_number', 'text', __('Order Number', 'siteorigin'), array(
+			'description' => __('Enter the order number we sent you by email', 'siteorigin')
+		) );
+	}
+
 }
 add_action( 'siteorigin_settings_init', 'siteorigin_theme_update_settings', 40 );
 
