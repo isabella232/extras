@@ -1,6 +1,6 @@
 <?php
 /**
- * Tight integration with Metaslider
+ * Tight integration with Meta Slider
  */
 
 /**

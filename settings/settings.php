@@ -630,6 +630,13 @@ function siteorigin_settings_validate( $values, $set_tab = true ) {
 				case 'number' :
 					// Only allow integers
 					$values[ $name ] = isset( $values[ $name ] ) ? intval( $values[ $name ] ) : $GLOBALS['siteorigin_settings_defaults'][ $name ];
+					// Check that the number falls within a max/min range if required
+					if( isset($field['args']['max']) ) {
+						$values[ $name ] = min( $values[ $name ], $field['args']['max'] );
+					}
+					if( isset($field['args']['min']) ) {
+						$values[ $name ] = max( $values[ $name ], $field['args']['min'] );
+					}
 					break;
 				
 				case 'media' :
