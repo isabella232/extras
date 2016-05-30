@@ -561,7 +561,7 @@ function siteorigin_settings_field( $args ) {
 					<script type="text/template" class="so-settings-widget-form-template">
 						<?php echo $form ?>
 					</script>
-					<a href="#" class="so-settings-widget-edit" data-is-setup="0"><?php _e('Edit', 'siteorgin') ?></a>
+					<a href="#" class="so-settings-widget-edit" data-is-setup="0"><?php _e('Edit', 'siteorigin') ?></a>
 				</div>
 				<input type="hidden" id="<?php echo esc_attr( $field_id ) ?>" name="<?php echo esc_attr( $field_name ) ?>" value="<?php echo esc_attr( serialize( $current ) ) ?>" />
 				<?php
